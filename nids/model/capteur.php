@@ -10,23 +10,45 @@ include ("requetesGenerales.php");
 //requête recuperations du logement en fonction de l'id de l'utilisateur
 
 function recuperationLogement (PDO $bdd, $id) {
-    $query = 'SELECT LOGEMENT.id FROM LOGEMENT WHERE LOGEMENT.id_logement = ' . $id;
+    $query = 'SELECT logement.id FROM logement WHERE logement.id_utilisateur = ' . $id;
     return $bdd->query($query)->fetchAll();     //retourne un tableau contenant toutes les resultats de la requete
 }
 
 //requête recuperations des pieces en fonction de l'id de la maison
 
+function recupValeurPiece($id, $nom) {
+    return "$id!$nom";
+}
+
+function supprimerCapteur(PDO $bdd, $id){
+    try {
+        $query = 'DELETE FROM actionneur_capteur WHERE id ='.$id;
+        $bdd->exec($query);
+    }
+    catch(PDOException $e)
+    {
+        echo $query . "<br>" . $e->getMessage();
+    }
+}
+
 function recuperationPieces (PDO $bdd, $id) {
-    $query = 'SELECT PIECE.nom FROM PIECE WHERE PIECE.id_logement = ' . $id;
-    return $bdd->query($query)->fetchAll();     //retourne un tableau contenant toutes les resultats de la requete
+    $query = 'SELECT piece.id, piece.nom FROM piece WHERE piece.id_logement = ' . $id;
+    return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC,"recupValeurPiece");     //retourne un tableau contenant toutes les resultats de la requete
 }
 
 //requête recup capteur en fonction de la pieces en entree
 
-function recuperationCapteurs (PDO $bdd, $pieces, $p) {
-    $query = 'SELECT ACTIONNEUR_CAPTEUR.nom FROM ACTIONNEUR_CAPTEUR JOIN PIECE ON PIECE.id = ACTIONNEUR_CAPTEUR.id_pieces WHERE PIECE.nom = ' . $pieces[$p];
-    return $bdd->query($query)->fetchAll();     //retourne un tableau contenant toutes les resultats de la requete
-}   //double join pour avoir les données du capteur ?
+function recupValeurCapteur($id, $nom, $type, $valeur) {
+    return "$id!$nom!$type!$valeur";
+}
+
+function recuperationCapteurs (PDO $bdd, $p) {      //prend la bdd et l'id de la piece pour recuperer les capteurs, leur type et valeur
+    $query = 'SELECT ac.id, ac.nom, ac.id_element_catalogue, donnees.Valeur 
+                FROM actionneur_capteur AS ac 
+                JOIN donnees ON ac.id = donnees.id_actionneur_capteur
+                WHERE ac.id_piece = ' . $p;
+    return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC,"recupValeurCapteur");     //retourne un tableau contenant toutes les resultats de la requete
+}
 
 /**
  * Insère un nouvel élément dans une table

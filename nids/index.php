@@ -28,4 +28,6 @@ if (isset($_GET['cible']) && !empty($_GET['cible'])) {
 }
 
 // Appel du contrôleur
+//include_once('view/fonctions.php');
 include('controller/'.$url.'.php');
+include('view/pageGestionCapteur.php');

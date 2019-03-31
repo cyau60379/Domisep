@@ -21,8 +21,8 @@
 </div>
 
 <div class="container fil" id="filPieces">     <!-- Contient les boutons pour afficher les différents capteurs en fonction de la salle -->
-    <?php foreach($pieces as $p):?>
-        <input onclick="recupCapteurs(this.value, this.id); return activerBouton(this.id);" type="button" id="<?php echo tabToString($capteurs[$p]);?>" class="boutonFil" value="<?php echo $p;?>"> <!-- creation des boutons avec un ID identique au nom de la salle -->
+    <?php foreach($pieces as $id => $p):?>
+        <input onclick="changerPiece(this.value, this.id); return activerBouton(this.id);" type="button" id="<?php echo $id;?>" class="boutonFil" value="<?php echo $p;?>"> <!-- creation des boutons avec un ID identique au nom de la salle -->
     <?php endforeach;?>
 </div>
 
@@ -31,7 +31,7 @@
 </div>
 
 <li id="zoneCapteurs">
-
+    <p>Hello world</p>  <!-- à améliorer -->
 </li>
 </body>
 </html>

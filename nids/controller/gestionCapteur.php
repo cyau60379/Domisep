@@ -3,33 +3,58 @@
  * Controleur des capteurs
  */
 
-//include ("requetesCapteurs.php");
+include ("fonctions.php");
+include ("/wamp64/www/nids/model/capteur.php");
 
-$pieces = array("entree", "cuisine", "salon", "chambre Bastien", "chambre Raph", "cave Julien");
+/*$pieces = array("entree", "cuisine", "salon", "chambre Bastien", "chambre Raph", "cave Julien");
 $capteurs = array();
-$capteurs["entree"] = array("Temperature", "Mouvement", "Luminosite");
-$capteurs["cuisine"] = array("Temperature_1", "Temperature_2", "Mouvement_1", "Mouvement_2", "Luminosite", "Volet");
-$capteurs["salon"] = array("Temperature", "Mouvement", "Luminosite", "Volet_Nord", "Volet_Sud");
-$capteurs["chambre Bastien"] = array("Temperature", "Mouvement", "Luminosite", "Volet");
-$capteurs["chambre Raph"] = array("Temperature_1", "Temperature_2", "Mouvement", "Luminosite", "Volet");
-$capteurs["cave Julien"] = array("Temperature", "Mouvement_1", "Mouvement_2", "Mouvement_3", "Luminosite");
-
+$capteurs["entree"] = array("1,Temperature,1,20", "1,Mouvement,1,20", "1,Luminosite,1,20");
+$capteurs["cuisine"] = array("1,Temperature_1,1,20", "1,Temperature_2,1,20", "1,Mouvement_1,1,20", "1,Mouvement_2,1,20", "1,Luminosite,1,20", "1,Volet,1,20");
+$capteurs["salon"] = array("1,Temperature,1,20", "1,Mouvement,1,20", "1,Luminosite,1,20", "1,Volet_Nord,1,20", "1,Volet_Sud,1,20");
+$capteurs["chambre Bastien"] = array("1,Temperature,1,20", "1,Mouvement,1,20", "1,Luminosite,1,20", "1,Volet,1,20");
+$capteurs["chambre Raph"] = array("1,Temperature_1,1,20", "1,Temperature_2,1,20", "1,Mouvement,1,20", "1,Luminosite,1,20", "1,Volet,1,20");
+$capteurs["cave Julien"] = array("1,Temperature,1,20", "1,Mouvement_1,1,20", "1,Mouvement_2,1,20", "1,Mouvement_3,1,20", "1,Luminosite,1,20");
+*/
 //trouver un moyen de récuperer les données en enlevant les espaces (replace( "_", " ") en javascript / str_replace ( char1, char2, string) php)
 
 $id = 1;
-$table = "LOGEMENT";
-/*$pieces = recuperationPieces ($bdd, $id);
+$capteurs = array();
 
-$capteurs = recuperationCapteurs($bdd, $pieces, );*/
+$table = recuperationLogement($bdd, $id);
+$listePieces = recuperationPieces ($bdd, $id);
+$pieces = decoupeString($listePieces);
+
+/*foreach ($pieces as $id => $p){
+    $capteurs[$p] = recuperationCapteurs($bdd, $id);
+}*/
 
 $page = "gestionCapteur";
 
 switch($page){
     case "gestionCapteur":
-        $vue = "view/pageGestionCapteur";
+        $vue = "pageGestionCapteur";
         break;
     default:
-        $vue = "view/erreur";
+        $vue = "erreur";
+}
+
+//include_once("view/".$vue .".php");
+
+if (isset($_GET['piece']) && isset($_GET['id'])) {
+
+    $pieceActive = $_GET['piece'];
+    $idPieceActive = $_GET['id'];
+    $capteurs = recuperationCapteurs($bdd, $idPieceActive);
+    $noms = array();
+    foreach ($capteurs as $key => $value){
+        $tabValeurs = preg_split("/\!/", $value);
+        $capteurs[$key] = $tabValeurs;
+    }
+    afficheCapteur($capteurs);
+}
+
+if (isset($_GET['id'])){
+    supprimerCapteur($bdd, $_GET['id']);
 }
 
 if (isset($_POST['temp'])) {
@@ -48,5 +73,4 @@ if (isset($_POST['temp'])) {
     }
 }
 
-include($vue .".php");
 ?>

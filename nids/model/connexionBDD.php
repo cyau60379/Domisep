@@ -6,9 +6,9 @@
  * Time: 21:38
  */
 try{
-    $bdd = new PDO('mysql:host=localhost:8080;dbname=NIDS;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    $bdd = new PDO('mysql:host=localhost:3306;dbname=nids;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }           // a modifier avec BDD NIDS
 catch(Exception $e)
 {
-    die('Erreur : '.$e->getMessage());
+    die('Erreur :'.$e->getMessage());
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 30 mars 2019 à 10:34
+-- Généré le :  sam. 30 mars 2019 à 22:25
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -46,7 +46,34 @@ CREATE TABLE IF NOT EXISTS `actionneur_capteur` (
   KEY `id_CeMac` (`id_CeMac`),
   KEY `id_element_catalogue` (`id_element_catalogue`),
   KEY `id_piece` (`id_piece`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `actionneur_capteur`
+--
+
+INSERT INTO `actionneur_capteur` (`id`, `nom`, `Etat`, `Actif`, `NumeroSerie`, `id_element_catalogue`, `id_CeMac`, `id_piece`, `id_utilisateur`, `id_categorie`) VALUES
+(1, 'Température 1', 1, 1, 656156151, 1, 1, 1, 1, 1),
+(2, 'Température 2', 1, 1, 656156152, 1, 1, 1, 1, 1),
+(4, 'Température', 1, 1, 656156153, 1, 1, 2, 1, 1),
+(5, 'Température', 1, 1, 656156154, 1, 1, 4, 1, 1),
+(6, 'Température', 1, 1, 656156155, 1, 1, 5, 1, 1),
+(7, 'Température', 1, 1, 656156156, 1, 1, 3, 1, 1),
+(8, 'Luminosité', 1, 1, 4913184, 2, 1, 1, 1, 1),
+(9, 'Luminosité', 1, 1, 4913185, 2, 1, 2, 1, 1),
+(10, 'Luminosité', 1, 1, 4913186, 2, 1, 3, 1, 1),
+(11, 'Luminosité', 1, 1, 4913187, 2, 1, 4, 1, 1),
+(12, 'Luminosité', 1, 1, 4913188, 2, 1, 5, 1, 1),
+(13, 'Mouvement', 1, 1, 723163652, 3, 1, 1, 1, 1),
+(14, 'Mouvement', 1, 1, 723163653, 3, 1, 4, 1, 1),
+(15, 'Mouvement 1', 1, 1, 723163654, 3, 1, 2, 1, 1),
+(16, 'Mouvement 2', 1, 1, 723163655, 3, 1, 2, 1, 1),
+(17, 'Mouvement 3', 1, 1, 723163656, 3, 1, 2, 1, 1),
+(18, 'Mouvement 4', 1, 1, 723163657, 3, 1, 2, 1, 1),
+(19, 'Mouvement 5', 1, 1, 723163658, 3, 1, 2, 1, 1),
+(20, 'Volet', 1, 1, 976786, 4, 1, 1, 1, 1),
+(21, 'Volet Nord', 1, 1, 976787, 4, 1, 4, 1, 1),
+(22, 'Volet Sud', 1, 1, 976788, 4, 1, 4, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -101,7 +128,14 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Nom` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `categorie`
+--
+
+INSERT INTO `categorie` (`id`, `Nom`) VALUES
+(1, 'Homme en colère');
 
 -- --------------------------------------------------------
 
@@ -116,7 +150,14 @@ CREATE TABLE IF NOT EXISTS `cemac` (
   `Etat` tinyint(1) NOT NULL,
   `id_logement` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `cemac`
+--
+
+INSERT INTO `cemac` (`id`, `Nom`, `Etat`, `id_logement`) VALUES
+(1, 'CeMACC', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -146,8 +187,36 @@ CREATE TABLE IF NOT EXISTS `donnees` (
   `Date_heure_reception` datetime NOT NULL,
   `Valeur` int(11) NOT NULL,
   `id_actionneur_capteur` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `donnees_ibfk_1` (`id_actionneur_capteur`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `donnees`
+--
+
+INSERT INTO `donnees` (`id`, `Date_heure_reception`, `Valeur`, `id_actionneur_capteur`) VALUES
+(1, '2019-04-01 13:12:20', 20, 1),
+(2, '2019-04-01 13:12:20', 20, 2),
+(3, '2019-04-01 13:12:20', 22, 4),
+(4, '2019-04-01 13:12:20', 22, 5),
+(5, '2019-04-01 13:12:20', 18, 6),
+(6, '2019-04-01 13:12:20', 18, 7),
+(7, '2019-04-01 13:12:20', 250, 8),
+(8, '2019-04-01 13:12:20', 250, 9),
+(9, '2019-04-01 13:12:20', 250, 10),
+(10, '2019-04-01 13:12:20', 250, 11),
+(11, '2019-04-01 13:12:20', 520, 12),
+(12, '2019-04-01 13:12:20', 0, 13),
+(13, '2019-04-01 13:12:20', 20, 14),
+(14, '2019-04-01 13:12:20', 0, 15),
+(15, '2019-04-01 13:12:20', 0, 16),
+(16, '2019-04-01 13:12:20', 12, 17),
+(17, '2019-04-01 13:12:20', 15, 18),
+(18, '2019-04-01 13:12:20', 15, 19),
+(19, '2019-04-01 13:12:20', 10, 20),
+(20, '2019-04-01 13:12:20', 5, 21),
+(21, '2019-04-01 13:12:20', 0, 22);
 
 -- --------------------------------------------------------
 
@@ -162,7 +231,17 @@ CREATE TABLE IF NOT EXISTS `element_catalogue` (
   `Description` text NOT NULL,
   `Photo` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `element_catalogue`
+--
+
+INSERT INTO `element_catalogue` (`id`, `Type`, `Description`, `Photo`) VALUES
+(1, 'Température', '???', 'Temperature'),
+(2, 'Luminosité', '???', 'Luminosite'),
+(3, 'Mouvement', '???', 'Mouvement'),
+(4, 'Volet', '???', 'Volet');
 
 -- --------------------------------------------------------
 
@@ -194,7 +273,14 @@ CREATE TABLE IF NOT EXISTS `logement` (
   `id_utilisateur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `logement`
+--
+
+INSERT INTO `logement` (`id`, `Adresse`, `Temperature_consigne`, `id_utilisateur`) VALUES
+(1, '23 avenue de Paris, 78000 Versailles', 20, 1);
 
 -- --------------------------------------------------------
 
@@ -209,7 +295,18 @@ CREATE TABLE IF NOT EXISTS `piece` (
   `id_logement` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_logement` (`id_logement`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `piece`
+--
+
+INSERT INTO `piece` (`id`, `Nom`, `id_logement`) VALUES
+(1, 'Chambre de Gérard', 1),
+(2, 'Cave de Julien', 1),
+(3, 'Buandrie', 1),
+(4, 'Cuisine', 1),
+(5, 'Salle de bain', 1);
 
 -- --------------------------------------------------------
 
@@ -228,8 +325,8 @@ CREATE TABLE IF NOT EXISTS `programmation` (
   `id_logement` int(11) NOT NULL,
   `id_piece` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_logement` (`id_logement`),
-  KEY `id_piece` (`id_piece`)
+  KEY `programmation_ibfk_1` (`id_logement`),
+  KEY `programmation_ibfk_2` (`id_piece`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -244,8 +341,8 @@ CREATE TABLE IF NOT EXISTS `programmation_capteur` (
   `id_capteur` int(11) NOT NULL,
   `id_programmation` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_capteur` (`id_capteur`),
-  KEY `id_programmation` (`id_programmation`)
+  KEY `programmation_capteur_ibfk_1` (`id_capteur`),
+  KEY `programmation_capteur_ibfk_2` (`id_programmation`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -275,7 +372,14 @@ CREATE TABLE IF NOT EXISTS `type_utilisateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Nom` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `type_utilisateur`
+--
+
+INSERT INTO `type_utilisateur` (`id`, `Nom`) VALUES
+(1, 'client');
 
 -- --------------------------------------------------------
 
@@ -297,7 +401,14 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_type_utilsateur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_type_utilsateur` (`id_type_utilsateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id`, `Nom`, `Prenom`, `Adresse_mail`, `Date_naissance`, `Mot_de_passe`, `Etat`, `Question_verif`, `Reponse_verif`, `id_type_utilsateur`) VALUES
+(1, 'MENVUSA', 'Gérard', 'gerard.menvusa@gmail.com', '1990-01-01', '6r&4k1S3p', 1, 'Que voulez-vous manger ?', 'Des nouilles', 1);
 
 -- --------------------------------------------------------
 
@@ -346,6 +457,12 @@ ALTER TABLE `actionneur_capteur`
   ADD CONSTRAINT `actionneur_capteur_ibfk_5` FOREIGN KEY (`id_piece`) REFERENCES `piece` (`id`);
 
 --
+-- Contraintes pour la table `donnees`
+--
+ALTER TABLE `donnees`
+  ADD CONSTRAINT `donnees_ibfk_1` FOREIGN KEY (`id_actionneur_capteur`) REFERENCES `actionneur_capteur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Contraintes pour la table `heritage`
 --
 ALTER TABLE `heritage`
@@ -368,15 +485,15 @@ ALTER TABLE `piece`
 -- Contraintes pour la table `programmation`
 --
 ALTER TABLE `programmation`
-  ADD CONSTRAINT `programmation_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`),
-  ADD CONSTRAINT `programmation_ibfk_2` FOREIGN KEY (`id_piece`) REFERENCES `piece` (`id`);
+  ADD CONSTRAINT `programmation_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `programmation_ibfk_2` FOREIGN KEY (`id_piece`) REFERENCES `piece` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `programmation_capteur`
 --
 ALTER TABLE `programmation_capteur`
-  ADD CONSTRAINT `programmation_capteur_ibfk_1` FOREIGN KEY (`id_capteur`) REFERENCES `actionneur_capteur` (`id`),
-  ADD CONSTRAINT `programmation_capteur_ibfk_2` FOREIGN KEY (`id_programmation`) REFERENCES `programmation` (`id`);
+  ADD CONSTRAINT `programmation_capteur_ibfk_1` FOREIGN KEY (`id_capteur`) REFERENCES `actionneur_capteur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `programmation_capteur_ibfk_2` FOREIGN KEY (`id_programmation`) REFERENCES `programmation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `programmation_categorie`

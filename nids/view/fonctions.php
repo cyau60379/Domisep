@@ -7,7 +7,7 @@
 function tabToString($tab) {
     $str = "";
     foreach($tab as $elt){
-        $str = $str . $elt . ",";
+        $str = $str . $elt . ";";
     }
     return $str;
 }
@@ -16,35 +16,25 @@ function tabToString($tab) {
 
 <script>
 
-    function recupCapteurs(piece, capteurs) {                                     //affiche les capteurs de la piece
-        document.getElementById("zoneCapteurs").innerHTML = "";
-        let tab = capteurs.split(",");
-        for(let i = 0; i < (tab.length - 1); i++){
-            document.getElementById("zoneCapteurs").innerHTML +="<div id= " + tab[i] + " class=\"caseCapteur\">\n" +
-                "        <div class=\"titreCapteur\">\n" +
-                "            "+ tab[i].replace("_", " ") + "\n" +
-                "            <a href=\"javascript:supprimer("+ tab[i] +")\">\n" +
-                "                <i class=\"fa fa-times-circle editionCapteur\" style=\"color: red;\" aria-hidden=\"true\" id=" + i + "></i>\n" +
-                "            </a>\n" +
-                "            <i class=\"fa fa-cogs editionCapteur\"></i>\n" +
-                "        </div>\n" +
-                "        <img src=\"Images/"+ tab[i].split('_')[0] +".png\" alt=" + tab[i] + " class=\"imageCapteur\">\n" +
-                "            <a href=\"javascript:allumerEteindre("+ tab[i] +"," + (tab.length - 1) + ")\">\n" +
-                "        <i class=\"fa fa-power-off editionCapteur on \" id="+ tab[i] +"></i>\n" +
-                "            </a>\n" +
-                "    </div>";
-        }
-    }
-    function supprimer(capteur) {                                           //supprime le capteur non voulu
+    function supprimer(id) {                                           //supprime le capteur non voulu
+        let id2 = -id;
         if (confirm('Voulez-vous réellement supprimer ce capteur ?')) {
-            alert('Capteur ' + capteur.id.replace("_", " ") +' supprimé !');             // /!\ mettre condition si la base n'a pas ete mise a jour
-            let list = document.getElementById("zoneCapteurs");   // recupere element <ul> avec id="zoneCapteurs"
-            list.removeChild(document.getElementById(capteur.id));           // efface celui d'id capteur
+            let list = document.getElementById(id);   // recupere element <ul> avec id="zoneCapteurs"
+            list.remove();           // efface celui d'id capteur
             //supprimer de la base de données
+            let xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    alert('Capteur ' + id +' supprimé !');             // /!\ mettre condition si la base n'a pas ete mise a jour
+                }
+            };
+            xhttp.open("GET", "controller/gestionCapteur.php?id=" + id2, true);
+            xhttp.send();   //envoie le resultat de la requete
         }
     }
 
-    function allumerEteindre(capteur, len){             //changer la classe de l'icone + envoi requête à la base pour changer l'etat
+    function allumerEteindre(capteur, id, len){             //changer la classe de l'icone + envoi requête à la base pour changer l'etat
         let zone = [];
         for(let i = 0; i < len; i++){
             zone.push(document.getElementsByClassName("caseCapteur")[i]);
@@ -52,7 +42,7 @@ function tabToString($tab) {
         if (confirm("Voulez-vous réellement modifier l'état de ce capteur ?")) {
             for(let i = 0; i < zone.length; i++){
                 let icon = zone[i].getElementsByTagName("i")[2];
-                if(icon.id === capteur.id){
+                if(icon.id === id){
                     if (icon.classList.contains('on')){
                         icon.classList.remove('on');      // change l'etat
                         icon.classList.add('off');           // change l'etat
@@ -81,20 +71,19 @@ function tabToString($tab) {
     }
 
 
-    /*   function changerTemperature() {
-           var xhttp;
+    function changerPiece(pieceVoulue, id) {
+           let xhttp;
            if (pieceVoulue === "") {
-               document.getElementById("zoneCapteur").innerHTML = "";
+               document.getElementById("zoneCapteurs").innerHTML = "";
                return;
            }
            xhttp = new XMLHttpRequest();
            xhttp.onreadystatechange = function() {
                if (this.readyState === 4 && this.status === 200) {
-                   document.getElementById("zoneCapteur").innerHTML = this.responseText;
+                   document.getElementById("zoneCapteurs").innerHTML = this.responseText;
                }
            };
-           xhttp.open("POST", "capteursController.php", true);
-           xhttp.send("piece=" + pieceVoulue);   //envoie le resultat de la requete
-       }
-   */
+           xhttp.open("GET", "controller/gestionCapteur.php?piece=" + pieceVoulue + "&id=" + id, true);
+           xhttp.send();   //envoie le resultat de la requete
+    }
 </script>
