@@ -6,29 +6,28 @@
 include ("fonctions.php");
 include ("/wamp64/www/nids/model/capteur.php");
 
-/*$pieces = array("entree", "cuisine", "salon", "chambre Bastien", "chambre Raph", "cave Julien");
-$capteurs = array();
-$capteurs["entree"] = array("1,Temperature,1,20", "1,Mouvement,1,20", "1,Luminosite,1,20");
-$capteurs["cuisine"] = array("1,Temperature_1,1,20", "1,Temperature_2,1,20", "1,Mouvement_1,1,20", "1,Mouvement_2,1,20", "1,Luminosite,1,20", "1,Volet,1,20");
-$capteurs["salon"] = array("1,Temperature,1,20", "1,Mouvement,1,20", "1,Luminosite,1,20", "1,Volet_Nord,1,20", "1,Volet_Sud,1,20");
-$capteurs["chambre Bastien"] = array("1,Temperature,1,20", "1,Mouvement,1,20", "1,Luminosite,1,20", "1,Volet,1,20");
-$capteurs["chambre Raph"] = array("1,Temperature_1,1,20", "1,Temperature_2,1,20", "1,Mouvement,1,20", "1,Luminosite,1,20", "1,Volet,1,20");
-$capteurs["cave Julien"] = array("1,Temperature,1,20", "1,Mouvement_1,1,20", "1,Mouvement_2,1,20", "1,Mouvement_3,1,20", "1,Luminosite,1,20");
-*/
 //trouver un moyen de récuperer les données en enlevant les espaces (replace( "_", " ") en javascript / str_replace ( char1, char2, string) php)
 
+
+//id de l'utilisateur
 $id = 1;
+//creation du tableau des capteurs de la piece
 $capteurs = array();
 
-$table = recuperationLogement($bdd, $id);
-$listePieces = recuperationPieces ($bdd, $id);
+//id du logement
+$logement = recuperationLogement($bdd, $id)[0][0];
+
+//liste des pieces de la maison sous forme array { [0] => $id!$nom ... }
+$listePieces = recuperationPieces($bdd, $logement);
+
+//liste des pieces de la maison sous forme array { [$id] => $nom ... }
 $pieces = decoupeString($listePieces);
 
-/*foreach ($pieces as $id => $p){
-    $capteurs[$p] = recuperationCapteurs($bdd, $id);
-}*/
-
+//page à activer, dépendra des autres pages de l'utilisateur
 $page = "gestionCapteur";
+
+
+//choix de la vue, à reverifier
 
 switch($page){
     case "gestionCapteur":
@@ -36,9 +35,12 @@ switch($page){
         break;
     default:
         $vue = "erreur";
+        break;
 }
 
 //include_once("view/".$vue .".php");
+
+//============================================ test des capteurs a afficher
 
 if (isset($_GET['piece']) && isset($_GET['id'])) {
 
@@ -53,24 +55,51 @@ if (isset($_GET['piece']) && isset($_GET['id'])) {
     afficheCapteur($capteurs);
 }
 
+//============================================ test des capteurs a supprimer
+
 if (isset($_GET['id'])){
     supprimerCapteur($bdd, $_GET['id']);
 }
 
-if (isset($_POST['temp'])) {
+//============================================ test de la température a donner a la maison
 
-    $values =  [
-        'Temperature_consigne' => $_POST['temp']
-    ];
+if (isset($_GET['temp'])) {
 
-    // Appel à la BDD à travers une fonction du modèle.
-    $retour = miseAJour($bdd, $values, $table, $id);
+    $temperature = $_GET['temp'];
+    miseAJourTemp($bdd, $temperature, $id);
+}
+//============================================ test de l'activité des capteurs
 
-    if ($retour) {
-        $alerte = "Ajout réussie";
-    } else {
-        $alerte = "L'ajout dans la BDD n'a pas fonctionné";
-    }
+if (isset($_GET['allume']) && isset($_GET['idCap'])) {
+
+    $actif = $_GET['allume'];
+    $idCapt = $_GET['idCap'];
+    miseAJourActif($bdd, $actif, $idCapt);
+}
+//============================================ test de l'activité des capteurs
+
+if (isset($_GET['positionVolet']) && isset($_GET['idCap2'])) {
+
+    $volet = $_GET['positionVolet'];
+    $idCapt2 = $_GET['idCap2'];
+    miseAJourVolet($bdd, $volet, $idCapt2);
+    afficheCapteur($capteurs);
+}
+//============================================ test de l'extinction totale
+
+if (isset($_GET['idEteindre'])) {
+
+    $idMaison = $_GET['idEteindre'];
+    extinction($bdd, $idMaison);
+    afficheCapteur($capteurs);
+}
+//============================================ test de la fermeture totale
+
+if (isset($_GET['idFermer'])) {
+
+    $idMaison = $_GET['idFermer'];
+    fermeture($bdd, $idMaison);
+    afficheCapteur($capteurs);
 }
 
 ?>

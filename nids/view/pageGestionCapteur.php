@@ -11,13 +11,13 @@
 <body>
 
 <div class="container gestionGlobale">
-    <form method="post" action="/controller/gestionCapteur.php" style="margin: 15px"> <!-- à déterminer -->
+    <div style="margin: 15px">
         <label for="tempChoix">Température du logement voulue:</label>
-        <input id="tempChoix" style="width: 50px; height: 30px; text-align: center;" type="number" name="temp" value="20" min="0" max="25"> °C
-        <input class="bouton" type="submit" value="Valider">
-    </form>
-    <button class=' bouton boutonGlobal'>Tout éteindre</button>
-    <button class="bouton boutonGlobal">Tout fermer</button>
+        <input id="tempChoix" style="width: 50px; height: 30px; text-align: center;" type="number" name="temp" value=20 min=0 max=25> °C
+        <input class="bouton" type="submit" value="Valider" onclick="changerTemperature(document.getElementById('tempChoix').value)">
+    </div>
+    <button onclick="eteindre(this.id)" class=' bouton boutonGlobal' id ='<?php echo ($logement + 100000)?>'>Tout éteindre</button>
+    <button onclick="fermer(this.id)" class="bouton boutonGlobal" id ='<?php echo ($logement + 100000)?>'>Tout fermer</button>
 </div>
 
 <div class="container fil" id="filPieces">     <!-- Contient les boutons pour afficher les différents capteurs en fonction de la salle -->
