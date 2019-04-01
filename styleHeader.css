@@ -1,0 +1,182 @@
+
+body{
+
+    border : solid;
+    border-color: black;
+    left : 0;
+    background-color: #05083E;
+    margin: 0px;
+}
+
+div.header {
+    background-color: #05083E;
+    display : inline-block;
+    height: 100px;
+    width: 100%;
+    left : 0;
+}
+.flotte{
+    float : left;
+}
+
+
+
+h1{
+    width : 100%;
+
+    border : 1px;
+    text-align: start;
+    padding : 12px; //espace bordure avec objet
+position: center;
+    display: inline;
+    color : white;
+    line-height:100px;
+    font-size: 60px;
+
+}
+img{
+    width : 75px;
+    margin-top: 20px;
+    margin-left: 20px;
+
+}
+
+div.firstheader{
+    background-color : #3C3D51;
+    display : inline-block;
+    height : 2px;
+    width : 99.8%;
+    border-width: 12220px;
+    border-color : black;
+    border : solid;
+    border-radius: 1px;
+
+
+}
+
+
+div.second_header{
+    background-color: #3C3D51;
+    display: inline-block;
+    height: 60px;
+    width: 100%;
+
+}
+
+.Domotique{
+    display : inline;
+}
+
+.Domotique{
+    width : 120px;
+    height: 60px;
+    background-color: #3C3D51;
+    border : none;
+    float: left;
+    border-radius : 20px;
+    cursor: pointer;
+    color : white;
+
+}
+.Domotique:hover{
+    background-color: darkgrey;
+    color : #05083E;
+    font-weight: bold;
+    font-size: 12px;
+
+}
+
+p{
+    color: white;
+    font-size: 13px;
+}
+
+.fa{
+    height :60px;
+    width : 50px;
+    color : white;
+    font-size:30px;
+    display: inline;
+
+
+}
+
+.EditerProfil {
+    display: inline;}
+
+
+.EditerProfil {
+    width: 120px;
+    height :60px;
+    border : none;
+    float:  left;
+    background-color: #3C3D51;
+    padding : 10px;
+    cursor: pointer;
+    border-radius : 20px;
+    color : white;
+
+}
+.EditerProfil:active{
+    background-color: blue;
+
+
+
+}
+.EditerProfil:hover{
+    background-color: darkgrey;
+    color : #05083E;
+    font-weight: bold;
+    font-size: 12px;
+
+
+}
+.Support{
+    display: inline;}
+.Support{
+    width: 120px;
+    height :60px;
+    border : none;
+    float:  left;
+    background-color: #3C3D51;
+    padding : 10px;
+    cursor: pointer;
+    border-radius : 20px;
+    color : white;}
+
+.Support:active{
+    background-color: blue;
+}
+.Support:hover{
+    background-color: darkgrey;
+    color : #05083E;
+    font-weight: bold;
+    font-size: 12px;
+
+}
+.Deconnexion{
+    height : 30px;
+    border-radius: 10px;
+    margin-left : 50px;
+    margin-top: 15px;
+    cursor : pointer;
+    width: 150px ;
+    display: inline-block;
+
+}
+.prenom{
+
+    margin-left: 750px;
+    height : 40px;
+    margin-top: 5px;
+    cursor: pointer;
+    display : inline-block;
+
+}
+.function {
+
+
+}
+
+
+
