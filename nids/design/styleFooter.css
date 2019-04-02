@@ -1,0 +1,46 @@
+.piedDePage {
+    background-color: #05083e;
+    color: #FFFFFF;
+    margin: 0;
+}
+footer {
+    background-color: #05083e;
+    color: #FFFFFF;
+    padding: 10px;
+
+}
+.liste {
+    display : inline-block;
+    justify-content: center;
+    height: 50px;
+    width: 250px;
+    position: relative;
+    margin-left: 150px;
+    color: #FFFFFF;
+}
+
+a {
+    color: #FFFFFF;
+}
+
+.liste1 {
+    display : inline-block;
+    justify-content: center;
+    text-align: center;
+    height: 100px;
+    width: 200px;
+    position: relative;
+    color: #FFFFFF;
+}
+
+img{
+    width : 50px;
+    padding: 10px;
+
+}
+body {
+    margin: 0;
+}
+li{
+    list-style-type: none;
+}
