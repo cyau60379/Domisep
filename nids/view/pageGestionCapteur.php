@@ -31,7 +31,7 @@
 </div>
 
 <li id="zoneCapteurs">
-    <p>Hello world</p>  <!-- à améliorer -->
+    <p class="info">Veuillez choisir une pièce</p>  <!-- à améliorer -->
 </li>
 </body>
 </html>

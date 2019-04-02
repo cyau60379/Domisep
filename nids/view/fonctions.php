@@ -5,7 +5,7 @@
  */
 
 //conversion d'un tableau en string pour l'exporter en javascript
-
+/*
 function tabToString($tab) {
     $str = "";
     foreach($tab as $elt){
@@ -13,10 +13,46 @@ function tabToString($tab) {
     }
     return $str;
 }
+*/
 ?>
 
 
 <script>
+
+    // fonction header changer contenu bouton
+    function changerContenu(id){
+        let str = document.getElementById(id).classList[1];
+        let str2 = document.getElementById(id).classList[2];
+        let boutons = document.getElementsByClassName("choixPage");
+        if(window.innerWidth < 520){
+            document.getElementById(id).innerHTML = "";
+        } else if(window.innerWidth < 587){
+            for(let i = 0; i < boutons.length; i++){
+                boutons[i].style.fontSize = "10px";
+                boutons[i].style.width = "100px";
+            }
+            document.getElementById(id).style.fontSize = "12px";
+            document.getElementById(id).innerHTML = str.substr(0,1) + "." + str2;
+        }else if(window.innerWidth < 650){
+            document.getElementById(id).innerHTML = str.substr(0,1) + "." + str2;
+            for(let i = 0; i < boutons.length; i++){
+                boutons[i].style.fontSize = "12px";
+                boutons[i].style.width = "120px";
+            }
+            document.getElementById(id).style.fontSize = "15px";
+        } else {
+            document.getElementById(id).innerHTML = str + " " + str2;
+            for(let i = 0; i < boutons.length; i++){
+                boutons[i].style.fontSize = "15px";
+                boutons[i].style.width = "130px";
+            }
+            document.getElementById(id).style.fontSize = "15px";
+        }
+    }
+    function remettreContenu(id){
+        document.getElementById(id).innerHTML = id;
+    }
+
 
     //fonction de suppression du capteur non voulu
 
@@ -209,6 +245,5 @@ function tabToString($tab) {
             request.send();                                                                 //envoie le resultat de la requete
         }
     }
-
 
 </script>

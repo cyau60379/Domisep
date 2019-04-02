@@ -20,6 +20,15 @@ function decoupeString($list){
     return $tab;
 }
 
+function decoupeString2($list){
+    $string = "";
+    foreach ($list as $str){
+        $result = preg_split("/\!/", $str);
+        $string = $result[0] ." ". $result[1];
+    }
+    return $string;
+}
+
 function afficheDonnees($tab){
     if (sizeof($tab) < 5){
         return "null";

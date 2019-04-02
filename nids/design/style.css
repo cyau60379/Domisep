@@ -3,6 +3,7 @@
 body {
     background-color: #3C3D51;
     font-family: Arial;
+    margin: 0;
 }
 
 /*division de base*/
@@ -18,7 +19,7 @@ body {
 
 /*changement du style en fonction de la taille de fenêtre*/
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 650px) {
     .container {                /*changement du container*/
         flex-wrap: wrap;
     }
@@ -36,6 +37,7 @@ div.gestionGlobale {
 
 div.fil {
     background-color: #3C3D51;
+    overflow: auto;
 }
 
 /*bouton pieces de l'appartement*/
@@ -184,4 +186,12 @@ i.on {
 i.off {
     margin: 5px;
     color: red;
+}
+
+/*paragraphe demandant de choisir une salle*/
+p.info {
+    font-size: 3vw;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-style: italic;
 }
