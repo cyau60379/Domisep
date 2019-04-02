@@ -5,58 +5,11 @@
  * Date: 25/03/2019
  * Time: 11:49
  */
-
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="/design/styleFooter.css">
+<link rel="stylesheet" type="text/css" href="design/styleFooter.css">
 
 <html>
-<body>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <br>
 <br>
 <br>
@@ -77,7 +30,7 @@
 <br>
 <footer>
     <div class="liste1">
-        <img src="/Images/logoNids.png" alt="notre logo"><br>© 2019 Copyright: NIDS
+        <img class="logoFoot" src="Images/logoNids.png" alt="notre logo"><br>© 2019 Copyright: NIDS
     </div>
     <div class="liste">
         <li>
@@ -106,5 +59,4 @@
         <br>
     </div>
 </footer>
-</body>
 </html>

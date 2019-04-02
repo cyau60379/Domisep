@@ -32,3 +32,4 @@ if (isset($_GET['cible']) && !empty($_GET['cible'])) {
 include('controller/'.$url.'.php');
 include('view/header.php');
 include('view/pageGestionCapteur.php');
+include('view/footer.php');

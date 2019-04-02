@@ -33,14 +33,11 @@ a {
     color: #FFFFFF;
 }
 
-img{
+img.logoFoot{
     width : 50px;
     padding: 10px;
+}
 
-}
-body {
-    margin: 0;
-}
 li{
     list-style-type: none;
 }

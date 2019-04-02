@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestionnaire des capteurs</title>
-    <link rel="stylesheet" type="text/css" media="screen" title="default" href="/design/style.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" title="default" href="design/style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <?php include_once ("fonctions.php");      //inclut les fonctions concernant les capteurs
     ?>
