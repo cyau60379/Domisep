@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  sam. 30 mars 2019 à 22:25
+-- Généré le :  jeu. 04 avr. 2019 à 20:56
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -53,27 +53,23 @@ CREATE TABLE IF NOT EXISTS `actionneur_capteur` (
 --
 
 INSERT INTO `actionneur_capteur` (`id`, `nom`, `Etat`, `Actif`, `NumeroSerie`, `id_element_catalogue`, `id_CeMac`, `id_piece`, `id_utilisateur`, `id_categorie`) VALUES
-(1, 'Température 1', 1, 1, 656156151, 1, 1, 1, 1, 1),
-(2, 'Température 2', 1, 1, 656156152, 1, 1, 1, 1, 1),
-(4, 'Température', 1, 1, 656156153, 1, 1, 2, 1, 1),
-(5, 'Température', 1, 1, 656156154, 1, 1, 4, 1, 1),
-(6, 'Température', 1, 1, 656156155, 1, 1, 5, 1, 1),
-(7, 'Température', 1, 1, 656156156, 1, 1, 3, 1, 1),
-(8, 'Luminosité', 1, 1, 4913184, 2, 1, 1, 1, 1),
-(9, 'Luminosité', 1, 1, 4913185, 2, 1, 2, 1, 1),
-(10, 'Luminosité', 1, 1, 4913186, 2, 1, 3, 1, 1),
-(11, 'Luminosité', 1, 1, 4913187, 2, 1, 4, 1, 1),
-(12, 'Luminosité', 1, 1, 4913188, 2, 1, 5, 1, 1),
-(13, 'Mouvement', 1, 1, 723163652, 3, 1, 1, 1, 1),
-(14, 'Mouvement', 1, 1, 723163653, 3, 1, 4, 1, 1),
-(15, 'Mouvement 1', 1, 1, 723163654, 3, 1, 2, 1, 1),
-(16, 'Mouvement 2', 1, 1, 723163655, 3, 1, 2, 1, 1),
-(17, 'Mouvement 3', 1, 1, 723163656, 3, 1, 2, 1, 1),
-(18, 'Mouvement 4', 1, 1, 723163657, 3, 1, 2, 1, 1),
-(19, 'Mouvement 5', 1, 1, 723163658, 3, 1, 2, 1, 1),
-(20, 'Volet', 1, 1, 976786, 4, 1, 1, 1, 1),
-(21, 'Volet Nord', 1, 1, 976787, 4, 1, 4, 1, 1),
-(22, 'Volet Sud', 1, 1, 976788, 4, 1, 4, 1, 1);
+(6, 'Température', 1, 0, 656156155, 1, 1, 5, 1, 1),
+(7, 'Température', 1, 0, 656156156, 1, 1, 3, 1, 1),
+(8, 'Luminosité', 1, 0, 4913184, 2, 1, 1, 1, 1),
+(9, 'Luminosité', 1, 0, 4913185, 2, 1, 2, 1, 1),
+(10, 'Luminosité', 1, 0, 4913186, 2, 1, 3, 1, 1),
+(11, 'Luminosité', 1, 0, 4913187, 2, 1, 4, 1, 1),
+(12, 'Luminosité', 1, 0, 4913188, 2, 1, 5, 1, 1),
+(13, 'Mouvement', 1, 0, 723163652, 3, 1, 1, 1, 1),
+(14, 'Mouvement', 1, 0, 723163653, 3, 1, 4, 1, 1),
+(15, 'Mouvement 1', 1, 0, 723163654, 3, 1, 2, 1, 1),
+(16, 'Mouvement 2', 1, 0, 723163655, 3, 1, 2, 1, 1),
+(17, 'Mouvement 3', 1, 0, 723163656, 3, 1, 2, 1, 1),
+(18, 'Mouvement 4', 1, 0, 723163657, 3, 1, 2, 1, 1),
+(19, 'Mouvement 5', 1, 0, 723163658, 3, 1, 2, 1, 1),
+(20, 'Volet', 1, 0, 976786, 4, 1, 1, 1, 1),
+(21, 'Volet Nord', 1, 0, 976787, 4, 1, 4, 1, 1),
+(22, 'Volet Sud', 1, 0, 976788, 4, 1, 4, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -149,7 +145,8 @@ CREATE TABLE IF NOT EXISTS `cemac` (
   `Nom` varchar(255) NOT NULL,
   `Etat` tinyint(1) NOT NULL,
   `id_logement` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `cemac_ibfk_1` (`id_logement`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
@@ -172,7 +169,8 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
   `Contenu` text NOT NULL,
   `Note` int(11) NOT NULL,
   `id_article` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `id_article` (`id_article`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -254,10 +252,20 @@ CREATE TABLE IF NOT EXISTS `heritage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_utilisateur_prim` int(11) NOT NULL,
   `id_utilisateur_sec` int(11) NOT NULL,
+  `id_logement` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_utilisateur_prim` (`id_utilisateur_prim`),
-  KEY `id_utilisateur_sec` (`id_utilisateur_sec`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `id_utilisateur_sec` (`id_utilisateur_sec`),
+  KEY `id_logement` (`id_logement`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `heritage`
+--
+
+INSERT INTO `heritage` (`id`, `id_utilisateur_prim`, `id_utilisateur_sec`, `id_logement`) VALUES
+(1, 4, 2, 2),
+(2, 4, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -272,15 +280,17 @@ CREATE TABLE IF NOT EXISTS `logement` (
   `Temperature_consigne` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  KEY `logement_ibfk_1` (`id_utilisateur`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `logement`
 --
 
 INSERT INTO `logement` (`id`, `Adresse`, `Temperature_consigne`, `id_utilisateur`) VALUES
-(1, '23 avenue de Paris, 78000 Versailles', 20, 1);
+(1, '23 avenue de Paris, 78000 Versailles', 20, 1),
+(2, '2 rue Berthier, 78000 Versailles', 20, 4),
+(3, '3 square du Dragon, 78150 Le Chesnay', 20, 4);
 
 -- --------------------------------------------------------
 
@@ -294,7 +304,7 @@ CREATE TABLE IF NOT EXISTS `piece` (
   `Nom` varchar(255) NOT NULL,
   `id_logement` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_logement` (`id_logement`)
+  KEY `piece_ibfk_1` (`id_logement`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
@@ -372,14 +382,15 @@ CREATE TABLE IF NOT EXISTS `type_utilisateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Nom` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `type_utilisateur`
 --
 
 INSERT INTO `type_utilisateur` (`id`, `Nom`) VALUES
-(1, 'client');
+(1, 'client'),
+(2, 'gestionnaire');
 
 -- --------------------------------------------------------
 
@@ -393,6 +404,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `Nom` varchar(255) NOT NULL,
   `Prenom` varchar(255) NOT NULL,
   `Adresse_mail` varchar(255) NOT NULL,
+  `numeroTel` varchar(14) NOT NULL,
   `Date_naissance` date NOT NULL,
   `Mot_de_passe` varchar(255) NOT NULL,
   `Etat` tinyint(1) NOT NULL,
@@ -400,15 +412,18 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `Reponse_verif` varchar(255) NOT NULL,
   `id_type_utilsateur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_type_utilsateur` (`id_type_utilsateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  KEY `utilisateur_ibfk_1` (`id_type_utilsateur`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`id`, `Nom`, `Prenom`, `Adresse_mail`, `Date_naissance`, `Mot_de_passe`, `Etat`, `Question_verif`, `Reponse_verif`, `id_type_utilsateur`) VALUES
-(1, 'MENVUSA', 'Gérard', 'gerard.menvusa@gmail.com', '1990-01-01', '6r&4k1S3p', 1, 'Que voulez-vous manger ?', 'Des nouilles', 1);
+INSERT INTO `utilisateur` (`id`, `Nom`, `Prenom`, `Adresse_mail`, `numeroTel`, `Date_naissance`, `Mot_de_passe`, `Etat`, `Question_verif`, `Reponse_verif`, `id_type_utilsateur`) VALUES
+(1, 'MENVUSA', 'Gérard', 'gerard.menvusa@gmail.com', '06 66 77 88 99', '1990-01-01', '6r&4k1S3p', 1, 'Que voulez-vous manger ?', 'Des nouilles', 1),
+(2, 'HIFFY', 'Eugène', 'eugene.hiffy@gmail.com', '07 87 26 12 12', '1998-01-31', 'M0l0lFait', 1, 'Que voulez-vous manger ?', 'Des patates', 1),
+(3, 'HIC', 'Bazil', 'bazil.hic@gmail.com', '07 54 64 12 14', '1987-07-05', 'Bi1Fr4is', 1, 'Que voulez-vous prendre ?', 'Un pari sur l\'avenir', 1),
+(4, 'TIME', 'Vic', 'vic.time@gmail.com', '06 78 45 40 17', '2000-07-09', 'TheB4nch33', 1, 'Que voulez-vous prendre ?', 'Ton argent', 2);
 
 -- --------------------------------------------------------
 
@@ -422,8 +437,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur_article` (
   `id_utilisateur` int(11) NOT NULL,
   `id_article` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_article` (`id_article`),
-  KEY `id_utilisateur` (`id_utilisateur`)
+  KEY `utilisateur_article_ibfk_1` (`id_article`),
+  KEY `utilisateur_article_ibfk_2` (`id_utilisateur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -438,8 +453,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur_commentaire` (
   `id_utilisateur` int(11) NOT NULL,
   `id_commentaire` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_commentaire` (`id_commentaire`),
-  KEY `id_utilisateur` (`id_utilisateur`)
+  KEY `utilisateur_commentaire_ibfk_1` (`id_commentaire`),
+  KEY `utilisateur_commentaire_ibfk_2` (`id_utilisateur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -447,80 +462,56 @@ CREATE TABLE IF NOT EXISTS `utilisateur_commentaire` (
 --
 
 --
--- Contraintes pour la table `actionneur_capteur`
+-- Contraintes pour la table `cemac`
 --
-ALTER TABLE `actionneur_capteur`
-  ADD CONSTRAINT `actionneur_capteur_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `actionneur_capteur_ibfk_2` FOREIGN KEY (`id_categorie`) REFERENCES `categorie` (`id`),
-  ADD CONSTRAINT `actionneur_capteur_ibfk_3` FOREIGN KEY (`id_CeMac`) REFERENCES `cemac` (`id`),
-  ADD CONSTRAINT `actionneur_capteur_ibfk_4` FOREIGN KEY (`id_element_catalogue`) REFERENCES `element_catalogue` (`id`),
-  ADD CONSTRAINT `actionneur_capteur_ibfk_5` FOREIGN KEY (`id_piece`) REFERENCES `piece` (`id`);
+ALTER TABLE `cemac`
+  ADD CONSTRAINT `cemac_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `donnees`
+-- Contraintes pour la table `commentaire`
 --
-ALTER TABLE `donnees`
-  ADD CONSTRAINT `donnees_ibfk_1` FOREIGN KEY (`id_actionneur_capteur`) REFERENCES `actionneur_capteur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `commentaire`
+  ADD CONSTRAINT `commentaire_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `heritage`
 --
 ALTER TABLE `heritage`
-  ADD CONSTRAINT `heritage_ibfk_1` FOREIGN KEY (`id_utilisateur_prim`) REFERENCES `utilisateur` (`id`),
-  ADD CONSTRAINT `heritage_ibfk_2` FOREIGN KEY (`id_utilisateur_sec`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `heritage_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `heritage_ibfk_2` FOREIGN KEY (`id_utilisateur_prim`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `heritage_ibfk_3` FOREIGN KEY (`id_utilisateur_sec`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `logement`
 --
 ALTER TABLE `logement`
-  ADD CONSTRAINT `logement_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `logement_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `piece`
 --
 ALTER TABLE `piece`
-  ADD CONSTRAINT `piece_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`);
-
---
--- Contraintes pour la table `programmation`
---
-ALTER TABLE `programmation`
-  ADD CONSTRAINT `programmation_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `programmation_ibfk_2` FOREIGN KEY (`id_piece`) REFERENCES `piece` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `programmation_capteur`
---
-ALTER TABLE `programmation_capteur`
-  ADD CONSTRAINT `programmation_capteur_ibfk_1` FOREIGN KEY (`id_capteur`) REFERENCES `actionneur_capteur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `programmation_capteur_ibfk_2` FOREIGN KEY (`id_programmation`) REFERENCES `programmation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `programmation_categorie`
---
-ALTER TABLE `programmation_categorie`
-  ADD CONSTRAINT `programmation_categorie_ibfk_1` FOREIGN KEY (`id_categorie`) REFERENCES `categorie` (`id`),
-  ADD CONSTRAINT `programmation_categorie_ibfk_2` FOREIGN KEY (`id_programmation`) REFERENCES `programmation` (`id`);
+  ADD CONSTRAINT `piece_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  ADD CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`id_type_utilsateur`) REFERENCES `type_utilisateur` (`id`);
+  ADD CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`id_type_utilsateur`) REFERENCES `type_utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `utilisateur_article`
 --
 ALTER TABLE `utilisateur_article`
-  ADD CONSTRAINT `utilisateur_article_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`),
-  ADD CONSTRAINT `utilisateur_article_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `article` (`id`);
+  ADD CONSTRAINT `utilisateur_article_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `utilisateur_article_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `utilisateur_commentaire`
 --
 ALTER TABLE `utilisateur_commentaire`
-  ADD CONSTRAINT `utilisateur_commentaire_ibfk_1` FOREIGN KEY (`id_commentaire`) REFERENCES `commentaire` (`id`),
-  ADD CONSTRAINT `utilisateur_commentaire_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+  ADD CONSTRAINT `utilisateur_commentaire_ibfk_1` FOREIGN KEY (`id_commentaire`) REFERENCES `commentaire` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `utilisateur_commentaire_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

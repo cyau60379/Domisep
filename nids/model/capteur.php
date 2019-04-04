@@ -7,13 +7,6 @@
  */
 include ("requetesGenerales.php");
 
-//requête recuperations du logement en fonction de l'id de l'utilisateur
-
-function recuperationLogement (PDO $bdd, $id) {
-    $query = 'SELECT logement.id FROM logement WHERE logement.id_utilisateur = ' . $id;
-    return $bdd->query($query)->fetchAll();     //retourne un tableau contenant toutes les resultats de la requete
-}
-
 //suppression des capteurs non desirés
 
 function supprimerCapteur(PDO $bdd, $id){

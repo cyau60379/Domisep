@@ -110,4 +110,21 @@ function afficheCapteur($cap){
             </div>";
     endforeach;
 }
+
+function afficheClients($clients){
+    $taille = sizeof($clients);
+    foreach ($clients as $c):
+        $id = -$c[0];
+        echo "<div id= '$id' class= ' caseCapteur '> 
+                <div class='titreCapteur'>
+                    $c[1] $c[2]
+                    <a href='javascript:supprimer($id)'>
+                        <i class='fa fa-times-circle editionCapteur' style='color: red;' aria-hidden='true' id='$c[0]'></i>
+                    </a>
+                    <i class='fa fa-cogs editionCapteur'></i>
+                </div>
+                $c[3] <br> $c[4] 
+            </div>";
+    endforeach;
+}
 ?>

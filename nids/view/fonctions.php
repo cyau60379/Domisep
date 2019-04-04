@@ -246,4 +246,22 @@ function tabToString($tab) {
         }
     }
 
+    //fonction qui permet d'afficher les capteurs en fonction de la piece demandée
+
+    function changerLogement(logementVoulu, id) {
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        if (logementVoulu === "") {
+            document.getElementById("zoneClients").innerHTML = "";  //cas ou aucune piece n'est choisi mais un bouton existe
+            return;
+        }
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                document.getElementById("zoneClients").innerHTML = this.responseText;   //rempli la zoneCapteurs
+            }
+        };
+        request.open("GET", "controller/gestionClient.php?logement=" + logementVoulu + "&id=" + id, true);
+        request.send();                                                              //envoie le resultat de la requete au serveur
+    }
+
 </script>

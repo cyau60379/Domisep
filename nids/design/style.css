@@ -44,7 +44,7 @@ div.fil {
 
 .boutonFil {
     color: #FFFFFF;
-    width: 200px;   /* à modifier en fonction du nombre de boutons sur le fil*/
+    width: 100%;
     height: 50px;
     font-size: 20px;
     background-image: linear-gradient(#3C3D51 0%, #3C3D51 100%);
@@ -83,6 +83,12 @@ div.fil {
     justify-content: center;
 }
 
+#zoneClients {
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(1,1fr);
+    justify-content: center;
+}
 /*bandeau contenant nom, et boutons pour chaque capteur*/
 
 div.titreCapteur {
@@ -122,6 +128,7 @@ div.actionneur {
     margin: 5px;
     color: #000000;
     background-color: #FFFFFF;
+    background-image: none;
     border-radius: 10px;
     border-style: solid;
     border-width: 2px;
@@ -138,8 +145,10 @@ div.actionneur {
 }
 .bouton:hover {     /*bouton de base changeant en passant dessus*/
     background-color: #000000;
+    background-image: none;
     color: white;
 }
+
 
 /*bouton ajout de capteur*/
 
