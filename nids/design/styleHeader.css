@@ -1,7 +1,7 @@
 div.header {
     background-color: #05083E;
     display: inline-block;
-    height: 100px;
+    height: 90px;
     width: 100%;
     left : 0;
 }
@@ -20,7 +20,7 @@ h1 {
 
 /*changement du style en fonction de la taille de fenêtre*/
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 460px) {
     h1 {                /*changement du container*/
         font-size: 2.5vw;
     }
@@ -52,7 +52,7 @@ div.bandeau {
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    height: 30px;
+    height: 50px;
     width: 100%;
 }
 
@@ -70,21 +70,21 @@ div.bandeau {
 /* Bouton choix */
 
 .choixPage {
-    width: 130px;
-    height: 30px;
-    border: none;
+    margin-left: 5px;
+    height: 44px;
+    border: solid 3px white;
     background-color: #3C3D51;
     cursor: pointer;
     border-radius: 20px;
     color: white;
-    font-size: 15px;
+    font-size: 20px;
 }
 
 .choixPage:hover{
     background-color: darkgrey;
     color: #05083E;
+    border-color: #05083E;
     font-weight: bold;
-    transition-duration: 0.3s;
 }
 
 .choixPage:active{
@@ -96,10 +96,12 @@ div.bandeau {
 }
 
 .prenom{
-    margin-top: 6px;
-    display: inline;
+    display: inline-block;
     color: white;
-    font-size: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: oblique;
+    margin: 0;
 }
 
 .bouton:focus {
