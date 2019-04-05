@@ -4,11 +4,11 @@
     <option name="dataSources">
       <list>
         <State>
-          <option name="id" value="91dbb884-6bd2-4822-a70a-4be9bfa00fc3" />
-          <option name="name" value="NIDS" />
+          <option name="id" value="410cb707-aedb-41f5-b7df-5262755d126f" />
+          <option name="name" value="nids" />
           <option name="urls">
             <array>
-              <option value="file://$PROJECT_DIR$/../Domisep/NIDS.sql" />
+              <option value="file://$PROJECT_DIR$/nids/nids.sql" />
             </array>
           </option>
         </State>

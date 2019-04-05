@@ -14,7 +14,7 @@
     <div class="header">
         <img src="Images/logoNids.png" alt="notre logo" class="logo">
         <h1>
-            Numérique et intelligence pour demeure sécurisée
+            Numérique et Intelligence pour Demeure Sécurisée
         </h1>
     </div>
     <div class="separation">
