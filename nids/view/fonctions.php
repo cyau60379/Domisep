@@ -257,7 +257,11 @@ function tabToString($tab) {
         request = new XMLHttpRequest();
         request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
             if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
-                document.getElementById("zoneClients").innerHTML = this.responseText;   //rempli la zoneCapteurs
+                document.getElementById("zoneClients").innerHTML = "";
+                document.getElementById("zoneClients").innerHTML = "<div class='caseClient' id='divClients'>" +
+                                                                        "<div class='titre titreSup'>Clients</div>" +
+                                                                    "</div>";
+                document.getElementById("divClients").innerHTML += this.responseText;   //rempli la zoneCapteurs
             }
         };
         request.open("GET", "controller/gestionClient.php?logement=" + logementVoulu + "&id=" + id, true);

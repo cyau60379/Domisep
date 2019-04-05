@@ -17,7 +17,7 @@
 </div>
 
 <div class="container">
-    <a href="/controller/catalogue.php"><button class="bouton boutonAjout"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter un client</button></a>
+    <a href="/controller/infoCompte.php"><button class="bouton boutonAjout"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter un client</button></a>
 </div>
 
 <li id="zoneClients">
