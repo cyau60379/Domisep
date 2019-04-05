@@ -260,6 +260,9 @@ function tabToString($tab) {
                 document.getElementById("zoneClients").innerHTML = "";
                 document.getElementById("zoneClients").innerHTML = "<div class='caseClient' id='divClients'>" +
                                                                         "<div class='titre titreSup'>Clients</div>" +
+                                                                    "</div>" +
+                                                                    "<div class='caseClient' id='divClients'>" +
+                                                                        "<div class='titre titreSup'>Graphes</div>" +
                                                                     "</div>";
                 document.getElementById("divClients").innerHTML += this.responseText;   //rempli la zoneCapteurs
             }
