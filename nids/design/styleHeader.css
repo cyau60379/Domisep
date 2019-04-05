@@ -6,7 +6,7 @@ div.header {
     left : 0;
 }
 
-h1{
+h1 {
     width: 100%;
     border: 1px;
     text-align: start;
@@ -32,22 +32,22 @@ h1{
     }
 }
 
-img.logo{
-    width : 75px;
+img.logo {
+    width: 75px;
     margin-top: 10px;
     margin-left: 10px;
-    float : left;
+    float: left;
 }
 
-div.separation{
-    background-color : #000000;
-    display : inline-block;
-    height : 2px;
-    width : 100%;
+div.separation {
+    background-color: #000000;
+    display: inline-block;
+    height: 2px;
+    width: 100%;
 }
 
 
-div.bandeau{
+div.bandeau {
     background-color: #3C3D51;
     display: inline-flex;
     flex-wrap: wrap;
@@ -68,6 +68,7 @@ div.bandeau{
 }
 
 /* Bouton choix */
+
 .choixPage {
     width: 130px;
     height: 30px;
@@ -90,9 +91,17 @@ div.bandeau{
     background-color: blue;
 }
 
+.choixPage:focus{
+    outline-color: #3c3d51;
+}
+
 .prenom{
     margin-top: 6px;
     display: inline;
     color: white;
     font-size: 15px;
+}
+
+.bouton:focus {
+    outline-color: #3c3d51;
 }
