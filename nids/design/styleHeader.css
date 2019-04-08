@@ -1,0 +1,109 @@
+div.header {
+    background-color: #05083E;
+    display: inline-block;
+    height: 90px;
+    width: 100%;
+    left : 0;
+}
+
+h1 {
+    width: 100%;
+    border: 1px;
+    text-align: start;
+    padding: 12px;
+    position: center;
+    display: inline;
+    color: white;
+    line-height: 100px;
+    font-size: 3vw;
+}
+
+/*changement du style en fonction de la taille de fenêtre*/
+
+@media screen and (max-width: 460px) {
+    h1 {                /*changement du container*/
+        font-size: 2.5vw;
+    }
+}
+
+@media screen and (max-width: 355px) {
+    h1 {                /*changement du container*/
+        font-size: 2vw;
+    }
+}
+
+img.logo {
+    width: 75px;
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+}
+
+div.separation {
+    background-color: #000000;
+    display: inline-block;
+    height: 2px;
+    width: 100%;
+}
+
+
+div.bandeau {
+    background-color: #3C3D51;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 50px;
+    width: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+    .bandeau {                /*changement du container*/
+        flex-wrap: nowrap;
+    }
+}
+
+.fa{
+    font-size: 30px;
+    display: inline;
+}
+
+/* Bouton choix */
+
+.choixPage {
+    margin-left: 10px;
+    height: 44px;
+    border: solid 3px white;
+    background-color: #3C3D51;
+    cursor: pointer;
+    border-radius: 20px;
+    color: white;
+    font-size: 20px;
+}
+
+.choixPage:hover{
+    background-color: darkgrey;
+    color: #05083E;
+    border-color: #05083E;
+    font-weight: bold;
+}
+
+.choixPage:active{
+    background-color: blue;
+}
+
+.choixPage:focus{
+    outline-color: #3c3d51;
+}
+
+.prenom{
+    display: inline-block;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: oblique;
+    margin: 0;
+}
+
+.bouton:focus {
+    outline-color: #3c3d51;
+}

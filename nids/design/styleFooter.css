@@ -1,0 +1,55 @@
+.piedDePage {
+    background-color: #05083e;
+    color: #FFFFFF;
+    margin: 0;
+}
+footer {
+    background-color: #05083e;
+    color: #FFFFFF;
+    padding: 10px;
+
+}
+.liste {
+    display : inline-block;
+    font-size: 15px;
+    justify-content: center;
+    position: relative;
+    color: #FFFFFF;
+}
+
+a {
+    color: #FFFFFF;
+}
+
+.liste1 {
+    display : inline-block;
+    font-size: 15px;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    color: #FFFFFF;
+}
+
+img.logoFoot{
+    width : 50px;
+    padding: 10px;
+}
+
+li{
+    list-style-type: none;
+}
+
+footer {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 630px){
+    .liste1 {
+        font-size: 2vw;
+    }
+    .liste {
+        font-size: 2vw;
+    }
+}

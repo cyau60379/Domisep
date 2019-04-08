@@ -1,15 +1,14 @@
-body {                      /*changement du fond du site*/
+/*changement du fond du site*/
+
+body {
     background-color: #3C3D51;
     font-family: Arial;
+    margin: 0;
 }
 
-div.gestionGlobale {        /*division pour la gestion globale*/
-    background-image: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(60,61,81,1) 100%);
-    border-radius: 10px;
-    color: #FFFFFF;
-}
+/*division de base*/
 
-.container {                /*division de base*/
+.container {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -17,19 +16,99 @@ div.gestionGlobale {        /*division pour la gestion globale*/
     text-align: center;
     font-size: 20px;
 }
-#zoneCapteurs {         /*division contenant les différents capteurs*/
+
+/*changement du style en fonction de la taille de fenêtre*/
+
+@media screen and (max-width: 650px) {
+    .container {                /*changement du container*/
+        flex-wrap: wrap;
+    }
+}
+
+/*division pour la gestion globale*/
+
+div.gestionGlobale {
+    background-image: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(60,61,81,1) 100%);
+    border-radius: 10px;
+    color: #FFFFFF;
+}
+
+/*bouton pour choix des pieces*/
+
+div.fil {
+    background-color: #3C3D51;
+    overflow: auto;
+}
+
+/*bouton pieces de l'appartement*/
+
+.boutonFil {
+    color: #FFFFFF;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    background-image: linear-gradient(#3C3D51 0%, #3C3D51 100%);
+    border-radius: 50px;
+    border-style: none;
+    float: left;
+}
+
+/*changement en passant dessus*/
+
+.boutonFil:hover {
+    background-image: linear-gradient(0deg, rgba(60,61,81,1) 0%, rgba(207,207,207,1) 100%);
+    color: white;
+}
+
+.boutonFil:active {
+    background-image: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(60,61,81,1) 100%);
+}
+
+.boutonFil:focus {
+    outline-color: #3c3d51;
+}
+
+/*style du bouton actif dans le fil*/
+
+.activer {
+    background-image: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(60,61,81,1) 100%);
+}
+
+.activer:hover {
+    background-image: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(60,61,81,1) 100%);
+}
+
+/*division contenant les différents capteurs*/
+
+#zoneCapteurs {
     display: flex;
     flex-wrap: wrap;
     grid-template-columns: repeat(3,1fr);
     justify-content: center;
 }
 
-div.titreCapteur {      /*bandeau contenant nom, et boutons pour chaque capteur*/
+#zoneClients {
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(1,1fr);
+    justify-content: center;
+}
+/*bandeau contenant nom, et boutons pour chaque capteur*/
+
+div.titre {
     background-color: #FFFFFF;
     border-radius: 9px;
     padding: 5px;
     border: solid 1px #000000;
+    text-align: initial;
 }
+
+div.titreSup {
+    text-align: center;
+    font-size: 20px;
+}
+
+/*division contenant toutes les infos des capteurs*/
 
 div.caseCapteur {
     background-image: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(60,61,81,1) 100%);
@@ -40,53 +119,61 @@ div.caseCapteur {
     margin: 20px;
 }
 
-div.fil {                   /*bouton pour choix des pieces*/
-    background-color: #3C3D51;
+/*division contenant toutes les clients*/
+
+#divClients {
+    background-image: none;
+    background-color: rgba(207,207,207,1);
+    width: 100%;
+    height: auto;
+    border: solid 1px #000000;
 }
 
-@media screen and (max-width: 400px) {  /*changement du style en fonction de la taille de fenêtre*/
-    .container {                /*changement du container*/
-        flex-wrap: wrap;
-    }
-}
 
+/*division contenant toutes les infos du clients*/
 
-.boutonFil {        /*bouton pieces de l'appartement*/
-    color: #FFFFFF;
-    width: 200px;   /* à modifier en fonction du nombre de boutons sur le fil*/
-    height: 50px;
-    font-size: 20px;
-    background-image: linear-gradient(#3C3D51 0%, #3C3D51 100%);
-    border-radius: 50px;
-    border-style: none;
-    float: left;
-}
-.boutonFil:hover {      /*changement en passant dessus*/
-    background-image: linear-gradient(0deg, rgba(60,61,81,1) 0%, rgba(207,207,207,1) 100%);
-    color: white;
-}
-
-.boutonFil:active {
+div.caseClient {
     background-image: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(60,61,81,1) 100%);
-}
-.activer {
-    background-image: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(60,61,81,1) 100%);
+    border-radius: 10px;
+    width: 200px;
+    height: 100px;
+    border: solid 1px #000000;
+    text-align: center;
+    margin: 20px;
+    font-weight: bold;
 }
 
-.activer:hover {
-    background-image: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(60,61,81,1) 100%);
+/*cadre avec les données des capteurs*/
+
+div.actionneur {
+    background: none;
+    font-size: 30px;
+    padding: 2px;
+    color: #000000;     /*blanc de base, plus lisible en noir*/
+    font-weight: bold;
+    display: inline-block;
+    justify-content: center;
+    position: absolute;
+    text-align: center;
 }
 
-.bouton {               /*bouton de base*/
+
+/*bouton de base*/
+
+.bouton {
     margin: 5px;
     color: #000000;
     background-color: #FFFFFF;
+    background-image: none;
     border-radius: 10px;
     border-style: solid;
     border-width: 2px;
     border-color: black;
 }
-.boutonGlobal {         /*bouton pour commander tous les capteurs à la fois*/
+
+/*bouton pour commander tous les capteurs à la fois*/
+
+.boutonGlobal {
     width: 200px;
     height: 50px;
     font-size: 20px;
@@ -94,24 +181,34 @@ div.fil {                   /*bouton pour choix des pieces*/
 }
 .bouton:hover {     /*bouton de base changeant en passant dessus*/
     background-color: #000000;
+    background-image: none;
     color: white;
 }
+
+
+/*bouton ajout de capteur*/
 
 .boutonAjout {
     font-size: 20px;
 }
+
+/*style pour les différentes icones utilisées*/
 
 .icone {
     width: 50px;
     height: 50px;
 }
 
-.imageCapteur { /*image du capteur qui sera affiché*/
+/*image du capteur qui sera affiché*/
+
+.imageCapteur {
     width: 150px;
     height: 150px;
     margin: 10px;
     border-radius: 15px;
 }
+
+/*icones de modification du capteur*/
 
 i.editionCapteur {
     display: inline;
@@ -122,40 +219,36 @@ i.editionCapteur {
     margin-left: 10px;
 }
 
+/* mettre le capteur sous tension*/
+
 i.on {
     margin: 5px;
     color: greenyellow;
 }
+
+/* mettre le capteur hors tension*/
 
 i.off {
     margin: 5px;
     color: red;
 }
 
-.flecheSelection {
-    position: relative;
+/*paragraphe demandant de choisir une salle*/
+p.info {
+    font-size: 3vw;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-style: italic;
 }
 
-.flecheSelection:after,
-.flecheSelection:before {
-    position: absolute;
-    right: 5px;
-    width: 1.6em;
-    height: .9em;
-    font-size: 10px;
-    pointer-events: none;
-    background: #fff;
-}
 
-.flecheSelection:after {
-    color: blue;
-    content: "\25B2";
-    margin-top: 1px;
-}
+@media screen and (max-width: 460px){
+    div.actionneur {
+        font-size: 6vw;
+    }
+    .imageCapteur {
+        width: 32vw;
+        height: 32vw;
+    }
 
-.flecheSelection:before {
-    color: red;
-    content: "\25BC";
-    margin-bottom: 5px;
-    bottom: -.5em;
 }
