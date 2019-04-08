@@ -28,7 +28,8 @@ function recupererUnAttributUnType(PDO $bdd, string $attribut, string $table, st
 
 //requête recuperations du logement en fonction de l'id de l'utilisateur
 
-function recuperationLogement (PDO $bdd, $id) {
-    $query = 'SELECT logement.id FROM logement WHERE logement.id_utilisateur = ' . $id;
-    return $bdd->query($query)->fetchAll();     //retourne un tableau contenant toutes les resultats de la requete
+function recupLogements (PDO $bdd, $id) {
+    $query = 'SELECT logement.id, logement.Adresse FROM logement WHERE logement.id_utilisateur = ' . $id;
+    return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, "recup2");     //retourne un tableau contenant toutes les resultats de la requete
 }
+

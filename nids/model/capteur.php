@@ -156,7 +156,7 @@ function allumage(PDO $bdd, $id) {
 
 function ouverture(PDO $bdd, $id) {
     try {
-        $query = 'UPDATE donnees SET Valeur = 1 
+        $query = 'UPDATE donnees SET Valeur = 10 
                   WHERE donnees.id_actionneur_capteur IN 
                       (SELECT actionneur_capteur.id FROM actionneur_capteur 
                       JOIN piece ON actionneur_capteur.id_piece = piece.id 
