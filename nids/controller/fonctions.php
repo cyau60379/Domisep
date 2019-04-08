@@ -29,6 +29,34 @@ function decoupeString2($list){
     return $string;
 }
 
+function affichePieces($pieces, $logement){
+    $logement += 100000;
+echo "    <div id='gestionGlobale' class= 'container gestionGlobale'>
+        <div style='margin: 15px'>
+            <label for='tempChoix'>Température du logement voulue:</label>
+            <input id='tempChoix' style='width: 50px; height: 30px; text-align: center;' type='number' name='temp' value=20 min=0 max=25> °C
+            <input class='bouton' type='submit' value='Valider' onclick='changerTemperature(document.getElementById(`tempChoix`).value)'\">
+        </div>
+        <button onclick=\"changer(this.id, 'eteindre', 'éteint')\" class=' bouton boutonGlobal' id ='$logement'>Tout éteindre</button>
+        <button onclick=\"changer(this.id, 'fermer', 'fermé')\" class=\"bouton boutonGlobal\" id ='$logement'>Tout fermer</button>
+        <button onclick=\"changer(this.id, 'allumer', 'allumé')\" class=' bouton boutonGlobal' id ='$logement'>Tout allumer</button>
+        <button onclick=\"changer(this.id, 'ouvrir', 'ouvert')\" class=\"bouton boutonGlobal\" id ='$logement'>Tout ouvrir</button>
+    </div>
+
+    <div class=\"container fil\" id=\"filPieces\"> ";
+        foreach($pieces as $id => $p):
+        echo "<input onclick=\"changerPiece(this.value, this.id); return activerBouton(this.id);\" type=\"button\" id='$id' class=\"boutonFil\" value= '$p'>";
+    endforeach;
+    echo "</div>
+        <div class=\"container\">
+            <a href=\"/controller/catalogue.php\"><button class=\"bouton boutonAjout\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Ajouter un élément</button></a>
+        </div>
+
+        <li id=\"zoneCapteurs\">
+            <p class=\"info\">Veuillez choisir une pièce</p>  <!-- à améliorer -->
+        </li>";
+}
+
 function afficheDonnees($tab){
     if (sizeof($tab) < 5){
         return "null";
@@ -83,18 +111,18 @@ function afficheDonnees($tab){
 }
 
 function afficheCapteur($cap){
-    $taille = sizeof($cap);
+    $taille = sizeof($cap);     //nombre de capteurs
     foreach ($cap as $c):
-        $id = -$c[0];
-        $type = preg_split("/\s/", $c[1]);
-        $donnees = afficheDonnees($c);
-        $actif = '';
+        $id = -$c[0];           //id negatif
+        $type = preg_split("/\s/", $c[1]);  //recuperation type
+        $donnees = afficheDonnees($c);              //recuperation des donnees
+        $actif = '';                                //récupération de l'activité du capteur
         if($c[4] == 1){
             $actif = 'on';
         } else {
             $actif = 'off';
         }
-        echo "<div id= '$id' class= ' caseCapteur '> 
+        echo "<div id= '$id' class= 'caseCapteur $c[1]'> 
                 <div class='titre'>
                     $c[1]
                     <a href='javascript:supprimer($id)'>
@@ -104,7 +132,7 @@ function afficheCapteur($cap){
                 </div>
                 <img src='Images/$type[0].png' alt='$type[0]' class='imageCapteur'>
                 <a href='javascript:allumerEteindre($c[0], $taille)'>
-                    <i class='fa fa-power-off editionCapteur $actif' id='$c[0]'></i>
+                    <i class='fa fa-power-off editionCapteur $c[1] $actif' id='$c[0]'></i>
                 </a>
                 $donnees
             </div>";

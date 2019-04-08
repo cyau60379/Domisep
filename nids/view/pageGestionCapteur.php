@@ -10,30 +10,14 @@
 </head>
 <body>
 
-<div class="container gestionGlobale">
-    <div style="margin: 15px">
-        <label for="tempChoix">Température du logement voulue:</label>
-        <input id="tempChoix" style="width: 50px; height: 30px; text-align: center;" type="number" name="temp" value=20 min=0 max=25> °C
-        <input class="bouton" type="submit" value="Valider" onclick="changerTemperature(document.getElementById('tempChoix').value)">
-    </div>
-    <button onclick="changer(this.id, 'eteindre', 'éteint')" class=' bouton boutonGlobal' id ='<?php echo ($logement + 100000)?>'>Tout éteindre</button>
-    <button onclick="changer(this.id, 'fermer', 'fermé')" class="bouton boutonGlobal" id ='<?php echo ($logement + 100000)?>'>Tout fermer</button>
-    <button onclick="changer(this.id, 'allumer', 'allumé')" class=' bouton boutonGlobal' id ='<?php echo ($logement + 100000)?>'>Tout allumer</button>
-    <button onclick="changer(this.id, 'ouvrir', 'ouvert')" class="bouton boutonGlobal" id ='<?php echo ($logement + 100000)?>'>Tout ouvrir</button>
-</div>
-
 <div class="container fil" id="filPieces">     <!-- Contient les boutons pour afficher les différents capteurs en fonction de la salle -->
-    <?php foreach($pieces as $id => $p):?>
-        <input onclick="changerPiece(this.value, this.id); return activerBouton(this.id);" type="button" id="<?php echo $id;?>" class="boutonFil" value="<?php echo $p;?>"> <!-- creation des boutons avec un ID identique au nom de la salle -->
+    <?php foreach($logement as $id => $p):?>
+        <input onclick="changerLogement2(this.id); return activerBouton2(this.id);" type="button" id="<?php echo $id;?>" class="boutonAppart" value="<?php echo $p;?>"> <!-- creation des boutons avec un ID identique au nom de la salle -->
     <?php endforeach;?>
 </div>
 
-<div class="container">
-    <a href="/controller/catalogue.php"><button class="bouton boutonAjout"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter un élément</button></a>
+<div id="zoneGestion">
+    <p class="info">Veuillez choisir un logement</p>
 </div>
-
-<li id="zoneCapteurs">
-    <p class="info">Veuillez choisir une pièce</p>  <!-- à améliorer -->
-</li>
 </body>
 </html>
