@@ -19,17 +19,24 @@ function tabToString($tab) {
 
 <script>
 
+    function montrerTitre(id, type) {
+        document.getElementById(id).innerHTML = '<i class="fa '+ id + '"></i> ' + type;
+    }
+
+    function cacherTitre(id) {
+        document.getElementById(id).innerHTML = '<i class="fa '+ id + '"></i>';
+    }
+
     // fonction header changer contenu bouton
     function changerContenu(id){
         let str = document.getElementById(id).classList[1];
         let str2 = document.getElementById(id).classList[2];
         let boutons = document.getElementsByClassName("choixPage");
-        if(window.innerWidth < 520){
+        if(window.innerWidth < 500){
             document.getElementById(id).innerHTML = "";
         } else if(window.innerWidth < 587){
             for(let i = 0; i < boutons.length; i++){
                 boutons[i].style.fontSize = "10px";
-                boutons[i].style.width = "100px";
             }
             document.getElementById(id).style.fontSize = "12px";
             document.getElementById(id).innerHTML = str.substr(0,1) + "." + str2;
@@ -37,14 +44,12 @@ function tabToString($tab) {
             document.getElementById(id).innerHTML = str.substr(0,1) + "." + str2;
             for(let i = 0; i < boutons.length; i++){
                 boutons[i].style.fontSize = "12px";
-                boutons[i].style.width = "120px";
             }
             document.getElementById(id).style.fontSize = "15px";
         } else {
             document.getElementById(id).innerHTML = str + " " + str2;
             for(let i = 0; i < boutons.length; i++){
                 boutons[i].style.fontSize = "15px";
-                boutons[i].style.width = "130px";
             }
             document.getElementById(id).style.fontSize = "15px";
         }
@@ -260,6 +265,9 @@ function tabToString($tab) {
                 document.getElementById("zoneClients").innerHTML = "";
                 document.getElementById("zoneClients").innerHTML = "<div class='caseClient' id='divClients'>" +
                                                                         "<div class='titre titreSup'>Clients</div>" +
+                                                                    "</div>" +
+                                                                    "<div class='caseClient' id='divClients'>" +
+                                                                        "<div class='titre titreSup'>Graphes</div>" +
                                                                     "</div>";
                 document.getElementById("divClients").innerHTML += this.responseText;   //rempli la zoneCapteurs
             }

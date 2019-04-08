@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="7899f645-31ed-43d0-82b8-caf82977347e" name="wamp" url="http://localhost">
-        <fileTransfer port="0" mountedRoot="C:\Users\julie\PhpstormProjects\NIDS\nids" accessType="MOUNT" />
+      <webServer id="cc9c2f90-b414-468a-a3ad-508e85b996eb" name="wamp" url="http://localhost/nids">
+        <fileTransfer port="0" mountedRoot="C:\Users\Mr Dark\PhpstormProjects\NIDS\nids" accessType="MOUNT" />
       </webServer>
     </option>
   </component>

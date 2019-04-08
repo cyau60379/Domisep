@@ -5,7 +5,8 @@
  * Date: 19/03/2019
  * Time: 21:28
  */
-include("connexionBDD.php");
+
+include($_SERVER["DOCUMENT_ROOT"] . "/model/connexionBDD.php");
 
 function recupererToutDans(PDO $bdd, string $table): array {
     $query = 'SELECT * FROM ' . $table;

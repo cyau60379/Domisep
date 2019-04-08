@@ -64,6 +64,10 @@ div.fil {
     background-image: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(60,61,81,1) 100%);
 }
 
+.boutonFil:focus {
+    outline-color: #3c3d51;
+}
+
 /*style du bouton actif dans le fil*/
 
 .activer {
@@ -148,9 +152,11 @@ div.actionneur {
     color: #000000;     /*blanc de base, plus lisible en noir*/
     font-weight: bold;
     display: inline-block;
+    justify-content: center;
     position: absolute;
     text-align: center;
 }
+
 
 /*bouton de base*/
 
@@ -233,4 +239,16 @@ p.info {
     color: #FFFFFF;
     font-weight: bold;
     font-style: italic;
+}
+
+
+@media screen and (max-width: 460px){
+    div.actionneur {
+        font-size: 6vw;
+    }
+    .imageCapteur {
+        width: 32vw;
+        height: 32vw;
+    }
+
 }
