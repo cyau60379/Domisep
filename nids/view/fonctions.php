@@ -217,36 +217,26 @@ function tabToString($tab) {
         }
     }
 
-    // fonction pour tout éteindre dans la maison
+    // fonction pour tout changer dans la maison
 
-    function eteindre(id){
-        if(confirm("Voulez-vous vraiment tout éteindre ?")) {
+    function changer(id, action, participe){
+        action2 = action.charAt(0).toUpperCase() + action.slice(1);
+        if(confirm("Voulez-vous vraiment tout " + action + " ?")) {
             let request = new XMLHttpRequest();
             request.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
-                    alert("Tout est éteint !");
-                    document.getElementById("zoneCapteurs").innerHTML = this.responseText;   //rempli la zoneCapteurs
+                    let len = document.getElementsByClassName("boutonFil").length;
+                    for(let i = 0; i < len; i++){
+                        if(document.getElementsByClassName("boutonFil")[i].classList.contains("activer")){
+                            document.getElementsByClassName("boutonFil")[i].classList.remove("activer");
+                        }
+                    }
+                    alert("Tout est " + participe +" !");
+                    document.getElementById("zoneCapteurs").innerHTML = '<p class="info">Veuillez choisir une pièce</p>';   //rempli la zoneCapteurs
                 }
             };
             id -= 100000;
-            request.open("GET", "controller/gestionCapteur.php?idEteindre=" + id, true);
-            request.send();                                                                 //envoie le resultat de la requete
-        }
-    }
-
-    // fonction pour tout fermer dans la maison
-
-    function fermer(id){
-        if(confirm("Voulez-vous vraiment tout fermer ?")) {
-            let request = new XMLHttpRequest();
-            request.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    alert("Tout est fermé !");
-                    document.getElementById("zoneCapteurs").innerHTML = this.responseText;   //rempli la zoneCapteurs
-                }
-            };
-            id -= 100000;
-            request.open("GET", "controller/gestionCapteur.php?idFermer=" + id, true);
+            request.open("GET", "controller/gestionCapteur.php?id" + action2 + "=" + id, true);
             request.send();                                                                 //envoie le resultat de la requete
         }
     }

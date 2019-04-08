@@ -103,4 +103,21 @@ if (isset($_GET['idFermer'])) {
     afficheCapteur($capteurs);
 }
 
+//============================================ test de l'allumage totale
+
+if (isset($_GET['idAllumer'])) {
+
+    $idMaison = $_GET['idAllumer'];
+    allumage($bdd, $idMaison);
+    afficheCapteur($capteurs);
+}
+//============================================ test de l'ouverture totale
+
+if (isset($_GET['idOuvrir'])) {
+
+    $idMaison = $_GET['idOuvrir'];
+    ouverture($bdd, $idMaison);
+    afficheCapteur($capteurs);
+}
+
 ?>

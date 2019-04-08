@@ -16,8 +16,10 @@
         <input id="tempChoix" style="width: 50px; height: 30px; text-align: center;" type="number" name="temp" value=20 min=0 max=25> °C
         <input class="bouton" type="submit" value="Valider" onclick="changerTemperature(document.getElementById('tempChoix').value)">
     </div>
-    <button onclick="eteindre(this.id)" class=' bouton boutonGlobal' id ='<?php echo ($logement + 100000)?>'>Tout éteindre</button>
-    <button onclick="fermer(this.id)" class="bouton boutonGlobal" id ='<?php echo ($logement + 100000)?>'>Tout fermer</button>
+    <button onclick="changer(this.id, 'eteindre', 'éteint')" class=' bouton boutonGlobal' id ='<?php echo ($logement + 100000)?>'>Tout éteindre</button>
+    <button onclick="changer(this.id, 'fermer', 'fermé')" class="bouton boutonGlobal" id ='<?php echo ($logement + 100000)?>'>Tout fermer</button>
+    <button onclick="changer(this.id, 'allumer', 'allumé')" class=' bouton boutonGlobal' id ='<?php echo ($logement + 100000)?>'>Tout allumer</button>
+    <button onclick="changer(this.id, 'ouvrir', 'ouvert')" class="bouton boutonGlobal" id ='<?php echo ($logement + 100000)?>'>Tout ouvrir</button>
 </div>
 
 <div class="container fil" id="filPieces">     <!-- Contient les boutons pour afficher les différents capteurs en fonction de la salle -->
