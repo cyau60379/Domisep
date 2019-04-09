@@ -10,7 +10,7 @@ include($_SERVER["DOCUMENT_ROOT"] . "/model/capteur.php");
 
 
 //id de l'utilisateur
-$id = 4;
+$id = 1;
 $utilisateur = decoupeString2(recupererUtilisateur($bdd,$id));
 //creation du tableau des capteurs de la piece
 $capteurs = array();

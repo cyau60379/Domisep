@@ -70,7 +70,7 @@ div.bandeau {
 /* Bouton choix */
 
 .choixPage {
-    margin-left: 10px;
+    width: 170px;
     height: 44px;
     border: solid 3px white;
     background-color: #3C3D51;
@@ -93,6 +93,33 @@ div.bandeau {
 
 .choixPage:focus{
     outline-color: #3c3d51;
+}
+
+@media screen and (max-width: 900px) {
+    .choixPage {
+        width: 125px;
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .choixPage {
+        width: 100px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 587px) {
+    .choixPage {
+        width: 90px;
+        font-size: 10px;
+    }
+}
+@media screen and (max-width: 410px) {
+    .choixPage {
+        width: auto;
+        font-size: 8px;
+    }
 }
 
 .prenom{
