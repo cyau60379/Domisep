@@ -40,6 +40,43 @@ div.fil {
     overflow: auto;
 }
 
+/*bouton des appartements*/
+
+.boutonAppart {
+    color: #000000;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    float: left;
+    background-image: none;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+}
+
+.boutonAppart:hover {     /*bouton de base changeant en passant dessus*/
+    background-color: #000000;
+    background-image: none;
+    color: white;
+}
+
+.boutonAppart:focus {
+    outline-color: #3c3d51;
+}
+
+/*style du bouton actif dans le fil*/
+
+.activerAppart {
+    background: gray;
+    color: #FFFFFF;
+}
+
+.activerAppart:hover {
+    background: gray;
+    color: #FFFFFF;
+}
+
 /*bouton pieces de l'appartement*/
 
 .boutonFil {
@@ -174,7 +211,7 @@ div.actionneur {
 /*bouton pour commander tous les capteurs à la fois*/
 
 .boutonGlobal {
-    width: 200px;
+    width: 150px;
     height: 50px;
     font-size: 20px;
     float: left;
@@ -239,6 +276,7 @@ p.info {
     color: #FFFFFF;
     font-weight: bold;
     font-style: italic;
+    text-align: center;
 }
 
 
@@ -250,7 +288,47 @@ p.info {
         width: 32vw;
         height: 32vw;
     }
+}
 
+#boite {
+    padding: 20px;
+    font-size: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 350px;
+
+}
+
+
+
+#boite main {
+    background-color: #3C3D51;
+}
+.choixPage {
+    margin-left: 10px;
+    height: 44px;
+    border: solid 3px white;
+    background-color: #3C3D51;
+    cursor: pointer;
+    border-radius: 20px;
+    color: white;
+    font-size: 20px;
+}
+
+.choixPage:hover{
+    background-color: darkgrey;
+    color: #05083E;
+    border-color: #05083E;
+    font-weight: bold;
+}
+
+.choixPage:active{
+    background-color: blue;
+}
+
+.choixPage:focus{
+    outline-color: #3c3d51;
 }
 
 

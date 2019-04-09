@@ -35,22 +35,13 @@ function tabToString($tab) {
         if(window.innerWidth < 500){
             document.getElementById(id).innerHTML = "";
         } else if(window.innerWidth < 587){
-            for(let i = 0; i < boutons.length; i++){
-                boutons[i].style.fontSize = "10px";
-            }
             document.getElementById(id).style.fontSize = "12px";
             document.getElementById(id).innerHTML = str.substr(0,1) + "." + str2;
         }else if(window.innerWidth < 650){
             document.getElementById(id).innerHTML = str.substr(0,1) + "." + str2;
-            for(let i = 0; i < boutons.length; i++){
-                boutons[i].style.fontSize = "12px";
-            }
             document.getElementById(id).style.fontSize = "15px";
         } else {
             document.getElementById(id).innerHTML = str + " " + str2;
-            for(let i = 0; i < boutons.length; i++){
-                boutons[i].style.fontSize = "15px";
-            }
             document.getElementById(id).style.fontSize = "15px";
         }
     }
@@ -71,7 +62,11 @@ function tabToString($tab) {
             request = new XMLHttpRequest();
             request.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
-                    alert('Capteur ' + id +' supprimé !');             // /!\ mettre condition si la base n'a pas ete mise a jour
+                    let nom = "";
+                    for(let i = 1; i < cap.classList.length; i++){
+                        nom += cap.classList[i];
+                    }
+                    alert('Capteur ' + nom +' supprimé !');             // /!\ mettre condition si la base n'a pas ete mise a jour
                 }
             };
             request.open("GET", "controller/gestionCapteur.php?id=" + id2, true);
@@ -90,6 +85,10 @@ function tabToString($tab) {
         if (confirm("Voulez-vous réellement modifier l'état de ce capteur ?")) {    //ouvre une fenetre de confirmation
             for(let i = 0; i < zone.length; i++){
                 let icon = zone[i].getElementsByTagName("i")[2];                    //recupere l'icone marche/arret
+                let nom = "";
+                for(let i = 3; i < (icon.classList.length - 1); i++){
+                    nom += " " + icon.classList[i];
+                }
                 if(icon.id == id){
                     if (icon.classList.contains('on')){                             //change l'etat s'il s'agit du bon element
                         let request = new XMLHttpRequest();
@@ -97,7 +96,11 @@ function tabToString($tab) {
                             if (this.readyState === 4 && this.status === 200) {
                                 icon.classList.remove('on');      // change l'etat
                                 icon.classList.add('off');        // change l'etat
-                                alert('Capteur ' + id +' éteint !');
+                                alert('Capteur ' + nom +' éteint !');
+                                let boutons = zone[i].getElementsByTagName("input");
+                                for(let i = 0; i < boutons.length; i ++){
+                                    boutons[i].style.visibility = "hidden";
+                                }
                             }
                         };
                         request.open("GET", "controller/gestionCapteur.php?allume=" + 0 + "&idCap=" + id, true);
@@ -108,7 +111,11 @@ function tabToString($tab) {
                             if (this.readyState === 4 && this.status === 200) {
                                 icon.classList.remove('off');           // change l'etat
                                 icon.classList.add('on');           // change l'etat
-                                alert('Capteur ' + id +' allumé !');
+                                alert('Capteur ' + nom +' allumé !');
+                                let boutons = zone[i].getElementsByTagName("input");
+                                for(let i = 0; i < boutons.length; i ++){
+                                    boutons[i].style.visibility = "visible";
+                                }
                             }
                         };
                         request.open("GET", "controller/gestionCapteur.php?allume=" + 1 + "&idCap=" + id, true);
@@ -128,8 +135,22 @@ function tabToString($tab) {
             if(document.getElementsByClassName("boutonFil")[i].classList.contains("activer")){
                 document.getElementsByClassName("boutonFil")[i].classList.remove("activer");
             }
+            if(document.getElementsByClassName("boutonFil")[i].id == id){
+                document.getElementsByClassName("boutonFil")[i].classList.add("activer");
+            }
         }
-        document.getElementById(id).classList.add("activer");
+    }
+
+    //change la classe des boutons en fonction de s'il y en a un qui est activé ce en fonction de l'id du bouton
+
+    function activerBouton2(id) {
+        let len = document.getElementsByClassName("boutonAppart").length;
+        for(let i = 0; i < len; i++){
+            if(document.getElementsByClassName("boutonAppart")[i].classList.contains("activerAppart")){
+                document.getElementsByClassName("boutonAppart")[i].classList.remove("activerAppart");
+            }
+        }
+        document.getElementById(id).classList.add("activerAppart");
     }
 
     //fonction qui permet d'afficher les capteurs en fonction de la piece demandée
@@ -217,36 +238,45 @@ function tabToString($tab) {
         }
     }
 
-    // fonction pour tout éteindre dans la maison
+    // fonction pour tout changer dans la maison
 
-    function eteindre(id){
-        if(confirm("Voulez-vous vraiment tout éteindre ?")) {
+    function changer(id, action, participe){
+        action2 = action.charAt(0).toUpperCase() + action.slice(1);
+        if(confirm("Voulez-vous vraiment tout " + action + " ?")) {
             let request = new XMLHttpRequest();
             request.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
-                    alert("Tout est éteint !");
-                    document.getElementById("zoneCapteurs").innerHTML = this.responseText;   //rempli la zoneCapteurs
+                    let len = document.getElementsByClassName("boutonFil").length;
+                    for(let i = 0; i < len; i++){
+                        if(document.getElementsByClassName("boutonFil")[i].classList.contains("activer")){
+                            document.getElementsByClassName("boutonFil")[i].classList.remove("activer");
+                        }
+                    }
+                    alert("Tout est " + participe +" !");
+                 /*   let boutons = document.getElementsByClassName("bas");
+                    let boutons2 = document.getElementsByClassName("haut");
+                    if(action == "ouvrir") {
+                        for(let i = 0; i < boutons.length; i ++){
+                                boutons[i].style.visibility = "visible";
+                        }
+                        for(let i = 0; i < boutons2.length; i ++){
+                            boutons2[i].style.visibility = "visible";
+                        }
+                    } else if(action == "fermer") {
+                        for(let i = 0; i < boutons.length; i ++){
+                            for(let i = 0; i < boutons.length; i ++){
+                                boutons[i].style.visibility = "hidden";
+                            }
+                            for(let i = 0; i < boutons2.length; i ++){
+                                boutons2[i].style.visibility = "hidden";
+                            }
+                        }
+                    }*/
+                    document.getElementById("zoneCapteurs").innerHTML = '<p class="info">Veuillez choisir une pièce</p>';   //rempli la zoneCapteurs
                 }
             };
             id -= 100000;
-            request.open("GET", "controller/gestionCapteur.php?idEteindre=" + id, true);
-            request.send();                                                                 //envoie le resultat de la requete
-        }
-    }
-
-    // fonction pour tout fermer dans la maison
-
-    function fermer(id){
-        if(confirm("Voulez-vous vraiment tout fermer ?")) {
-            let request = new XMLHttpRequest();
-            request.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    alert("Tout est fermé !");
-                    document.getElementById("zoneCapteurs").innerHTML = this.responseText;   //rempli la zoneCapteurs
-                }
-            };
-            id -= 100000;
-            request.open("GET", "controller/gestionCapteur.php?idFermer=" + id, true);
+            request.open("GET", "controller/gestionCapteur.php?id" + action2 + "=" + id, true);
             request.send();                                                                 //envoie le resultat de la requete
         }
     }
@@ -276,4 +306,17 @@ function tabToString($tab) {
         request.send();                                                              //envoie le resultat de la requete au serveur
     }
 
+    //fonction qui permet d'afficher les pieces en fonction de l'appartement
+
+    function changerLogement2(id) {
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                document.getElementById("zoneGestion").innerHTML = this.responseText;   //rempli filPieces
+            }
+        };
+        request.open("GET", "controller/gestionCapteur.php?logement=" + id, true);
+        request.send();                                                              //envoie le resultat de la requete au serveur
+    }
 </script>
