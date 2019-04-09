@@ -5,7 +5,7 @@
  * Date: 19/03/2019
  * Time: 21:49
  */
-include($_SERVER["DOCUMENT_ROOT"] . "/model/requetesGenerales.php");
+include ($_SERVER["DOCUMENT_ROOT"] . "/model/requetesGenerales.php");
 
 //suppression des capteurs non desirés
 
@@ -49,7 +49,7 @@ function recuperationCapteurs (PDO $bdd, $p) {      //prend la bdd et l'id de la
 }
 
 /**
- * met a jour un élément dans la table logement
+ * met a jour un élément dans une table
  * @param PDO $bdd
  * @param int $temp
  * @param int $id
@@ -65,7 +65,7 @@ function miseAJourTemp(PDO $bdd, $temp, $id) {
 }
 
 /**
- * met a jour un élément dans la table actionneur_capteur
+ * Insère un nouvel élément dans une table
  * @param PDO $bdd
  * @param int $actif
  * @param int $id
@@ -81,7 +81,7 @@ function miseAJourActif(PDO $bdd, $actif, $id) {
 }
 
 /**
- * met a jour un élément dans la table donnees
+ * Insère un nouvel élément dans une table
  * @param PDO $bdd
  * @param int $actif
  * @param int $id
@@ -99,7 +99,7 @@ function miseAJourVolet(PDO $bdd, $actif, $id) {
     }
 }
 /**
- * met a jour un élément dans la table actionneur_capteur
+ * Insère un nouvel élément dans une table
  * @param PDO $bdd
  * @param int $id
  */
@@ -114,7 +114,7 @@ function extinction(PDO $bdd, $id) {
     }
 }
 /**
- * met a jour un élément dans la table donnees
+ * Insère un nouvel élément dans une table
  * @param PDO $bdd
  * @param int $id
  */
@@ -122,41 +122,6 @@ function extinction(PDO $bdd, $id) {
 function fermeture(PDO $bdd, $id) {
     try {
         $query = 'UPDATE donnees SET Valeur = 0 
-                  WHERE donnees.id_actionneur_capteur IN 
-                      (SELECT actionneur_capteur.id FROM actionneur_capteur 
-                      JOIN piece ON actionneur_capteur.id_piece = piece.id 
-                      WHERE piece.id_logement=' . $id ." AND actionneur_capteur.id_element_catalogue = 4)";
-        $bdd->exec($query);
-    }
-    catch(PDOException $e) {
-        echo $query . "<br>" . $e->getMessage();
-    }
-}
-
-/**
- * met a jour un élément dans la table actionneur_capteur
- * @param PDO $bdd
- * @param int $id
- */
-
-function allumage(PDO $bdd, $id) {
-    try {
-        $query = 'UPDATE actionneur_capteur SET Actif = 1 WHERE actionneur_capteur.id_piece IN (SELECT piece.id FROM piece JOIN logement ON piece.id_logement =' . $id .")";
-        $bdd->exec($query);
-    }
-    catch(PDOException $e) {
-        echo $query . "<br>" . $e->getMessage();
-    }
-}
-/**
- * met a jour un élément dans la table donnees
- * @param PDO $bdd
- * @param int $id
- */
-
-function ouverture(PDO $bdd, $id) {
-    try {
-        $query = 'UPDATE donnees SET Valeur = 10 
                   WHERE donnees.id_actionneur_capteur IN 
                       (SELECT actionneur_capteur.id FROM actionneur_capteur 
                       JOIN piece ON actionneur_capteur.id_piece = piece.id 

@@ -289,3 +289,46 @@ p.info {
         height: 32vw;
     }
 }
+
+#boite {
+    padding: 20px;
+    font-size: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 350px;
+
+}
+
+
+
+#boite main {
+    background-color: #3C3D51;
+}
+.choixPage {
+    margin-left: 10px;
+    height: 44px;
+    border: solid 3px white;
+    background-color: #3C3D51;
+    cursor: pointer;
+    border-radius: 20px;
+    color: white;
+    font-size: 20px;
+}
+
+.choixPage:hover{
+    background-color: darkgrey;
+    color: #05083E;
+    border-color: #05083E;
+    font-weight: bold;
+}
+
+.choixPage:active{
+    background-color: blue;
+}
+
+.choixPage:focus{
+    outline-color: #3c3d51;
+}
+
+
