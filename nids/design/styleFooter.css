@@ -11,9 +11,11 @@ footer {
 }
 .liste {
     display : inline-block;
-    font-size: 15px;
     justify-content: center;
+    height: 50px;
+    width: 250px;
     position: relative;
+    margin-left: 150px;
     color: #FFFFFF;
 }
 
@@ -23,9 +25,10 @@ a {
 
 .liste1 {
     display : inline-block;
-    font-size: 15px;
     justify-content: center;
     text-align: center;
+    height: 100px;
+    width: 200px;
     position: relative;
     color: #FFFFFF;
 }
@@ -37,19 +40,4 @@ img.logoFoot{
 
 li{
     list-style-type: none;
-}
-
-footer {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-}
-
-@media screen and (max-width: 630px){
-    .liste1 {
-        font-size: 2vw;
-    }
-    .liste {
-        font-size: 2vw;
-    }
 }
