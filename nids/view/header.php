@@ -14,29 +14,29 @@
     <div class="header">
         <img src="Images/logoNids.png" alt="notre logo" class="logo">
         <h1>
-            Numérique et intelligence pour demeure sécurisée
+            Numérique et Intelligence pour Demeure Sécurisée
         </h1>
     </div>
     <div class="separation">
     </div>
     <div class = "bandeau">
         <div>
-            <button class="choixPage">
-                <i class="fa fa-home"></i>  Domotique
+            <button id="fa-home" class="choixPage Domotique" onmouseover="montrerTitre(this.id, this.classList[1]);" onmouseout="cacherTitre(this.id);">
+                <i class="fa fa-home"></i>
             </button>
 
-            <button class="choixPage">
-                <i class=" fa fa-file-text-o"></i>  Profil
+            <button id="fa-file-text-o" class="choixPage Profil" onmouseover="montrerTitre(this.id, this.classList[1]);" onmouseout="cacherTitre(this.id);">
+                <i class=" fa fa-file-text-o"></i>
             </button>
 
-            <button class="choixPage">
-                <i class="fa fa-question"></i>  Support
+            <button id="fa-question" class="choixPage Support" onmouseover="montrerTitre(this.id, this.classList[1]);" onmouseout="cacherTitre(this.id);">
+                <i class="fa fa-question"></i>
             </button>
         </div>
 
         <div>
             <p id="nom" class="prenom <?php echo $utilisateur;?>"><?php echo $utilisateur;?></p>
-            <button class="bouton">
+            <button class="bouton" style="height: 40px">
                 Déconnexion
                 <a href = "/index.php?cible=connexion&fonction=deconnexion"></a>
             </button>

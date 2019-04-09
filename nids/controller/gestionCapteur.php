@@ -4,7 +4,7 @@
  */
 
 include ("fonctions.php");
-include ("/wamp64/www/nids/model/capteur.php");
+include($_SERVER["DOCUMENT_ROOT"] . "/model/capteur.php");
 
 //trouver un moyen de récuperer les données en enlevant les espaces (replace( "_", " ") en javascript / str_replace ( char1, char2, string) php)
 
