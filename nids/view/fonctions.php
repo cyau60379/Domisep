@@ -35,22 +35,13 @@ function tabToString($tab) {
         if(window.innerWidth < 500){
             document.getElementById(id).innerHTML = "";
         } else if(window.innerWidth < 587){
-            for(let i = 0; i < boutons.length; i++){
-                boutons[i].style.fontSize = "10px";
-            }
             document.getElementById(id).style.fontSize = "12px";
             document.getElementById(id).innerHTML = str.substr(0,1) + "." + str2;
         }else if(window.innerWidth < 650){
             document.getElementById(id).innerHTML = str.substr(0,1) + "." + str2;
-            for(let i = 0; i < boutons.length; i++){
-                boutons[i].style.fontSize = "12px";
-            }
             document.getElementById(id).style.fontSize = "15px";
         } else {
             document.getElementById(id).innerHTML = str + " " + str2;
-            for(let i = 0; i < boutons.length; i++){
-                boutons[i].style.fontSize = "15px";
-            }
             document.getElementById(id).style.fontSize = "15px";
         }
     }
