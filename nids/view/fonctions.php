@@ -135,8 +135,10 @@ function tabToString($tab) {
             if(document.getElementsByClassName("boutonFil")[i].classList.contains("activer")){
                 document.getElementsByClassName("boutonFil")[i].classList.remove("activer");
             }
+            if(document.getElementsByClassName("boutonFil")[i].id == id){
+                document.getElementsByClassName("boutonFil")[i].classList.add("activer");
+            }
         }
-        document.getElementById("zoneGestion").getElementById(id).classList.add("activer");
     }
 
     //change la classe des boutons en fonction de s'il y en a un qui est activé ce en fonction de l'id du bouton
