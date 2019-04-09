@@ -15,14 +15,10 @@ $utilisateur = decoupeString2(recupererUtilisateur($bdd,$id));
 //creation du tableau des capteurs de la piece
 $capteurs = array();
 
-//id du logement
-$logement = recuperationLogement($bdd, $id)[0][0];
+//id des logements du gestionnaire
+$logement = decoupeString(recupLogements($bdd, $id));
 
-//liste des pieces de la maison sous forme array { [0] => $id!$nom ... }
-$listePieces = recuperationPieces($bdd, $logement);
 
-//liste des pieces de la maison sous forme array { [$id] => $nom ... }
-$pieces = decoupeString($listePieces);
 
 //page à activer, dépendra des autres pages de l'utilisateur
 $page = "gestionCapteur";
@@ -40,6 +36,20 @@ switch($page){
 }
 
 //include_once("view/".$vue .".php");
+
+//============================================ test des clients a afficher
+
+if (isset($_GET['logement'])) {
+
+    $idLogementActif = $_GET['logement'];
+
+    //liste des pieces de la maison sous forme array { [0] => $id!$nom ... }
+    $listePieces = recuperationPieces($bdd, $idLogementActif);
+
+    //liste des pieces de la maison sous forme array { [$id] => $nom ... }
+    $pieces = decoupeString($listePieces);
+    affichePieces($pieces, $idLogementActif);
+}
 
 //============================================ test des capteurs a afficher
 
