@@ -39,7 +39,7 @@
         </td>
         <td class=' prixElement'>
 
-            <input type="button" id = "ajoutCapteur" value="AJOUTER" onclick="AJOUTER" />
+            <input type="button" id = "ajoutCapteur" value=" AJOUTER" onclick="AJOUTER" />
 
 
         </td>
