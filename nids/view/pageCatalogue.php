@@ -1,6 +1,9 @@
 
 
 <html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+</head>
 <body>
 
 
@@ -35,11 +38,23 @@
 
         </td>
         <td class = 'descriCapteur'>
-            Capteur de mouvement dernière génération. Détecte la présence de mouvement dans l'habitat grâce à un capteur infrarouge
+            <?php
+
+            $bdd = new PDO('mysql:host=localhost;dbname=nids;charset=utf8', 'root', '');
+            $reponse = $bdd->query('SELECT Description FROM element_catalogue WHERE id = 1' );
+            $donnees = $reponse->fetchAll();
+
+            print_r($donnees[0]['Description']);?>
+
+
+            //[0] => "température";[1] => "température"
+            //PDO :: fetch_func, "___")
         </td>
         <td class=' prixElement'>
 
             <input type="button" id = "ajoutCapteur" value=" AJOUTER" onclick="AJOUTER" />
+
+
 
 
         </td>
@@ -52,8 +67,16 @@
         <td  >
             <img class='img' src="Images\capteurLuminosite.PNG" alt="capinfra">
         </td>
-        <td class = 'descriCapteur' >Capteur de luminosité à la pointe de la technologie, vous permet de mesurer le taux de luminosité et d'éclairage. Celui-ci est très utile puisqu'il pourra
-            déclencher automatiquement l'éclairage électrique de votre maison si celui de l'extérieur venait à diminuer </td>
+        <td class = 'descriCapteur' >
+        <?php
+
+        //include ($_SERVER["DOCUMENT_ROOT"] . "nids/model/connexionBDD.php");
+
+        $bdd = new PDO('mysql:host=localhost;dbname=nids;charset=utf8', 'root', '');
+        $reponse = $bdd->query('SELECT Description FROM element_catalogue WHERE id = 2' );
+        $donnees = $reponse->fetchAll();
+
+        print_r($donnees[0]['Description']);?></td>
         <td class='prixElement'>
 
             <input type="button" id = "ajoutCapteur" value="AJOUTER" onclick="AJOUTER" />
@@ -67,8 +90,15 @@
             <img class = 'img' src="Images\actionneur.PNG" alt="capinfra" >
         </td>
 
-        <td class = 'descriCapteur'>Actionneur, à l'origine des mouvements ou changements d'états des capteurs.
+        <td class = 'descriCapteur'>
+<?php
+//include ($_SERVER["DOCUMENT_ROOT"] . "nids/model/connexionBDD.php");
 
+            $bdd = new PDO('mysql:host=localhost;dbname=nids;charset=utf8', 'root', '');
+            $reponse = $bdd->query('SELECT Description FROM element_catalogue WHERE id = 3' );
+            $donnees = $reponse->fetchAll();
+
+            print_r($donnees[0]['Description']);?>
         </td>
         <td class = 'prixElement'>
 
@@ -144,6 +174,7 @@
     }
     body{
         background-color: #05083E;
+        width:100%;
     }
 
 
