@@ -195,8 +195,14 @@ function tabToString($tab) {
                 if(monter === 'y'){
                     request.onreadystatechange = function() {
                         if (this.readyState === 4 && this.status === 200) {
+                            let len = document.getElementsByClassName("boutonFil").length;
+                            for(let i = 0; i < len; i++){
+                                if(document.getElementsByClassName("boutonFil")[i].classList.contains("activer")){
+                                    document.getElementsByClassName("boutonFil")[i].classList.remove("activer");
+                                }
+                            }
+                            document.getElementById("zoneCapteurs").innerHTML = '<p class="info">Veuillez choisir une pièce</p>';   //rempli la zoneCapteurs
                             alert('Volet monté !');
-                            document.getElementById("zoneCapteurs").innerHTML = this.responseText;   //rempli la zoneCapteurs
                         }
                     };
                     request.open("GET", "controller/gestionCapteur.php?positionVolet=" + 10 + "&idCap2=" + id, true);
@@ -204,8 +210,14 @@ function tabToString($tab) {
                 } else {
                     request.onreadystatechange = function() {
                         if (this.readyState === 4 && this.status === 200) {
+                            let len = document.getElementsByClassName("boutonFil").length;
+                            for(let i = 0; i < len; i++){
+                                if(document.getElementsByClassName("boutonFil")[i].classList.contains("activer")){
+                                    document.getElementsByClassName("boutonFil")[i].classList.remove("activer");
+                                }
+                            }
+                            document.getElementById("zoneCapteurs").innerHTML = '<p class="info">Veuillez choisir une pièce</p>';   //rempli la zoneCapteurs
                             alert('Volet monté !');
-                            document.getElementById("zoneCapteurs").innerHTML = this.responseText;   //rempli la zoneCapteurs
                         }
                     };
                     etat += 1;
@@ -217,8 +229,14 @@ function tabToString($tab) {
                 if(monter === 'y'){
                     request.onreadystatechange = function() {
                         if (this.readyState === 4 && this.status === 200) {
+                            let len = document.getElementsByClassName("boutonFil").length;
+                            for(let i = 0; i < len; i++){
+                                if(document.getElementsByClassName("boutonFil")[i].classList.contains("activer")){
+                                    document.getElementsByClassName("boutonFil")[i].classList.remove("activer");
+                                }
+                            }
+                            document.getElementById("zoneCapteurs").innerHTML = '<p class="info">Veuillez choisir une pièce</p>';   //rempli la zoneCapteurs
                             alert('Volet descendu !');
-                            document.getElementById("zoneCapteurs").innerHTML = this.responseText;   //rempli la zoneCapteurs
                         }
                     };
                     request.open("GET", "controller/gestionCapteur.php?positionVolet=" + 0 + "&idCap2=" + id, true);
@@ -226,8 +244,14 @@ function tabToString($tab) {
                 } else {
                     request.onreadystatechange = function() {
                         if (this.readyState === 4 && this.status === 200) {
+                            let len = document.getElementsByClassName("boutonFil").length;
+                            for(let i = 0; i < len; i++){
+                                if(document.getElementsByClassName("boutonFil")[i].classList.contains("activer")){
+                                    document.getElementsByClassName("boutonFil")[i].classList.remove("activer");
+                                }
+                            }
+                            document.getElementById("zoneCapteurs").innerHTML = '<p class="info">Veuillez choisir une pièce</p>';   //rempli la zoneCapteurs
                             alert('Volet descendu !');
-                            document.getElementById("zoneCapteurs").innerHTML = this.responseText;   //rempli la zoneCapteurs
                         }
                     };
                     etat -= 1;
