@@ -3,21 +3,26 @@
  * Fonctions
  *
  */
-
-//conversion d'un tableau en string pour l'exporter en javascript
-/*
-function tabToString($tab) {
-    $str = "";
-    foreach($tab as $elt){
-        $str = $str . $elt . ";";
-    }
-    return $str;
-}
-*/
 ?>
 
 
 <script>
+
+    function connexionUser() {
+        let id = document.forms["connexion"].elements["identifiant"];
+        let mdp = document.forms["connexion"].elements["password"];
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                document.getElementById("divReponse").innerHTML = this.responseText;   //rempli le corps de la page avec la réponse
+                document.getElementById("divReponse").style.zIndex = '1';
+            }
+        };
+        request.open("POST", "controller/accueil.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("identifiant=" + id + "&password=" + mdp);                                                              //envoie le resultat de la requete au serveur
+    }
 
     function montrerTitre(id, type) {
         document.getElementById(id).innerHTML = '<i class="fa '+ id + '"></i> ' + type;
@@ -31,7 +36,6 @@ function tabToString($tab) {
     function changerContenu(id){
         let str = document.getElementById(id).classList[1];
         let str2 = document.getElementById(id).classList[2];
-        let boutons = document.getElementsByClassName("choixPage");
         if(window.innerWidth < 500){
             document.getElementById(id).innerHTML = "";
         } else if(window.innerWidth < 587){

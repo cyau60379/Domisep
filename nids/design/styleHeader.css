@@ -6,7 +6,7 @@ div.header {
     left : 0;
 }
 
-h1 {
+h1.titre {
     width: 100%;
     border: 1px;
     text-align: start;

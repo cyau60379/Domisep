@@ -1,22 +1,38 @@
 <?php
 
-include($_SERVER["DOCUMENT_ROOT"] . "/model/connexionBDD.php");
+include($_SERVER["DOCUMENT_ROOT"] . "/model/requetesGenerales.php");
 
 
-function ajouterInscription(PDO $bdd, $valNom, $valPrenom, $valAdresse_mail, $valDate, $valMdp): array
-{
-    $valMdp = password_hash($valMdp, $id, PASSWORD_DEFAULT);
-    $query = 'INSERT INTO utilisateur (Nom, Prenom, Adresse_mail, Date_naissance, Mot_de_passe) VALUES ($valNom, $valPrenom, $valAdresse_mail, $valDate, $valMdp )' . $id; //rajoute les données du nouvel utilisateur
+function ajouterInscription(PDO $bdd, $valNom, $valPrenom, $valAdresse_mail, $valDate, $valMdp) {
+    $valMdp = password_hash($valMdp, PASSWORD_DEFAULT);
+    $query = "INSERT INTO utilisateur (Nom, Prenom, Adresse_mail, Date_naissance, Mot_de_passe) 
+              VALUES ($valNom, $valPrenom, $valAdresse_mail, $valDate, $valMdp)"; //rajoute les données du nouvel utilisateur
     $bdd->exec($query);
-
 }
 
-function adresse_mailMdp(PDO $bdd, $valAdresse_mail)
-{
-    $query = 'SELECT utilisateur.id FROM utilisateur WHERE utilisateur.Adresse_mail="$valAdresse_mail"' . $valAdresse_mail;
+
+function prenomVersId(PDO $bdd, $prenom) {
+    try {
+        $query = "SELECT utilisateur.id FROM utilisateur WHERE utilisateur.Prenom LIKE '$prenom%'";
+        $table = $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN);
+        return $table;
+    } catch(PDOException $e) {
+        return false;
+    }
+}
+
+function nomVersId(PDO $bdd, $nom) {
+    try {
+        $query = "SELECT utilisateur.id FROM utilisateur WHERE utilisateur.Nom LIKE '$nom%'";
+        $table = $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN);
+        return $table;
+    } catch(PDOException $e) {
+        return false;
+    }
+}
+
+function recupMdp(PDO $bdd, $id){
+    $query = 'SELECT utilisateur.Mot_de_passe FROM utilisateur WHERE utilisateur.id =' . $id;
     $table = $bdd->query($query)->fetchAll();
-    $id = $table[0];
-    $query = 'SELECT utilisateur.Mot_de_passe FROM utilisateur WHERE utilisateur.Adresse_mail="$valAdresse_mail"' . $id;
-    $table = $bdd->query($query);
-    return $table[0];  //renvoie le Mot de passe
+    return $table[0]["Mot_de_passe"];  //renvoie le Mot de passe
 }

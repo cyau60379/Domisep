@@ -1,27 +1,11 @@
-html {
-
-}
-
-body {
-    background-color: #3C3D51;
-    font-family: Arial;
-    margin: 0;
-    padding: 0;
-
-}
-
 .boxCentre{
     width: 740px;
     height: 580px;
     display: flex;
+    margin: auto;
     flex-direction: row;
     justify-content: space-between;
-    position: fixed;
-    top:50%;
-    left: 50%;
-    margin-left:-390px;
-    margin-top: -290px;
-
+    position: relative;
 
 }
 
@@ -35,24 +19,19 @@ body {
     padding: 5px;
     display: flex;
     flex-direction: column;
-
-
-
 }
-
 
 .boxConnexion1{
     border: 1px solid black;
     width: 315px;
     height: 390px;
-    margin: 10px;
+    margin: auto;
     padding: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-
 }
+
 .input{
     width: 180px;
     margin: auto;
@@ -71,7 +50,6 @@ body {
     text-decoration: underline;
     font-style: italic;
     font-size: 80%;
-
 }
 
 .boxBouton{
@@ -95,7 +73,25 @@ body {
     padding: 15px;
 }
 
+#divReponse {
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    z-index: -1000;
+}
 
+.case {
+    position: fixed;
+    top: 25%;
+    left: 35.5%;
+    align-content: center;
+    margin: auto;
+    text-align: center;
+    color: #FFFFFF;
+}
 
 
 

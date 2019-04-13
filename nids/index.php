@@ -23,13 +23,20 @@ if (isset($_GET['cible']) && !empty($_GET['cible'])) {
     $url = $_GET['cible'];
 
 } else {
-    //$url = 'utilisateurs';
-    $url = 'gestionCapteur';
+    $url = 'accueil';
+}
+
+$url2 = ucfirst($url);
+$utilisateur = 0;
+
+if(isset($_GET['id'])){
+    $utilisateur = $_GET['id'];
 }
 
 // Appel du contrôleur
-//include_once('view/fonctions.php');
+
 include('controller/'.$url.'.php');
 include('view/header.php');
-include('view/pageGestionCapteur.php');
+include('controller/selection.php');
+include("view/page$url2.php");
 include('view/footer.php');

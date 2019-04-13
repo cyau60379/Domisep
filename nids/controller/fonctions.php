@@ -7,6 +7,55 @@
  */
 
 /**
+ * @param $utilisateur
+ */
+
+function selectionPage($utilisateur){
+    echo "    <div>
+        <button id='fa-home' class='choixPage Domotique' onmouseover='montrerTitre(this.id, this.classList[1]);' onmouseout='cacherTitre(this.id);'>
+            <i class='fa fa-home'></i>
+        </button>
+
+        <button id='fa-file-text-o' class='choixPage Profil' onmouseover='montrerTitre(this.id, this.classList[1]);' onmouseout='cacherTitre(this.id);'>
+            <i class='fa fa-file-text-o'></i>
+        </button>
+
+        <button id='fa-question' class='choixPage Support' onmouseover='montrerTitre(this.id, this.classList[1]);' onmouseout='cacherTitre(this.id);'>
+            <i class='fa fa-question'></i>
+        </button>
+    </div>
+
+    <div>
+        <p id='nom' class='prenom $utilisateur'>$utilisateur</p>
+        <button class='bouton' style='height: 40px'>
+            Déconnexion
+            <a href = '/index.php?cible=connexion&fonction=deconnexion'></a>
+        </button>
+    </div>";
+}
+
+
+/**
+ * @param $reponse
+ * @param $id
+ */
+
+function affichageReponse($reponse, $id){
+    print_r($id);
+    if($reponse){
+        echo "<div class= 'case caseCapteur'> 
+                <h1>Connexion Réussie !</h1>
+                <a href='../index.php?cible=editionProfil&id=$id'><input type='button' class='bouton boutonGlobal' style='float: none' value='OK'></a>
+            </div>";
+    } else {
+        echo "<div class= 'caseCapteur'> 
+                <h1>Connexion Echouee !</h1>
+                <input type='button' value='OK' onclick='fermtureMessage()'>
+            </div>";
+    }
+}
+
+/**
  * @param $list
  * @return array
  */
