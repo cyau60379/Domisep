@@ -3,7 +3,7 @@
 
 /* hasher variable fonction, password_hash()*/
 
-include("fonctions.php");
+include_once("fonctions.php");
 include($_SERVER["DOCUMENT_ROOT"] . "/model/requetesUtilisateur.php");
 
 //$id = 1;
@@ -29,5 +29,6 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
            $reponse = true;
         }
     }
-    affichageReponse($reponse, $nom);
+    $utilisateur = decoupeString3(recupererUtilisateur($bdd,$id));
+    affichageReponse($reponse, $utilisateur);
 }

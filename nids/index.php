@@ -19,24 +19,26 @@ include("vues/fonctions.php");
 */
 
 // Identification du contrôleur à appeler
-if (isset($_GET['cible']) && !empty($_GET['cible'])) {
-    $url = $_GET['cible'];
+if (isset($_POST['cible']) && !empty($_POST['cible'])) {
+    $url = $_POST['cible'];
 
 } else {
     $url = 'accueil';
 }
 
 $url2 = ucfirst($url);
-$utilisateur = 0;
+$utilisateur = "";
 
-if(isset($_GET['id'])){
-    $utilisateur = $_GET['id'];
+if(isset($_POST['id'])){
+    $utilisateur = $_POST['id'];
+    $result = preg_split("/\_/", $utilisateur);
+    $utilisateur = $result[0] ." ". $result[1];
 }
 
 // Appel du contrôleur
 
 include('controller/'.$url.'.php');
 include('view/header.php');
-include('controller/selection.php');
+include('view/selectionPage.php');
 include("view/page$url2.php");
 include('view/footer.php');

@@ -3,7 +3,7 @@
  * Controleur des capteurs
  */
 
-include ("fonctions.php");
+include_once ("fonctions.php");
 include($_SERVER["DOCUMENT_ROOT"] . "/model/capteur.php");
 
 //trouver un moyen de récuperer les données en enlevant les espaces (replace( "_", " ") en javascript / str_replace ( char1, char2, string) php)

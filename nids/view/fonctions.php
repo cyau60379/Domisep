@@ -9,8 +9,8 @@
 <script>
 
     function connexionUser() {
-        let id = document.forms["connexion"].elements["identifiant"];
-        let mdp = document.forms["connexion"].elements["password"];
+        let id = document.forms["connexion"].elements["identifiant"].value;
+        let mdp = document.forms["connexion"].elements["password"].value;
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
         request = new XMLHttpRequest();
         request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère

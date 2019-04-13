@@ -41,11 +41,15 @@ function selectionPage($utilisateur){
  */
 
 function affichageReponse($reponse, $id){
-    print_r($id);
+
     if($reponse){
         echo "<div class= 'case caseCapteur'> 
                 <h1>Connexion Réussie !</h1>
-                <a href='../index.php?cible=editionProfil&id=$id'><input type='button' class='bouton boutonGlobal' style='float: none' value='OK'></a>
+                <form action='../index.php' method='post'>
+                    <input type='hidden' name='cible' value='editionProfil'>
+                    <input type='hidden' name='id' value= $id>
+                    <input type='submit' class='bouton boutonGlobal' style='float: none' value='OK'>
+                </form>
             </div>";
     } else {
         echo "<div class= 'caseCapteur'> 
@@ -74,6 +78,16 @@ function decoupeString2($list){
     foreach ($list as $str){
         $result = preg_split("/\!/", $str);
         $string = $result[0] ." ". $result[1];
+    }
+    return $string;
+}
+
+
+function decoupeString3($list){
+    $string = "";
+    foreach ($list as $str){
+        $result = preg_split("/\!/", $str);
+        $string = $result[0] ."_". $result[1];
     }
     return $string;
 }
