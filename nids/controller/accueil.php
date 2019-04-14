@@ -4,7 +4,7 @@
 /* hasher variable fonction, password_hash()*/
 
 include_once("fonctions.php");
-include($_SERVER["DOCUMENT_ROOT"] . "/model/requetesUtilisateur.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesUtilisateur.php");
 
 //$id = 1;
 
@@ -21,7 +21,6 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
     $reponse = false;                                   //reponse qui determinera l'action suivante
 
     if(!empty($tabIdPrenom) && !empty($tabIdNom)){
-        print_r($tabIdNom);
         if(in_array($id, $tabIdPrenom) && in_array($id, $tabIdNom)){        //si l'id appartient à une personne
             //$mdpRegistered = recupMdp($bdd, $id);                           //on recupere le mot de passe de la personne
            /* if(password_verify($mdp, $mdpRegistered)) {                     //on compare les deux
@@ -45,16 +44,14 @@ if(isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['mail']) && i
     $result1 = nomVersId($bdd, $nom);
     $result2 = prenomVersId($bdd, $prenom);
     $reponse = false;
-    $id = 0;
-    print_r($result1);
-    print_r($result2);
+    $id = maximumId($bdd) + 1;
 
     if(empty($result1) && empty($result2)){
         $reponse = true;
-        ajouterInscription($bdd, $nom, $prenom, $mail, $naissance, $mdp);
-        $id =  recuperationDeId($bdd, $prenom, $nom);
+        ajouterInscription($bdd, $id, $nom, $prenom, $mail, $naissance, $mdp);
+        updateEtat($bdd, $id, 1);
     }
 
     $utilisateur = $prenom . "_". $nom;
-    affichageReponse($reponse, $id, $utilisateur, "Inscription");
+    affichageReponse($reponse, $id, $utilisateur,"Inscription");
 }

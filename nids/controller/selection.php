@@ -12,7 +12,7 @@ $pagesPossibles = array();
 if(isset($_POST['deconnexion'])){
     affichageReponse2();
 } else {
-    if($id != 0){
+    if($utilisateur != ""){
         $type = recupType($bdd, $id);
         switch($type){
             case 1:

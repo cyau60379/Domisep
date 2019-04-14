@@ -42,7 +42,7 @@ if(isset($_POST['id']) && isset($_POST['utilisateur'])){
 
 include('controller/'.$url.'.php');
 include('view/header.php');
-if($id != 0) {
+if($utilisateur != "") {
     include('controller/selection.php');
     include('view/selectionPage.php');
 }

@@ -3,25 +3,31 @@
 include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesGenerales.php");
 
 
-function ajouterInscription(PDO $bdd, $valNom, $valPrenom, $valAdresse_mail, $valDate, $valMdp) {
-    $query = "";
+function maximumId(PDO $bdd){
+    $query = "SELECT max(utilisateur.id) FROM utilisateur";
+    $table = $bdd->query($query)->fetch();
+    return $table[0];
+}
+
+function updateEtat(PDO $bdd, $id, $etat){
     try {
-        $valMdp = password_hash($valMdp, PASSWORD_DEFAULT);
-        $query = "INSERT INTO utilisateur (Nom, Prenom, Adresse_mail, Date_naissance, Mot_de_passe, Etat, id_type_utilsateur) 
-              VALUES ('$valNom', '$valPrenom', '$valAdresse_mail', '$valDate', '$valMdp', '1', '1')"; //rajoute les données du nouvel utilisateur
+        $query = "UPDATE utilisateur SET id_type_utilsateur = '$etat' WHERE utilisateur.id = '$id'";
         $bdd->exec($query);
-    } catch(PDOException $e) {
+    }
+    catch(PDOException $e) {
         echo $query . "<br>" . $e->getMessage();
     }
 }
 
-function recuperationDeId(PDO $bdd, $prenom, $nom) {
+function ajouterInscription(PDO $bdd, $id, $valNom, $valPrenom, $valAdresse_mail, $valDate, $valMdp) {
+    $query = "";
     try {
-        $query = "SELECT utilisateur.id FROM utilisateur WHERE utilisateur.Prenom = $prenom AND utilisateur.Nom = $nom";
-        $table = $bdd->query($query)->fetch();
-        return $table['id'];
+        $valMdp = password_hash($valMdp, PASSWORD_DEFAULT);
+        $query = "INSERT INTO utilisateur (id, Nom, Prenom, Adresse_mail, Date_naissance, Mot_de_passe, Etat, id_type_utilsateur) 
+              VALUES ($id,'$valNom', '$valPrenom', '$valAdresse_mail', '$valDate', '$valMdp', '1', '1')"; //rajoute les données du nouvel utilisateur
+        $bdd->exec($query);
     } catch(PDOException $e) {
-        return false;
+        echo $query . "<br>" . $e->getMessage();
     }
 }
 
@@ -52,7 +58,28 @@ function recupMdp(PDO $bdd, $id){
 }
 
 function recupType(PDO $bdd, $id){
-    $query = 'SELECT utilisateur.id_type_utilsateur FROM utilisateur WHERE utilisateur.id =' . $id;
+    try{
+        $query = "SELECT utilisateur.id_type_utilsateur FROM utilisateur WHERE utilisateur.id = '$id'";
+        $table = $bdd->query($query)->fetch();
+        return $table['id_type_utilsateur'];  //renvoie le type
+    } catch(PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
+}
+}
+
+function recupMonId(PDO $bdd, $nom, $prenom, $mail){
+    try {
+        $query = "SELECT utilisateur.id FROM utilisateur 
+                  WHERE utilisateur.Nom = '$nom' AND utilisateur.Prenom = '$prenom' AND utilisateur.Adresse_mail = '$mail'";
+        $table = $bdd->query($query)->fetch();
+        return $table['id'];  //renvoie l'id
+    } catch(PDOException $e) {
+        return false;
+    }
+}
+
+function recupMail(PDO $bdd, $id){
+    $query = "SELECT utilisateur.Adresse_mail FROM utilisateur WHERE utilisateur.id = '$id'";
     $table = $bdd->query($query)->fetch();
-    return $table['id_type_utilsateur'];  //renvoie le type
+    return $table['Adresse_mail'];  //renvoie le mail
 }
