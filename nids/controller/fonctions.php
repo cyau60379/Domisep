@@ -83,7 +83,7 @@ function decoupeString4($str){
     }
 }
 
-function affichePieces($pieces, $logement){
+function affichePieces($pieces, $logement, $id, $utilisateur){
     $logement += 100000;
 echo "    <div id='gestionGlobale' class= 'container gestionGlobale'>
         <div style='margin: 15px'>
@@ -98,12 +98,17 @@ echo "    <div id='gestionGlobale' class= 'container gestionGlobale'>
     </div>
 
     <div class=\"container fil\" id=\"filPieces\"> ";
-        foreach($pieces as $id => $p):
-        echo "<input onclick=\"changerPiece(this.value, this.id); return activerBouton(this.id);\" type=\"button\" id='$id' class=\"boutonFil\" value= '$p'>";
+        foreach($pieces as $identif => $p):
+        echo "<input onclick=\"changerPiece(this.value, this.id); return activerBouton(this.id);\" type=\"button\" id='$identif' class=\"boutonFil\" value= '$p'>";
     endforeach;
     echo "</div>
         <div class=\"container\">
-            <a href=\"/controller/catalogue.php\"><button class=\"bouton boutonAjout\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Ajouter un élément</button></a>
+            <form action='../index.php' method='post'>
+            <input type='hidden' name='cible' value='catalogue'>
+             <input type='hidden' name='id' value= $id>
+             <input type='hidden' name='utilisateur' value= $utilisateur>
+                <button type='submit' class=\"bouton boutonAjout\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Ajouter un élément</button>
+            </form>
         </div>
 
         <li id=\"zoneCapteurs\">

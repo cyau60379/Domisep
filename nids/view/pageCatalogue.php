@@ -4,166 +4,72 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" charset="UTF-8">
     <title>Catalogue</title>
     <link rel="shortcut icon" href="Images/logoNids.ico" />
-    <link rel="stylesheet" type="text/css" media="screen" title="default" href="design/style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <?php include_once ("fonctions.php");      //inclut les fonctions concernant les capteurs
+    ?>
 </head>
 <body>
 
-
-
-
-<table cellspacing = "0" cellpadding = "0" border="0" width =500px>
-
-    <?php
-
-
-    ?>
+<table cellspacing = "0" cellpadding = "0" border="0">
     <caption>CATALOGUE CAPTEURS</caption>
     <thead>
-    <tr >
-        <td class = 'head'>Nom Capteur</td>
-
-        <td class = 'head'>Image Capteur</td>
-
-        <td class = 'head' >Description Capteur</td>
-
-        <td class = 'prix'>PRIX</td>
+    <tr>
+        <td class='catalogue nom head'>Nom Capteur</td>
+        <td class='catalogue nom head'>Image Capteur</td>
+        <td class='catalogue head' >Description Capteur</td>
+        <td class='catalogue head'>Ajouter ?</td>
     </tr>
     </thead>
 
-    <TBODY>
+    <tbody>
+    <?php foreach($tabCatalogue as $key => $value):?>
     <tr>
-        <td>
-            Capteur de mouvement
+        <td class='catalogue nom'>
+            <?php echo $value[0]?>
         </td>
-        <td >
-            <img class='img' src="Images\CaptureInfra.PNG" alt="capinfra">
-
+        <td class='catalogue nom'>
+            <img class='img' src="Images\<?php echo $value[0]?>.png" alt="<?php echo $value[0]?>">
         </td>
-        <td class = 'descriCapteur'>
-            <?php
-
-            $bdd = new PDO('mysql:host=localhost;dbname=nids;charset=utf8', 'root', '');
-            $reponse = $bdd->query('SELECT Description FROM element_catalogue WHERE id = 1' );
-            $donnees = $reponse->fetchAll();
-
-            print_r($donnees[0]['Description']);?>
-
-
-            //[0] => "température";[1] => "température"
-            //PDO :: fetch_func, "___")
+        <td class='catalogue' class = 'descriCapteur'>
+            <?php echo $value[1]?>
         </td>
-        <td class=' prixElement'>
-
-            <input type="button" id = "ajoutCapteur" value=" AJOUTER" onclick="AJOUTER" />
-
-
-
-
+        <td class='catalogue prixElement'>
+            <input class="ajouter" type="button" id = "ajoutCapteur" value=" AJOUTER" onclick="AJOUTER" />
         </td>
 
     </tr>
-    <tr>
-        <td>
-            Capteur de luminsotié
-        </td>
-        <td  >
-            <img class='img' src="Images\capteurLuminosite.PNG" alt="capinfra">
-        </td>
-        <td class = 'descriCapteur' >
-        <?php
-
-        //include ($_SERVER["DOCUMENT_ROOT"] . "nids/model/connexionBDD.php");
-
-        $bdd = new PDO('mysql:host=localhost;dbname=nids;charset=utf8', 'root', '');
-        $reponse = $bdd->query('SELECT Description FROM element_catalogue WHERE id = 2' );
-        $donnees = $reponse->fetchAll();
-
-        print_r($donnees[0]['Description']);?></td>
-        <td class='prixElement'>
-
-            <input type="button" id = "ajoutCapteur" value="AJOUTER" onclick="AJOUTER" />
-        </td>
-    </tr>
-    <tr>
-        <td>actionneur / moteur
-        </td>
-
-        <td >
-            <img class = 'img' src="Images\actionneur.PNG" alt="capinfra" >
-        </td>
-
-        <td class = 'descriCapteur'>
-<?php
-//include ($_SERVER["DOCUMENT_ROOT"] . "nids/model/connexionBDD.php");
-
-            $bdd = new PDO('mysql:host=localhost;dbname=nids;charset=utf8', 'root', '');
-            $reponse = $bdd->query('SELECT Description FROM element_catalogue WHERE id = 3' );
-            $donnees = $reponse->fetchAll();
-
-            print_r($donnees[0]['Description']);?>
-        </td>
-        <td class = 'prixElement'>
-
-            <input type="button" id = "ajoutCapteur" value="AJOUTER" onclick="AJOUTER" />
-        </td>
-
-
-
-    </tr>
-    <tr>
-        <?php for ($tab =0; $tab<4; $tab ++)
-
-        {echo '<td>'; for ($espace =0; $espace < 10; $espace ++){echo '<br>';}'</td>';}
-        ?>
-    </tr>
-
-    </TBODY>
-    <tfoot>
-    </tfoot>
+    <?php endforeach;?>
+    </tbody>
+</table>
 
 </body>
-
-
-</table  >
-
 </html>
-
 
 <style>
 
- input{
-
+ input.ajouter{
      background-color : black;
      height: 25px;
      width: 75px;
      color : white;
-
  }
 
-
-
     .descriCapteur{
-        width: 12%;
-        margin-top: 0px;
-        padding-left: 0px;
-        padding-right: 0px;
+        margin-top: 0;
+        padding-left: 0;
+        padding-right: 0;
         color : white;
     }
 
-
     .prixElement{
-        width: 8%;
-        margin-top: 0px;
-        padding-left: 0px;
-        padding-right: 0px;
-        color : red;
+        margin-top: 0;
+        padding-left: 0;
+        padding-right: 0;
     }
 
     .img{
-        width : 150px;
+        width: 150px;
         height: 150px;
-        border : solid;
         border-color: black;
         border-width: 10px;
         border-style: inset;
@@ -173,39 +79,23 @@
         padding-top: 8px;
         padding-bottom: 50px;
         font-size: 55px;
-
-    }
-    body{
-        background-color: #05083E;
-        width:100%;
+        margin: auto;
+        justify-content: center;
     }
 
-
-    td{
+    td.catalogue{
         border : 1px solid white;
         text-align: center;
-        padding-left : 150px;
-        padding-right: 150px;
-        padding-bottom: 10px;
-        padding-top: 10px;
-        color: white;
-
-
-
+        padding: 10px 100px 10px 100px;
+        width: 100%;
     }
-    .prix{
-        border : 1px solid white;
-        padding-left : 30px;
-        padding-right: 30px;
-        padding-bottom: 10px;
-        padding-top: 10px;
-        color: white;
-        font-weight: bolder;
+    td.nom {
+        width: 20%;
     }
     .head{
-        margin-top: 0px;
-        padding-left: 0px;
-        padding-right: 0px;
+        margin-top: 0;
+        padding-left: 0;
+        padding-right: 0;
         font-weight: bolder;
         width: 12px;
     }

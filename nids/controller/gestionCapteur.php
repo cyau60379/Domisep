@@ -18,6 +18,7 @@ if(!isset($_SESSION['idUtilisateur'])){
     session_start();
 }
 $id = $_SESSION['idUtilisateur'];
+$utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));
 
 //id des logements du gestionnaire
 $logement = decoupeString(recupLogements($bdd, $id));
@@ -52,7 +53,7 @@ if (isset($_GET['logement'])) {
 
     //liste des pieces de la maison sous forme array { [$id] => $nom ... }
     $pieces = decoupeString($listePieces);
-    affichePieces($pieces, $idLogementActif);
+    affichePieces($pieces, $idLogementActif, $id, $utilisateur);
 }
 
 //============================================ test des capteurs a afficher
