@@ -8,6 +8,28 @@
 
 <script>
 
+
+    //=================================== messages à afficher
+
+    function confirmer(message, zone){
+        document.getElementById(zone).innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1>"+ message +"</h1>" +
+        "<form action='../index.php' method='post'>" +
+            "<input type='button' class='bouton boutonGlobal' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+    function alerter(message){
+        document.getElementById(`divReponse`).innerHTML = "<div class= 'case caseCapteur'>"+
+        "<h1>"+ message +"</h1>"+
+        "<input type='button' class='bouton boutonGlobal' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</div>";
+    }
+
+
+
     //=================================== connexion à la page
 
 
@@ -132,84 +154,99 @@
     //=================================== gestion capteurs
 
 
-    //fonction de suppression du capteur non voulu
+    //------------------------fonction de suppression du capteur non voulu
 
     function supprimer(id) {
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1> Voulez-vous supprimer ce capteur ?</h1>" +
+            "<form>" +
+            "<input type='button' class='bouton boutonGlobal' onclick='actionSupprimer("+id+")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+    function actionSupprimer(id){
         let id2 = -id;
-        if (confirm('Voulez-vous réellement supprimer ce capteur ?')) {
-            let cap = document.getElementById(id);   // recupere element <ul> avec id="zoneCapteurs"
-            cap.remove();           // efface celui d'id capteur
-            //supprimer de la base de données
-            let request;
-            request = new XMLHttpRequest();
-            request.onreadystatechange = function() {
+        let cap = document.getElementById(id);   // recupere element <ul> avec id="zoneCapteurs"
+        cap.remove();           // efface celui d'id capteur
+        //supprimer de la base de données
+        let request;
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let nom = "";
+                for(let i = 1; i < cap.classList.length; i++){
+                    nom += " " + cap.classList[i];
+                }
+                alerter(nom +' supprimé !');             // /!\ mettre condition si la base n'a pas ete mise a jour
+            }
+        };
+        request.open("GET", "controller/gestionCapteur.php?id=" + id2, true);
+        request.send();   //envoie le resultat de la requete
+    }
+
+    //-----------------changer la classe de l'icone + envoi requête à la base pour changer l'etat
+
+
+    function allumerEteindre(id){
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1>Voulez-vous réellement modifier l'état de ce capteur ?</h1>" +
+            "<form>" +
+            "<input type='button' class='bouton boutonGlobal' onclick='actionAllumerEteindre(" + id + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+    function actionAllumerEteindre(id){
+        let icon = document.getElementById(id);                    //recupere l'icone marche/arret
+        let nom = "";
+        for (let i = 3; i < (icon.classList.length - 1); i++) {
+            nom += " " + icon.classList[i];
+        }
+        if (icon.classList.contains('on')) {                             //change l'etat s'il s'agit du bon element
+            let request = new XMLHttpRequest();
+            request.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
-                    let nom = "";
-                    for(let i = 1; i < cap.classList.length; i++){
-                        nom += cap.classList[i];
+                    icon.classList.remove('on');      // change l'etat
+                    icon.classList.add('off');        // change l'etat
+                    alerter(nom + ' éteint !');
+                    let boutons = document.getElementsByTagName("input");
+                    for (let i = 0; i < boutons.length; i++) {
+                        if(boutons[i].classList.contains(id)){
+                            boutons[i].style.visibility = "hidden";
+                        }
                     }
-                    alert('Capteur ' + nom +' supprimé !');             // /!\ mettre condition si la base n'a pas ete mise a jour
                 }
             };
-            request.open("GET", "controller/gestionCapteur.php?id=" + id2, true);
-            request.send();   //envoie le resultat de la requete
-        }
-    }
-
-
-    //changer la classe de l'icone + envoi requête à la base pour changer l'etat
-
-    function allumerEteindre(id, len){
-        let zone = [];
-        for(let i = 0; i < len; i++){
-            zone.push(document.getElementsByClassName("caseCapteur")[i]);       //recupere les elements de classe caseCapteur dans un tableau
-        }
-        if (confirm("Voulez-vous réellement modifier l'état de ce capteur ?")) {    //ouvre une fenetre de confirmation
-            for(let i = 0; i < zone.length; i++){
-                let icon = zone[i].getElementsByTagName("i")[2];                    //recupere l'icone marche/arret
-                let nom = "";
-                for(let i = 3; i < (icon.classList.length - 1); i++){
-                    nom += " " + icon.classList[i];
-                }
-                if(icon.id == id){
-                    if (icon.classList.contains('on')){                             //change l'etat s'il s'agit du bon element
-                        let request = new XMLHttpRequest();
-                        request.onreadystatechange = function() {
-                            if (this.readyState === 4 && this.status === 200) {
-                                icon.classList.remove('on');      // change l'etat
-                                icon.classList.add('off');        // change l'etat
-                                alert('Capteur ' + nom +' éteint !');
-                                let boutons = zone[i].getElementsByTagName("input");
-                                for(let i = 0; i < boutons.length; i ++){
-                                    boutons[i].style.visibility = "hidden";
-                                }
-                            }
-                        };
-                        request.open("GET", "controller/gestionCapteur.php?allume=" + 0 + "&idCap=" + id, true);
-                        request.send();                                                   //envoie le resultat de la requete par methode get
-                    } else {
-                        let request = new XMLHttpRequest();
-                        request.onreadystatechange = function() {
-                            if (this.readyState === 4 && this.status === 200) {
-                                icon.classList.remove('off');           // change l'etat
-                                icon.classList.add('on');           // change l'etat
-                                alert('Capteur ' + nom +' allumé !');
-                                let boutons = zone[i].getElementsByTagName("input");
-                                for(let i = 0; i < boutons.length; i ++){
-                                    boutons[i].style.visibility = "visible";
-                                }
-                            }
-                        };
-                        request.open("GET", "controller/gestionCapteur.php?allume=" + 1 + "&idCap=" + id, true);
-                        request.send();                                                    //envoie le resultat de la requete par methode get
+            request.open("GET", "controller/gestionCapteur.php?allume=" + 0 + "&idCap=" + id, true);
+            request.send();                                                   //envoie le resultat de la requete par methode get
+        } else {
+            let request = new XMLHttpRequest();
+            request.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    icon.classList.remove('off');           // change l'etat
+                    icon.classList.add('on');           // change l'etat
+                    alerter(nom + ' allumé !');
+                    let boutons = document.getElementsByTagName("input");
+                    for (let i = 0; i < boutons.length; i++) {
+                        if(boutons[i].classList.contains(id)){
+                            boutons[i].style.visibility = "visible";
+                        }
                     }
                 }
-            }
-
+            };
+            request.open("GET", "controller/gestionCapteur.php?allume=" + 1 + "&idCap=" + id, true);
+            request.send();                                                    //envoie le resultat de la requete par methode get
         }
     }
 
-    //change la classe des boutons en fonction de s'il y en a un qui est activé ce en fonction de l'id du bouton
+    //------------------------change la classe des boutons en fonction de s'il y en a un qui est activé ce en fonction de l'id du bouton
 
     function activerBouton(id) {
         let len = document.getElementsByClassName("boutonFil").length;
@@ -223,7 +260,7 @@
         }
     }
 
-    //change la classe des boutons en fonction de s'il y en a un qui est activé ce en fonction de l'id du bouton
+    //------------------------change la classe des boutons en fonction de s'il y en a un qui est activé ce en fonction de l'id du bouton
 
     function activerBouton2(id) {
         let len = document.getElementsByClassName("boutonAppart").length;
@@ -235,7 +272,7 @@
         document.getElementById(id).classList.add("activerAppart");
     }
 
-    //fonction qui permet d'afficher les capteurs en fonction de la piece demandée
+    //----------------------------fonction qui permet d'afficher les capteurs en fonction de la piece demandée
 
     function changerPiece(pieceVoulue, id) {
            let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
@@ -253,21 +290,23 @@
            request.send();                                                              //envoie le resultat de la requete au serveur
     }
 
-    //fonction pour modifier la température de la maison
+    //-----------------------------fonction pour modifier la température de la maison
 
     function changerTemperature() {
         let temp = document.getElementById('tempChoix').value;
         let request = new XMLHttpRequest();
         request.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
-                alert("Le changement de température effectué a bien été pris en compte.");
+                document.getElementById("divReponse").style.zIndex = '1';
+                document.getElementById("divReponse").style.display = 'initial';
+                alerter("Le changement de température effectué a bien été pris en compte.");
             }
         };
         request.open("GET", "controller/gestionCapteur.php?temp=" + temp, true);
         request.send();                                                                 //envoie le resultat de la requete
     }
 
-    //fonction pour monter / descendre le volet
+    //-----------------------fonction pour monter / descendre le volet
 
     function monterDescendre(id, etat, boutonClic){
         if(confirm("Voulez-vous changer l'état de ce volet ?")){
@@ -344,47 +383,56 @@
         }
     }
 
-    // fonction pour tout changer dans la maison
+    // ------------------------------------- fonction pour tout changer dans la maison
 
-    function changer(id, action, participe){
-        action2 = action.charAt(0).toUpperCase() + action.slice(1);
-        if(confirm("Voulez-vous vraiment tout " + action + " ?")) {
-            let request = new XMLHttpRequest();
-            request.onreadystatechange = function () {
-                if (this.readyState === 4 && this.status === 200) {
-                    let len = document.getElementsByClassName("boutonFil").length;
-                    for(let i = 0; i < len; i++){
-                        if(document.getElementsByClassName("boutonFil")[i].classList.contains("activer")){
-                            document.getElementsByClassName("boutonFil")[i].classList.remove("activer");
-                        }
-                    }
-                    alert("Tout est " + participe +" !");
-                 /*   let boutons = document.getElementsByClassName("bas");
-                    let boutons2 = document.getElementsByClassName("haut");
-                    if(action == "ouvrir") {
-                        for(let i = 0; i < boutons.length; i ++){
-                                boutons[i].style.visibility = "visible";
-                        }
-                        for(let i = 0; i < boutons2.length; i ++){
-                            boutons2[i].style.visibility = "visible";
-                        }
-                    } else if(action == "fermer") {
-                        for(let i = 0; i < boutons.length; i ++){
-                            for(let i = 0; i < boutons.length; i ++){
-                                boutons[i].style.visibility = "hidden";
-                            }
-                            for(let i = 0; i < boutons2.length; i ++){
-                                boutons2[i].style.visibility = "hidden";
-                            }
-                        }
-                    }*/
-                    document.getElementById("zoneCapteurs").innerHTML = '<p class="info">Veuillez choisir une pièce</p>';   //rempli la zoneCapteurs
-                }
-            };
-            id -= 100000;
-            request.open("GET", "controller/gestionCapteur.php?id" + action2 + "=" + id, true);
-            request.send();                                                                 //envoie le resultat de la requete
+    function changer(id, action, numAction){
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1>Voulez-vous réellement tout "+ action +" ?</h1>" +
+            "<form>" +
+            "<input type='button' class='bouton boutonGlobal' onclick='actionChanger(" + id + "," + numAction + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+    function actionChanger(id, numAction){
+        let participe = "";
+        let action2 = "";
+        switch (numAction) {
+            case 1:
+                action2 = "Allumer";
+                participe = "allumé";
+                break;
+            case 2:
+                action2 = "Eteindre";
+                participe = "eteint";
+                break;
+            case 3:
+                action2 = "Ouvrir";
+                participe = "ouvert";
+                break;
+            case 4:
+                action2 = "Fermer";
+                participe = "fermé";
+                break;
         }
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let len = document.getElementsByClassName("boutonFil").length;
+                for(let i = 0; i < len; i++){
+                    if(document.getElementsByClassName("boutonFil")[i].classList.contains("activer")){
+                        document.getElementsByClassName("boutonFil")[i].classList.remove("activer");
+                    }
+                }
+                alerter("Tout est " + participe +" !");document.getElementById("zoneCapteurs").innerHTML = '<p class="info">Veuillez choisir une pièce</p>';   //rempli la zoneCapteurs
+            }
+        };
+        id -= 100000;
+        request.open("GET", "controller/gestionCapteur.php?id" + action2 + "=" + id, true);
+        request.send();                                                                 //envoie le resultat de la requete
     }
 
     //fonction qui permet d'afficher les capteurs en fonction de la piece demandée

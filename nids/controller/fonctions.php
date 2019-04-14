@@ -91,10 +91,10 @@ echo "    <div id='gestionGlobale' class= 'container gestionGlobale'>
             <input id='tempChoix' style='width: 50px; height: 30px; text-align: center;' type='number' name='temp' value=20 min=0 max=25> °C
             <input class='bouton' type='submit' value='Valider' onclick='changerTemperature(document.getElementById(`tempChoix`).value)'\">
         </div>
-        <button onclick=\"changer(this.id, 'eteindre', 'éteint')\" class=' bouton boutonGlobal' id ='$logement'>Tout éteindre</button>
-        <button onclick=\"changer(this.id, 'fermer', 'fermé')\" class=\"bouton boutonGlobal\" id ='$logement'>Tout fermer</button>
-        <button onclick=\"changer(this.id, 'allumer', 'allumé')\" class=' bouton boutonGlobal' id ='$logement'>Tout allumer</button>
-        <button onclick=\"changer(this.id, 'ouvrir', 'ouvert')\" class=\"bouton boutonGlobal\" id ='$logement'>Tout ouvrir</button>
+        <button onclick=\"changer(this.id, 'eteindre', 2)\" class=' bouton boutonGlobal' id ='$logement'>Tout éteindre</button>
+        <button onclick=\"changer(this.id, 'fermer', 4)\" class=\"bouton boutonGlobal\" id ='$logement'>Tout fermer</button>
+        <button onclick=\"changer(this.id, 'allumer', 1)\" class=' bouton boutonGlobal' id ='$logement'>Tout allumer</button>
+        <button onclick=\"changer(this.id, 'ouvrir', 3)\" class=\"bouton boutonGlobal\" id ='$logement'>Tout ouvrir</button>
     </div>
 
     <div class=\"container fil\" id=\"filPieces\"> ";
@@ -143,20 +143,20 @@ function afficheDonnees($tab){
                     return (" 
                             <div class='actionneur imageCapteur'>
                             <br> Fermé <br>
-                                <input type='button' id='haut' class='bouton' value='&#x25b2;' onclick=' monterDescendre($tab[0], $tab[3], this.id)'>
+                                <input type='button' id='haut' class='bouton $tab[0]' value='&#x25b2;' onclick=' monterDescendre($tab[0], $tab[3], this.id)'>
                             </div>");
                 } elseif(($tab[3] <= 9) && ($tab[3] >= 1)) {
                     return ("
                             <div class='actionneur imageCapteur'>
                                 <br> Entrouvert <br>
-                                <input type='button' id='haut' class='bouton' value='&#x25b2;' onclick=' monterDescendre($tab[0], $tab[3], this.id)'>
-                                <input type='button' id='bas' class='bouton' value='&#x25bc;' onclick=' monterDescendre($tab[0], $tab[3], this.id)'>
+                                <input type='button' id='haut' class='bouton $tab[0]' value='&#x25b2;' onclick=' monterDescendre($tab[0], $tab[3], this.id)'>
+                                <input type='button' id='bas' class='bouton $tab[0]' value='&#x25bc;' onclick=' monterDescendre($tab[0], $tab[3], this.id)'>
                             </div>");
                 } else {
                     return (" 
                             <div class='actionneur imageCapteur'>
                                 <br> Ouvert <br>
-                                <input type='button' id='bas' class='bouton' value='&#x25bc;' onclick=' monterDescendre($tab[0], $tab[3], this.id)'>
+                                <input type='button' id='bas' class='bouton $tab[0]' value='&#x25bc;' onclick=' monterDescendre($tab[0], $tab[3], this.id)'>
                             </div>");
                 }
                 break;
@@ -180,7 +180,7 @@ function afficheCapteur($cap){
                 <div class='titre'>
                     $c[1]
                     <a href='javascript:supprimer($id)'>
-                        <i class='fa fa-times-circle editionCapteur' style='color: red;' aria-hidden='true' id='$c[0]'></i>
+                        <i class='fa fa-times-circle editionCapteur' style='color: red;' aria-hidden='true'></i>
                     </a>
                     <i class='fa fa-cogs editionCapteur'></i>
                 </div>
