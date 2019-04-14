@@ -28,17 +28,20 @@ if (isset($_POST['cible']) && !empty($_POST['cible'])) {
 
 $url2 = ucfirst($url);
 $utilisateur = "";
+$id = 0;
 
-if(isset($_POST['id'])){
-    $utilisateur = $_POST['id'];
-    $result = preg_split("/\_/", $utilisateur);
-    $utilisateur = $result[0] ." ". $result[1];
+if(isset($_POST['id']) && isset($_POST['utilisateur'])){
+    $id = $_POST['id'];
+    $utilisateur = $_POST['utilisateur'];
 }
 
 // Appel du contrôleur
 
 include('controller/'.$url.'.php');
 include('view/header.php');
-include('view/selectionPage.php');
+if($utilisateur != "") {
+    include('controller/selection.php');
+    include('view/selectionPage.php');
+}
 include("view/page$url2.php");
 include('view/footer.php');

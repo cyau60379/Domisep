@@ -208,6 +208,10 @@ div.actionneur {
     border-color: black;
 }
 
+.bouton:focus {
+    outline-color: #3c3d51;
+}
+
 /*bouton pour commander tous les capteurs à la fois*/
 
 .boutonGlobal {
@@ -298,32 +302,6 @@ p.info {
     justify-content: space-between;
     margin-left: 350px;
     background-color: #3C3D51;
-}
-
-.choixPage {
-    margin-left: 10px;
-    height: 44px;
-    border: solid 3px white;
-    background-color: #3C3D51;
-    cursor: pointer;
-    border-radius: 20px;
-    color: white;
-    font-size: 20px;
-}
-
-.choixPage:hover{
-    background-color: darkgrey;
-    color: #05083E;
-    border-color: #05083E;
-    font-weight: bold;
-}
-
-.choixPage:active{
-    background-color: blue;
-}
-
-.choixPage:focus{
-    outline-color: #3c3d51;
 }
 
 

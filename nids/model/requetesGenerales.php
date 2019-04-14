@@ -6,7 +6,7 @@
  * Time: 21:28
  */
 
-include($_SERVER["DOCUMENT_ROOT"] . "/model/connexionBDD.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/model/connexionBDD.php");
 
 function recupererToutDans(PDO $bdd, string $table): array {
     $query = 'SELECT * FROM ' . $table;

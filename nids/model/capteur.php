@@ -5,7 +5,7 @@
  * Date: 19/03/2019
  * Time: 21:49
  */
-include ($_SERVER["DOCUMENT_ROOT"] . "/model/requetesGenerales.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesGenerales.php");
 
 //suppression des capteurs non desirés
 

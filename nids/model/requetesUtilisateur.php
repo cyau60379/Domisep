@@ -1,6 +1,6 @@
 <?php
 
-include($_SERVER["DOCUMENT_ROOT"] . "/model/requetesGenerales.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesGenerales.php");
 
 
 function ajouterInscription(PDO $bdd, $valNom, $valPrenom, $valAdresse_mail, $valDate, $valMdp) {
@@ -35,4 +35,10 @@ function recupMdp(PDO $bdd, $id){
     $query = 'SELECT utilisateur.Mot_de_passe FROM utilisateur WHERE utilisateur.id =' . $id;
     $table = $bdd->query($query)->fetchAll();
     return $table[0]["Mot_de_passe"];  //renvoie le Mot de passe
+}
+
+function recupType(PDO $bdd, $id){
+    $query = 'SELECT utilisateur.id_type_utilsateur FROM utilisateur WHERE utilisateur.id =' . $id;
+    $table = $bdd->query($query)->fetch();
+    return $table['id_type_utilsateur'];  //renvoie le Mot de passe
 }

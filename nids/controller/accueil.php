@@ -29,6 +29,6 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
            $reponse = true;
         }
     }
-    $utilisateur = decoupeString3(recupererUtilisateur($bdd,$id));
-    affichageReponse($reponse, $utilisateur);
+    $utilisateur = decoupeString2(recupererUtilisateur($bdd,$id));
+    affichageReponse($reponse, $id, $utilisateur);
 }

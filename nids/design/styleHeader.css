@@ -6,7 +6,7 @@ div.header {
     left : 0;
 }
 
-h1.titre {
+h1.nomSite {
     width: 100%;
     border: 1px;
     text-align: start;
@@ -21,13 +21,13 @@ h1.titre {
 /*changement du style en fonction de la taille de fenêtre*/
 
 @media screen and (max-width: 460px) {
-    h1 {                /*changement du container*/
+    h1.nomSite {                /*changement du container*/
         font-size: 2.5vw;
     }
 }
 
 @media screen and (max-width: 355px) {
-    h1 {                /*changement du container*/
+    h1.nomSite {                /*changement du container*/
         font-size: 2vw;
     }
 }
@@ -41,7 +41,7 @@ img.logo {
 
 div.separation {
     background-color: #000000;
-    display: inline-block;
+    display: inherit;
     height: 2px;
     width: 100%;
 }
@@ -129,8 +129,4 @@ div.bandeau {
     font-weight: bold;
     font-style: oblique;
     margin: 0;
-}
-
-.bouton:focus {
-    outline-color: #3c3d51;
 }
