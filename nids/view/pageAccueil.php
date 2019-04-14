@@ -26,7 +26,7 @@
                 </label>
 
                 <label class="boxIdentifiant boxConnexion1">
-                    Mot de passe : <input class="input" name="password">
+                    Mot de passe : <input type="password" class="input" name="password">
                 </label>
 
                 <div class="boxBouton boxConnexion1">
@@ -40,7 +40,7 @@
 
     <div class="box">
         <h1> Inscription</h1>
-        <div class="boxConnexion1">
+        <form name='inscription' class="boxConnexion1">
             <label class="boxIdentifiant boxConnexion1">
                 Prénom: <input class="input" name="Prenom">
             </label>
@@ -51,15 +51,15 @@
                 Adresse mail: <input class="input" name="AdresseMail">
             </label>
             <label class="boxIdentifiant boxConnexion1">
-                Date de Naissance: <input class="input" name="DateDeNaissance">
+                Date de Naissance (AAAA-MM-JJ): <input class="input" name="DateDeNaissance">
             </label>
             <label class="boxIdentifiant boxConnexion1">
                 Mot de Passe: <input class="input" name="Mdp">
             </label>
             <div class="boxBouton boxConnexion1">
-                <a href="../index.php?cible=connexion&fonction=captainMarcel"  <button class="button"> S'inscrire </button></a>
+                <input type="button" class="button" onclick="return inscriptionUser()" value="S'inscrire">
             </div>
-        </div>
+        </form>
     </div>
 </div>
 

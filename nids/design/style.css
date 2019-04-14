@@ -486,3 +486,24 @@ li.client {
     width: 180px;
     display: inline-block;
 }
+
+
+#divReponse {
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    z-index: -1000;
+}
+
+.case {
+    position: fixed;
+    top: 25%;
+    left: 35.5%;
+    align-content: center;
+    margin: auto;
+    text-align: center;
+    color: #FFFFFF;
+}

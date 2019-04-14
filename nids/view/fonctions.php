@@ -8,6 +8,9 @@
 
 <script>
 
+    //=================================== connexion à la page
+
+
     function connexionUser() {
         let id = document.forms["connexion"].elements["identifiant"].value;
         let mdp = document.forms["connexion"].elements["password"].value;
@@ -17,12 +20,57 @@
             if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
                 document.getElementById("divReponse").innerHTML = this.responseText;   //rempli le corps de la page avec la réponse
                 document.getElementById("divReponse").style.zIndex = '1';
+                document.getElementById("divReponse").style.display = 'initial';
             }
         };
         request.open("POST", "controller/accueil.php", true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("identifiant=" + id + "&password=" + mdp);                                                              //envoie le resultat de la requete au serveur
+        request.send("identifiant=" + id + "&password=" + mdp);                      //envoie le resultat de la requete au serveur
     }
+
+    function inscriptionUser() {
+        let prenom = document.forms["inscription"].elements["Prenom"].value;
+        let nom = document.forms["inscription"].elements["Nom"].value;
+        let mail = document.forms["inscription"].elements["AdresseMail"].value;
+        let naissance = document.forms["inscription"].elements["DateDeNaissance"].value;
+        let mdp = document.forms["inscription"].elements["Mdp"].value;
+
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                document.getElementById("divReponse").innerHTML = this.responseText;   //rempli le corps de la page avec la réponse
+                document.getElementById("divReponse").style.zIndex = '1';
+                document.getElementById("divReponse").style.display = 'initial';
+            }
+        };
+        request.open("POST", "controller/accueil.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("prenom=" + prenom + "&nom=" + nom + "&mail=" + mail + "&naissance=" + naissance + "&mdp=" + mdp);     //envoie le resultat de la requete au serveur
+    }
+
+
+    function fermetureMessage(id){
+        document.getElementById(id).style.zIndex = '-100';
+        document.getElementById(id).style.display = 'none';
+    }
+
+    function deconnexionUser() {
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                document.getElementById("divReponse").innerHTML = this.responseText;   //rempli le corps de la page avec la réponse
+                document.getElementById("divReponse").style.zIndex = '1';
+                document.getElementById("divReponse").style.display = 'initial';
+            }
+        };
+        request.open("POST", "controller/selection.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("deconnexion=1");                      //envoie le resultat de la requete au serveur
+    }
+
+    //=================================== animation boutons
 
     function montrerTitre(id, type) {
         document.getElementById(id).innerHTML = '<i class="fa '+ id + '"></i> ' + type;
@@ -32,7 +80,9 @@
         document.getElementById(id).innerHTML = '<i class="fa '+ id + '"></i>';
     }
 
-    // fonction header changer contenu bouton
+
+        // fonction header changer contenu bouton
+
     function changerContenu(id){
         let str = document.getElementById(id).classList[1];
         let str2 = document.getElementById(id).classList[2];
@@ -52,6 +102,8 @@
     function remettreContenu(id){
         document.getElementById(id).innerHTML = id;
     }
+
+    //=================================== gestion capteurs
 
 
     //fonction de suppression du capteur non voulu

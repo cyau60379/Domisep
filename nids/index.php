@@ -11,9 +11,10 @@
 // Activation des erreurs
 ini_set('display_errors', 1);
 
-/*
+
 // Appel des fonctions du contrôleur
-include("controleurs/fonctions.php");
+include_once("controller/fonctions.php");
+/*
 // Appel des fonctions liées à l'affichage
 include("vues/fonctions.php");
 */
@@ -28,18 +29,20 @@ if (isset($_POST['cible']) && !empty($_POST['cible'])) {
 
 $url2 = ucfirst($url);
 $utilisateur = "";
+$utilisateur2 = "";
 $id = 0;
 
 if(isset($_POST['id']) && isset($_POST['utilisateur'])){
     $id = $_POST['id'];
     $utilisateur = $_POST['utilisateur'];
+    $utilisateur2 = decoupeString4($utilisateur);
 }
 
 // Appel du contrôleur
 
 include('controller/'.$url.'.php');
 include('view/header.php');
-if($utilisateur != "") {
+if($id != 0) {
     include('controller/selection.php');
     include('view/selectionPage.php');
 }

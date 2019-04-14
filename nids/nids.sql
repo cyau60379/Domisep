@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 04 avr. 2019 à 20:56
+-- Généré le :  Dim 14 avr. 2019 à 11:51
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `actionneur_capteur`;
 CREATE TABLE IF NOT EXISTS `actionneur_capteur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(35) NOT NULL,
+  `nom` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
   `Etat` tinyint(1) NOT NULL,
   `Actif` tinyint(1) NOT NULL,
   `NumeroSerie` int(11) NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `actionneur_capteur` (
   KEY `id_CeMac` (`id_CeMac`),
   KEY `id_element_catalogue` (`id_element_catalogue`),
   KEY `id_piece` (`id_piece`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `actionneur_capteur`
@@ -58,7 +58,6 @@ INSERT INTO `actionneur_capteur` (`id`, `nom`, `Etat`, `Actif`, `NumeroSerie`, `
 (8, 'Luminosité', 1, 0, 4913184, 2, 1, 1, 1, 1),
 (9, 'Luminosité', 1, 0, 4913185, 2, 1, 2, 1, 1),
 (10, 'Luminosité', 1, 0, 4913186, 2, 1, 3, 1, 1),
-(11, 'Luminosité', 1, 0, 4913187, 2, 1, 4, 1, 1),
 (12, 'Luminosité', 1, 0, 4913188, 2, 1, 5, 1, 1),
 (13, 'Mouvement', 1, 0, 723163652, 3, 1, 1, 1, 1),
 (14, 'Mouvement', 1, 0, 723163653, 3, 1, 4, 1, 1),
@@ -80,10 +79,10 @@ INSERT INTO `actionneur_capteur` (`id`, `nom`, `Etat`, `Actif`, `NumeroSerie`, `
 DROP TABLE IF EXISTS `administratif`;
 CREATE TABLE IF NOT EXISTS `administratif` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(255) NOT NULL,
-  `Valeur` text NOT NULL,
+  `Nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Valeur` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -94,10 +93,10 @@ CREATE TABLE IF NOT EXISTS `administratif` (
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE IF NOT EXISTS `article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Titre` varchar(255) NOT NULL,
-  `Contenu` text NOT NULL,
+  `Titre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Contenu` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -108,10 +107,10 @@ CREATE TABLE IF NOT EXISTS `article` (
 DROP TABLE IF EXISTS `article_faq`;
 CREATE TABLE IF NOT EXISTS `article_faq` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Titre` varchar(255) NOT NULL,
-  `Contenu` text NOT NULL,
+  `Titre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Contenu` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -122,9 +121,9 @@ CREATE TABLE IF NOT EXISTS `article_faq` (
 DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE IF NOT EXISTS `categorie` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(255) NOT NULL,
+  `Nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `categorie`
@@ -142,12 +141,12 @@ INSERT INTO `categorie` (`id`, `Nom`) VALUES
 DROP TABLE IF EXISTS `cemac`;
 CREATE TABLE IF NOT EXISTS `cemac` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(255) NOT NULL,
+  `Nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `Etat` tinyint(1) NOT NULL,
   `id_logement` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `cemac_ibfk_1` (`id_logement`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `cemac`
@@ -166,12 +165,12 @@ DROP TABLE IF EXISTS `commentaire`;
 CREATE TABLE IF NOT EXISTS `commentaire` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Date_publication` datetime NOT NULL,
-  `Contenu` text NOT NULL,
+  `Contenu` text COLLATE utf8_unicode_ci NOT NULL,
   `Note` int(11) NOT NULL,
   `id_article` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_article` (`id_article`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -187,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `donnees` (
   `id_actionneur_capteur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `donnees_ibfk_1` (`id_actionneur_capteur`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `donnees`
@@ -212,8 +211,8 @@ INSERT INTO `donnees` (`id`, `Date_heure_reception`, `Valeur`, `id_actionneur_ca
 (16, '2019-04-01 13:12:20', 12, 17),
 (17, '2019-04-01 13:12:20', 15, 18),
 (18, '2019-04-01 13:12:20', 15, 19),
-(19, '2019-04-01 13:12:20', 10, 20),
-(20, '2019-04-01 13:12:20', 5, 21),
+(19, '2019-04-01 13:12:20', 0, 20),
+(20, '2019-04-01 13:12:20', 0, 21),
 (21, '2019-04-01 13:12:20', 0, 22);
 
 -- --------------------------------------------------------
@@ -225,11 +224,11 @@ INSERT INTO `donnees` (`id`, `Date_heure_reception`, `Valeur`, `id_actionneur_ca
 DROP TABLE IF EXISTS `element_catalogue`;
 CREATE TABLE IF NOT EXISTS `element_catalogue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Type` varchar(255) NOT NULL,
-  `Description` text NOT NULL,
-  `Photo` text NOT NULL,
+  `Type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Description` text COLLATE utf8_unicode_ci NOT NULL,
+  `Photo` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `element_catalogue`
@@ -257,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `heritage` (
   KEY `id_utilisateur_prim` (`id_utilisateur_prim`),
   KEY `id_utilisateur_sec` (`id_utilisateur_sec`),
   KEY `id_logement` (`id_logement`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `heritage`
@@ -276,12 +275,12 @@ INSERT INTO `heritage` (`id`, `id_utilisateur_prim`, `id_utilisateur_sec`, `id_l
 DROP TABLE IF EXISTS `logement`;
 CREATE TABLE IF NOT EXISTS `logement` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Adresse` varchar(255) NOT NULL,
+  `Adresse` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `Temperature_consigne` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `logement_ibfk_1` (`id_utilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `logement`
@@ -301,11 +300,11 @@ INSERT INTO `logement` (`id`, `Adresse`, `Temperature_consigne`, `id_utilisateur
 DROP TABLE IF EXISTS `piece`;
 CREATE TABLE IF NOT EXISTS `piece` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(255) NOT NULL,
+  `Nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `id_logement` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `piece_ibfk_1` (`id_logement`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `piece`
@@ -327,9 +326,9 @@ INSERT INTO `piece` (`id`, `Nom`, `id_logement`) VALUES
 DROP TABLE IF EXISTS `programmation`;
 CREATE TABLE IF NOT EXISTS `programmation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(255) NOT NULL,
+  `Nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `Instruction` int(11) NOT NULL,
-  `Type` varchar(255) NOT NULL,
+  `Type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `Moment d'activation` datetime NOT NULL,
   `Moment de desactivation` datetime NOT NULL,
   `id_logement` int(11) NOT NULL,
@@ -337,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `programmation` (
   PRIMARY KEY (`id`),
   KEY `programmation_ibfk_1` (`id_logement`),
   KEY `programmation_ibfk_2` (`id_piece`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -353,7 +352,7 @@ CREATE TABLE IF NOT EXISTS `programmation_capteur` (
   PRIMARY KEY (`id`),
   KEY `programmation_capteur_ibfk_1` (`id_capteur`),
   KEY `programmation_capteur_ibfk_2` (`id_programmation`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -369,7 +368,7 @@ CREATE TABLE IF NOT EXISTS `programmation_categorie` (
   PRIMARY KEY (`id`),
   KEY `id_categorie` (`id_categorie`),
   KEY `id_programmation` (`id_programmation`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -380,9 +379,9 @@ CREATE TABLE IF NOT EXISTS `programmation_categorie` (
 DROP TABLE IF EXISTS `type_utilisateur`;
 CREATE TABLE IF NOT EXISTS `type_utilisateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(255) NOT NULL,
+  `Nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `type_utilisateur`
@@ -401,19 +400,19 @@ INSERT INTO `type_utilisateur` (`id`, `Nom`) VALUES
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(255) NOT NULL,
-  `Prenom` varchar(255) NOT NULL,
-  `Adresse_mail` varchar(255) NOT NULL,
-  `numeroTel` varchar(14) NOT NULL,
+  `Nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Prenom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Adresse_mail` varchar(320) CHARACTER SET ascii NOT NULL,
+  `numeroTel` varchar(14) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Date_naissance` date NOT NULL,
-  `Mot_de_passe` varchar(255) NOT NULL,
+  `Mot_de_passe` varchar(1000) CHARACTER SET ascii NOT NULL,
   `Etat` tinyint(1) NOT NULL,
-  `Question_verif` varchar(255) NOT NULL,
-  `Reponse_verif` varchar(255) NOT NULL,
+  `Question_verif` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Reponse_verif` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_type_utilsateur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `utilisateur_ibfk_1` (`id_type_utilsateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
@@ -439,7 +438,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur_article` (
   PRIMARY KEY (`id`),
   KEY `utilisateur_article_ibfk_1` (`id_article`),
   KEY `utilisateur_article_ibfk_2` (`id_utilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -455,7 +454,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur_commentaire` (
   PRIMARY KEY (`id`),
   KEY `utilisateur_commentaire_ibfk_1` (`id_commentaire`),
   KEY `utilisateur_commentaire_ibfk_2` (`id_utilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Contraintes pour les tables déchargées

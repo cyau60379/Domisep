@@ -13,6 +13,7 @@ function recupererToutDans(PDO $bdd, string $table): array {
     return $bdd->query($query)->fetchAll();     //retourne un tableau contenant toutes les resultats de la requete
 }
 
+
 function recup2($prenom, $nom){
     return "$prenom!$nom";
 }
@@ -22,7 +23,7 @@ function recupererUtilisateur(PDO $bdd, $id): array {
 }
 
 function recupererUnAttributUnType(PDO $bdd, string $attribut, string $table, string $id, string $valeur): array {
-    $query = 'SELECT ' . $attribut . ' FROM ' . $table . ' WHERE ' . $id . '=' . $valeur;
+    $query = "SELECT $attribut FROM $table WHERE $id = $valeur";
     return $bdd->query($query)->fetchAll();     //retourne un tableau contenant toutes les resultats de la requete
 }
 

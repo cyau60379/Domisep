@@ -5,6 +5,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body onresize="changerContenu('nom')">
+
+<div id="divReponse">
+    Hello
+</div>
+
     <div class = 'bandeau'>
         <div style="display: inherit">
             <?php foreach($pagesPossibles as $key => $value):?>
@@ -20,10 +25,9 @@
         </div>
 
         <div>
-            <p id='nom' class='prenom <?php echo $utilisateur;?>'><?php echo $utilisateur;?></p>
-            <button class='bouton' style='height: 40px'>
+            <p id='nom' class='prenom <?php echo $utilisateur;?>'><?php echo $utilisateur2;?></p>
+            <button class='bouton' style='height: 40px' onclick="deconnexionUser()">
                 Déconnexion
-                <a href = '/index.php?cible=accueil&fonction=deconnexion'></a>
             </button>
         </div>
     </div>

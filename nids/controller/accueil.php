@@ -20,7 +20,8 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
     $tabIdNom = nomVersId($bdd,$nom);                //id des personnes ayant un debut de nom correspondant
     $reponse = false;                                   //reponse qui determinera l'action suivante
 
-    if(!is_bool($tabIdPrenom) && !is_bool($tabIdNom)){
+    if(!empty($tabIdPrenom) && !empty($tabIdNom)){
+        print_r($tabIdNom);
         if(in_array($id, $tabIdPrenom) && in_array($id, $tabIdNom)){        //si l'id appartient à une personne
             //$mdpRegistered = recupMdp($bdd, $id);                           //on recupere le mot de passe de la personne
            /* if(password_verify($mdp, $mdpRegistered)) {                     //on compare les deux
@@ -29,6 +30,31 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
            $reponse = true;
         }
     }
-    $utilisateur = decoupeString2(recupererUtilisateur($bdd,$id));
-    affichageReponse($reponse, $id, $utilisateur);
+    $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));
+    affichageReponse($reponse, $id, $utilisateur, "Connexion");
+}
+
+// ============================================================= inscription
+
+if(isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['mail']) && isset($_POST['naissance']) && isset($_POST['mdp'])){
+    $prenom = $_POST['prenom'];
+    $nom = $_POST['nom'];
+    $mail = $_POST['mail'];
+    $naissance = $_POST['naissance'];
+    $mdp = $_POST['mdp'];
+    $result1 = nomVersId($bdd, $nom);
+    $result2 = prenomVersId($bdd, $prenom);
+    $reponse = false;
+    $id = 0;
+    print_r($result1);
+    print_r($result2);
+
+    if(empty($result1) && empty($result2)){
+        $reponse = true;
+        ajouterInscription($bdd, $nom, $prenom, $mail, $naissance, $mdp);
+        $id =  recuperationDeId($bdd, $prenom, $nom);
+    }
+
+    $utilisateur = $prenom . "_". $nom;
+    affichageReponse($reponse, $id, $utilisateur, "Inscription");
 }

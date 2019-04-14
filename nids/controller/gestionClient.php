@@ -10,8 +10,8 @@ include ($_SERVER["DOCUMENT_ROOT"] . "/model/gestionClient.php");
 
 
 //id de l'utilisateur
-$id = 4;
-$utilisateur = decoupeString2(recupererUtilisateur($bdd,$id));
+/*$id = 4;
+$utilisateur = decoupeString2(recupererUtilisateur($bdd,$id));*/
 //creation du tableau des capteurs de la piece
 $clients = array();
 

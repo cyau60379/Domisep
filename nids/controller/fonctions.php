@@ -6,58 +6,44 @@
  * Time: 14:13
  */
 
-/**
- * @param $utilisateur
- */
-
-function selectionPage($utilisateur){
-    echo "    <div>
-        <button id='fa-home' class='choixPage Domotique' onmouseover='montrerTitre(this.id, this.classList[1]);' onmouseout='cacherTitre(this.id);'>
-            <i class='fa fa-home'></i>
-        </button>
-
-        <button id='fa-file-text-o' class='choixPage Profil' onmouseover='montrerTitre(this.id, this.classList[1]);' onmouseout='cacherTitre(this.id);'>
-            <i class='fa fa-file-text-o'></i>
-        </button>
-
-        <button id='fa-question' class='choixPage Support' onmouseover='montrerTitre(this.id, this.classList[1]);' onmouseout='cacherTitre(this.id);'>
-            <i class='fa fa-question'></i>
-        </button>
-    </div>
-
-    <div>
-        <p id='nom' class='prenom $utilisateur'>$utilisateur</p>
-        <button class='bouton' style='height: 40px'>
-            Déconnexion
-            <a href = '/index.php?cible=connexion&fonction=deconnexion'></a>
-        </button>
-    </div>";
-}
-
 
 /**
  * @param $reponse
  * @param $id
  * @param $utilisateur
+ * @param $type
  */
 
-function affichageReponse($reponse, $id, $utilisateur){
+function affichageReponse($reponse, $id, $utilisateur, $type){
     if($reponse){
         echo "<div class= 'case caseCapteur'> 
-                <h1>Connexion Réussie !</h1>
+                <h1>$type Réussie !</h1>
                 <form action='../index.php' method='post'>
                     <input type='hidden' name='cible' value='editionProfil'>
                     <input type='hidden' name='id' value= $id>
                     <input type='hidden' name='utilisateur' value= $utilisateur>
-                    <input type='submit' class='bouton boutonGlobal' style='float: none' value='OK'>
+                    <input type='submit' class='bouton boutonGlobal' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OK'>
                 </form>
             </div>";
     } else {
-        echo "<div class= 'caseCapteur'> 
-                <h1>Connexion Echouee !</h1>
-                <input type='button' value='OK' onclick='fermtureMessage()'>
+        echo "<div class= 'case caseCapteur'> 
+                <h1>$type Echouee !</h1>
+                <input type='button' class='bouton boutonGlobal' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>
             </div>";
     }
+}
+
+function affichageReponse2(){
+        echo "<div class= 'case caseCapteur'> 
+                <h1>Voulez-vous vous déconnecter ?</h1>
+                <form action='../index.php' method='post'>
+                    <input type='hidden' name='cible' value='accueil'>
+                    <input type='hidden' name='id' value= 0>
+                    <input type='hidden' name='utilisateur' value= ''>
+                    <input type='submit' class='bouton boutonGlobal' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OUI'>
+                    <input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>
+                </form>
+            </div>";
 }
 
 /**
@@ -81,6 +67,20 @@ function decoupeString2($list){
         $string = $result[0] ." ". $result[1];
     }
     return $string;
+}
+
+function decoupeString3($str){
+    $result = preg_split("/\s/", $str);
+    $string = $result[0] . "_" . $result[1];
+    return $string;
+}
+
+function decoupeString4($str){
+    if($str != ""){
+        $result = preg_split("/\_/", $str);
+        $string = $result[0] . " " . $result[1];
+        return $string;
+    }
 }
 
 function affichePieces($pieces, $logement){
