@@ -83,3 +83,19 @@ function recupMail(PDO $bdd, $id){
     $table = $bdd->query($query)->fetch();
     return $table['Adresse_mail'];  //renvoie le mail
 }
+
+function recuperationCoordonnees(PDO $bdd, $id){
+    $query = "SELECT * FROM utilisateur WHERE utilisateur.id = '$id'";
+    $table = $bdd->query($query)->fetchAll();
+    return $table[0];  //renvoie le mail
+}
+
+function updateUtilisateur(PDO $bdd, $id, $chgnt, $colonne){
+    try {
+        $query = "UPDATE utilisateur SET ". $colonne ."= '$chgnt' WHERE utilisateur.id = '$id'";
+        $bdd->exec($query);
+    }
+    catch(PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
+    }
+}

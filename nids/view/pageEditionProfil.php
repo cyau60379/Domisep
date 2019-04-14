@@ -9,22 +9,46 @@
 </head>
 <body>
 
+<div id="divReponse">
+    Hello
+</div>
+
 <div id="zoneClients">
     <li class='caseClient' id='divClients'>     <!-- Contient les options de modifications de profil -->
         <div class='titre titreSup'>Edition de profil</div>
         <div class="bloc">
-            <form class="formulaire" method="post" action="../controller/editionProfil.php">
+            <form class="formulaire" name="modification">
+                <input type='hidden' name='cible' value='editionProfil'>
+                <input type='hidden' name='id' value= "<?php echo $id ?>">
+                <input type='hidden' name='utilisateur' value= "<?php echo $utilisateur?>" >
                 <p> <label class="ed" for="nom">Nom:</label>
-                    <input class="edi" type="text" id="nom" name="user_nom" placeholder="Monteiro"></p>
+                    <input class="edi" type="text" id="nom" name="user_nom" placeholder="<?php echo $coord["Nom"]?>"></p>
+
                 <p> <label class="ed" for="prenom"> Prenom:</label>
-                    <input class="edi" type="text" id="prenom" name="user_prenom" placeholder="Romuald"></p>
-                <p> <label class="ed" for="phone"> N° de téléphone:</label>
-                    <input class="edi" type="tel" id="phone" name="user_phone" placeholder="0632"></p>
+                    <input class="edi" type="text" id="prenom" name="user_prenom" placeholder="<?php echo $coord["Prenom"]?>"></p>
+
                 <p> <label class="ed" for="mail"> E-mail:</label>
-                    <input class="edi" type="email" id="email" name="user_email" placeholder="contact@romuald"></p>
+                    <input class="edi" type="email" id="email" name="user_email" placeholder="<?php echo $coord["Adresse_mail"]?>"></p>
+
+                <p> <label class="ed" for="phone"> N° de téléphone:</label>
+                    <input class="edi" type="tel" id="phone" name="user_phone" placeholder="<?php echo $coord["numeroTel"]?>"></p>
+
+                <p> <label class="ed" for="birth"> Date de naissance:</label>
+                    <input class="edi" type="date" id="date" name="user_date" value="<?php echo $coord["Date_naissance"]?>"></p>
+
                 <p> <label class="ed" for="pass"> Mot de passe:</label>
-                    <input class="edi" type="password" id="pass" name="user_pass" placeholder="c'est secret"></p>
-                <input type="submit" class="bouton edi" value="Modifier les informations" />
+                    <input class="edi" type="password" id="pass" name="user_pass" placeholder="<?php echo $coord["Mot_de_passe"]?>"></p>
+
+                <p> <label class="ed" for="question"> Question vérification:</label>
+                    <input class="edi" type="text" id="question" name="user_question" placeholder="<?php echo $coord["Question_verif"]?>"></p>
+
+                <p> <label class="ed" for="reponse"> Réponse vérification:</label>
+                    <input class="edi" type="text" id="reponse" name="user_response" placeholder="<?php echo $coord["Reponse_verif"]?>"></p>
+
+                <p> <label class="ed" for="type"> Type:</label>
+                    <input class="edi" type="number" id="type" name="user_type" disabled placeholder="<?php echo $coord["id_type_utilsateur"]?>" min="1" max="2"></p>
+
+                <input type="button" onclick="modificationUser()" class="bouton edi" style="float: right" value="Modifier les informations" />
             </form>
         </div>
 

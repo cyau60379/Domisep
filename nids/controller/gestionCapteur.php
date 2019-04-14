@@ -14,6 +14,10 @@ include($_SERVER["DOCUMENT_ROOT"] . "/model/capteur.php");
 $utilisateur = decoupeString2(recupererUtilisateur($bdd,$id));*/
 //creation du tableau des capteurs de la piece
 $capteurs = array();
+if(!isset($_SESSION['idUtilisateur'])){
+    session_start();
+}
+$id = $_SESSION['idUtilisateur'];
 
 //id des logements du gestionnaire
 $logement = decoupeString(recupLogements($bdd, $id));

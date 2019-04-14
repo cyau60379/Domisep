@@ -6,7 +6,6 @@
 include_once("fonctions.php");
 include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesUtilisateur.php");
 
-//$id = 1;
 
 //============================================================== connexion
 
@@ -27,6 +26,7 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
                 $reponse = true;
             }*/
            $reponse = true;
+           session_start();
         }
     }
     $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));

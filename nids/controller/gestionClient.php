@@ -4,7 +4,7 @@
  */
 
 include_once("fonctions.php");
-include ($_SERVER["DOCUMENT_ROOT"] . "/model/gestionClient.php");
+include_once ($_SERVER["DOCUMENT_ROOT"] . "/model/gestionClient.php");
 
 //trouver un moyen de récuperer les données en enlevant les espaces (replace( "_", " ") en javascript / str_replace ( char1, char2, string) php)
 
@@ -14,7 +14,10 @@ include ($_SERVER["DOCUMENT_ROOT"] . "/model/gestionClient.php");
 $utilisateur = decoupeString2(recupererUtilisateur($bdd,$id));*/
 //creation du tableau des capteurs de la piece
 $clients = array();
-
+if(!isset($_SESSION['idUtilisateur'])){
+    session_start();
+}
+$id = $_SESSION['idUtilisateur'];
 //id des logements du gestionnaire
 $logement = decoupeString(recupLogements($bdd, $id));
 

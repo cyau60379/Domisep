@@ -14,6 +14,7 @@ ini_set('display_errors', 1);
 
 // Appel des fonctions du contrôleur
 include_once("controller/fonctions.php");
+session_start();
 /*
 // Appel des fonctions liées à l'affichage
 include("vues/fonctions.php");
@@ -30,10 +31,9 @@ if (isset($_POST['cible']) && !empty($_POST['cible'])) {
 $url2 = ucfirst($url);
 $utilisateur = "";
 $utilisateur2 = "";
-$id = 0;
 
 if(isset($_POST['id']) && isset($_POST['utilisateur'])){
-    $id = $_POST['id'];
+    $_SESSION['idUtilisateur'] = $_POST['id'];
     $utilisateur = $_POST['utilisateur'];
     $utilisateur2 = decoupeString4($utilisateur);
 }
