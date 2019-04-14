@@ -65,45 +65,19 @@
 
     </li>
 
-    <li class='caseClient' id='divClients'>     <!-- Contient les options de modifications de logement -->
+    <li class='caseClient' id='divClients' style="height: 250px">     <!-- Contient les options de modifications de logement -->
         <div class='titre titreSup'>Logement</div>
         <div class="container fil" id="filPieces">     <!-- Contient les boutons pour afficher les différents capteurs en fonction de la salle -->
-            <input type="button" class="boutonFil" value="appartement 1"> <!-- creation des boutons avec un ID identique au nom de la salle -->
-            <input type="button" class="boutonFil" value="appartement 2"> <!-- creation des boutons avec un ID identique au nom de la salle -->
-            <input type="button" class="boutonFil" value="appartement 3"> <!-- creation des boutons avec un ID identique au nom de la salle -->
+            <?php foreach($logement as $id => $p):?>
+                <input onclick="changerLogement3(this.id); return activerBouton(this.id);" type="button" id="<?php echo $id;?>" class="boutonFil" value="<?php echo $p;?>"> <!-- creation des boutons avec un ID identique au nom de la salle -->
+            <?php endforeach;?>
         </div>
         <div class="container gestionGlobale">
-            <div>
-                <table>
-                    <thead>                   <!-- En-tête du tableau -->
-                    <tr>
-                        <th>  </th>
-                        <th>Salle</th>
-                    </tr>
-                    </thead>
+            <div id="gestionPieces">
 
-                    <tbody>                 <!-- Corps du tableau -->
-                    <tr>
-                        <td><input class="imgInput" type="image" src="Images/times-circle-regular.svg" /></td>
-                        <td>Cuisine</td>
-                    </tr>
-                    <tr>
-                        <td><input class="imgInput" type="image" src="Images/times-circle-regular.svg" /></td>
-                        <td>Salon</td>
-                    </tr>
-                    <tr>
-                        <td><input class="imgInput" type="image" src="Images/times-circle-regular.svg" /></td>
-                        <td>Chambre</td>
-                    </tr>
-                    <tr>
-                        <td><input class="imgInput" type="image" src="Images/times-circle-regular.svg" /></td>
-                        <td>Salle de bain</td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
             <div>
-                <div class="titre"> Ajout d'une salle dans : [Appartement 2]
+                <div class="titre" style="color: black"> Ajout d'une salle dans : [Appartement 2]
                     <p>
                         <form method="post" action="../controller/editionProfil.php">
                             <div>

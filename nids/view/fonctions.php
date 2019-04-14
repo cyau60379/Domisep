@@ -450,17 +450,18 @@
                 document.getElementById("zoneClients").innerHTML = "<div class='caseClient' id='divClients'>" +
                                                                         "<div class='titre titreSup'>Clients</div>" +
                                                                     "</div>" +
-                                                                    "<div class='caseClient' id='divClients'>" +
+                                                                    "<div class='caseClient graphe' id='divClients'>" +
                                                                         "<div class='titre titreSup'>Graphes</div>" +
                                                                     "</div>";
                 document.getElementById("divClients").innerHTML += this.responseText;   //rempli la zoneCapteurs
+                document.getElementsByClassName("graphe")[0].innerHTML += "<img style='width: 550px; height: 400px' src='Images/graph.png' alt='graph'>"
             }
         };
         request.open("GET", "controller/gestionClient.php?logement=" + logementVoulu + "&id=" + id, true);
         request.send();                                                              //envoie le resultat de la requete au serveur
     }
 
-    //fonction qui permet d'afficher les pieces en fonction de l'appartement
+    //------------------------------fonction qui permet d'afficher les pieces en fonction de l'appartement
 
     function changerLogement2(id) {
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
@@ -471,6 +472,20 @@
             }
         };
         request.open("GET", "controller/gestionCapteur.php?logement=" + id, true);
+        request.send();                                                              //envoie le resultat de la requete au serveur
+    }
+
+    //------------------------------------fonction qui permet d'afficher les pieces en fonction de l'appartement dans l'editeur de profil
+
+    function changerLogement3(id) {
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                document.getElementById("gestionPieces").innerHTML = this.responseText;   //rempli filPieces
+            }
+        };
+        request.open("GET", "controller/editionProfil.php?logement=" + id, true);
         request.send();                                                              //envoie le resultat de la requete au serveur
     }
 </script>

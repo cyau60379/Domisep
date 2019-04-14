@@ -5,12 +5,16 @@
 
 include_once("fonctions.php");
 include_once($_SERVER["DOCUMENT_ROOT"]. "/model/requetesUtilisateur.php");
+include_once($_SERVER["DOCUMENT_ROOT"]. "/model/capteur.php");
 
 if(!isset($_SESSION['idUtilisateur'])){
     session_start();
 }
 $id = $_SESSION['idUtilisateur'];
 $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd, $id)));
+
+//id des logements du gestionnaire
+$logement = decoupeString(recupLogements($bdd, $id));
 
 $coord = recuperationCoordonnees($bdd, $id);
 
@@ -45,4 +49,18 @@ if(isset($_POST['user_question']) && !empty($_POST['user_question'])){
 if(isset($_POST['user_response']) && !empty($_POST['user_response'])){
     updateUtilisateur($bdd, $id, $_POST['user_response'], "Reponse_verif");
     affichageReponse(true, $id, $utilisateur, "Modifiction");
+}
+
+//============================================ logements a afficher
+
+if (isset($_GET['logement'])) {
+
+    $idLogementActif = $_GET['logement'];
+
+    //liste des pieces de la maison sous forme array { [0] => $id!$nom ... }
+    $listePieces = recuperationPieces($bdd, $idLogementActif);
+
+    //liste des pieces de la maison sous forme array { [$id] => $nom ... }
+    $pieces = decoupeString($listePieces);
+    affichePieces2($pieces, $idLogementActif, $id, $utilisateur);
 }

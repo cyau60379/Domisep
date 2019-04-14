@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 14 avr. 2019 à 11:51
+-- Généré le :  Dim 14 avr. 2019 à 22:10
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -235,10 +235,10 @@ CREATE TABLE IF NOT EXISTS `element_catalogue` (
 --
 
 INSERT INTO `element_catalogue` (`id`, `Type`, `Description`, `Photo`) VALUES
-(1, 'Température', '???', 'Temperature'),
-(2, 'Luminosité', '???', 'Luminosite'),
-(3, 'Mouvement', '???', 'Mouvement'),
-(4, 'Volet', '???', 'Volet');
+(1, 'Température', 'Ce capteur permet de mesurer la température dans la pièce dans laquelle il se situe', 'Temperature'),
+(2, 'Luminosité', 'Ce capteur mesure la luminosité de la pièce dans laquelle il se situe', 'Luminosite'),
+(3, 'Mouvement', 'Ce capteur détecte tout mouvement se situant entre 20 cm et 60 cm', 'Mouvement'),
+(4, 'Volet', 'Grâce aux actionneurs, les volets peuvent être descendus en un clic', 'Volet');
 
 -- --------------------------------------------------------
 
@@ -304,7 +304,7 @@ CREATE TABLE IF NOT EXISTS `piece` (
   `id_logement` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `piece_ibfk_1` (`id_logement`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `piece`
@@ -315,7 +315,14 @@ INSERT INTO `piece` (`id`, `Nom`, `id_logement`) VALUES
 (2, 'Cave de Julien', 1),
 (3, 'Buandrie', 1),
 (4, 'Cuisine', 1),
-(5, 'Salle de bain', 1);
+(5, 'Salle de bain', 1),
+(6, 'Salle de bain', 2),
+(7, 'Cuisine', 2),
+(8, 'Buandrie', 2),
+(9, 'Chambre à coucher', 2),
+(10, 'Salle de bain', 3),
+(11, 'Cuisine', 3),
+(12, 'Chambre à coucher', 3);
 
 -- --------------------------------------------------------
 
@@ -412,17 +419,21 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_type_utilsateur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `utilisateur_ibfk_1` (`id_type_utilsateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id`, `Nom`, `Prenom`, `Adresse_mail`, `numeroTel`, `Date_naissance`, `Mot_de_passe`, `Etat`, `Question_verif`, `Reponse_verif`, `id_type_utilsateur`) VALUES
-(1, 'MENVUSA', 'Gérard', 'gerard.menvusa@gmail.com', '06 66 77 88 99', '1990-01-01', '6r&4k1S3p', 1, 'Que voulez-vous manger ?', 'Des nouilles', 1),
+(1, 'MENVUSSA', 'Gérard', 'gerard.menvussa@gmail.com', '07 78 64 15 12', '1990-01-01', '6r43kIs3P', 1, 'Que voulez-vous ?', 'Manger une bûche', 1),
 (2, 'HIFFY', 'Eugène', 'eugene.hiffy@gmail.com', '07 87 26 12 12', '1998-01-31', 'M0l0lFait', 1, 'Que voulez-vous manger ?', 'Des patates', 1),
 (3, 'HIC', 'Bazil', 'bazil.hic@gmail.com', '07 54 64 12 14', '1987-07-05', 'Bi1Fr4is', 1, 'Que voulez-vous prendre ?', 'Un pari sur l\'avenir', 1),
-(4, 'TIME', 'Vic', 'vic.time@gmail.com', '06 78 45 40 17', '2000-07-09', 'TheB4nch33', 1, 'Que voulez-vous prendre ?', 'Ton argent', 2);
+(4, 'TIME', 'Vic', 'vic.time@gmail.com', '06 78 45 40 17', '2000-07-09', 'TheB4nch33', 1, 'Que voulez-vous prendre ?', 'Ton argent', 2),
+(6, 'BELLINI', 'Cédric', 'cedric', NULL, '1999-10-31', '$2y$10$Ho2/tUyu49ANNGBRninrOeKqWPyMk9i72Iw150wAnZAo4HyvqQPLu', 1, NULL, NULL, 1),
+(7, 'PARIZOT', 'Julien', 'julien.parizot@isep.fr', NULL, '1998-02-12', '$2y$10$YXOcjoUfBdHBCkT2MekdM.xofbVd.PVXiG5/puwLc2JELoydNT06W', 1, NULL, NULL, 1),
+(8, 'Corcaud', 'Bastien', 'bastien.corcaud@isep.fr', NULL, '1996-05-21', '$2y$10$JvdKq9M.vNDUEdYhKY7H6uU.4NxeyxtY/S9H5niEH/bE5ro/jXaai', 1, NULL, NULL, 1),
+(9, 'AUBOURG', 'Cyril', 'cyril.aubourg@isep.fr', NULL, '1998-01-08', '$2y$10$hmpy3J9OjpYSEpzijm.cC.vZ.fdX.aSNyVdZdMA.lxJoLPWAgsSTS', 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -461,36 +472,16 @@ CREATE TABLE IF NOT EXISTS `utilisateur_commentaire` (
 --
 
 --
--- Contraintes pour la table `cemac`
---
-ALTER TABLE `cemac`
-  ADD CONSTRAINT `cemac_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Contraintes pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
   ADD CONSTRAINT `commentaire_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `heritage`
---
-ALTER TABLE `heritage`
-  ADD CONSTRAINT `heritage_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `heritage_ibfk_2` FOREIGN KEY (`id_utilisateur_prim`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `heritage_ibfk_3` FOREIGN KEY (`id_utilisateur_sec`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Contraintes pour la table `logement`
 --
 ALTER TABLE `logement`
   ADD CONSTRAINT `logement_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `piece`
---
-ALTER TABLE `piece`
-  ADD CONSTRAINT `piece_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `utilisateur`

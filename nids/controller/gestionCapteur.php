@@ -42,7 +42,7 @@ switch($page){
 
 //include_once("view/".$vue .".php");
 
-//============================================ test des clients a afficher
+//============================================ logements a afficher
 
 if (isset($_GET['logement'])) {
 

@@ -116,6 +116,27 @@ echo "    <div id='gestionGlobale' class= 'container gestionGlobale'>
         </li>";
 }
 
+function affichePieces2($pieces, $logement, $id, $utilisateur){
+    echo "<table>
+                    <thead>                   <!-- En-tête du tableau -->
+                    <tr>
+                        <th>  </th>
+                        <th>Salle</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>                 <!-- Corps du tableau -->";
+    foreach($pieces as $identif => $p):
+        echo "<tr>
+                <td><input class='imgInput' type='image' src='Images/times-circle-regular.svg'/></td>
+                        <td>$p</td>
+                    </tr>";
+    endforeach;
+    echo "</table>";
+}
+
+
+
 function afficheDonnees($tab){
     if (sizeof($tab) < 5){
         return "null";

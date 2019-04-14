@@ -27,14 +27,14 @@
             </button>
         </form>
 
-        <form action="../index.php" method="post">
+       <!-- <form action="../index.php" method="post"> -->
           <!--  <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
             <input type='hidden' name='id' value='<?php echo $id;?>'>
             <input type='hidden' name='cible' value='catalogue'> -->
             <button id="fa-question" class="choixPage"> <!--type="submit"-->
                 <i class="fa fa-map-marker"></i> Forum
             </button>
-        </form>
+       <!-- </form> -->
 
     </div>
 </div>
