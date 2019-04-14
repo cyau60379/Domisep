@@ -18,12 +18,12 @@ if(isset($_POST['deconnexion'])){
             case 1:
                 $pagesPossibles["Domotique"] = array("gestionCapteur", "fa-home");
                 $pagesPossibles["Profil"] = array("editionProfil", "fa-file-text-o");
-                $pagesPossibles["Support"] = array("selectionSupport", "fa-question");
+                $pagesPossibles["Support"] = array("support", "fa-question");
                 break;
             case 2:
                 $pagesPossibles["Domotique"] = array("gestionClient", "fa-home");
                 $pagesPossibles["Profil"] = array("editionProfil", "fa-file-text-o");
-                $pagesPossibles["Support"] = array("selectionSupport", "fa-question");
+                $pagesPossibles["Support"] = array("support", "fa-question");
                 break;
             //mettre pour admin + sav
             default:
