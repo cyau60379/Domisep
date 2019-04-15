@@ -28,7 +28,9 @@ function affichageReponse($reponse, $id, $utilisateur, $type){
     } else {
         echo "<div class= 'case caseCapteur'> 
                 <h1>$type Echouee !</h1>
-                <input type='button' class='bouton boutonGlobal' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>
+                <div>
+                    <input type='button' class='bouton boutonGlobal' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>
+                </div>
             </div>";
     }
 }

@@ -24,7 +24,9 @@
     function alerter(message){
         document.getElementById(`divReponse`).innerHTML = "<div class= 'case caseCapteur'>"+
         "<h1>"+ message +"</h1>"+
-        "<input type='button' class='bouton boutonGlobal' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<div>"+
+                "<input type='button' class='bouton boutonGlobal' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</div>"+
             "</div>";
     }
 
