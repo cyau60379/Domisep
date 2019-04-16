@@ -437,7 +437,39 @@
         request.send();                                                                 //envoie le resultat de la requete
     }
 
-    //fonction qui permet d'afficher les capteurs en fonction de la piece demandée
+    // --------------------------------------------- fonction qui change les propriétés des capteurs
+
+
+    function modificationInformations(id){
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1>Voulez-vous réellement modifier les informations de cet élément ?</h1>" +
+            "<form>" +
+            "<input type='button' class='bouton boutonGlobal' onclick='actionModificationInfo(" + id + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+    actionModificationInfo(id){
+        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1>Informations</h1>" +
+            "<form name='modifInfo'>" +
+                " <label class=\"ed\" for=\"phone\"> Nom:</label>" +
+                "<input type='text' name='nom'>" +
+            " <label class=\"ed\" for=\"phone\"> Nom:</label>" +
+            "<input type='text' name='nom'>" +
+            " <label class=\"ed\" for=\"phone\"> Nom:</label>" +
+            "<input type='text' name='nom'>" +
+            "<input type='button' class='bouton boutonGlobal' onclick='actionModificationInfo(" + id + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+
+    // --------------------------------------------- fonction qui permet d'afficher les capteurs en fonction de la piece demandée
 
     function changerLogement(logementVoulu, id) {
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
