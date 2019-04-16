@@ -208,6 +208,10 @@ div.actionneur {
     border-color: black;
 }
 
+.bouton:focus {
+    outline-color: #3c3d51;
+}
+
 /*bouton pour commander tous les capteurs à la fois*/
 
 .boutonGlobal {
@@ -297,38 +301,267 @@ p.info {
     flex-direction: row;
     justify-content: space-between;
     margin-left: 350px;
+    background-color: #3C3D51;
+}
 
+
+/* Espacement entre les questions */
+.faq-section{
+    margin: 40px 0;
+}
+
+/* Masquer les checkbox et les paragraphes */
+.faq-section input,
+.faq-section p{
+    display: none;
 }
 
 
-
-#boite main {
-    background-color: #3C3D51;
+/* Si le checkbox est coché, montrer tous les paragraphes */
+.faq-section input[type=checkbox]:checked~p{
+    background-color: rgba(207,207,207,1);
+    display: block;
+    border: solid 1px #000000;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0;
+    color: black;
+    font-size: 1.5em;
+    /* Restaurer le texte entier */
+    text-overflow: clip;
+    white-space: normal;
+    overflow: visible;
 }
-.choixPage {
-    margin-left: 10px;
-    height: 44px;
-    border: solid 3px white;
-    background-color: #3C3D51;
+
+/* Style des label */
+.faq-section label{
+    font-size: 1.2em;
+    border-radius: 10px;
     cursor: pointer;
-    border-radius: 20px;
-    color: white;
-    font-size: 20px;
-}
-
-.choixPage:hover{
-    background-color: darkgrey;
-    color: #05083E;
-    border-color: #05083E;
+    background: #eee;
+    display: block;
+    position: relative;
+    padding: 7px 10px;
     font-weight: bold;
+    border: 1px solid #ddd;
+    border-left: 3px solid #888;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    transition: all .15s ease-out;
 }
 
-.choixPage:active{
-    background-color: blue;
+/* Éviter de sélectionner le texte en cliquant plusieurs fois */
+.faq-section label::selection{
+    background: none;
 }
 
-.choixPage:focus{
-    outline-color: #3c3d51;
+.faq-section label:hover{
+    background: #f5f5f5;
+}
+
+/* Style du label si le checkbox est coché */
+.faq-section input[type=checkbox]:checked~label{
+    border-color: #3C3D51;
+    box-shadow: 0 0 1px;
+}
+
+/* Flèche du label par défaut */
+.faq-section label::before{
+    content: '';
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    margin-top: -6px;
+    border: 6px solid transparent;
+    border-left-color: inherit;
+}
+
+/* Flèche du label sélectionné */
+.faq-section input[type=checkbox]:checked~label::before{
+    border: 6px solid transparent;
+    border-top-color: inherit;
+    margin-top: -3px;
+    right: 10px;
 }
 
 
+.bloc{
+    display: inline-block;
+    border-radius: 10px;
+    background-image: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(60,61,81,1) 100%);
+    width: 49%;
+}
+
+div.displayflex {        /*division pour la gestion globale*/
+    display: flex;
+    justify-content: space-around;
+}
+
+.container2 {                /*division de base*/
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    text-align: center;
+    font-size: 20px;
+    padding: 20px;
+}
+
+.listPersonne{
+    border: 1px solid black;
+    background-color: #FFFFFF;
+    color: black;
+    margin: 9px;
+    border-radius: 10px;
+}
+
+.list2{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+form.formulaire {
+    /* Uniquement centrer le formulaire sur la page */
+    margin: auto;
+    width: 95.5%;
+    height: 100%;
+    /* Encadré pour voir les limites du formulaire */
+    padding: 1em;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+label.ed {
+    /* Pour être sûrs que toutes les étiquettes ont même taille et sont correctement alignées */
+    display: inline-block;
+    width: 200px;
+    text-align: right;
+}
+
+input.edi, textarea.edit {
+    /* Pour s'assurer que tous les champs texte ont la même police.
+       Par défaut, les textarea ont une police monospace */
+    font: 1em sans-serif;
+
+    /* Pour que tous les champs texte aient la même dimension */
+    width: 300px;
+    box-sizing: border-box;
+
+    /* Pour harmoniser le look & feel des bordures des champs texte */
+    border: 1px solid #999;
+}
+
+input.edi:focus, textarea.edit:focus {
+    /* Pour souligner légèrement les éléments actifs */
+    border-color: #000;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+th{
+    background-color: #999999;
+    border: 1px solid black;
+    font-weight: normal;
+}
+
+td {
+    background-color: #CCCCCC;
+    border: 1px solid black;
+    color: black;
+}
+
+.imgInput {
+    width: 20px;
+    height: 20px;
+    border: none;
+}
+
+ul.client {
+    padding: 0;
+    width: 100%;
+    height: 200px;
+    overflow: auto;
+    display: inline-flex;
+}
+li.client {
+    width: 100%;
+}
+
+
+#divReponse {
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    z-index: -100;
+    display: none;
+    background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.case {
+    display: inline-grid;
+    position: fixed;
+    top: 25%;
+    left: 35.5%;
+    align-content: center;
+    margin: auto;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 10px;
+}
+
+input.ajouter{
+    background-color : black;
+    height: 25px;
+    width: 75px;
+    color : white;
+}
+
+.descriCapteur{
+    margin-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    color : white;
+}
+
+.prixElement{
+    margin-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.img{
+    width: 150px;
+    height: 150px;
+    border-color: black;
+    border-width: 10px;
+    border-style: inset;
+}
+caption{
+    color : white;
+    padding-top: 8px;
+    padding-bottom: 50px;
+    font-size: 55px;
+    margin: auto;
+    justify-content: center;
+}
+
+td.catalogue{
+    border : 1px solid white;
+    text-align: center;
+    padding: 10px 100px 10px 100px;
+    width: 100%;
+}
+td.nom {
+    width: 20%;
+}
+.head{
+    margin-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    font-weight: bolder;
+    width: 12px;
+}

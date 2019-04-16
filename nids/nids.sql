@@ -2,10 +2,10 @@
 -- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 04 avr. 2019 à 20:56
--- Version du serveur :  5.7.24
--- Version de PHP :  7.2.14
+-- Host: 127.0.0.1:3306
+-- Generation Time: Apr 16, 2019 at 12:45 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `nids`
+-- Database: `nids`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `actionneur_capteur`
+-- Table structure for table `actionneur_capteur`
 --
 
 DROP TABLE IF EXISTS `actionneur_capteur`;
@@ -49,32 +49,26 @@ CREATE TABLE IF NOT EXISTS `actionneur_capteur` (
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `actionneur_capteur`
+-- Dumping data for table `actionneur_capteur`
 --
 
 INSERT INTO `actionneur_capteur` (`id`, `nom`, `Etat`, `Actif`, `NumeroSerie`, `id_element_catalogue`, `id_CeMac`, `id_piece`, `id_utilisateur`, `id_categorie`) VALUES
-(6, 'Température', 1, 0, 656156155, 1, 1, 5, 1, 1),
-(7, 'Température', 1, 0, 656156156, 1, 1, 3, 1, 1),
-(8, 'Luminosité', 1, 0, 4913184, 2, 1, 1, 1, 1),
-(9, 'Luminosité', 1, 0, 4913185, 2, 1, 2, 1, 1),
-(10, 'Luminosité', 1, 0, 4913186, 2, 1, 3, 1, 1),
-(11, 'Luminosité', 1, 0, 4913187, 2, 1, 4, 1, 1),
-(12, 'Luminosité', 1, 0, 4913188, 2, 1, 5, 1, 1),
-(13, 'Mouvement', 1, 0, 723163652, 3, 1, 1, 1, 1),
-(14, 'Mouvement', 1, 0, 723163653, 3, 1, 4, 1, 1),
-(15, 'Mouvement 1', 1, 0, 723163654, 3, 1, 2, 1, 1),
-(16, 'Mouvement 2', 1, 0, 723163655, 3, 1, 2, 1, 1),
-(17, 'Mouvement 3', 1, 0, 723163656, 3, 1, 2, 1, 1),
-(18, 'Mouvement 4', 1, 0, 723163657, 3, 1, 2, 1, 1),
-(19, 'Mouvement 5', 1, 0, 723163658, 3, 1, 2, 1, 1),
-(20, 'Volet', 1, 0, 976786, 4, 1, 1, 1, 1),
-(21, 'Volet Nord', 1, 0, 976787, 4, 1, 4, 1, 1),
-(22, 'Volet Sud', 1, 0, 976788, 4, 1, 4, 1, 1);
+(6, 'Température', 1, 1, 656156155, 1, 1, 5, 1, 1),
+(7, 'Température', 1, 1, 656156156, 1, 1, 3, 1, 1),
+(8, 'Luminosité', 1, 1, 4913184, 2, 1, 1, 1, 1),
+(10, 'Luminosité', 1, 1, 4913186, 2, 1, 3, 1, 1),
+(11, 'Luminosité', 1, 1, 4913187, 2, 1, 4, 1, 1),
+(12, 'Luminosité', 1, 1, 4913188, 2, 1, 5, 1, 1),
+(13, 'Mouvement', 1, 1, 723163652, 3, 1, 1, 1, 1),
+(14, 'Mouvement', 1, 1, 723163653, 3, 1, 4, 1, 1),
+(20, 'Volet', 1, 1, 976786, 4, 1, 1, 1, 1),
+(21, 'Volet Nord', 1, 1, 976787, 4, 1, 4, 1, 1),
+(22, 'Volet Sud', 1, 1, 976788, 4, 1, 4, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `administratif`
+-- Table structure for table `administratif`
 --
 
 DROP TABLE IF EXISTS `administratif`;
@@ -88,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `administratif` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `article`
+-- Table structure for table `article`
 --
 
 DROP TABLE IF EXISTS `article`;
@@ -102,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `article` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `article_faq`
+-- Table structure for table `article_faq`
 --
 
 DROP TABLE IF EXISTS `article_faq`;
@@ -111,12 +105,25 @@ CREATE TABLE IF NOT EXISTS `article_faq` (
   `Titre` varchar(255) NOT NULL,
   `Contenu` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `article_faq`
+--
+
+INSERT INTO `article_faq` (`id`, `Titre`, `Contenu`) VALUES
+(1, 'Qu’est-ce qu’est la domotique ?', 'La domotique sans fil permet de superviser, d\'automatiser, de programmer et de coordonner le fonctionnement de vos lampes et/ou appareils électriques.'),
+(2, 'Quelles sont les technologies utilisées par la gamme de domotique sans fil NIDS ?', 'La gamme de domotique sans fil NIDS permettra la simplification de vos travaux d’innovation de votre domicile. Notre gamme utilise les connexions Wi-FI, Bluetooth, et cellulaires afin de vous permettre d’avoir un service le plus agréable et efficace possible.'),
+(3, 'Ces produits sont-ils compatibles avec mon équipement ?', 'Nos produits sont compatibles avec non seulement tout type d’aménagement de domicile : appartement ou maison, mais aussi avec n’importe quel appareil capable d’avoir accès à une page web.'),
+(4, 'Comment ajouter un nouveau capteur à mon équipement ?', 'Afin d’ajouter un nouveau capteur à votre équipement, il vous suffit de le lier avec votre compte client à l’aide de son numéro de série sur la page de gestion des capteurs accessible par la page de gestion de profil.'),
+(5, 'Comment fonctionne votre système ?', 'Les ordres données par vous-même à l’aide de votre page web gestion des capteurs se transmettent à partir de nos serveurs à l’aide la connexion internet de votre routeur qui diffuse ensuite en Wi-Fi, Bluetooth, or Ethernet.'),
+(6, 'Que faire si j’ai oublié mon mot de passe ?', 'Une fonctionnalité “Mot de passe oublié” est disponible sur le site, ce qui vous permet de réinitialiser votre mot de passe à partir d’un mail automatique envoyé à votre adresse e-mail liée à votre compte.'),
+(7, 'Que se passe-t-il si une personne non désirée est détectée par vos capteurs ?', 'Dans un premier temps, un boîtier est placé à l’entrée pour que vous puissiez rentrer facilement sans une longue procédure de vérification. En revanche, si le code entré n’est pas bon au bout de 30 secondes, un standardiste appelle votre maison par le fixe du domicile et demande un code de vérification. Si le code répondu est faux, ou si il n’y a pas de réponse, le client et la police sont immédiatement contactés.');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categorie`
+-- Table structure for table `categorie`
 --
 
 DROP TABLE IF EXISTS `categorie`;
@@ -127,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `categorie`
+-- Dumping data for table `categorie`
 --
 
 INSERT INTO `categorie` (`id`, `Nom`) VALUES
@@ -136,7 +143,7 @@ INSERT INTO `categorie` (`id`, `Nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `cemac`
+-- Table structure for table `cemac`
 --
 
 DROP TABLE IF EXISTS `cemac`;
@@ -150,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `cemac` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `cemac`
+-- Dumping data for table `cemac`
 --
 
 INSERT INTO `cemac` (`id`, `Nom`, `Etat`, `id_logement`) VALUES
@@ -159,7 +166,7 @@ INSERT INTO `cemac` (`id`, `Nom`, `Etat`, `id_logement`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `commentaire`
+-- Table structure for table `commentaire`
 --
 
 DROP TABLE IF EXISTS `commentaire`;
@@ -176,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `donnees`
+-- Table structure for table `donnees`
 --
 
 DROP TABLE IF EXISTS `donnees`;
@@ -190,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `donnees` (
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `donnees`
+-- Dumping data for table `donnees`
 --
 
 INSERT INTO `donnees` (`id`, `Date_heure_reception`, `Valeur`, `id_actionneur_capteur`) VALUES
@@ -212,14 +219,14 @@ INSERT INTO `donnees` (`id`, `Date_heure_reception`, `Valeur`, `id_actionneur_ca
 (16, '2019-04-01 13:12:20', 12, 17),
 (17, '2019-04-01 13:12:20', 15, 18),
 (18, '2019-04-01 13:12:20', 15, 19),
-(19, '2019-04-01 13:12:20', 10, 20),
-(20, '2019-04-01 13:12:20', 5, 21),
+(19, '2019-04-01 13:12:20', 0, 20),
+(20, '2019-04-01 13:12:20', 0, 21),
 (21, '2019-04-01 13:12:20', 0, 22);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `element_catalogue`
+-- Table structure for table `element_catalogue`
 --
 
 DROP TABLE IF EXISTS `element_catalogue`;
@@ -232,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `element_catalogue` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `element_catalogue`
+-- Dumping data for table `element_catalogue`
 --
 
 INSERT INTO `element_catalogue` (`id`, `Type`, `Description`, `Photo`) VALUES
@@ -244,7 +251,7 @@ INSERT INTO `element_catalogue` (`id`, `Type`, `Description`, `Photo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `heritage`
+-- Table structure for table `heritage`
 --
 
 DROP TABLE IF EXISTS `heritage`;
@@ -260,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `heritage` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `heritage`
+-- Dumping data for table `heritage`
 --
 
 INSERT INTO `heritage` (`id`, `id_utilisateur_prim`, `id_utilisateur_sec`, `id_logement`) VALUES
@@ -270,7 +277,7 @@ INSERT INTO `heritage` (`id`, `id_utilisateur_prim`, `id_utilisateur_sec`, `id_l
 -- --------------------------------------------------------
 
 --
--- Structure de la table `logement`
+-- Table structure for table `logement`
 --
 
 DROP TABLE IF EXISTS `logement`;
@@ -284,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `logement` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `logement`
+-- Dumping data for table `logement`
 --
 
 INSERT INTO `logement` (`id`, `Adresse`, `Temperature_consigne`, `id_utilisateur`) VALUES
@@ -295,7 +302,7 @@ INSERT INTO `logement` (`id`, `Adresse`, `Temperature_consigne`, `id_utilisateur
 -- --------------------------------------------------------
 
 --
--- Structure de la table `piece`
+-- Table structure for table `piece`
 --
 
 DROP TABLE IF EXISTS `piece`;
@@ -308,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `piece` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `piece`
+-- Dumping data for table `piece`
 --
 
 INSERT INTO `piece` (`id`, `Nom`, `id_logement`) VALUES
@@ -321,7 +328,7 @@ INSERT INTO `piece` (`id`, `Nom`, `id_logement`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `programmation`
+-- Table structure for table `programmation`
 --
 
 DROP TABLE IF EXISTS `programmation`;
@@ -342,7 +349,7 @@ CREATE TABLE IF NOT EXISTS `programmation` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `programmation_capteur`
+-- Table structure for table `programmation_capteur`
 --
 
 DROP TABLE IF EXISTS `programmation_capteur`;
@@ -358,7 +365,7 @@ CREATE TABLE IF NOT EXISTS `programmation_capteur` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `programmation_categorie`
+-- Table structure for table `programmation_categorie`
 --
 
 DROP TABLE IF EXISTS `programmation_categorie`;
@@ -374,7 +381,7 @@ CREATE TABLE IF NOT EXISTS `programmation_categorie` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `type_utilisateur`
+-- Table structure for table `type_utilisateur`
 --
 
 DROP TABLE IF EXISTS `type_utilisateur`;
@@ -385,7 +392,7 @@ CREATE TABLE IF NOT EXISTS `type_utilisateur` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `type_utilisateur`
+-- Dumping data for table `type_utilisateur`
 --
 
 INSERT INTO `type_utilisateur` (`id`, `Nom`) VALUES
@@ -395,7 +402,7 @@ INSERT INTO `type_utilisateur` (`id`, `Nom`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateur`
+-- Table structure for table `utilisateur`
 --
 
 DROP TABLE IF EXISTS `utilisateur`;
@@ -416,7 +423,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `utilisateur`
+-- Dumping data for table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id`, `Nom`, `Prenom`, `Adresse_mail`, `numeroTel`, `Date_naissance`, `Mot_de_passe`, `Etat`, `Question_verif`, `Reponse_verif`, `id_type_utilsateur`) VALUES
@@ -428,7 +435,7 @@ INSERT INTO `utilisateur` (`id`, `Nom`, `Prenom`, `Adresse_mail`, `numeroTel`, `
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateur_article`
+-- Table structure for table `utilisateur_article`
 --
 
 DROP TABLE IF EXISTS `utilisateur_article`;
@@ -444,7 +451,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur_article` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `utilisateur_commentaire`
+-- Table structure for table `utilisateur_commentaire`
 --
 
 DROP TABLE IF EXISTS `utilisateur_commentaire`;
@@ -458,56 +465,36 @@ CREATE TABLE IF NOT EXISTS `utilisateur_commentaire` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `cemac`
---
-ALTER TABLE `cemac`
-  ADD CONSTRAINT `cemac_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `commentaire`
+-- Constraints for table `commentaire`
 --
 ALTER TABLE `commentaire`
   ADD CONSTRAINT `commentaire_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `heritage`
---
-ALTER TABLE `heritage`
-  ADD CONSTRAINT `heritage_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `heritage_ibfk_2` FOREIGN KEY (`id_utilisateur_prim`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `heritage_ibfk_3` FOREIGN KEY (`id_utilisateur_sec`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `logement`
+-- Constraints for table `logement`
 --
 ALTER TABLE `logement`
   ADD CONSTRAINT `logement_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `piece`
---
-ALTER TABLE `piece`
-  ADD CONSTRAINT `piece_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `utilisateur`
+-- Constraints for table `utilisateur`
 --
 ALTER TABLE `utilisateur`
   ADD CONSTRAINT `utilisateur_ibfk_1` FOREIGN KEY (`id_type_utilsateur`) REFERENCES `type_utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `utilisateur_article`
+-- Constraints for table `utilisateur_article`
 --
 ALTER TABLE `utilisateur_article`
   ADD CONSTRAINT `utilisateur_article_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `utilisateur_article_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `utilisateur_commentaire`
+-- Constraints for table `utilisateur_commentaire`
 --
 ALTER TABLE `utilisateur_commentaire`
   ADD CONSTRAINT `utilisateur_commentaire_ibfk_1` FOREIGN KEY (`id_commentaire`) REFERENCES `commentaire` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,

@@ -3,17 +3,22 @@
  * Controleur des capteurs
  */
 
-include ("fonctions.php");
+include_once ("fonctions.php");
 include($_SERVER["DOCUMENT_ROOT"] . "/model/capteur.php");
 
 //trouver un moyen de récuperer les données en enlevant les espaces (replace( "_", " ") en javascript / str_replace ( char1, char2, string) php)
 
 
 //id de l'utilisateur
-$id = 1;
-$utilisateur = decoupeString2(recupererUtilisateur($bdd,$id));
+/*$id = 1;
+$utilisateur = decoupeString2(recupererUtilisateur($bdd,$id));*/
 //creation du tableau des capteurs de la piece
 $capteurs = array();
+if(!isset($_SESSION['idUtilisateur'])){
+    session_start();
+}
+$id = $_SESSION['idUtilisateur'];
+$utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));
 
 //id des logements du gestionnaire
 $logement = decoupeString(recupLogements($bdd, $id));
@@ -37,7 +42,7 @@ switch($page){
 
 //include_once("view/".$vue .".php");
 
-//============================================ test des clients a afficher
+//============================================ logements a afficher
 
 if (isset($_GET['logement'])) {
 
@@ -48,7 +53,7 @@ if (isset($_GET['logement'])) {
 
     //liste des pieces de la maison sous forme array { [$id] => $nom ... }
     $pieces = decoupeString($listePieces);
-    affichePieces($pieces, $idLogementActif);
+    affichePieces($pieces, $idLogementActif, $id, $utilisateur);
 }
 
 //============================================ test des capteurs a afficher

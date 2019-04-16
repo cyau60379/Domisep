@@ -11,25 +11,40 @@
 // Activation des erreurs
 ini_set('display_errors', 1);
 
-/*
+
 // Appel des fonctions du contrôleur
-include("controleurs/fonctions.php");
+include_once("controller/fonctions.php");
+session_start();
+/*
 // Appel des fonctions liées à l'affichage
 include("vues/fonctions.php");
 */
 
 // Identification du contrôleur à appeler
-if (isset($_GET['cible']) && !empty($_GET['cible'])) {
-    $url = $_GET['cible'];
+if (isset($_POST['cible']) && !empty($_POST['cible'])) {
+    $url = $_POST['cible'];
 
 } else {
-    //$url = 'utilisateurs';
-    $url = 'gestionCapteur';
+    $url = 'accueil';
+}
+
+$url2 = ucfirst($url);
+$utilisateur = "";
+$utilisateur2 = "";
+
+if(isset($_POST['id']) && isset($_POST['utilisateur'])){
+    $_SESSION['idUtilisateur'] = $_POST['id'];
+    $utilisateur = $_POST['utilisateur'];
+    $utilisateur2 = decoupeString4($utilisateur);
 }
 
 // Appel du contrôleur
-//include_once('view/fonctions.php');
+
 include('controller/'.$url.'.php');
 include('view/header.php');
-include('view/pageCatalogue.php');
+if($utilisateur != "") {
+    include('controller/selection.php');
+    include('view/selectionPage.php');
+}
+include("view/page$url2.php");
 include('view/footer.php');
