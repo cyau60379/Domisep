@@ -135,17 +135,17 @@
 
     function changerContenu(id){
         let str = document.getElementById(id).classList[1];
-        let str2 = document.getElementById(id).classList[2];
+        let str2 = str.split('_');
         if(window.innerWidth < 500){
             document.getElementById(id).innerHTML = "";
         } else if(window.innerWidth < 587){
             document.getElementById(id).style.fontSize = "12px";
-            document.getElementById(id).innerHTML = str.substr(0,1) + "." + str2;
+            document.getElementById(id).innerHTML = str2[0].substr(0,1) + "." + str2[1];
         }else if(window.innerWidth < 650){
-            document.getElementById(id).innerHTML = str.substr(0,1) + "." + str2;
+            document.getElementById(id).innerHTML = str2[0].substr(0,1) + "." + str2[1];
             document.getElementById(id).style.fontSize = "15px";
         } else {
-            document.getElementById(id).innerHTML = str + " " + str2;
+            document.getElementById(id).innerHTML = str2[0] + " " + str2[1];
             document.getElementById(id).style.fontSize = "15px";
         }
     }
