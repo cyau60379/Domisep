@@ -212,7 +212,9 @@ function afficheCapteur($cap){
                     <a href='javascript:supprimer($id)'>
                         <i class='fa fa-times-circle editionCapteur' style='color: red;' aria-hidden='true'></i>
                     </a>
-                    <i class='fa fa-cogs editionCapteur'></i>
+                    <a href='javascript:modificationInformations($c[0])'>
+                        <i class='fa fa-cogs editionCapteur' aria-hidden='true'></i>
+                    </a>
                 </div>
                 <img src='Images/$type[0].png' alt='$type[0]' class='imageCapteur'>
                 <a href='javascript:allumerEteindre($c[0], $taille)'>

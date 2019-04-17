@@ -4,7 +4,7 @@
  */
 
 include_once ("fonctions.php");
-include($_SERVER["DOCUMENT_ROOT"] . "/model/capteur.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/model/capteur.php");
 
 //trouver un moyen de récuperer les données en enlevant les espaces (replace( "_", " ") en javascript / str_replace ( char1, char2, string) php)
 
@@ -133,6 +133,26 @@ if (isset($_GET['idOuvrir'])) {
     $idMaison = $_GET['idOuvrir'];
     ouverture($bdd, $idMaison);
     afficheCapteur($capteurs);
+}
+
+//============================================ recuperation des coordonnées du capteur
+
+if (isset($_POST['idCapteur'])) {
+
+    $idCapteur = $_POST['idCapteur'];
+    $recup = recupInformationCapteur($bdd, $idCapteur);
+    echo $recup;
+
+}
+
+//============================================ recuperation des coordonnées du capteur
+
+if (isset($_POST['modifNom']) && isset($_POST['idDuCapteur'])) {
+
+    $id = $_POST['idDuCapteur'];
+    $nom = $_POST['modifNom'];
+    updateNom($bdd, $id, $nom);
+
 }
 
 ?>

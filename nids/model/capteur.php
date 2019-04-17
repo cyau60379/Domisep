@@ -170,4 +170,40 @@ function ouverture(PDO $bdd, $id) {
     catch(PDOException $e) {
         echo $query . "<br>" . $e->getMessage();
     }
+
+    function recupValeur4($a1, $a2, $a3, $a4) {
+        return "$a1!$a2!$a3!$a4";
+    }
+
+    /**
+     *  Récupérations des données en fonction de l'id du capteur
+     * @param PDO $bdd
+     * @param int $id
+     * @return array
+     */
+
+    function recupInformationCapteur(PDO $bdd, $id) {
+        $query = "SELECT actionneur_capteur.nom, id_piece, id_CeMac, id_categorie 
+                     FROM actionneur_capteur WHERE actionneur_capteur.id = '$id'";
+        $result = $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, 'recupValeur4');
+        return $result[0];
+    }
+
+    /**
+     *  met a jour de toutes les données dans la table actionneur_capteur
+     * @param PDO $bdd
+     * @param int $id
+     * @param string $nom
+     */
+
+    function updateNom(PDO $bdd, $id, $nom) {
+        try {
+            $query = "UPDATE actionneur_capteur SET actionneur_capteur.nom = '$nom' 
+                  WHERE actionneur_capteur.id ='$id'";
+            $bdd->exec($query);
+        }
+        catch(PDOException $e) {
+            echo $query . "<br>" . $e->getMessage();
+        }
+    }
 }
