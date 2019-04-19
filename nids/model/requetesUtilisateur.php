@@ -24,7 +24,7 @@ function ajouterInscription(PDO $bdd, $id, $valNom, $valPrenom, $valAdresse_mail
     try {
         $valMdp = password_hash($valMdp, PASSWORD_DEFAULT);
         $query = "INSERT INTO utilisateur (id, Nom, Prenom, Adresse_mail, Date_naissance, Mot_de_passe, Etat, id_type_utilsateur) 
-              VALUES ($id,'$valNom', '$valPrenom', '$valAdresse_mail', '$valDate', '$valMdp', '1', '1')"; //rajoute les données du nouvel utilisateur
+              VALUES ('$id', '$valNom', '$valPrenom', '$valAdresse_mail', '$valDate', '$valMdp', '1', '1')"; //rajoute les données du nouvel utilisateur
         $bdd->exec($query);
     } catch(PDOException $e) {
         echo $query . "<br>" . $e->getMessage();

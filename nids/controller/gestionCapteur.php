@@ -66,6 +66,7 @@ if (isset($_GET['piece']) && isset($_GET['id'])) {
     $noms = array();
     foreach ($capteurs as $key => $value){
         $tabValeurs = preg_split("/\!/", $value);
+        $tabValeurs[2] = recupTypeCap($bdd, $tabValeurs[2]);
         $capteurs[$key] = $tabValeurs;
     }
     afficheCapteur($capteurs);
@@ -141,17 +142,16 @@ if (isset($_POST['idCapteur'])) {
 
     $idCapteur = $_POST['idCapteur'];
     $recup = recupInformationCapteur($bdd, $idCapteur);
-    echo $recup;
 
 }
 
 //============================================ recuperation des coordonnées du capteur
 
-if (isset($_POST['modifNom']) && isset($_POST['idDuCapteur'])) {
+if (isset($_GET['modifNom']) && isset($_GET['idDuCapteur'])) {
 
-    $id = $_POST['idDuCapteur'];
-    $nom = $_POST['modifNom'];
-    updateNom($bdd, $id, $nom);
+    $idCap = $_GET['idDuCapteur'];
+    $name = $_GET['modifNom'];
+    updateNom($bdd, $idCap, $name);
 
 }
 
