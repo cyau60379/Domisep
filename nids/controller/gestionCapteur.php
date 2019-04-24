@@ -58,10 +58,10 @@ if (isset($_GET['logement'])) {
 
 //============================================ test des capteurs a afficher
 
-if (isset($_GET['piece']) && isset($_GET['id'])) {
+if (isset($_POST['piece']) && isset($_POST['id'])) {
 
-    $pieceActive = $_GET['piece'];
-    $idPieceActive = $_GET['id'];
+    $pieceActive = $_POST['piece'];
+    $idPieceActive = $_POST['id'];
     $capteurs = recuperationCapteurs($bdd, $idPieceActive);
     $noms = array();
     foreach ($capteurs as $key => $value){
@@ -74,64 +74,62 @@ if (isset($_GET['piece']) && isset($_GET['id'])) {
 
 //============================================ test des capteurs a supprimer
 
-if (isset($_GET['id'])){
-    supprimerCapteur($bdd, $_GET['id']);
+if (isset($_POST['id'])){
+    supprimerCapteur($bdd, $_POST['id']);
 }
 
 //============================================ test de la température a donner a la maison
 
-if (isset($_GET['temp'])) {
-
-    $temperature = $_GET['temp'];
+if (isset($_POST['temp'])) {
+    $temperature = $_POST['temp'];
     miseAJourTemp($bdd, $temperature, $id);
 }
 //============================================ test de l'activité des capteurs
 
-if (isset($_GET['allume']) && isset($_GET['idCap'])) {
-
-    $actif = $_GET['allume'];
-    $idCapt = $_GET['idCap'];
+if (isset($_POST['allume']) && isset($_POST['idCap'])) {
+    $actif = $_POST['allume'];
+    $idCapt = $_POST['idCap'];
     miseAJourActif($bdd, $actif, $idCapt);
 }
 //============================================ test de l'activité des capteurs
 
-if (isset($_GET['positionVolet']) && isset($_GET['idCap2'])) {
+if (isset($_POST['positionVolet']) && isset($_POST['idCap2'])) {
 
-    $volet = $_GET['positionVolet'];
-    $idCapt2 = $_GET['idCap2'];
+    $volet = $_POST['positionVolet'];
+    $idCapt2 = $_POST['idCap2'];
     miseAJourVolet($bdd, $volet, $idCapt2);
     afficheCapteur($capteurs);
 }
 //============================================ test de l'extinction totale
 
-if (isset($_GET['idEteindre'])) {
+if (isset($_POST['idEteindre'])) {
 
-    $idMaison = $_GET['idEteindre'];
+    $idMaison = $_POST['idEteindre'];
     extinction($bdd, $idMaison);
     afficheCapteur($capteurs);
 }
 //============================================ test de la fermeture totale
 
-if (isset($_GET['idFermer'])) {
+if (isset($_POST['idFermer'])) {
 
-    $idMaison = $_GET['idFermer'];
+    $idMaison = $_POST['idFermer'];
     fermeture($bdd, $idMaison);
     afficheCapteur($capteurs);
 }
 
 //============================================ test de l'allumage totale
 
-if (isset($_GET['idAllumer'])) {
+if (isset($_POST['idAllumer'])) {
 
-    $idMaison = $_GET['idAllumer'];
+    $idMaison = $_POST['idAllumer'];
     allumage($bdd, $idMaison);
     afficheCapteur($capteurs);
 }
 //============================================ test de l'ouverture totale
 
-if (isset($_GET['idOuvrir'])) {
+if (isset($_POST['idOuvrir'])) {
 
-    $idMaison = $_GET['idOuvrir'];
+    $idMaison = $_POST['idOuvrir'];
     ouverture($bdd, $idMaison);
     afficheCapteur($capteurs);
 }
@@ -139,10 +137,10 @@ if (isset($_GET['idOuvrir'])) {
 
 //============================================ recuperation des coordonnées du capteur
 
-if (isset($_GET['modifNom']) && isset($_GET['idDuCapteur'])) {
+if (isset($_POST['modifNom']) && isset($_POST['idDuCapteur'])) {
 
-    $idCap = $_GET['idDuCapteur'];
-    $name = $_GET['modifNom'];
+    $idCap = $_POST['idDuCapteur'];
+    $name = $_POST['modifNom'];
     updateNom($bdd, $idCap, $name);
 }
 

@@ -185,8 +185,9 @@
                 alerter(nom +' supprimé !');             // /!\ mettre condition si la base n'a pas ete mise a jour
             }
         };
-        request.open("GET", "controller/gestionCapteur.php?id=" + id2, true);
-        request.send();   //envoie le resultat de la requete
+        request.open("POST", "controller/gestionCapteur.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("id=" + id2);   //envoie le resultat de la requete
     }
 
     //-----------------changer la classe de l'icone + envoi requête à la base pour changer l'etat
@@ -225,8 +226,9 @@
                     }
                 }
             };
-            request.open("GET", "controller/gestionCapteur.php?allume=" + 0 + "&idCap=" + id, true);
-            request.send();                                                   //envoie le resultat de la requete par methode get
+            request.open("POST", "controller/gestionCapteur.php", true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send("allume=" + 0 + "&idCap=" + id);                                                   //envoie le resultat de la requete par methode get
         } else {
             let request = new XMLHttpRequest();
             request.onreadystatechange = function () {
@@ -242,8 +244,9 @@
                     }
                 }
             };
-            request.open("GET", "controller/gestionCapteur.php?allume=" + 1 + "&idCap=" + id, true);
-            request.send();                                                    //envoie le resultat de la requete par methode get
+            request.open("POST", "controller/gestionCapteur.php", true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send("allume=" + 1 + "&idCap=" + id);                                                    //envoie le resultat de la requete par methode get
         }
     }
 
@@ -276,19 +279,20 @@
     //----------------------------fonction qui permet d'afficher les capteurs en fonction de la piece demandée
 
     function changerPiece(pieceVoulue, id) {
-           let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
-           if (pieceVoulue === "") {
-               document.getElementById("zoneCapteurs").innerHTML = "";  //cas ou aucune piece n'est choisi mais un bouton existe
-               return;
-           }
-           request = new XMLHttpRequest();
-           request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
-               if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
-                   document.getElementById("zoneCapteurs").innerHTML = this.responseText;   //rempli la zoneCapteurs
-               }
-           };
-           request.open("GET", "controller/gestionCapteur.php?piece=" + pieceVoulue + "&id=" + id, true);
-           request.send();                                                              //envoie le resultat de la requete au serveur
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        if (pieceVoulue === "") {
+            document.getElementById("zoneCapteurs").innerHTML = "";  //cas ou aucune piece n'est choisi mais un bouton existe
+            return;
+        }
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                document.getElementById("zoneCapteurs").innerHTML = this.responseText;   //rempli la zoneCapteurs
+            }
+        };
+        request.open("POST", "controller/gestionCapteur.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("piece=" + pieceVoulue + "&id=" + id);                                                              //envoie le resultat de la requete au serveur
     }
 
     //-----------------------------fonction pour modifier la température de la maison
@@ -303,8 +307,9 @@
                 alerter("Le changement de température effectué a bien été pris en compte.");
             }
         };
-        request.open("GET", "controller/gestionCapteur.php?temp=" + temp, true);
-        request.send();                                                                 //envoie le resultat de la requete
+        request.open("POST", "controller/gestionCapteur.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("temp=" + temp);                                                                 //envoie le resultat de la requete
     }
 
     //-----------------------fonction pour monter / descendre le volet
@@ -327,8 +332,9 @@
                             alert('Volet monté !');
                         }
                     };
-                    request.open("GET", "controller/gestionCapteur.php?positionVolet=" + 10 + "&idCap2=" + id, true);
-                    request.send();                                                    //envoie le resultat de la requete par methode get
+                    request.open("POST", "controller/gestionCapteur.php", true);
+                    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    request.send("positionVolet=" + 10 + "&idCap2=" + id);                                                    //envoie le resultat de la requete par methode get
                 } else {
                     request.onreadystatechange = function() {
                         if (this.readyState === 4 && this.status === 200) {
@@ -343,8 +349,9 @@
                         }
                     };
                     etat += 1;
-                    request.open("GET", "controller/gestionCapteur.php?positionVolet=" + etat + "&idCap2=" + id, true);
-                    request.send();                                                    //envoie le resultat de la requete par methode get
+                    request.open("POST", "controller/gestionCapteur.php", true);
+                    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    request.send("positionVolet=" + etat + "&idCap2=" + id);                                                    //envoie le resultat de la requete par methode get
                 }
             } else {
                 let monter = prompt("Voulez-vous descendre complètement ce volet ? (y/n)");
@@ -361,8 +368,9 @@
                             alert('Volet descendu !');
                         }
                     };
-                    request.open("GET", "controller/gestionCapteur.php?positionVolet=" + 0 + "&idCap2=" + id, true);
-                    request.send();                                                    //envoie le resultat de la requete par methode get
+                    request.open("POST", "controller/gestionCapteur.php", true);
+                    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    request.send("positionVolet=" + 0 + "&idCap2=" + id);                                                    //envoie le resultat de la requete par methode get
                 } else {
                     request.onreadystatechange = function() {
                         if (this.readyState === 4 && this.status === 200) {
@@ -377,8 +385,9 @@
                         }
                     };
                     etat -= 1;
-                    request.open("GET", "controller/gestionCapteur.php?positionVolet=" + etat + "&idCap2=" + id, true);
-                    request.send();                                                    //envoie le resultat de la requete par methode get
+                    request.open("POST", "controller/gestionCapteur.php", true);
+                    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    request.send("positionVolet=" + etat + "&idCap2=" + id);                                                    //envoie le resultat de la requete par methode get
                 }
             }
         }
@@ -433,8 +442,9 @@
             }
         };
         id -= 100000;
-        request.open("GET", "controller/gestionCapteur.php?id" + action2 + "=" + id, true);
-        request.send();                                                                 //envoie le resultat de la requete
+        request.open("POST", "controller/gestionCapteur.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("id" + action2 + "=" + id);                                                                 //envoie le resultat de la requete
     }
 
     // --------------------------------------------- fonction qui change les propriétés des capteurs (à continuer)
@@ -466,9 +476,9 @@
 
     function finalModification(id) {
         let nom = document.forms["modifInfo"].elements["nomCapteur"].value;
-        let request2;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
-        request2 = new XMLHttpRequest();
-        request2.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
             if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
                 alerter('La modification a bien été prise en compte');
                 document.getElementById("zoneCapteurs").innerHTML = '<p class="info">Veuillez choisir une pièce</p>';
@@ -480,8 +490,9 @@
                 }
             }
         };
-        request2.open("GET", "controller/gestionCapteur.php?modifNom=" + nom + "&idDuCapteur=" + id, true);
-        request2.send();
+        request.open("POST", "controller/gestionCapteur.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("modifNom=" + nom + "&idDuCapteur=" + id);
     }
 
 
