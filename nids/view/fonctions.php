@@ -453,23 +453,11 @@
     }
 
     function actionModificationInfo(id){
-       /* let request = new XMLHttpRequest();
-        let values = "";
-        request.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                values = this.responseText;
-            }
-        };
-        request.open("POST", "controller/gestionCapteur.php", true);
-        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("idCapteur=" + id);
-
-        let tabValues = values.split("!");*/
         document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'>" +
             "<h1>Informations</h1>" +
             "<form name='modifInfo'>" +
-                " <label class=\"ed\"> Nom :</label>" +
-                "<input type='text' name='nomCapteur'>" +
+                " <label class='ed' style='text-align: center; font-size: 15px; width: 50px;'> Nom :</label>" +
+                "<input type='text' name='nomCapteur' style='width: 90%'>" +
             "<input type='button' class='bouton boutonGlobal' onclick='finalModification(" + id + ")' style='float: none' value='OUI'>"+
             "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
@@ -484,6 +472,12 @@
             if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
                 alerter('La modification a bien été prise en compte');
                 document.getElementById("zoneCapteurs").innerHTML = '<p class="info">Veuillez choisir une pièce</p>';
+                let len = document.getElementsByClassName("boutonFil").length;
+                for(let i = 0; i < len; i++){
+                    if(document.getElementsByClassName("boutonFil")[i].classList.contains("activer")){
+                        document.getElementsByClassName("boutonFil")[i].classList.remove("activer");
+                    }
+                }
             }
         };
         request2.open("GET", "controller/gestionCapteur.php?modifNom=" + nom + "&idDuCapteur=" + id, true);

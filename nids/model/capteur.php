@@ -189,8 +189,8 @@ function recupValeur4($a1, $a2, $a3, $a4) {
  */
 
 function recupInformationCapteur(PDO $bdd, $id) {
-    $query = "SELECT actionneur_capteur.nom, id_piece, id_CeMac, id_categorie 
-                   FROM actionneur_capteur WHERE actionneur_capteur.id = '$id'";
+    $query = "SELECT `actionneur_capteur`.`nom`, `id_piece`, `id_CeMac`, `id_categorie` 
+                   FROM `actionneur_capteur` WHERE `actionneur_capteur`.`id` = '$id'";
     $result = $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, 'recupValeur4');
     return $result[0];
 }

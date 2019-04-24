@@ -136,14 +136,6 @@ if (isset($_GET['idOuvrir'])) {
     afficheCapteur($capteurs);
 }
 
-//============================================ recuperation des coordonnées du capteur
-
-if (isset($_POST['idCapteur'])) {
-
-    $idCapteur = $_POST['idCapteur'];
-    $recup = recupInformationCapteur($bdd, $idCapteur);
-
-}
 
 //============================================ recuperation des coordonnées du capteur
 
@@ -152,7 +144,6 @@ if (isset($_GET['modifNom']) && isset($_GET['idDuCapteur'])) {
     $idCap = $_GET['idDuCapteur'];
     $name = $_GET['modifNom'];
     updateNom($bdd, $idCap, $name);
-
 }
 
 ?>
