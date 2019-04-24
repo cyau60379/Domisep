@@ -1,13 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 4.8.4
--- https://www.phpmyadmin.net/
---
--- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 14 avr. 2019 à 22:10
--- Version du serveur :  5.7.24
--- Version de PHP :  7.2.14
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+﻿SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -111,6 +102,20 @@ CREATE TABLE IF NOT EXISTS `article_faq` (
   `Contenu` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `article_faq`
+--
+
+INSERT INTO `article_faq` (`id`, `Titre`, `Contenu`) VALUES
+(1, 'Qu’est-ce qu’est la domotique ?', 'La domotique sans fil permet de superviser, d\'automatiser, de programmer et de coordonner le fonctionnement de vos lampes et/ou appareils électriques.'),
+(2, 'Quelles sont les technologies utilisées par la gamme de domotique sans fil NIDS ?', 'La gamme de domotique sans fil NIDS permettra la simplification de vos travaux d’innovation de votre domicile. Notre gamme utilise les connexions Wi-FI, Bluetooth, et cellulaires afin de vous permettre d’avoir un service le plus agréable et efficace possible.'),
+(3, 'Ces produits sont-ils compatibles avec mon équipement ?', 'Nos produits sont compatibles avec non seulement tout type d’aménagement de domicile : appartement ou maison, mais aussi avec n’importe quel appareil capable d’avoir accès à une page web.'),
+(4, 'Comment ajouter un nouveau capteur à mon équipement ?', 'Afin d’ajouter un nouveau capteur à votre équipement, il vous suffit de le lier avec votre compte client à l’aide de son numéro de série sur la page de gestion des capteurs accessible par la page de gestion de profil.'),
+(5, 'Comment fonctionne votre système ?', 'Les ordres données par vous-même à l’aide de votre page web gestion des capteurs se transmettent à partir de nos serveurs à l’aide la connexion internet de votre routeur qui diffuse ensuite en Wi-Fi, Bluetooth, or Ethernet.'),
+(6, 'Que faire si j’ai oublié mon mot de passe ?', 'Une fonctionnalité “Mot de passe oublié” est disponible sur le site, ce qui vous permet de réinitialiser votre mot de passe à partir d’un mail automatique envoyé à votre adresse e-mail liée à votre compte.'),
+(7, 'Que se passe-t-il si une personne non désirée est détectée par vos capteurs ?', 'Dans un premier temps, un boîtier est placé à l’entrée pour que vous puissiez rentrer facilement sans une longue procédure de vérification. En revanche, si le code entré n’est pas bon au bout de 30 secondes, un standardiste appelle votre maison par le fixe du domicile et demande un code de vérification. Si le code répondu est faux, ou si il n’y a pas de réponse, le client et la police sont immédiatement contactés.');
+
 
 -- --------------------------------------------------------
 
