@@ -360,6 +360,83 @@
     }
 
 
+    // ------------------------------------- fonction pour ajouter un capteur dans la maison
+
+    function ajouterCapteur(id, idUt){
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1>Voulez-vous réellement ajouter cet élément ?</h1>" +
+            "<form>" +
+            "<input type='button' class='bouton boutonGlobal' onclick='actionAjouterCapteur(" + id + "," + idUt +")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+    function actionAjouterCapteur(id, idUt){
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function(){
+          if(this.readyState === 4 && this.status === 200) {
+              let values = this.responseText;
+              let tabValues = values.split('_');
+              let options = "";
+              for(let i = 0; i < tabValues.length - 1; i++){
+                  let tabVal2 = tabValues[i].split("!");
+                  options += "<option value= "+ tabVal2[0] + ">" + tabVal2[1] + " (" + tabVal2[2] + ")</option>"
+              }
+              document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur' style='height: 300px'>" +
+                  "<h1>Informations</h1>" +
+                  "<form name='ajoutCap'>" +
+
+                  "<label class='ed' style='text-align: center; font-size: 15px; width: 100%'> Nom :</label>" +
+                  "<input type='text' name='nomCap' style='width: 90%'>" +
+
+                  "<label class='ed' style='text-align: center; font-size: 15px; width: 100%'> Numéro de série :</label>" +
+                  "<input type='number' name='numSerie' style='width: 90%'>" +
+
+                  "<label class='ed' style='text-align: center; font-size: 15px; width: 100%'> Piece :</label>" +
+                  "<select name='piece'>" +
+                  options +
+                  "</select>" +
+                  "<label class='ed' style='text-align: center; font-size: 15px; width: 100%'> Id CeMAC :</label>" +
+                  "<input type='number' name='CeMAC' style='width: 90%'>" +
+
+                  "<label class='ed' style='text-align: center; font-size: 15px; width: 100%'> Id Categorie :</label>" +
+                  "<input type='number' name='Cat' style='width: 90%'>" +
+
+                  "<input type='button' class='bouton boutonGlobal' onclick='finalAjouterCapteur(" + id + "," + idUt +")' style='float: none' value='OUI'>"+
+                  "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+                  "</form>"+
+                  "</div>";
+          }
+        };
+        request.open("POST", "controller/catalogue.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("idUtil=" + idUt);
+    }
+
+    function finalAjouterCapteur(id, idUt) {
+        let nom = document.forms["ajoutCap"].elements["nomCap"].value;
+        let numSerie = document.forms["ajoutCap"].elements["numSerie"].value;
+        let piece = document.forms["ajoutCap"].elements["piece"].value;
+        let cemac = document.forms["ajoutCap"].elements["CeMAC"].value;
+        let cat = document.forms["ajoutCap"].elements["Cat"].value;
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                alerter("L'ajout a bien été prise en compte");
+            }
+        };
+        alert("idUtilisateur=" + idUt +"&idCap=" + id + "&nom=" + nom + "&numSerie=" + numSerie
+            + "&piece=" + piece + "&cemac=" + cemac + "&cat=" + cat);
+        request.open("POST", "controller/catalogue.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("idUtilisateur=" + idUt +"&idCap=" + id + "&nom=" + nom + "&numSerie=" + numSerie
+            + "&piece=" + piece + "&cemac=" + cemac + "&cat=" + cat);
+    }
+
     // ------------------------------------- fonction pour tout changer dans la maison
 
     function changer(id, action, numAction){

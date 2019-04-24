@@ -20,13 +20,13 @@ h1.nomSite {
 
 /*changement du style en fonction de la taille de fenêtre*/
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 500px) {
     h1.nomSite {                /*changement du container*/
         font-size: 2.5vw;
     }
 }
 
-@media screen and (max-width: 355px) {
+@media screen and (max-width: 380px) {
     h1.nomSite {                /*changement du container*/
         font-size: 2vw;
     }

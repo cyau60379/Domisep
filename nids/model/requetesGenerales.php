@@ -13,10 +13,14 @@ function recupererToutDans(PDO $bdd, string $table): array {
     return $bdd->query($query)->fetchAll();     //retourne un tableau contenant toutes les resultats de la requete
 }
 
-
 function recup2($prenom, $nom){
     return "$prenom!$nom";
 }
+
+function recup3($a1, $a2, $a3){
+    return "$a1!$a2!$a3";
+}
+
 function recupererUtilisateur(PDO $bdd, $id): array {
     $query = ' SELECT utilisateur.prenom, utilisateur.nom  FROM utilisateur WHERE utilisateur.id='. $id;
     return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, "recup2");     //retourne un tableau contenant toutes les resultats de la requete

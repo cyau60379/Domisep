@@ -555,6 +555,7 @@ td.catalogue{
     text-align: center;
     padding: 10px 100px 10px 100px;
     width: 100%;
+    background-color: #979ACC;
 }
 td.nom {
     width: 20%;

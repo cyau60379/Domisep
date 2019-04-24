@@ -28,15 +28,14 @@
             <?php echo $value[0]?>
         </td>
         <td class='catalogue nom'>
-            <img class='img' src="Images\<?php echo $value[0]?>.png" alt="<?php echo $value[0]?>">
+            <img class='img' src="Images\<?php echo $value[0];?>.png" alt="<?php echo $value[0];?>">
         </td>
         <td class='catalogue' class = 'descriCapteur'>
-            <?php echo $value[1]?>
+            <?php echo $value[1];?>
         </td>
         <td class='catalogue prixElement'>
-            <input class="ajouter" type="button" id = "ajoutCapteur" value=" AJOUTER" onclick="AJOUTER" />
+            <input class="bouton boutonGlobal <?php echo $id;?>" type="button" id ="<?php echo $key;?>" value="Ajouter" onclick="ajouterCapteur(this.id, this.classList[2])" />
         </td>
-
     </tr>
     <?php endforeach;?>
     </tbody>
