@@ -429,8 +429,6 @@
                 alerter("L'ajout a bien été prise en compte");
             }
         };
-        alert("idUtilisateur=" + idUt +"&idCap=" + id + "&nom=" + nom + "&numSerie=" + numSerie
-            + "&piece=" + piece + "&cemac=" + cemac + "&cat=" + cat);
         request.open("POST", "controller/catalogue.php", true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send("idUtilisateur=" + idUt +"&idCap=" + id + "&nom=" + nom + "&numSerie=" + numSerie
