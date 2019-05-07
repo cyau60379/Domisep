@@ -32,13 +32,9 @@
                 <div class="boxBouton boxConnexion1">
                     <input type="button" class="button" onclick="return connexionUser()" value="Se connecter">
                 </div>
-
-                <div class="boxBouton boxConnexion1">
-                    <a href="../index.php?cible=connexion&fonction=captainMarcel" class="boxOubli boxConnexion1">Mot de passe oublié ?</a>
-                </div>
             </form>
 
-
+            <a href="../index.php?cible=connexion&fonction=captainMarcel" class="boxOubli boxConnexion1">Mot de passe oublié ?</a>
 
     </div>
 
