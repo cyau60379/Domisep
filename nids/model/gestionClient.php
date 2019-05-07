@@ -1,5 +1,5 @@
 <?php
-include ("requetesGenerales.php");
+include_once("requetesGenerales.php");
 
 function recup5($id, $prenom, $nom, $tel, $mail){
     return "$id!$prenom!$nom!$tel!$mail";

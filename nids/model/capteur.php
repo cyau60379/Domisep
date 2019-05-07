@@ -5,7 +5,7 @@
  * Date: 19/03/2019
  * Time: 21:49
  */
-include ($_SERVER["DOCUMENT_ROOT"] . "/model/requetesGenerales.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesGenerales.php");
 
 //suppression des capteurs non desirés
 
@@ -48,8 +48,14 @@ function recuperationCapteurs (PDO $bdd, $p) {      //prend la bdd et l'id de la
     return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC,"recupValeurCapteur");     //retourne un tableau contenant toutes les resultats de la requete
 }
 
+function recupTypeCap(PDO $bdd, $id){
+    $query = "SELECT element_catalogue.Type FROM element_catalogue WHERE element_catalogue.id = '$id'";
+    $tab = $bdd->query($query)->fetch();
+    return $tab['Type'];
+}
+
 /**
- * met a jour un élément dans une table
+ * met a jour la température dans la table logement
  * @param PDO $bdd
  * @param int $temp
  * @param int $id
@@ -65,7 +71,7 @@ function miseAJourTemp(PDO $bdd, $temp, $id) {
 }
 
 /**
- * Insère un nouvel élément dans une table
+ * met a jour l'activité dans la table actionneur_capteur
  * @param PDO $bdd
  * @param int $actif
  * @param int $id
@@ -81,7 +87,7 @@ function miseAJourActif(PDO $bdd, $actif, $id) {
 }
 
 /**
- * Insère un nouvel élément dans une table
+ * met a jour des donnees dans la table donnees
  * @param PDO $bdd
  * @param int $actif
  * @param int $id
@@ -99,14 +105,16 @@ function miseAJourVolet(PDO $bdd, $actif, $id) {
     }
 }
 /**
- * Insère un nouvel élément dans une table
+ *  met a jour de toutes les données dans la table actionneur_capteur
  * @param PDO $bdd
  * @param int $id
  */
 
 function extinction(PDO $bdd, $id) {
     try {
-        $query = 'UPDATE actionneur_capteur SET Actif = 0 WHERE actionneur_capteur.id_piece IN (SELECT piece.id FROM piece JOIN logement ON piece.id_logement =' . $id .")";
+        $query = 'UPDATE actionneur_capteur SET Actif = 0 
+                  WHERE actionneur_capteur.id_piece 
+                          IN (SELECT piece.id FROM piece JOIN logement ON piece.id_logement =' . $id .")";
         $bdd->exec($query);
     }
     catch(PDOException $e) {
@@ -114,7 +122,7 @@ function extinction(PDO $bdd, $id) {
     }
 }
 /**
- * Insère un nouvel élément dans une table
+ *  met a jour de toutes les donnees dans la table donnees
  * @param PDO $bdd
  * @param int $id
  */
@@ -129,6 +137,76 @@ function fermeture(PDO $bdd, $id) {
         $bdd->exec($query);
     }
     catch(PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
+    }
+}
+
+/**
+ *  met a jour de toutes les données dans la table actionneur_capteur
+ * @param PDO $bdd
+ * @param int $id
+ */
+
+function allumage(PDO $bdd, $id) {
+    try {
+        $query = 'UPDATE actionneur_capteur SET Actif = 1 
+                  WHERE actionneur_capteur.id_piece 
+                          IN (SELECT piece.id FROM piece JOIN logement ON piece.id_logement =' . $id .")";
+        $bdd->exec($query);
+    }
+    catch(PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
+    }
+}
+/**
+ *  met a jour de toutes les donnees dans la table donnees
+ * @param PDO $bdd
+ * @param int $id
+ */
+
+function ouverture(PDO $bdd, $id) {
+    try {
+        $query = 'UPDATE donnees SET Valeur = 10 
+                  WHERE donnees.id_actionneur_capteur IN 
+                      (SELECT actionneur_capteur.id FROM actionneur_capteur 
+                      JOIN piece ON actionneur_capteur.id_piece = piece.id 
+                      WHERE piece.id_logement=' . $id . " AND actionneur_capteur.id_element_catalogue = 4)";
+        $bdd->exec($query);
+    } catch (PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
+    }
+}
+
+function recupValeur4($a1, $a2, $a3, $a4) {
+    return "$a1!$a2!$a3!$a4";
+}
+
+/**
+ *  Récupérations des données en fonction de l'id du capteur
+ * @param PDO $bdd
+ * @param int $id
+ * @return array
+ */
+
+function recupInformationCapteur(PDO $bdd, $id) {
+    $query = "SELECT `actionneur_capteur`.`nom`, `id_piece`, `id_CeMac`, `id_categorie` 
+                   FROM `actionneur_capteur` WHERE `actionneur_capteur`.`id` = '$id'";
+    $result = $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, 'recupValeur4');
+    return $result[0];
+}
+
+/**
+ *  met a jour de toutes les données dans la table actionneur_capteur
+ * @param PDO $bdd
+ * @param int $identity
+ * @param string $name
+ */
+
+function updateNom(PDO $bdd, $identity, $name) {
+    try {
+        $query = "UPDATE `actionneur_capteur` SET `nom`= '$name' WHERE `actionneur_capteur`.`id`= '$identity'";
+        $bdd->exec($query);
+    } catch (PDOException $e) {
         echo $query . "<br>" . $e->getMessage();
     }
 }

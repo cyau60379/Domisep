@@ -6,7 +6,7 @@
  * Time: 21:28
  */
 
-include($_SERVER["DOCUMENT_ROOT"] . "/model/connexionBDD.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/model/connexionBDD.php");
 
 function recupererToutDans(PDO $bdd, string $table): array {
     $query = 'SELECT * FROM ' . $table;
@@ -16,13 +16,18 @@ function recupererToutDans(PDO $bdd, string $table): array {
 function recup2($prenom, $nom){
     return "$prenom!$nom";
 }
+
+function recup3($a1, $a2, $a3){
+    return "$a1!$a2!$a3";
+}
+
 function recupererUtilisateur(PDO $bdd, $id): array {
     $query = ' SELECT utilisateur.prenom, utilisateur.nom  FROM utilisateur WHERE utilisateur.id='. $id;
     return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, "recup2");     //retourne un tableau contenant toutes les resultats de la requete
 }
 
 function recupererUnAttributUnType(PDO $bdd, string $attribut, string $table, string $id, string $valeur): array {
-    $query = 'SELECT ' . $attribut . ' FROM ' . $table . ' WHERE ' . $id . '=' . $valeur;
+    $query = "SELECT $attribut FROM $table WHERE $id = $valeur";
     return $bdd->query($query)->fetchAll();     //retourne un tableau contenant toutes les resultats de la requete
 }
 
