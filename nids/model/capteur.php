@@ -48,6 +48,12 @@ function recuperationCapteurs (PDO $bdd, $p) {      //prend la bdd et l'id de la
     return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC,"recupValeurCapteur");     //retourne un tableau contenant toutes les resultats de la requete
 }
 
+function recupTypeCap(PDO $bdd, $id){
+    $query = "SELECT element_catalogue.Type FROM element_catalogue WHERE element_catalogue.id = '$id'";
+    $tab = $bdd->query($query)->fetch();
+    return $tab['Type'];
+}
+
 /**
  * met a jour la température dans la table logement
  * @param PDO $bdd
@@ -164,10 +170,43 @@ function ouverture(PDO $bdd, $id) {
                   WHERE donnees.id_actionneur_capteur IN 
                       (SELECT actionneur_capteur.id FROM actionneur_capteur 
                       JOIN piece ON actionneur_capteur.id_piece = piece.id 
-                      WHERE piece.id_logement=' . $id ." AND actionneur_capteur.id_element_catalogue = 4)";
+                      WHERE piece.id_logement=' . $id . " AND actionneur_capteur.id_element_catalogue = 4)";
         $bdd->exec($query);
+    } catch (PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
     }
-    catch(PDOException $e) {
+}
+
+function recupValeur4($a1, $a2, $a3, $a4) {
+    return "$a1!$a2!$a3!$a4";
+}
+
+/**
+ *  Récupérations des données en fonction de l'id du capteur
+ * @param PDO $bdd
+ * @param int $id
+ * @return array
+ */
+
+function recupInformationCapteur(PDO $bdd, $id) {
+    $query = "SELECT `actionneur_capteur`.`nom`, `id_piece`, `id_CeMac`, `id_categorie` 
+                   FROM `actionneur_capteur` WHERE `actionneur_capteur`.`id` = '$id'";
+    $result = $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, 'recupValeur4');
+    return $result[0];
+}
+
+/**
+ *  met a jour de toutes les données dans la table actionneur_capteur
+ * @param PDO $bdd
+ * @param int $identity
+ * @param string $name
+ */
+
+function updateNom(PDO $bdd, $identity, $name) {
+    try {
+        $query = "UPDATE `actionneur_capteur` SET `nom`= '$name' WHERE `actionneur_capteur`.`id`= '$identity'";
+        $bdd->exec($query);
+    } catch (PDOException $e) {
         echo $query . "<br>" . $e->getMessage();
     }
 }

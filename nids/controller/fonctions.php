@@ -79,14 +79,6 @@ function decoupeString3($str){
     }
 }
 
-function decoupeString4($str){
-    if($str != ""){
-        $result = preg_split("/\_/", $str);
-        $string = $result[0] . " " . $result[1];
-        return $string;
-    }
-}
-
 function affichePieces($pieces, $logement, $id, $utilisateur){
     $logement += 100000;
 echo "    <div id='gestionGlobale' class= 'container gestionGlobale'>
@@ -147,17 +139,17 @@ function afficheDonnees($tab){
     } else {
         $type = $tab[2];
         switch ($type){
-            case 1:
+            case 'Température':
                 return ("<div class='actionneur imageCapteur'>
                             <p>$tab[3] °C </p>
                             </div>");
                 break;
-            case 2:
+            case 'Luminosité':
                 return ("<div class='actionneur imageCapteur'>
                             <p>$tab[3] lux</p>
                             </div>");
                 break;
-            case 3:
+            case 'Mouvement':
                 if($tab[3] == 0){
                     return ("<div class='actionneur imageCapteur'>
                             <p>Aucun mouvement</p>
@@ -168,7 +160,7 @@ function afficheDonnees($tab){
                             </div>");
                 }
                 break;
-            case 4:
+            case 'Volet':
                 if($tab[3] == 0){
                     return (" 
                             <div class='actionneur imageCapteur'>
@@ -212,9 +204,11 @@ function afficheCapteur($cap){
                     <a href='javascript:supprimer($id)'>
                         <i class='fa fa-times-circle editionCapteur' style='color: red;' aria-hidden='true'></i>
                     </a>
-                    <i class='fa fa-cogs editionCapteur'></i>
+                    <a href='javascript:modificationInformations($c[0])'>
+                        <i class='fa fa-cogs editionCapteur' aria-hidden='true'></i>
+                    </a>
                 </div>
-                <img src='Images/$type[0].png' alt='$type[0]' class='imageCapteur'>
+                <img src='Images/$c[2].png' alt='$c[2]' class='imageCapteur'>
                 <a href='javascript:allumerEteindre($c[0], $taille)'>
                     <i class='fa fa-power-off editionCapteur $c[1] $actif' id='$c[0]'></i>
                 </a>

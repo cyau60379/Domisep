@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
+
+
     <meta name="viewport" content="width=device-width,initial-scale=1" charset="UTF-8">
     <title>Catalogue</title>
     <link rel="shortcut icon" href="Images/logoNids.ico" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" media="screen " href="design/style.css" type="text/css" />
     <?php include_once ("fonctions.php");      //inclut les fonctions concernant les capteurs
     ?>
+
 </head>
 <body>
 
@@ -28,15 +34,14 @@
             <?php echo $value[0]?>
         </td>
         <td class='catalogue nom'>
-            <img class='img' src="Images\<?php echo $value[0]?>.png" alt="<?php echo $value[0]?>">
+            <img class='img' src="Images\<?php echo $value[0];?>.png" alt="<?php echo $value[0];?>">
         </td>
-        <td class='catalogue' class = 'descriCapteur'>
-            <?php echo $value[1]?>
+        <td class='catalogue descriCapteur'>
+            <?php echo $value[1];?>
         </td>
         <td class='catalogue prixElement'>
-            <input class="ajouter" type="button" id = "ajoutCapteur" value=" AJOUTER" onclick="AJOUTER" />
+            <input class="bouton boutonGlobal <?php echo $id;?>" type="button" id ="<?php echo $key;?>" value="Ajouter" onclick="ajouterCapteur(this.id, this.classList[2])" />
         </td>
-
     </tr>
     <?php endforeach;?>
     </tbody>

@@ -21,10 +21,10 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
 
     if(!empty($tabIdPrenom) && !empty($tabIdNom)){
         if(in_array($id, $tabIdPrenom) && in_array($id, $tabIdNom)){        //si l'id appartient à une personne
-            //$mdpRegistered = recupMdp($bdd, $id);                           //on recupere le mot de passe de la personne
-           /* if(password_verify($mdp, $mdpRegistered)) {                     //on compare les deux
+            $mdpRegistered = recupMdp($bdd, $id);                           //on recupere le mot de passe de la personne
+           if(password_verify($mdp, $mdpRegistered)) {                     //on compare les deux
                 $reponse = true;
-            }*/
+            }
            $reponse = true;
            session_start();
         }
