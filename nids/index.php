@@ -30,7 +30,6 @@ if (isset($_POST['cible']) && !empty($_POST['cible'])) {
 
 $url2 = ucfirst($url);
 $utilisateur = "";
-$utilisateur2 = "";
 
 if(isset($_POST['id']) && isset($_POST['utilisateur'])){
     $_SESSION['idUtilisateur'] = $_POST['id'];
