@@ -1,4 +1,13 @@
-﻿SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+-- phpMyAdmin SQL Dump
+-- version 4.8.4
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  mar. 07 mai 2019 à 11:17
+-- Version du serveur :  5.7.24
+-- Version de PHP :  7.2.14
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -37,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `actionneur_capteur` (
   KEY `id_CeMac` (`id_CeMac`),
   KEY `id_element_catalogue` (`id_element_catalogue`),
   KEY `id_piece` (`id_piece`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `actionneur_capteur`
@@ -59,7 +68,8 @@ INSERT INTO `actionneur_capteur` (`id`, `nom`, `Etat`, `Actif`, `NumeroSerie`, `
 (19, 'Mouvement 5', 1, 0, 723163658, 3, 1, 2, 1, 1),
 (20, 'Volet', 1, 0, 976786, 4, 1, 1, 1, 1),
 (21, 'Volet Nord', 1, 0, 976787, 4, 1, 4, 1, 1),
-(22, 'Volet Sud', 1, 0, 976788, 4, 1, 4, 1, 1);
+(22, 'Volet Sud', 1, 0, 976788, 4, 1, 4, 1, 1),
+(23, 'Super Connard', 1, 0, 515615, 3, 1, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -84,10 +94,10 @@ CREATE TABLE IF NOT EXISTS `administratif` (
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE IF NOT EXISTS `article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Titre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `Contenu` text COLLATE utf8_unicode_ci NOT NULL,
+  `Titre` varchar(255) NOT NULL,
+  `Contenu` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -101,10 +111,10 @@ CREATE TABLE IF NOT EXISTS `article_faq` (
   `Titre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `Contenu` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `article_faq`
+-- Déchargement des données de la table `article_faq`
 --
 
 INSERT INTO `article_faq` (`id`, `Titre`, `Contenu`) VALUES
@@ -115,7 +125,6 @@ INSERT INTO `article_faq` (`id`, `Titre`, `Contenu`) VALUES
 (5, 'Comment fonctionne votre système ?', 'Les ordres données par vous-même à l’aide de votre page web gestion des capteurs se transmettent à partir de nos serveurs à l’aide la connexion internet de votre routeur qui diffuse ensuite en Wi-Fi, Bluetooth, or Ethernet.'),
 (6, 'Que faire si j’ai oublié mon mot de passe ?', 'Une fonctionnalité “Mot de passe oublié” est disponible sur le site, ce qui vous permet de réinitialiser votre mot de passe à partir d’un mail automatique envoyé à votre adresse e-mail liée à votre compte.'),
 (7, 'Que se passe-t-il si une personne non désirée est détectée par vos capteurs ?', 'Dans un premier temps, un boîtier est placé à l’entrée pour que vous puissiez rentrer facilement sans une longue procédure de vérification. En revanche, si le code entré n’est pas bon au bout de 30 secondes, un standardiste appelle votre maison par le fixe du domicile et demande un code de vérification. Si le code répondu est faux, ou si il n’y a pas de réponse, le client et la police sont immédiatement contactés.');
-
 
 -- --------------------------------------------------------
 
@@ -170,12 +179,12 @@ DROP TABLE IF EXISTS `commentaire`;
 CREATE TABLE IF NOT EXISTS `commentaire` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Date_publication` datetime NOT NULL,
-  `Contenu` text COLLATE utf8_unicode_ci NOT NULL,
+  `Contenu` text NOT NULL,
   `Note` int(11) NOT NULL,
   `id_article` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_article` (`id_article`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -186,12 +195,12 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
 DROP TABLE IF EXISTS `donnees`;
 CREATE TABLE IF NOT EXISTS `donnees` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Date_heure_reception` datetime NOT NULL,
+  `Date_heure_reception` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `Valeur` int(11) NOT NULL,
   `id_actionneur_capteur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `donnees_ibfk_1` (`id_actionneur_capteur`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `donnees`
@@ -218,7 +227,8 @@ INSERT INTO `donnees` (`id`, `Date_heure_reception`, `Valeur`, `id_actionneur_ca
 (18, '2019-04-01 13:12:20', 15, 19),
 (19, '2019-04-01 13:12:20', 0, 20),
 (20, '2019-04-01 13:12:20', 0, 21),
-(21, '2019-04-01 13:12:20', 0, 22);
+(21, '2019-04-01 13:12:20', 0, 22),
+(22, '2019-05-06 10:43:45', 0, 23);
 
 -- --------------------------------------------------------
 
@@ -280,12 +290,12 @@ INSERT INTO `heritage` (`id`, `id_utilisateur_prim`, `id_utilisateur_sec`, `id_l
 DROP TABLE IF EXISTS `logement`;
 CREATE TABLE IF NOT EXISTS `logement` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Adresse` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Adresse` varchar(255) NOT NULL,
   `Temperature_consigne` int(11) NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `logement_ibfk_1` (`id_utilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `logement`
@@ -391,9 +401,9 @@ CREATE TABLE IF NOT EXISTS `programmation_categorie` (
 DROP TABLE IF EXISTS `type_utilisateur`;
 CREATE TABLE IF NOT EXISTS `type_utilisateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Nom` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `type_utilisateur`
@@ -412,33 +422,30 @@ INSERT INTO `type_utilisateur` (`id`, `Nom`) VALUES
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `Prenom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `Adresse_mail` varchar(320) CHARACTER SET ascii NOT NULL,
-  `numeroTel` varchar(14) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Nom` varchar(255) NOT NULL,
+  `Prenom` varchar(255) NOT NULL,
+  `Adresse_mail` varchar(255) NOT NULL,
+  `numeroTel` varchar(14) DEFAULT NULL,
   `Date_naissance` date NOT NULL,
-  `Mot_de_passe` varchar(1000) CHARACTER SET ascii NOT NULL,
+  `Mot_de_passe` varchar(255) NOT NULL,
   `Etat` tinyint(1) NOT NULL,
-  `Question_verif` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Reponse_verif` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Question_verif` varchar(255) DEFAULT NULL,
+  `Reponse_verif` varchar(255) DEFAULT NULL,
   `id_type_utilsateur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `utilisateur_ibfk_1` (`id_type_utilsateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id`, `Nom`, `Prenom`, `Adresse_mail`, `numeroTel`, `Date_naissance`, `Mot_de_passe`, `Etat`, `Question_verif`, `Reponse_verif`, `id_type_utilsateur`) VALUES
-(1, 'MENVUSSA', 'Gérard', 'gerard.menvussa@gmail.com', '07 78 64 15 12', '1990-01-01', '6r43kIs3P', 1, 'Que voulez-vous ?', 'Manger une bûche', 1),
+(1, 'MENVUSA', 'Gérard', 'gerard.menvusa@gmail.com', '06 66 77 88 99', '1990-01-01', '6r&4k1S3p', 1, 'Que voulez-vous manger ?', 'Des nouilles', 1),
 (2, 'HIFFY', 'Eugène', 'eugene.hiffy@gmail.com', '07 87 26 12 12', '1998-01-31', 'M0l0lFait', 1, 'Que voulez-vous manger ?', 'Des patates', 1),
 (3, 'HIC', 'Bazil', 'bazil.hic@gmail.com', '07 54 64 12 14', '1987-07-05', 'Bi1Fr4is', 1, 'Que voulez-vous prendre ?', 'Un pari sur l\'avenir', 1),
-(4, 'TIME', 'Vic', 'vic.time@gmail.com', '06 78 45 40 17', '2000-07-09', 'TheB4nch33', 1, 'Que voulez-vous prendre ?', 'Ton argent', 2),
-(6, 'BELLINI', 'Cédric', 'cedric', NULL, '1999-10-31', '$2y$10$Ho2/tUyu49ANNGBRninrOeKqWPyMk9i72Iw150wAnZAo4HyvqQPLu', 1, NULL, NULL, 1),
-(7, 'PARIZOT', 'Julien', 'julien.parizot@isep.fr', NULL, '1998-02-12', '$2y$10$YXOcjoUfBdHBCkT2MekdM.xofbVd.PVXiG5/puwLc2JELoydNT06W', 1, NULL, NULL, 1),
-(8, 'Corcaud', 'Bastien', 'bastien.corcaud@isep.fr', NULL, '1996-05-21', '$2y$10$JvdKq9M.vNDUEdYhKY7H6uU.4NxeyxtY/S9H5niEH/bE5ro/jXaai', 1, NULL, NULL, 1),
-(9, 'AUBOURG', 'Cyril', 'cyril.aubourg@isep.fr', NULL, '1998-01-08', '$2y$10$hmpy3J9OjpYSEpzijm.cC.vZ.fdX.aSNyVdZdMA.lxJoLPWAgsSTS', 1, NULL, NULL, 1);
+(4, 'Time', 'Vincent', 'vic.time@gmail.com', '06 78 45 40 17', '2000-07-09', 'TheB4nch33', 1, 'Que voulez-vous prendre ?', 'Ton argent', 2),
+(5, 'parizot', 'julien', 'julien@parizot.org', NULL, '1998-02-21', '$2y$10$CvFonXCnNKgT6RvOJ912MOO2aCXdjeGvBJAB.1aAj2ks.xB1wP/NG', 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -454,7 +461,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur_article` (
   PRIMARY KEY (`id`),
   KEY `utilisateur_article_ibfk_1` (`id_article`),
   KEY `utilisateur_article_ibfk_2` (`id_utilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -470,7 +477,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur_commentaire` (
   PRIMARY KEY (`id`),
   KEY `utilisateur_commentaire_ibfk_1` (`id_commentaire`),
   KEY `utilisateur_commentaire_ibfk_2` (`id_utilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contraintes pour les tables déchargées
