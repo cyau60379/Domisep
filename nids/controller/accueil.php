@@ -25,7 +25,6 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
            if(password_verify($mdp, $mdpRegistered)) {                     //on compare les deux
                 $reponse = true;
             }
-           $reponse = true;
            session_start();
         }
     }

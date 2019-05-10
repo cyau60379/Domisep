@@ -39,7 +39,7 @@ if(isset($_POST['user_date']) && !empty($_POST['user_date'])){
     affichageReponse(true, $id, $utilisateur, "Modifiction");
 }
 if(isset($_POST['user_pass']) && !empty($_POST['user_pass'])){
-    updateUtilisateur($bdd, $id, $_POST['user_pass'], "Mot_de_passe");
+    updateMdp($bdd, $id, $_POST['user_pass'], "Mot_de_passe");
     affichageReponse(true, $id, $utilisateur, "Modifiction");
 }
 if(isset($_POST['user_question']) && !empty($_POST['user_question'])){

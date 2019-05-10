@@ -99,3 +99,14 @@ function updateUtilisateur(PDO $bdd, $id, $chgnt, $colonne){
         echo $query . "<br>" . $e->getMessage();
     }
 }
+
+function updateMdp(PDO $bdd, $id, $chgnt, $colonne){
+    try {
+        $valMdp = password_hash($chgnt, PASSWORD_DEFAULT);
+        $query = "UPDATE utilisateur SET ". $colonne ."= '$valMdp' WHERE utilisateur.id = '$id'";
+        $bdd->exec($query);
+    }
+    catch(PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
+    }
+}
