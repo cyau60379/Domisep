@@ -72,19 +72,21 @@ function decoupeString2($list){
 }
 
 function decoupeString3($str){
+    $string = "";
     if($str != "") {
         $result = preg_split("/\s/", $str);
         $string = $result[0] . "_" . $result[1];
-        return $string;
     }
+    return $string;
 }
 
 function decoupeString4($str){
+    $string = "";
     if($str != ""){
         $result = preg_split("/\_/", $str);
         $string = $result[0] . " " . $result[1];
-        return $string;
     }
+    return $string;
 }
 
 function affichePieces($pieces, $logement, $id, $utilisateur){

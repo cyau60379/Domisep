@@ -46,5 +46,5 @@ if($utilisateur != "") {
     include('controller/selection.php');
     include('view/selectionPage.php');
 }
-include("view/page$url2.php");
+include('view/page'.$url2.'.php');
 include('view/footer.php');
