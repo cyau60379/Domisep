@@ -14,7 +14,7 @@
 <body>
 
 <div id="divReponse">
-        Hello
+        Hello world
 </div>
 
 <div id="boxCentre" class="boxCentre">
