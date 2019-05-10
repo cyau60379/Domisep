@@ -79,14 +79,6 @@ function decoupeString3($str){
     }
 }
 
-function decoupeString4($str){
-    if($str != ""){
-        $result = preg_split("/\_/", $str);
-        $string = $result[0] . " " . $result[1];
-        return $string;
-    }
-}
-
 function affichePieces($pieces, $logement, $id, $utilisateur){
     $logement += 100000;
 echo "    <div id='gestionGlobale' class= 'container gestionGlobale'>

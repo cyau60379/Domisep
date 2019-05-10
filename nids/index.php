@@ -30,12 +30,10 @@ if (isset($_POST['cible']) && !empty($_POST['cible'])) {
 
 $url2 = ucfirst($url);
 $utilisateur = "";
-$utilisateur2 = "";
 
 if(isset($_POST['id']) && isset($_POST['utilisateur'])){
     $_SESSION['idUtilisateur'] = $_POST['id'];
     $utilisateur = $_POST['utilisateur'];
-    $utilisateur2 = decoupeString4($utilisateur);
 }
 
 // Appel du contrôleur
@@ -46,5 +44,5 @@ if($utilisateur != "") {
     include('controller/selection.php');
     include('view/selectionPage.php');
 }
-include("view/page$url2.php");
+include('view/page'.$url2.'.php');
 include('view/footer.php');
