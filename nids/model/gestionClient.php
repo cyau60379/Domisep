@@ -12,3 +12,33 @@ function recuperationClients (PDO $bdd, $id) {
               WHERE heritage.id_logement = ' . $id;
     return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, "recup5");     //retourne un tableau contenant toutes les resultats de la requete
 }
+
+//suppression des clients non desirés
+
+function supprimerClient(PDO $bdd, $id){
+    try {
+        $query = 'DELETE FROM heritage WHERE id_utilisateur_sec ='.$id;
+        $bdd->exec($query);
+    }
+    catch(PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
+    }
+}
+
+function recupClient(PDO $bdd, $id){
+    $query = "SELECT prenom, nom FROM utilisateur WHERE id = '$id'";
+    return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, "recup2");
+}
+
+//suppression des clients non desirés
+
+function associationClient(PDO $bdd, $id, $idGest, $idLog){
+    $query = "";
+    try {
+        $query = "INSERT INTO `heritage`(`id_utilisateur_prim`, `id_utilisateur_sec`, `id_logement`) VALUES ('$idGest', '$id', '$idLog')";
+        $bdd->exec($query);
+    }
+    catch(PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
+    }
+}

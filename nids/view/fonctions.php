@@ -537,7 +537,7 @@
 
     // --------------------------------------------- fonction qui permet d'afficher les capteurs en fonction de la piece demandée
 
-    function changerLogement(logementVoulu, id) {
+    function changerLogement(logementVoulu, id, idGest) {
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
         if (logementVoulu === "") {
             document.getElementById("zoneClients").innerHTML = "";  //cas ou aucune piece n'est choisi mais un bouton existe
@@ -547,12 +547,18 @@
         request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
             if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
                 document.getElementById("zoneClients").innerHTML = "";
-                document.getElementById("zoneClients").innerHTML = "<div class='caseClient' id='divClients'>" +
-                                                                        "<div class='titre titreSup'>Clients</div>" +
-                                                                    "</div>" +
-                                                                    "<div class='caseClient graphe' id='divClients'>" +
-                                                                        "<div class='titre titreSup'>Graphes</div>" +
-                                                                    "</div>";
+                document.getElementById("zoneClients").innerHTML =
+                    "<div class=\"container\">" +
+                    "    <button class=\"bouton boutonAjout\" onclick=\"ajouterClient("+idGest + "," + id +")\">" +
+                    "        <i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Ajouter un client" +
+                    "    </button>" +
+                    "</div>" +
+                    "<div class='caseClient' id='divClients'>" +
+                        "<div class='titre titreSup'>Clients</div>" +
+                    "</div>" +
+                    "<div class='caseClient graphe' id='divClients'>" +
+                        "<div class='titre titreSup'>Graphes</div>" +
+                    "</div>";
                 document.getElementById("divClients").innerHTML += this.responseText;   //rempli la zoneCapteurs
                 document.getElementsByClassName("graphe")[0].innerHTML += "<img style='width: 550px; height: 400px' src='Images/graph.png' alt='graph'>"
             }
@@ -588,4 +594,109 @@
         request.open("GET", "controller/editionProfil.php?logement=" + id, true);
         request.send();                                                              //envoie le resultat de la requete au serveur
     }
+
+    //------------------------fonction de suppression du capteur non voulu
+
+    function supprimerClient(id) {
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1> Voulez-vous supprimer ce client ?</h1>" +
+            "<form>" +
+            "<input type='button' class='bouton boutonGlobal' onclick='actionSupprimerClient("+id+")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+    function actionSupprimerClient(id){
+        let id2 = -id;
+        let client = document.getElementById(id);   // recupere element <ul> avec id="zoneCapteurs"
+        client.remove();           // efface celui d'id capteur
+        //supprimer de la base de données
+        let request;
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let nom = "";
+                for(let i = 1; i < client.classList.length; i++){
+                    nom += " " + client.classList[i];
+                }
+                alerter(nom +' supprimé !');             // /!\ mettre condition si la base n'a pas ete mise a jour
+            }
+        };
+        request.open("POST", "controller/gestionClient.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("id=" + id2);   //envoie le resultat de la requete
+    }
+
+    // ------------------------------------- fonction pour ajouter un capteur dans la maison
+
+    function ajouterClient(idGest, idLog){
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1>Voulez-vous réellement ajouter un client ?</h1>" +
+            "<form>" +
+            "<input type='button' class='bouton boutonGlobal' onclick='actionAjouterClient(" + idGest + "," + idLog + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+    function actionAjouterClient(idGest, idLog){
+                document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur' style='height: 300px'>" +
+                    "<h1>Ajout d'un client</h1>" +
+                    "<form name='ajoutClient'>" +
+
+                    "<label class='ed' style='text-align: center; font-size: 15px; width: 100%'> Numéro du client :</label>" +
+                    "<input type='number' name='num' style='width: 90%'>" +
+
+                    "<input type='button' class='bouton boutonGlobal' onclick='finalAjouterClient(" + idGest + "," + idLog +")' style='float: none' value='OUI'>"+
+                    "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+                    "</form>"+
+                    "</div>";
+    }
+
+    function finalAjouterClient(idGest, idLog) {
+        let num = document.forms["ajoutClient"].elements["num"].value;
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                let nomClient = this.responseText;
+                document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'>" +
+                    "<h1>Voulez-vous ajouter " + nomClient + " à ce logement ?</h1>" +
+                    "<form>" +
+                        "<input type='button' class='bouton boutonGlobal' onclick='finalAjouterClientFinal(" + num + "," + idGest + "," + idLog +")' style='float: none' value='OUI'>"+
+                        "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>" +
+                    "</form>" +
+                    "</div>";
+            }
+        };
+        request.open("POST", "controller/gestionClient.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("idUtilisateur=" + num);
+    }
+
+    function finalAjouterClientFinal(id, idGest, idLog) {
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                alerter("L'ajout a bien été pris en compte");
+                document.getElementById("zoneClients").innerHTML = '<p class="info">Veuillez choisir un logement</p>';
+                let len = document.getElementsByClassName("boutonFil").length;
+                for(let i = 0; i < len; i++){
+                    if(document.getElementsByClassName("boutonFil")[i].classList.contains("activer")){
+                        document.getElementsByClassName("boutonFil")[i].classList.remove("activer");
+                    }
+                }
+            }
+        };
+        request.open("POST", "controller/gestionClient.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("idClientAjouter=" + id + "&idGest=" + idGest + "&idLog=" + idLog);
+    }
+
 </script>

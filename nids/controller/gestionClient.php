@@ -49,3 +49,22 @@ if (isset($_GET['logement']) && isset($_GET['id'])) {
     }
     afficheClients($clients);
 }
+
+//============================================ test des clients a supprimer
+
+if (isset($_POST['id'])){
+    supprimerClient($bdd, $_POST['id']);
+}
+
+//============================================ test des clients a ajouter
+
+if (isset($_POST['idUtilisateur'])){
+    $tab = recupClient($bdd, $_POST['idUtilisateur']);
+    echo decoupeString2($tab);
+}
+
+//============================================ ajout des clients
+
+if (isset($_POST['idClientAjouter']) && isset($_POST['idGest']) && isset($_POST['idLog'])){
+    associationClient($bdd, $_POST['idClientAjouter'], $_POST['idGest'], $_POST['idLog']);
+}

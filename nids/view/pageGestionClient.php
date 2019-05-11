@@ -13,12 +13,8 @@
 
 <div class="container fil" id="filPieces">     <!-- Contient les boutons pour afficher les différents capteurs en fonction de la salle -->
     <?php foreach($logement as $id => $p):?>
-        <input onclick="changerLogement(this.value, this.id); return activerBouton(this.id);" type="button" id="<?php echo $id;?>" class="boutonFil" value="<?php echo $p;?>"> <!-- creation des boutons avec un ID identique au nom de la salle -->
+        <input onclick="changerLogement(this.value, this.id, this.classList[1]); return activerBouton(this.id);" type="button" id="<?php echo $id;?>" class="boutonFil <?php echo $_SESSION['idUtilisateur']?>" value="<?php echo $p;?>"> <!-- creation des boutons avec un ID identique au nom de la salle -->
     <?php endforeach;?>
-</div>
-
-<div class="container">
-    <a href="/controller/infoCompte.php"><button class="bouton boutonAjout"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter un client</button></a>
 </div>
 
 <li id="zoneClients">

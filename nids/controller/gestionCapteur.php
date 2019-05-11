@@ -141,7 +141,9 @@ if (isset($_POST['modifNom']) && isset($_POST['idDuCapteur'])) {
 
     $idCap = $_POST['idDuCapteur'];
     $name = $_POST['modifNom'];
-    updateNom($bdd, $idCap, $name);
+    if($name != ""){
+        updateNom($bdd, $idCap, $name);
+    }
 }
 
 ?>

@@ -227,6 +227,8 @@ function afficheCapteur($cap){
     endforeach;
 }
 
+/*fonction qui place sur la page les informations concernant les clients liés à un gestionnaire en fonction de l'appartement choisi*/
+
 function afficheClients($clients){
     $taille = sizeof($clients);
     foreach ($clients as $c):
@@ -234,10 +236,9 @@ function afficheClients($clients){
         echo "<div id= '$id' class= ' caseClient '> 
                 <div class='titre'>
                     $c[1] $c[2]
-                    <a href='javascript:supprimer($id)'>
+                    <a href='javascript:supprimerClient($id)'>
                         <i class='fa fa-times-circle editionCapteur' style='color: red;' aria-hidden='true' id='$c[0]'></i>
                     </a>
-                    <i class='fa fa-cogs editionCapteur'></i>
                 </div>
                 numéro client : $c[0]<br>$c[3]<br>$c[4]
             </div>";
