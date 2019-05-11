@@ -138,14 +138,11 @@
         if(window.innerWidth < 500){
             document.getElementById(id).innerHTML = "";
         } else if(window.innerWidth < 587){
-            document.getElementById(id).style.fontSize = "12px";
             document.getElementById(id).innerHTML = str2[0].substr(0,1) + "." + str2[1];
         }else if(window.innerWidth < 650){
             document.getElementById(id).innerHTML = str2[0].substr(0,1) + "." + str2[1];
-            document.getElementById(id).style.fontSize = "15px";
         } else {
             document.getElementById(id).innerHTML = str2[0] + " " + str2[1];
-            document.getElementById(id).style.fontSize = "15px";
         }
     }
     function remettreContenu(id){

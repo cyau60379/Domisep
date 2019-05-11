@@ -95,9 +95,21 @@ div.bandeau {
     outline-color: #3c3d51;
 }
 
+.prenom{
+    display: inline-block;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: oblique;
+    margin: 0;
+}
+
 @media screen and (max-width: 900px) {
     .choixPage {
         width: 125px;
+        font-size: 15px;
+    }
+    .prenom {
         font-size: 15px;
     }
 }
@@ -107,11 +119,17 @@ div.bandeau {
         width: 100px;
         font-size: 12px;
     }
+    .prenom {
+        font-size: 12px;
+    }
 }
 
 @media screen and (max-width: 587px) {
     .choixPage {
         width: 90px;
+        font-size: 10px;
+    }
+    .prenom {
         font-size: 10px;
     }
 }
@@ -120,13 +138,8 @@ div.bandeau {
         width: auto;
         font-size: 8px;
     }
+    .prenom {
+        font-size: 8px;
+    }
 }
 
-.prenom{
-    display: inline-block;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    font-style: oblique;
-    margin: 0;
-}

@@ -6,7 +6,7 @@
     <?php include_once ("fonctions.php");      //inclut les fonctions concernant les capteurs
     ?>
 </head>
-<body onresize="changerContenu('nom')">
+<body onload="changerContenu('nom')" onresize="changerContenu('nom')">
 
 <div id="divReponse">
     Hello

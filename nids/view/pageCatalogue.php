@@ -40,7 +40,7 @@
             <?php echo $value[1];?>
         </td>
         <td class='catalogue prixElement'>
-            <input class="bouton boutonGlobal <?php echo $id;?>" type="button" id ="<?php echo $key;?>" value="Ajouter" onclick="ajouterCapteur(this.id, this.classList[2])" />
+            <input class="bouton boutonGlobal boutonAjout2 <?php echo $id;?>" type="button" id ="<?php echo $key;?>" value="Ajouter" onclick="ajouterCapteur(this.id, this.classList[2])" />
         </td>
     </tr>
     <?php endforeach;?>

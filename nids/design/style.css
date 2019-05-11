@@ -491,9 +491,9 @@ li.client {
 
 
 #divReponse {
+    position: fixed;
     top: 0;
     left: 0;
-    position: fixed;
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -504,7 +504,7 @@ li.client {
 
 .case {
     display: inline-grid;
-    position: fixed;
+    position: relative;
     top: 25%;
     left: 35.5%;
     align-content: center;
@@ -574,7 +574,7 @@ td.nom {
         clear:both;
     }
     td.catalogue{
-        padding: 0px 0px 0px 0px;
+        padding: 0;
     }
 }
 @media screen and  (max-width: 1080px) {
@@ -583,7 +583,7 @@ td.nom {
         clear:both;
     }
     td.catalogue{
-        padding: 0px 0px 0px 0px;
+        padding: 0;
     }
 }
 
@@ -600,22 +600,28 @@ td.nom {
         height: 50px;
         border:5px ;
     }
-    .bouton{
-        font-size : 3vw;
+    .boutonAjout2{
+        font-size : 2vw;
         height: 50px;
-        width: 50px;}
+        width: 50px;
+    }
     td.catalogue{
-        padding: 0px 0px 0px 0px;
+        padding: 0;
     }
 
     }
 
-@media screen and (max-width: 200px) {
+@media screen and (max-width: 300px) {
     .bloc {
         display:block;
         clear:both;
     }
     td.catalogue{
-        padding: 0px 0px 0px 0px;
+        padding: 0;
+    }
+    .boutonAjout2{
+        font-size : 2.5vw;
+        height: 50px;
+        width: 50px;
     }
 }
