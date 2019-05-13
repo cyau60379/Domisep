@@ -301,11 +301,23 @@ p.info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-left: 350px;
+    margin-left: 0px;
     background-color: #3C3D51;
+    margin-right: 100px;
+    margin-left : 100px;
+    padding-bottom: 200px;
 }
 
-
+.support{
+    text-align: center;
+    font-size: 40px;
+}
+.contacteznous{
+    margin-top: 50px;
+    text-align: center;
+    font-size: 40px;
+    border-top: 1px solid #FFFFFF;
+}
 /* Espacement entre les questions */
 .faq-section{
     margin: 40px 0;
@@ -600,28 +612,105 @@ td.nom {
         height: 50px;
         border:5px ;
     }
-    .boutonAjout2{
-        font-size : 2vw;
+    .bouton{
+        font-size : 3vw;
         height: 50px;
-        width: 50px;
-    }
+        width: 50px;}
     td.catalogue{
-        padding: 0;
+        padding: 0px 0px 0px 0px;
     }
 
-    }
+}
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 200px) {
     .bloc {
         display:block;
         clear:both;
     }
     td.catalogue{
-        padding: 0;
+        padding: 0px 0px 0px 0px;
     }
-    .boutonAjout2{
-        font-size : 2.5vw;
-        height: 50px;
-        width: 50px;
-    }
+}
+.choixPage {
+    width: 170px;
+    height: 44px;
+    border: solid 3px white;
+    background-color: #3C3D51;
+    cursor: pointer;
+    border-radius: 20px;
+    color: white;
+    font-size: 20px;
+
+}
+
+.choixPage:hover{
+    background-color: darkgrey;
+    color: #05083E;
+    border-color: #05083E;
+    font-weight: bold;
+}
+
+.choixPage:active{
+    background-color: blue;
+}
+
+.choixPage:focus{
+    outline-color: #3c3d51;
+}
+.croute{
+    width: 170px;
+    height: 44px;
+    border: solid 3px white;
+    background-color: #3C3D51;
+    cursor: pointer;
+    border-radius: 20px;
+    color: white;
+    font-size: 20px;
+
+
+
+}
+.croute:hover{
+    background-color: darkgrey;
+    color: #05083E;
+    border-color: #05083E;
+    font-weight: bold;
+}
+
+.croutte2{
+    width: 170px;
+    height: 44px;
+    border: solid 3px white;
+    background-color: #3C3D51;
+    cursor: pointer;
+    border-radius: 20px;
+    color: white;
+    font-size: 20px;
+    margin-left: 500px;
+    margin-top: 150px;
+
+}
+.croutte2 :hover{
+    background-color: darkgrey;
+    color: #05083E;
+    border-color: #05083E;
+    font-weight: bold;
+}
+form1{
+    display: inline;
+    justify-content: space-between;
+}
+.imgfb{
+    width: 75px;
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+
+}
+.imgtwt{
+    width: 75px;
+    height: 75px;
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
 }

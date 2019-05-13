@@ -9,40 +9,49 @@
     ?>
 </head>
 
-<div id="boite">
-    <h3 style="color: #FFFFFF">Contactez-nous</h3>
+<div class="support">
+    <h3 style="color: #FFFFFF">Support</h3>
 </div>
 
-<div id="boite">
-    <div>
-        <form action="../index.php" method="post">
+<div id="boite" >
+        <form1 action="../index.php" method="post" >
             <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
             <input type='hidden' name='id' value='<?php echo $id;?>'>
             <input type='hidden' name='cible' value='catalogue'>
-            <button type="submit" id="fa-home" class="choixPage">
-                <i class="fa fa-file-text"></i> produits
+            <button type="submit" id="fa-home" class="croute">
+                <i class="fa fa-file-text"></i> Produits
             </button>
-        </form>
+        </form1>
 
-        <form action="../index.php" method="post">
+        <form1 action="../index.php" method="post" >
             <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
             <input type='hidden' name='id' value='<?php echo $id;?>'>
             <input type='hidden' name='cible' value='FAQ'>
-            <button type="submit" id="fa-file-text-o" class="choixPage">
+            <button type="submit" id="fa-file-text-o" class="croute">
                 <i class="fa fa-question-circle"></i> FAQ
             </button>
-        </form>
+        </form1>
 
-       <!-- <form action="../index.php" method="post"> -->
-          <!--  <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
+       <form1 action="../index.php" method="post">
+          <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
             <input type='hidden' name='id' value='<?php echo $id;?>'>
-            <input type='hidden' name='cible' value='catalogue'> -->
-            <button id="fa-question" class="choixPage"> <!--type="submit"-->
+            <input type='hidden' name='cible' value='catalogue'>
+            <button id="fa-question" class="choixPage" class="croute">
                 <i class="fa fa-map-marker"></i> Forum
             </button>
        <!-- </form> -->
 
     </div>
+<div class="contacteznous">
+    <h3 style="color: #FFFFFF">Contactez-nous</h3>
+</div>
+
+<div id="boite1">
+    <a href="https://www.facebook.com/genesisbde/" ><img src="Images/facebook.png" class="imgfb"/></a>
+    <a href="https://www.facebook.com/genesisbde/" ><img src="Images/Twitter.png" class="imgtwt"/></a>
+    <a href="https://vigueur.org/cunnilingus-reussir-faire-cuni/" ><img src="Images/Pornhub.png" class="imgtwt"/></a>
+
+
 </div>
 
 </html>

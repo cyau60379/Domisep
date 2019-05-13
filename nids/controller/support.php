@@ -6,4 +6,4 @@ if(!isset($_SESSION['idUtilisateur'])){
     session_start();
 }
 $id = $_SESSION['idUtilisateur'];
-$utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));
+$utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));//Cyril tu peux expliquer ???
