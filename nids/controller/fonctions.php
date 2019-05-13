@@ -14,6 +14,7 @@
  * @param $type
  */
 
+//
 function affichageReponse($reponse, $id, $utilisateur, $type){
     if($reponse){
         echo "<div class= 'case caseCapteur'> 
@@ -27,7 +28,7 @@ function affichageReponse($reponse, $id, $utilisateur, $type){
             </div>";
     } else {
         echo "<div class= 'case caseCapteur'> 
-                <h1>$type Echouee !</h1>
+                <h1>$type Echouée !</h1>
                 <div>
                     <input type='button' class='bouton boutonGlobal' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>
                 </div>

@@ -15,14 +15,14 @@ $tabId = recuperationId($bdd);
 //nom des types de capteurs
 $tabType = recupTypeCapteur($bdd);
 
-//tableau
+//tableau des capteurs contenant l'id en indice et un tableau avec nom et description
 $tabCatalogue = array();
 for($i = 0; $i < sizeof($tabId); $i++){
     $description = recupDescription($bdd, $tabId[$i])[0];
     $tabCatalogue[$tabId[$i]] = array($tabType[$i],$description);
 }
 
-
+//================================================ récupération des informations des pièces de la maison
 if(isset($_POST['idUtil'])){
     $pieces = recupInfoPieces($bdd, $id);
     $pieces2 = "";
@@ -31,6 +31,8 @@ if(isset($_POST['idUtil'])){
     }
     echo $pieces2;
 }
+
+//================================================ récupération des informations entrées par l'utilisateur pour l'ajout de capteur
 
 if(isset($_POST['idUtilisateur']) &&  isset($_POST['idCap']) && isset($_POST['nom']) && isset($_POST['numSerie'])
     && isset($_POST['piece']) && isset($_POST['cemac']) && isset($_POST['cat'])){

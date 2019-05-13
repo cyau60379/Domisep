@@ -49,7 +49,6 @@
 <div id="boite1">
     <a href="https://www.facebook.com/genesisbde/" ><img src="Images/facebook.png" class="imgfb"/></a>
     <a href="https://www.facebook.com/genesisbde/" ><img src="Images/Twitter.png" class="imgtwt"/></a>
-    <a href="https://vigueur.org/cunnilingus-reussir-faire-cuni/" ><img src="Images/Pornhub.png" class="imgtwt"/></a>
 
 
 </div>
