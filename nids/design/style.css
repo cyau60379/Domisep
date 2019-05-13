@@ -612,7 +612,7 @@ td.nom {
         border:5px ;
     }
     .boutonAjout2{
-        font-size : 3vw;
+        font-size : 2vw;
         height: 50px;
         width: 50px;
     }
@@ -636,7 +636,7 @@ td.nom {
         width: 50px;
     }
 }
-.choixPage {
+.choixPage2 {
     width: 170px;
     height: 44px;
     border: solid 3px white;
@@ -648,18 +648,18 @@ td.nom {
 
 }
 
-.choixPage:hover{
+.choixPage2:hover{
     background-color: darkgrey;
     color: #05083E;
     border-color: #05083E;
     font-weight: bold;
 }
 
-.choixPage:active{
+.choixPage2:active{
     background-color: blue;
 }
 
-.choixPage:focus{
+.choixPage2:focus{
     outline-color: #3c3d51;
 }
 .croute{
@@ -701,10 +701,7 @@ td.nom {
     border-color: #05083E;
     font-weight: bold;
 }
-form1{
-    display: inline;
-    justify-content: space-between;
-}
+
 .imgfb{
     width: 75px;
     margin-top: 10px;

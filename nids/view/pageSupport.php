@@ -36,7 +36,7 @@
           <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
             <input type='hidden' name='id' value='<?php echo $id;?>'>
             <input type='hidden' name='cible' value='catalogue'>
-            <button id="fa-question" class="choixPage" class="croute">
+            <button id="fa-question" class="choixPage2 croute">
                 <i class="fa fa-map-marker"></i> Forum
             </button>
        </form>
