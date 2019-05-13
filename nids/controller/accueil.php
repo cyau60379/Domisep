@@ -25,15 +25,16 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
            if(password_verify($mdp, $mdpRegistered)) {                     //on compare les deux
                 $reponse = true;
             }
-           session_start();
+           session_start();             //commencement de la session si la connexion fonctionne
         }
     }
-    $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));
+    $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));  //
     affichageReponse($reponse, $id, $utilisateur, "Connexion");
 }
 
 // ============================================================= inscription
 
+// récupération des données passées dans le formulaire
 if(isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['mail']) && isset($_POST['naissance']) && isset($_POST['mdp'])){
     $prenom = $_POST['prenom'];
     $nom = $_POST['nom'];
@@ -42,15 +43,15 @@ if(isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['mail']) && i
     $mdp = $_POST['mdp'];
     $result1 = nomVersId($bdd, $nom);
     $result2 = prenomVersId($bdd, $prenom);
-    $reponse = false;
-    $id = maximumId($bdd) + 1;
+    $reponse = false;           //réponse qui servira à afficher un message à l'écran
+    $id = maximumId($bdd) + 1;  //met au nouvel inscrit l'id le plus  grand + 1
 
-    if(empty($result1) && empty($result2)){
+    if(empty($result1) && empty($result2)){         //vérifie que l'utilisateur n'existe pas déjà (utile ?)
         $reponse = true;
         ajouterInscription($bdd, $id, $nom, $prenom, $mail, $naissance, $mdp);
         updateEtat($bdd, $id, 1);
     }
 
     $utilisateur = $prenom . "_". $nom;
-    affichageReponse($reponse, $id, $utilisateur,"Inscription");
+    affichageReponse($reponse, $id, $utilisateur,"Inscription"); //message envoyé pour être affiché
 }

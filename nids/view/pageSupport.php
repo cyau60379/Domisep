@@ -13,33 +13,33 @@
     <h3 style="color: #FFFFFF">Support</h3>
 </div>
 
-<div id="boite" >
-        <form1 action="../index.php" method="post" >
+<div id="boite">
+        <form action="../index.php" method="post" >
             <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
             <input type='hidden' name='id' value='<?php echo $id;?>'>
             <input type='hidden' name='cible' value='catalogue'>
             <button type="submit" id="fa-home" class="croute">
                 <i class="fa fa-file-text"></i> Produits
             </button>
-        </form1>
+        </form>
 
-        <form1 action="../index.php" method="post" >
+        <form action="../index.php" method="post" >
             <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
             <input type='hidden' name='id' value='<?php echo $id;?>'>
             <input type='hidden' name='cible' value='FAQ'>
             <button type="submit" id="fa-file-text-o" class="croute">
                 <i class="fa fa-question-circle"></i> FAQ
             </button>
-        </form1>
+        </form>
 
-       <form1 action="../index.php" method="post">
+       <form action="../index.php" method="post">
           <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
             <input type='hidden' name='id' value='<?php echo $id;?>'>
             <input type='hidden' name='cible' value='catalogue'>
             <button id="fa-question" class="choixPage" class="croute">
                 <i class="fa fa-map-marker"></i> Forum
             </button>
-       <!-- </form> -->
+       </form>
 
     </div>
 <div class="contacteznous">

@@ -2,13 +2,14 @@
 
 include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesGenerales.php");
 
-
+// Fonction permettant de récupérer l'id maximum des utilisateurs
 function maximumId(PDO $bdd){
     $query = "SELECT max(utilisateur.id) FROM utilisateur";
     $table = $bdd->query($query)->fetch();
     return $table[0];
 }
 
+//Changer l'état de connexion
 function updateEtat(PDO $bdd, $id, $etat){
     try {
         $query = "UPDATE utilisateur SET id_type_utilsateur = '$etat' WHERE utilisateur.id = '$id'";
@@ -19,6 +20,7 @@ function updateEtat(PDO $bdd, $id, $etat){
     }
 }
 
+//Ajout de l'utilisateur qui s'inscrit
 function ajouterInscription(PDO $bdd, $id, $valNom, $valPrenom, $valAdresse_mail, $valDate, $valMdp) {
     $query = "";
     try {
@@ -31,6 +33,7 @@ function ajouterInscription(PDO $bdd, $id, $valNom, $valPrenom, $valAdresse_mail
     }
 }
 
+//Récupère les id utilisateurs en fonction des deux premières lettres du prenom
 function prenomVersId(PDO $bdd, $prenom) {
     try {
         $query = "SELECT utilisateur.id FROM utilisateur WHERE utilisateur.Prenom LIKE '$prenom%'";
@@ -40,7 +43,7 @@ function prenomVersId(PDO $bdd, $prenom) {
         return false;
     }
 }
-
+//Récupère les id utilisateurs en fonction des deux premières lettres du nom
 function nomVersId(PDO $bdd, $nom) {
     try {
         $query = "SELECT utilisateur.id FROM utilisateur WHERE utilisateur.Nom LIKE '$nom%'";
@@ -51,12 +54,14 @@ function nomVersId(PDO $bdd, $nom) {
     }
 }
 
+//Récupère le mot de passe en fonction de l'id
 function recupMdp(PDO $bdd, $id){
     $query = 'SELECT utilisateur.Mot_de_passe FROM utilisateur WHERE utilisateur.id =' . $id;
     $table = $bdd->query($query)->fetchAll();
     return $table[0]["Mot_de_passe"];  //renvoie le Mot de passe
 }
 
+//Récupère le type en fonction de l'id
 function recupType(PDO $bdd, $id){
     try{
         $query = "SELECT utilisateur.id_type_utilsateur FROM utilisateur WHERE utilisateur.id = '$id'";
@@ -64,9 +69,11 @@ function recupType(PDO $bdd, $id){
         return $table['id_type_utilsateur'];  //renvoie le type
     } catch(PDOException $e) {
         echo $query . "<br>" . $e->getMessage();
-}
+        return false;
+    }
 }
 
+//Récupère l'id en fonction du nom, du prenom et du mail
 function recupMonId(PDO $bdd, $nom, $prenom, $mail){
     try {
         $query = "SELECT utilisateur.id FROM utilisateur 
@@ -78,18 +85,21 @@ function recupMonId(PDO $bdd, $nom, $prenom, $mail){
     }
 }
 
+//Récupère le mail en fonction de l'id
 function recupMail(PDO $bdd, $id){
     $query = "SELECT utilisateur.Adresse_mail FROM utilisateur WHERE utilisateur.id = '$id'";
     $table = $bdd->query($query)->fetch();
     return $table['Adresse_mail'];  //renvoie le mail
 }
 
+//Récupère le mot de passe en fonction de l'id
 function recuperationCoordonnees(PDO $bdd, $id){
     $query = "SELECT * FROM utilisateur WHERE utilisateur.id = '$id'";
     $table = $bdd->query($query)->fetchAll();
     return $table[0];  //renvoie le mail
 }
 
+//Mise à jour dans la base de données en fonctions des changements faits
 function updateUtilisateur(PDO $bdd, $id, $chgnt, $colonne){
     try {
         $query = "UPDATE utilisateur SET ". $colonne ."= '$chgnt' WHERE utilisateur.id = '$id'";
@@ -100,6 +110,7 @@ function updateUtilisateur(PDO $bdd, $id, $chgnt, $colonne){
     }
 }
 
+//Met à jour le mot de passe en fonction de l'id
 function updateMdp(PDO $bdd, $id, $chgnt, $colonne){
     try {
         $valMdp = password_hash($chgnt, PASSWORD_DEFAULT);

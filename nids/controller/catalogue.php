@@ -3,16 +3,19 @@
 include_once("fonctions.php");
 include_once ($_SERVER["DOCUMENT_ROOT"] . "/model/catalogue.php");
 
-
+//vérifie si la session est toujours active
 if(!isset($_SESSION['idUtilisateur'])){
     session_start();
 }
 $id = $_SESSION['idUtilisateur'];
 
-
+//id des types de capteurs
 $tabId = recuperationId($bdd);
+
+//nom des types de capteurs
 $tabType = recupTypeCapteur($bdd);
 
+//tableau
 $tabCatalogue = array();
 for($i = 0; $i < sizeof($tabId); $i++){
     $description = recupDescription($bdd, $tabId[$i])[0];

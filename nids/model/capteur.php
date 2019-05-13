@@ -79,6 +79,7 @@ function miseAJourTemp(PDO $bdd, $temp, $id) {
 function miseAJourActif(PDO $bdd, $actif, $id) {
     try {
         $query = 'UPDATE actionneur_capteur SET Actif = '. $actif .' WHERE actionneur_capteur.id = '. $id;
+        //$query = "INSERT INTO donnees(valeur, id_actionneur_capteur)  VALUES ('$actif', '$id')";
         $bdd->exec($query);
     }
     catch(PDOException $e) {

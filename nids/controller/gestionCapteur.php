@@ -6,41 +6,23 @@
 include_once ("fonctions.php");
 include_once($_SERVER["DOCUMENT_ROOT"] . "/model/capteur.php");
 
-//trouver un moyen de récuperer les données en enlevant les espaces (replace( "_", " ") en javascript / str_replace ( char1, char2, string) php)
 
-
-//id de l'utilisateur
-/*$id = 1;
-$utilisateur = decoupeString2(recupererUtilisateur($bdd,$id));*/
 //creation du tableau des capteurs de la piece
 $capteurs = array();
+
+// test de la session, si cette dernière n'est pas active, la redémarrer
 if(!isset($_SESSION['idUtilisateur'])){
     session_start();
 }
+//id de l'utilisateur
 $id = $_SESSION['idUtilisateur'];
+
+//récupération du nom de l'utilisateur
 $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));
 
 //id des logements du gestionnaire
 $logement = decoupeString(recupLogements($bdd, $id));
 
-
-
-//page à activer, dépendra des autres pages de l'utilisateur
-$page = "gestionCapteur";
-
-
-//choix de la vue, à reverifier
-
-switch($page){
-    case "gestionCapteur":
-        $vue = "pageGestionCapteur";
-        break;
-    default:
-        $vue = "erreur";
-        break;
-}
-
-//include_once("view/".$vue .".php");
 
 //============================================ logements a afficher
 
@@ -53,6 +35,8 @@ if (isset($_GET['logement'])) {
 
     //liste des pieces de la maison sous forme array { [$id] => $nom ... }
     $pieces = decoupeString($listePieces);
+
+    //affiche les pièces dans le div qui convient via Javascript
     affichePieces($pieces, $idLogementActif, $id, $utilisateur);
 }
 
@@ -60,15 +44,27 @@ if (isset($_GET['logement'])) {
 
 if (isset($_POST['piece']) && isset($_POST['id'])) {
 
+    //récupération par requête post des données voulues
     $pieceActive = $_POST['piece'];
     $idPieceActive = $_POST['id'];
+
+    //récupérations des données des capteurs sous la forme array { [0] => $id!$nom!$type!$valeur!$actif ... }
     $capteurs = recuperationCapteurs($bdd, $idPieceActive);
-    $noms = array();
+
+    // boucle pour séparer les données de $capteurs
     foreach ($capteurs as $key => $value){
+
+        //tableau des valeurs
         $tabValeurs = preg_split("/\!/", $value);
+
+        //changement du type en son nom plutôt que son id pour récupérer l'image adéquate
         $tabValeurs[2] = recupTypeCap($bdd, $tabValeurs[2]);
+
+        //remise des données pour avoir un tableau de tableau
         $capteurs[$key] = $tabValeurs;
     }
+
+    //affichage des capteurs dans le bon div
     afficheCapteur($capteurs);
 }
 
@@ -84,14 +80,14 @@ if (isset($_POST['temp'])) {
     $temperature = $_POST['temp'];
     miseAJourTemp($bdd, $temperature, $id);
 }
-//============================================ test de l'activité des capteurs
+//============================================ test de l'activité (allumé ou éteint) des capteurs
 
 if (isset($_POST['allume']) && isset($_POST['idCap'])) {
     $actif = $_POST['allume'];
     $idCapt = $_POST['idCap'];
     miseAJourActif($bdd, $actif, $idCapt);
 }
-//============================================ test de l'activité des capteurs
+//============================================ test de la position du volet d'indice idCap2 récupérer par post
 
 if (isset($_POST['positionVolet']) && isset($_POST['idCap2'])) {
 
@@ -135,7 +131,7 @@ if (isset($_POST['idOuvrir'])) {
 }
 
 
-//============================================ recuperation des coordonnées du capteur
+//============================================ Changement des données en fonction de ce que l'utilisateur souhaite
 
 if (isset($_POST['modifNom']) && isset($_POST['idDuCapteur'])) {
 
