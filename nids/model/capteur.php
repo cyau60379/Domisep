@@ -34,18 +34,24 @@ function recuperationPieces (PDO $bdd, $id) {
 
 //requête recup capteur en fonction de la pieces en entree
 
-function recupValeurCapteur($id, $nom, $type, $valeur, $actif) {
-    return "$id!$nom!$type!$valeur!$actif";
+function recupValeur4($a1, $a2, $a3, $a4) {
+    return "$a1!$a2!$a3!$a4";
 }
 
 //requête recup capteur en fonction de la pieces en entree
 
 function recuperationCapteurs (PDO $bdd, $p) {      //prend la bdd et l'id de la piece pour recuperer les capteurs, leur activité et valeur
-    $query = 'SELECT ac.id, ac.nom, ac.id_element_catalogue, donnees.Valeur, ac.Actif
-                FROM actionneur_capteur AS ac 
-                JOIN donnees ON ac.id = donnees.id_actionneur_capteur
-                WHERE ac.id_piece = ' . $p;
-    return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC,"recupValeurCapteur");     //retourne un tableau contenant toutes les resultats de la requete
+    $query = "SELECT ac.id, ac.nom, ac.id_element_catalogue, ac.Actif FROM actionneur_capteur AS ac WHERE ac.id_piece = '$p'";
+    return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC,"recupValeur4");     //retourne un tableau contenant toutes les resultats de la requete
+}
+
+//requête recup donnees des capteurs
+
+function recuperationDonnees (PDO $bdd, $id){
+    $query = "SELECT donnees.Valeur FROM donnees 
+                WHERE donnees.Date_heure_reception = (SELECT MAX(donnees.Date_heure_reception) FROM donnees WHERE donnees.id_actionneur_capteur = '$id') 
+                  AND donnees.id_actionneur_capteur = '$id';";
+    return $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
 }
 
 function recupTypeCap(PDO $bdd, $id){
@@ -79,7 +85,6 @@ function miseAJourTemp(PDO $bdd, $temp, $id) {
 function miseAJourActif(PDO $bdd, $actif, $id) {
     try {
         $query = 'UPDATE actionneur_capteur SET Actif = '. $actif .' WHERE actionneur_capteur.id = '. $id;
-        //$query = "INSERT INTO donnees(valeur, id_actionneur_capteur)  VALUES ('$actif', '$id')";
         $bdd->exec($query);
     }
     catch(PDOException $e) {
@@ -98,7 +103,7 @@ function miseAJourActif(PDO $bdd, $actif, $id) {
 
 function miseAJourVolet(PDO $bdd, $actif, $id) {
     try {
-        $query = 'UPDATE donnees SET Valeur = '. $actif .' WHERE donnees.id_actionneur_capteur = '. $id;
+        //$query = "INSERT INTO donnees(valeur, id_actionneur_capteur)  VALUES ('$actif', '$id')";
         $bdd->exec($query);
     }
     catch(PDOException $e) {
@@ -127,6 +132,8 @@ function extinction(PDO $bdd, $id) {
  * @param PDO $bdd
  * @param int $id
  */
+
+//A MODIFIER
 
 function fermeture(PDO $bdd, $id) {
     try {
@@ -165,6 +172,8 @@ function allumage(PDO $bdd, $id) {
  * @param int $id
  */
 
+//A MODIFIER
+
 function ouverture(PDO $bdd, $id) {
     try {
         $query = 'UPDATE donnees SET Valeur = 10 
@@ -176,10 +185,6 @@ function ouverture(PDO $bdd, $id) {
     } catch (PDOException $e) {
         echo $query . "<br>" . $e->getMessage();
     }
-}
-
-function recupValeur4($a1, $a2, $a3, $a4) {
-    return "$a1!$a2!$a3!$a4";
 }
 
 /**

@@ -57,7 +57,14 @@ if (isset($_POST['piece']) && isset($_POST['id'])) {
         //tableau des valeurs
         $tabValeurs = preg_split("/\!/", $value);
 
+        //mise de l'activité à l'indice 4 et la valeur à l'indice 3
+
+        $actif = $tabValeurs[3];
+        $tabValeurs[3] = recuperationDonnees($bdd, $tabValeurs[0])[0];
+        $tabValeurs[4] = $actif;
+
         //changement du type en son nom plutôt que son id pour récupérer l'image adéquate
+
         $tabValeurs[2] = recupTypeCap($bdd, $tabValeurs[2]);
 
         //remise des données pour avoir un tableau de tableau
