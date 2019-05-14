@@ -103,7 +103,7 @@ function miseAJourActif(PDO $bdd, $actif, $id) {
 
 function miseAJourVolet(PDO $bdd, $actif, $id) {
     try {
-        //$query = "INSERT INTO donnees(valeur, id_actionneur_capteur)  VALUES ('$actif', '$id')";
+        $query = "INSERT INTO donnees(valeur, id_actionneur_capteur)  VALUES ('$actif', '$id')";
         $bdd->exec($query);
     }
     catch(PDOException $e) {
