@@ -716,3 +716,23 @@ td.nom {
     margin-left: 10px;
     float: left;
 }
+
+.imgyou{
+    width: 125px;
+    height: 75px;
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+}
+#boite1 {
+    padding: 10px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 0px;
+    background-color: #3C3D51;
+    margin-right: 100px;
+    margin-left: 100px;
+    margin-bottom: auto;
+}

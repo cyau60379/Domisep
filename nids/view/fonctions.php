@@ -125,7 +125,21 @@
     function cacherTitre(id) {
         document.getElementById(id).innerHTML = '<i class="fa '+ id + '"></i>';
     }
+    function miseEnValeur(id) {
+        document.getElementById(id).style.borderColor = 'white';
+        document.getElementById(id).style.borderWidth = '5px';
+        document.getElementById(id).style.borderStyle = 'solid';
+        document.getElementById(id).style.backgroundColor = 'darkgrey';
+        document.getElementById(id).style.color = 'black';
 
+    }
+    function changerBordure(id) {
+        document.getElementById(id).style.borderWidth = '0';
+        document.getElementById(id).style.backgroundColor = '#3C3D51';
+        document.getElementById(id).style.borderColor = '#3C3D51';
+        document.getElementById(id).style.borderStyle = 'none';
+        document.getElementById(id).style.color = 'white';
+    }
 
         // fonction header changer contenu bouton
 
