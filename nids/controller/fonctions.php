@@ -14,9 +14,10 @@
  * @param $type
  */
 
-//
+//fonction permettant d'afficher la réponse après la connexion ou l'inscription
 function affichageReponse($reponse, $id, $utilisateur, $type){
-    if($reponse){
+    if($reponse){ //vérifie si la réponse doit être positive ou négative
+        //affiche un formulaire permettant d'aller à la page suivante
         echo "<div class= 'case caseCapteur'> 
                 <h1>$type Réussie !</h1>
                 <form action='../index.php' method='post'>
@@ -26,7 +27,7 @@ function affichageReponse($reponse, $id, $utilisateur, $type){
                     <input type='submit' class='bouton boutonGlobal' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OK'>
                 </form>
             </div>";
-    } else {
+    } else { //sinon le message ne fait que se fermer, on revient sur le formulaire d'inscription ou de connexion
         echo "<div class= 'case caseCapteur'> 
                 <h1>$type Echouée !</h1>
                 <div>
@@ -36,6 +37,7 @@ function affichageReponse($reponse, $id, $utilisateur, $type){
     }
 }
 
+//fonction pour afficher le message de déconnexion
 function affichageReponse2(){
         echo "<div class= 'case caseCapteur'> 
                 <h1>Voulez-vous vous déconnecter ?</h1>
@@ -54,14 +56,18 @@ function affichageReponse2(){
  * @return array
  */
 
+//fonction pour découper un tableau de string en un tableau de tableau de string avec l'id en indice
+
 function decoupeString($list){
     $tab = array();
     foreach ($list as $str){
-        $result = preg_split("/\!/", $str);
+        $result = preg_split("/\!/", $str); //découpe un string et crée un tableau avec
         $tab[$result[0]] = $result[1];
     }
     return $tab;
 }
+
+//fonction pour découper un string en fonction du séparateur choisi ("!")
 
 function decoupeString2($list){
     $string = "";
@@ -72,6 +78,8 @@ function decoupeString2($list){
     return $string;
 }
 
+//idem decoupeString2 avec " " en changeant avec "_"
+
 function decoupeString3($str){
     $string = "";
     if($str != "") {
@@ -80,6 +88,8 @@ function decoupeString3($str){
     }
     return $string;
 }
+
+//idem decoupeString2 avec "_" en changeant avec " "
 
 function decoupeString4($str){
     $string = "";

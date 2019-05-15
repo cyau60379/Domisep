@@ -10,7 +10,7 @@
 
     //=================================== messages à afficher
 
-    function confirmer(message, zone){
+  /*  function confirmer(message, zone){
         document.getElementById(zone).innerHTML = "<div class= 'case caseCapteur'> "+
             "<h1>"+ message +"</h1>" +
         "<form action='../index.php' method='post'>" +
@@ -18,9 +18,11 @@
             "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
-    }
+    }*/
 
+  //fonction qui permet d'afficher un messsage comme alert en JS mais en personnalisé
     function alerter(message){
+        //ajout du message dans le div appelé divReponse
         document.getElementById(`divReponse`).innerHTML = "<div class= 'case caseCapteur'>"+
         "<h1>"+ message +"</h1>"+
             "<div>"+

@@ -54,6 +54,8 @@ function recuperationDonnees (PDO $bdd, $id){
     return $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
 }
 
+//requête de récupération des noms des types de capteurs
+
 function recupTypeCap(PDO $bdd, $id){
     $query = "SELECT element_catalogue.Type FROM element_catalogue WHERE element_catalogue.id = '$id'";
     $tab = $bdd->query($query)->fetch();
