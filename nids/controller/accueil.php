@@ -35,23 +35,47 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
 // ============================================================= inscription
 
 // récupération des données passées dans le formulaire
-if(isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['mail']) && isset($_POST['naissance']) && isset($_POST['mdp'])){
-    $prenom = $_POST['prenom'];
-    $nom = $_POST['nom'];
-    $mail = $_POST['mail'];
-    $naissance = $_POST['naissance'];
-    $mdp = $_POST['mdp'];
-    $result1 = nomVersId($bdd, $nom);
-    $result2 = prenomVersId($bdd, $prenom);
-    $reponse = false;           //réponse qui servira à afficher un message à l'écran
-    $id = maximumId($bdd) + 1;  //met au nouvel inscrit l'id le plus  grand + 1
 
-    if(empty($result1) && empty($result2)){         //vérifie que l'utilisateur n'existe pas déjà (utile ?)
-        $reponse = true;
-        ajouterInscription($bdd, $id, $nom, $prenom, $mail, $naissance, $mdp);
-        updateEtat($bdd, $id, 1);
+
+
+    if(isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['mail']) && isset($_POST['naissance']) && isset($_POST['mdp']) &&isset($_POST['ConfirmationMdp'])){
+        $prenom = $_POST['prenom'];
+        $nom = $_POST['nom'];
+        $mail = $_POST['mail'];
+        $naissance = $_POST['naissance'];
+
+        if($_POST['prenom'] == ""){
+            affichageErreur("votre prénom. Veuillez en rentrer un.");
+
+        } elseif($_POST['nom']==""){
+            affichageErreur("votre nom. Veuillez en rentrer un.");
+
+        } elseif($_POST['mail']=="") {
+            affichageErreur("votre email. Veuillez en rentrer un.");
+
+        } elseif(filter_var($_POST['mail'],FILTER_VALIDATE_EMAIL)){
+            affichageErreur("votre email. Veuillez rentrer un email valide.");
+
+        } elseif($_POST['naissance']==""){
+            affichageErreur("votre date de naissance. Veuillez en rentrer une.");
+
+        } elseif($_POST['mdp']=="") {
+            affichageErreur("votre mot de passe. Veuillez en rentrer un.");
+
+        } elseif($_POST['ConfirmationMdp']=="") {
+            affichageErreur("votre mot de passe. Veuillez le confirmer.");
+
+        } elseif($_POST['mdp']!=$_POST['ConfirmationMdp']){
+            affichageErreur( "le mot de passe. Veuillez rentrer le même deux fois.");
+        } else {     //verif avec confirmation
+            $mdp = $_POST['mdp'];
+            $id = maximumId($bdd) + 1;  //met au nouvel inscrit l'id le plus  grand + 1
+            ajouterInscription($bdd, $id, $nom, $prenom, $mail, $naissance, $mdp);
+            updateEtat($bdd, $id, 1);
+            $utilisateur = $prenom . "_". $nom;
+            affichageReponse(true, $id, $utilisateur,"Inscription"); //message envoyé pour être affiché
+        }
+
+
+
     }
-
-    $utilisateur = $prenom . "_". $nom;
-    affichageReponse($reponse, $id, $utilisateur,"Inscription"); //message envoyé pour être affiché
-}

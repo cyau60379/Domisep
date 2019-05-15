@@ -43,10 +43,9 @@
 
     </div>
 
-
     <div class="box">
         <h1> Inscription</h1>
-        <form name='inscription' class="boxConnexion1">
+        <form name='inscription' class="boxConnexion1" >
             <label class="boxIdentifiant boxConnexion1">
                 Prénom: <input class="input" name="Prenom">
             </label>
@@ -57,13 +56,16 @@
                 Adresse mail: <input class="input" name="AdresseMail">
             </label>
             <label class="boxIdentifiant boxConnexion1">
-                Date de naissance: <input class="input" type="date" name="DateDeNaissance">
+                Date de Naissance: <input class="input" type="date" name="DateDeNaissance">
             </label>
             <label class="boxIdentifiant boxConnexion1">
-                Mot de passe: <input class="input" name="Mdp">
+                Mot de Passe: <input class="input" type="password" name="Mdp">
+            </label>
+            <label class="boxIdentifiant boxConnexion1">
+                Confirmation: <input class="input" type="password" name="ConfirmationMdp">
             </label>
             <div class="boxBouton boxConnexion1">
-                <input type="button" class="button" onclick="return inscriptionUser()" value="S'inscrire">
+                <input type="button" class="button"  onclick="return inscriptionUser()" value="S'inscrire">
             </div>
         </form>
     </div>

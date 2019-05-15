@@ -54,6 +54,7 @@
         let mail = document.forms["inscription"].elements["AdresseMail"].value;
         let naissance = document.forms["inscription"].elements["DateDeNaissance"].value;
         let mdp = document.forms["inscription"].elements["Mdp"].value;
+        let confirma = document.forms["inscription"].elements["ConfirmationMdp"].value;
 
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
         request = new XMLHttpRequest();
@@ -66,8 +67,11 @@
         };
         request.open("POST", "controller/accueil.php", true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("prenom=" + prenom + "&nom=" + nom + "&mail=" + mail + "&naissance=" + naissance + "&mdp=" + mdp);     //envoie le resultat de la requete au serveur
+        request.send("prenom=" + prenom + "&nom=" + nom + "&mail=" + mail + "&naissance=" + naissance + "&mdp=" + mdp + "&ConfirmationMdp=" + confirma);     //envoie le resultat de la requete au serveur
     }
+
+
+
 
 
     function fermetureMessage(id){

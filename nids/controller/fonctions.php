@@ -44,6 +44,14 @@ function affichageReponse2(){
             </div>";
 }
 
+function affichageErreur($type){
+    echo "<div class='case caseCapteur'>
+            <h1> Il y a un problème avec $type</h1>
+            <div>
+                <input type='button' class='bouton boutonGlobal' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>
+            </div>
+          </div>";
+}
 /**
  * @param $list
  * @return array
