@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1" charset="UTF-8">
     <title>Edition de profil</title>
-    <link rel="shortcut icon" href="Images/logoNids.ico"/>
+    <link rel="shortcut icon" href="../Images/logoNids.ico"/>
     <?php include_once ("fonctions.php");      //inclut les fonctions concernant les capteurs
     ?>
 </head>
@@ -86,7 +86,7 @@
                             <option value="Chambre">Chambre</option>
                             <option value="Terasse">Terasse</option>
                         </select>
-                        <input class="imgInput" type="image" src="Images/check-circle-regular.svg" />
+                        <input class="imgInput" type="image" src="../Images/check-circle-regular.svg" />
                     </p>
                     </form>
                     </p>

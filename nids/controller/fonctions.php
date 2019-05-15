@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mr Dark
- * Date: 30/03/2019
- * Time: 14:13
- */
-
 
 /**
  * @param $reponse

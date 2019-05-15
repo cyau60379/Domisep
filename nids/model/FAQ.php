@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mr Dark
- * Date: 19/03/2019
- * Time: 21:49
- */
+
 include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesGenerales.php");
 
 function recupFAQ(PDO $bdd){

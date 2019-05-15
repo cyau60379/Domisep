@@ -36,7 +36,7 @@
 
             </form>
         <div class="boxBouton boxConnexion1">
-            <a href="lienquimarchepas" class="boxOubli boxConnexion1">Mot de passe oublié ?</a>
+            <a href="lienADefinir" class="boxOubli boxConnexion1">Mot de passe oublié ?</a>
         </div>
 
 

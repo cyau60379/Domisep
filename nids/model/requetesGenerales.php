@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Mr Dark
- * Date: 19/03/2019
- * Time: 21:28
- */
 
 include_once($_SERVER["DOCUMENT_ROOT"] . "/model/connexionBDD.php");
 

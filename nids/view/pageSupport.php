@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1" charset="UTF-8">
     <title>Support</title>
-    <link rel="shortcut icon" href="Images/logoNids.ico"/>
+    <link rel="shortcut icon" href="../Images/logoNids.ico"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <?php include_once ("fonctions.php");      //inclut les fonctions concernant les capteurs
     ?>
@@ -47,8 +47,8 @@
 </div>
 
 <div id="boite1">
-    <a href="https://www.facebook.com/genesisbde/" ><img src="Images/facebook.png" class="imgfb"/></a>
-    <a href="https://www.facebook.com/genesisbde/" ><img src="Images/Twitter.png" class="imgtwt"/></a>
+    <a href="https://www.facebook.com/genesisbde/" ><img src="../Images/facebook.png" class="imgfb"/></a>
+    <a href="https://www.facebook.com/genesisbde/" ><img src="../Images/Twitter.png" class="imgtwt"/></a>
 
 
 </div>

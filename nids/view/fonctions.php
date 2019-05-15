@@ -1,12 +1,7 @@
-<?php
-/*
- * Fonctions
- */
-?>
-
-
 <script>
-
+    /*
+     * Fonctions
+     */
 
     //=================================== messages à afficher
 
