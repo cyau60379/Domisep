@@ -19,7 +19,7 @@ function affichageReponse($reponse, $id, $utilisateur, $type){
     if($reponse){ //vérifie si la réponse doit être positive ou négative
         //affiche un formulaire permettant d'aller à la page suivante
         echo "<div class= 'case caseCapteur'> 
-                <h1>$type Réussie !</h1>
+                <h1>$type réussie !</h1>
                 <form action='../index.php' method='post'>
                     <input type='hidden' name='cible' value='editionProfil'>
                     <input type='hidden' name='id' value= $id>
@@ -29,7 +29,7 @@ function affichageReponse($reponse, $id, $utilisateur, $type){
             </div>";
     } else { //sinon le message ne fait que se fermer, on revient sur le formulaire d'inscription ou de connexion
         echo "<div class= 'case caseCapteur'> 
-                <h1>$type Echouée !</h1>
+                <h1>$type échouée !</h1>
                 <div>
                     <input type='button' class='bouton boutonGlobal' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>
                 </div>
