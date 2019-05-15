@@ -23,7 +23,6 @@ include("vues/fonctions.php");
 // Identification du contrôleur à appeler
 if (isset($_POST['cible']) && !empty($_POST['cible'])) {
     $url = $_POST['cible'];
-
 } else {
     $url = 'accueil';
 }
@@ -32,7 +31,7 @@ $url2 = ucfirst($url);
 $utilisateur = "";
 $utilisateur2 = "";
 
-if(isset($_POST['id']) && isset($_POST['utilisateur'])){
+if (isset($_POST['id']) && isset($_POST['utilisateur'])){
     $_SESSION['idUtilisateur'] = $_POST['id'];
     $utilisateur = $_POST['utilisateur'];
     $utilisateur2 = decoupeString4($utilisateur);
@@ -40,11 +39,12 @@ if(isset($_POST['id']) && isset($_POST['utilisateur'])){
 
 // Appel du contrôleur
 
-include('controller/'.$url.'.php');
 include('view/header.php');
+include('controller/'.$url.'.php');
 if($utilisateur != "") {
     include('controller/selection.php');
     include('view/selectionPage.php');
 }
 include('view/page'.$url2.'.php');
 include('view/footer.php');
+
