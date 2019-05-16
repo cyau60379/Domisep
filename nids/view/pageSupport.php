@@ -18,12 +18,12 @@
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
         <input type='hidden' name='cible' value='catalogue'>
-        <button type="submit" id="fa-home" class="croute">
+        <button type="submit" id="fa-home" class="redirection">
             <i class="fa fa-file-text"></i> Produits
         </button>
         <br>
         <br>
-        <p id="prod" style="color: #ffffff; font-size: 15px" onmouseover='miseEnValeur(this.id);' onmouseout='changerBordure(this.id);'>Accès au pannel de nos<br><br>
+        <p id="prod" class="explications" onmouseover='miseEnValeur(this.id);' onmouseout='changerBordure(this.id);'>Accès au pannel de nos<br><br>
             produits sur notre catalogue
         </p>
     </form>
@@ -32,12 +32,12 @@
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
         <input type='hidden' name='cible' value='FAQ'>
-        <button type="submit" id="fa-file-text-o" class="croute">
+        <button type="submit" id="fa-file-text-o" class="redirection">
             <i class="fa fa-question-circle"></i> FAQ
         </button>
         <br>
         <br>
-        <p id="foireaq" style="color: #ffffff; font-size: 15px" onmouseover='miseEnValeur(this.id);' onmouseout='changerBordure(this.id);'>Besoin d'aide?<br>
+        <p id="foireaq" class="explications" onmouseover='miseEnValeur(this.id);' onmouseout='changerBordure(this.id);'>Besoin d'aide?<br>
             <br>
             Accès à notre foire au questions
         </p>
@@ -47,12 +47,12 @@
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
         <input type='hidden' name='cible' value='catalogue'>
-        <button id="fa-question" class="choixPage2 croute">
+        <button id="fa-question" class="choixPage2 redirection">
             <i class="fa fa-map-marker"></i> Forum
         </button>
         <br>
         <br>
-        <p id="forum" style="color: #ffffff; font-size: 15px" onmouseover='miseEnValeur(this.id);' onmouseout='changerBordure(this.id);'> Sinon posez une questions <br><br>à notre communauté</><br>
+        <p id="forum" class="explications" onmouseover='miseEnValeur(this.id);' onmouseout='changerBordure(this.id);'> Sinon posez une questions <br><br>à notre communauté</><br>
         <br>
         ils seront ravis de vous répondre ;)
         </p>

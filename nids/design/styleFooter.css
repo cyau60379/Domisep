@@ -1,14 +1,22 @@
+/*style du pied de page*/
 .piedDePage {
     background-color: #05083e;
     color: #FFFFFF;
     margin: 0;
 }
+
+/*style de la balise footer*/
 footer {
     background-color: #05083e;
     color: #FFFFFF;
     padding: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 
 }
+
+/*liste des contacts*/
 .liste {
     display : inline-block;
     font-size: 15px;
@@ -17,10 +25,12 @@ footer {
     color: #FFFFFF;
 }
 
+/*style pour les liens*/
 a {
     color: #FFFFFF;
 }
 
+/*classe pour la liste contenants les contacts*/
 .liste1 {
     display : inline-block;
     font-size: 15px;
@@ -30,21 +40,18 @@ a {
     color: #FFFFFF;
 }
 
+/*logo au pied de page*/
 img.logoFoot{
     width : 50px;
     padding: 10px;
 }
 
+/*changement du style des listes*/
 li{
     list-style-type: none;
 }
 
-footer {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-}
-
+/*changement des tailles d'écriture en fonction de la taille de la fenêtre*/
 @media screen and (max-width: 630px){
     .liste1 {
         font-size: 2vw;

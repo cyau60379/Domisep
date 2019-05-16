@@ -1,3 +1,4 @@
+/*Boite au centre de la page d'accueil*/
 .boxCentre{
     width: 740px;
     height: 580px;
@@ -6,21 +7,21 @@
     flex-direction: row;
     justify-content: space-between;
     position: relative;
-
 }
-
+/*Boite contenant les formulaires*/
 .box{
     color: black;
     background-color: white;
     border: 5px solid black;
     text-align: center;
     width: 340px;
-    height: 503px;
+    height: 590px;
     padding: 5px;
     display: flex;
     flex-direction: column;
 }
 
+/*classe des formulaires*/
 .boxConnexion1{
     border: 1px solid black;
     width: 315px;
@@ -33,20 +34,28 @@
     justify-content: center;
 }
 
+/*les entrées dans lesquelles les informations sont mises*/
 .input{
     width: 180px;
     margin: auto;
 }
 
+/*Boite avec les identifiants entrés*/
 .boxIdentifiant {
     font-size: 80%;
     border: 0;
     margin-top: 5px;
     margin-left: -5px;
     margin-right: auto;
-
 }
 
+/*affichage de message de vérification des entrées*/
+p.put {
+    margin: 0;
+    color: white;
+}
+
+/*boite avec le lien mdp oublié*/
 .boxOubli {
     color: blue;
     border: 0;
@@ -61,6 +70,7 @@
     font-size: 80%;
 }
 
+/*boite avec les boutons*/
 .boxBouton{
     border: 0;
     width: 260px;
@@ -71,6 +81,7 @@
     align-items: center;
 }
 
+/*classe du bouton de connexion et inscription*/
 .button{
     background-color:#3C3D51;
     text-decoration: none;
@@ -81,7 +92,3 @@
     margin: 15px;
     padding: 15px;
 }
-
-
-
-

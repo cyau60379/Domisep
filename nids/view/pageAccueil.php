@@ -18,15 +18,17 @@
 </div>
 
 <div id="boxCentre" class="boxCentre">
-    <div class="box">
+    <div class="box" style="height: 400px; margin: auto;">
         <h1>Connexion</h1>
             <form name='connexion' class="boxConnexion1">
                 <label class="boxIdentifiant boxConnexion1">
                     Identifiant: <input class="input" name="identifiant">
+                    <p id="labIdentifiant" class ="put">.</p>
                 </label>
 
                 <label class="boxIdentifiant boxConnexion1">
                     Mot de passe : <input type="password" class="input" name="password">
+                    <p id="labMdpCo" class ="put">.</p>
                 </label>
 
                 <div class="boxBouton boxConnexion1">
@@ -48,23 +50,29 @@
         <form name='inscription' class="boxConnexion1" >
             <label class="boxIdentifiant boxConnexion1">
                 Prénom: <input id="Prenom" class="input" name="Prenom" oninput="verificationNom(this.name)">
+                <p id="labPrenom" class ="put">.</p>
             </label>
             <label class="boxIdentifiant boxConnexion1">
                 Nom: <input id="Nom" class="input" name="Nom" oninput="verificationNom(this.name)">
+                <p id="labNom" class ="put">.</p>
             </label>
             <label class="boxIdentifiant boxConnexion1">
                 Adresse mail: <input id="AdresseMail" class="input" name="AdresseMail">
+                <p id="labAdresseMail" class ="put">.</p>
             </label>
             <label class="boxIdentifiant boxConnexion1">
-                Date de Naissance: <input id="DateDeNaissance" class="input" type="date" name="DateDeNaissance" min="1900-01-01" max="2050-12-31">
+                Date de Naissance: <input id="DateDeNaissance" class="input" type="date" name="DateDeNaissance" min="1900-01-01" max="2020-12-31" oninput="verificationDate()">
+                <p id="labDateDeNaissance" class ="put">.</p>
             </label>
             <label class="boxIdentifiant boxConnexion1">
-                Mot de Passe: <input id="Mdp" class="input" type="password" name="Mdp">
+                Mot de Passe: <input id="Mdp" class="input" type="password" name="Mdp" oninput="verificationPass()">
+                <p id="labMdp" class ="put">.</p>
             </label>
             <label class="boxIdentifiant boxConnexion1">
-                Confirmation: <input id="ConfirmationMdp" class="input" type="password" name="ConfirmationMdp">
+                Confirmation: <input id="ConfirmationMdp" class="input" type="password" name="ConfirmationMdp" oninput="verificationConfPass()">
+                <p id="labConfirmationMdp" class ="put">.</p>
             </label>
-            <div class="boxBouton boxConnexion1">
+            <div class="boxBouton boxConnexion1" style="margin: auto">
                 <input type="button" class="button"  onclick="return inscriptionUser()" value="S'inscrire">
             </div>
         </form>

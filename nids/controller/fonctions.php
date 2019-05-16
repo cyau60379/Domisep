@@ -8,9 +8,10 @@
  */
 
 //fonction permettant d'afficher la réponse après la connexion ou l'inscription
+
 function affichageReponse($reponse, $id, $utilisateur, $type){
-    if($reponse){ //vérifie si la réponse doit être positive ou négative
-        //affiche un formulaire permettant d'aller à la page suivante
+    if($reponse){                                   //vérifie si la réponse doit être positive ou négative
+                    //affiche un formulaire permettant d'aller à la page suivante
         echo "<div class= 'case caseCapteur'> 
                 <h1>$type réussie !</h1>
                 <form action='../index.php' method='post'>
@@ -20,7 +21,7 @@ function affichageReponse($reponse, $id, $utilisateur, $type){
                     <input type='submit' class='bouton boutonGlobal' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OK'>
                 </form>
             </div>";
-    } else { //sinon le message ne fait que se fermer, on revient sur le formulaire d'inscription ou de connexion
+    } else {                                        //sinon le message ne fait que se fermer, on revient sur le formulaire d'inscription ou de connexion
         echo "<div class= 'case caseCapteur'> 
                 <h1>$type échouée !</h1>
                 <div>
@@ -31,6 +32,7 @@ function affichageReponse($reponse, $id, $utilisateur, $type){
 }
 
 //fonction pour afficher le message de déconnexion
+
 function affichageReponse2(){
         echo "<div class= 'case caseCapteur'> 
                 <h1>Voulez-vous vous déconnecter ?</h1>
@@ -43,6 +45,8 @@ function affichageReponse2(){
                 </form>
             </div>";
 }
+
+//fonction pour erreurs lors de l'inscription (+ connexion)
 
 function affichageErreur($type){
     echo "<div class='case caseCapteur'>
@@ -101,6 +105,8 @@ function decoupeString4($str){
     return $string;
 }
 
+//fonction pour afficher les pièces de la maison pour un client voulant gérer sa maison
+
 function affichePieces($pieces, $logement, $id, $utilisateur){
     $logement += 100000;
 echo "    <div id='gestionGlobale' class= 'container gestionGlobale'>
@@ -134,6 +140,8 @@ echo "    <div id='gestionGlobale' class= 'container gestionGlobale'>
         </li>";
 }
 
+//affichage des logements pour un utilisateur dans l'edition de profil
+
 function affichePieces2($pieces, $logement, $id, $utilisateur){
     echo "<table>
                     <thead>                   <!-- En-tête du tableau -->
@@ -153,7 +161,7 @@ function affichePieces2($pieces, $logement, $id, $utilisateur){
     echo "</table>";
 }
 
-
+//fonction affichant les données dans les cases des capteurs
 
 function afficheDonnees($tab){
     if (sizeof($tab) < 5){
@@ -208,6 +216,8 @@ function afficheDonnees($tab){
     }
 }
 
+//fonction pour afficher les capteurs de la pièce choisie
+
 function afficheCapteur($cap){
     $taille = sizeof($cap);     //nombre de capteurs
     foreach ($cap as $c):
@@ -239,7 +249,7 @@ function afficheCapteur($cap){
     endforeach;
 }
 
-/*fonction qui place sur la page les informations concernant les clients liés à un gestionnaire en fonction de l'appartement choisi*/
+//fonction qui place sur la page les informations concernant les clients liés à un gestionnaire en fonction de l'appartement choisi
 
 function afficheClients($clients){
     $taille = sizeof($clients);

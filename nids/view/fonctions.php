@@ -15,30 +15,82 @@
             "</div>";
     }*/
 
-  //changement de couleur lors de l'entrée des données pour l'inscription
+  //changements de couleur lors de l'entrée des données pour l'inscription + ajout de message
 
     function verificationNom(nom){
-        let entree = document.forms['inscription'].elements[nom].value;  //récupération de ce qui est mis dans l'entrée pour le mot de passe
-        if(entree !== ""){
+        let entree = document.forms['inscription'].elements[nom].value;  //récupération de ce qui est mis dans l'entrée pour le nom ou prenom
+        if(entree !== "" && entree.length >= 2){
             document.getElementById(nom).style.borderColor = "green";             //change le style du message
+            document.getElementById("lab" + nom).style.color = "green";             //change le style du message
+            document.getElementById("lab" + nom).innerHTML = "Ok";               //ajout message
+
             return true;
         } else {
-            document.getElementById(nom).style.borderColor = "RED";               //change le style du message
+            document.getElementById(nom).style.borderColor = "red";               //change le style du message
+            document.getElementById("lab" + nom).style.color = "red";             //change le style du message
+            document.getElementById("lab" + nom).innerHTML = "Trop court";               //ajout message
             return false;
         }
     }
 
-    //fonction qui récupère le mot de passe et la confirmation et vérifie s'ils sont égaux
     function verificationPass(){
-        let pass = document.forms['inscription'].elements['pass'].value;  //récupération de ce qui est mis dans l'entrée pour le mot de passe
-        let pass2 = document.forms['inscription'].elements['pass2'].value;  //récupération de ce qui est mis dans l'entrée pour la confirmation
-        if(pass === pass2 && pass !== ""){
-            document.getElementById("verifPass").innerHTML = "OK";                  //change le message inscrit
-            document.getElementById("verifPass").style.color = "green";             //change le style du message
+        let mdp = document.forms['inscription'].elements['Mdp'].value;  //récupération de ce qui est mis dans l'entrée pour le mot de passe
+        if(mdp !== "" && mdp.length >= 8){
+            document.getElementById("Mdp").style.borderColor = "green";             //change le style du message
+            document.getElementById("labMdp").style.color = "green";             //change le style du message
+            document.getElementById("labMdp").innerHTML = "Ok";               //ajout message
             return true;
         } else {
-            document.getElementById("verifPass").innerHTML = "NOK";                 //change le message inscrit
-            document.getElementById("verifPass").style.color = "RED";               //change le style du message
+            document.getElementById("Mdp").style.borderColor = "red";               //change le style du message
+            document.getElementById("labMdp").style.color = "red";             //change le style du message
+            document.getElementById("labMdp").innerHTML = "Trop court (8 caractères minimum)";       //ajout message
+            return false;
+        }
+    }
+
+    function verificationDate(){
+        let naissance = document.forms['inscription'].elements['DateDeNaissance'].value;  //récupération de ce qui est mis dans l'entrée pour la date de naissance
+        let date = naissance.split("-");
+        if((date[0] > 2020) || (date[0] < 1900)){
+            document.getElementById("DateDeNaissance").style.borderColor = "red";               //change le style du message
+            document.getElementById("labDateDeNaissance").style.color = "red";             //change le style du message
+            document.getElementById("labDateDeNaissance").innerHTML = "Invalide (année de 1900 à 2020)";       //ajout message
+            return false;
+        } else {
+            document.getElementById("DateDeNaissance").style.borderColor = "green";             //change le style du message
+            document.getElementById("labDateDeNaissance").style.color = "green";             //change le style du message
+            document.getElementById("labDateDeNaissance").innerHTML = "Ok";               //ajout message
+        }
+    }
+    /*
+    function verificationMail(){
+        let mail = document.forms['inscription'].elements['AdresseMail'].value;  //récupération de ce qui est mis dans l'entrée pour le mot de passe
+        if(checkMail(mail)){
+            document.getElementById("AdresseMail").style.borderColor = "green";             //change le style du message
+            document.getElementById("labAdresseMail").style.color = "green";             //change le style du message
+            document.getElementById("labAdresseMail").innerHTML = "Adresse valide";               //ajout message
+            return true;
+        } else {
+            document.getElementById("AdresseMail").style.borderColor = "red";               //change le style du message
+            document.getElementById("labAdresseMail").style.color = "red";             //change le style du message
+            document.getElementById("labAdresseMail").innerHTML = "Adresse invalide";               //ajout message
+            return false;
+        }
+    }
+*/
+    //fonction qui récupère le mot de passe et la confirmation et vérifie s'ils sont égaux
+    function verificationConfPass(){
+        let pass = document.forms['inscription'].elements['Mdp'].value;  //récupération de ce qui est mis dans l'entrée pour le mot de passe
+        let pass2 = document.forms['inscription'].elements['ConfirmationMdp'].value;  //récupération de ce qui est mis dans l'entrée pour la confirmation
+        if(pass === pass2 && pass !== ""){
+            document.getElementById("ConfirmationMdp").style.borderColor = "green";             //change le style du message
+            document.getElementById("labConfirmationMdp").innerHTML = "Ok";             //change le message
+            document.getElementById("labConfirmationMdp").style.color = "green";             //change le style du message
+            return true;
+        } else {
+            document.getElementById("ConfirmationMdp").style.borderColor = "red";             //change le style du message
+            document.getElementById("labConfirmationMdp").innerHTML = "Invalide";             //change le message
+            document.getElementById("labConfirmationMdp").style.color = "red";             //change le style du message
             return false;
         }
     }
@@ -54,8 +106,16 @@
             "</div>";
     }
 
+    //fonction permettant de revenir à l'état antérieur après un message à l'écran
+    function fermetureMessage(id){
+        //changement de style pour le div de réponse
+        document.getElementById(id).style.zIndex = '-100';
+        document.getElementById(id).style.display = 'none';
+    }
+
     //test de la validité du mail
     function checkMail(mail){
+        //création d'une expression régulière pour tester le mail
         let regularExp = /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
         return(regularExp.test(mail));
     }
@@ -64,6 +124,7 @@
 
 
     function connexionUser() {
+        //recuperation des données du formulaire
         let id = document.forms["connexion"].elements["identifiant"].value;
         let mdp = document.forms["connexion"].elements["password"].value;
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
@@ -80,7 +141,10 @@
         request.send("identifiant=" + id + "&password=" + mdp);                      //envoie le resultat de la requete au serveur
     }
 
+    //=================================== inscription d'un nouvel utilisateur
+
     function inscriptionUser() {
+        //recuperation des données du formulaire
         let prenom = document.forms["inscription"].elements["Prenom"].value;
         let nom = document.forms["inscription"].elements["Nom"].value;
         let mail = document.forms["inscription"].elements["AdresseMail"].value;
@@ -102,11 +166,7 @@
         request.send("prenom=" + prenom + "&nom=" + nom + "&mail=" + mail + "&naissance=" + naissance + "&mdp=" + mdp + "&ConfirmationMdp=" + confirma);     //envoie le resultat de la requete au serveur
     }
 
-
-    function fermetureMessage(id){
-        document.getElementById(id).style.zIndex = '-100';
-        document.getElementById(id).style.display = 'none';
-    }
+    //=========================== Déconnexion de l'utilisateur
 
     function deconnexionUser() {
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
@@ -114,7 +174,7 @@
         request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
             if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
                 document.getElementById("divReponse").innerHTML = this.responseText;   //rempli le corps de la page avec la réponse
-                document.getElementById("divReponse").style.zIndex = '1';
+                document.getElementById("divReponse").style.zIndex = '1';               //change le style de divReponse
                 document.getElementById("divReponse").style.display = 'initial';
             }
         };
@@ -123,7 +183,10 @@
         request.send("deconnexion=1");                      //envoie le resultat de la requete au serveur
     }
 
+    //============================ modification des informations de l'utilisateur dans le menu editionProfil
+
     function modificationUser() {
+        //recuperation des informations du formulaire modification
         let nom = document.forms["modification"].elements["user_nom"].value;
         let prenom = document.forms["modification"].elements["user_prenom"].value;
         let mail = document.forms["modification"].elements["user_email"].value;
@@ -134,11 +197,11 @@
         let reponse = document.forms["modification"].elements["user_response"].value;
 
         let date = naissance.split("-");
-        if((date[0] > 2050) || (date[0] < 1900)){
+        if((date[0] > 2020) || (date[0] < 1900)){                   //verification de la date pour eviter tout problème avec
             document.getElementById("divReponse").style.zIndex = '1';
             document.getElementById("divReponse").style.display = 'initial';
             alerter("Date de naissance invalide");
-        } else if(!checkMail(mail)) {
+        } else if(!checkMail(mail)) {                               //verification que l'adresse est bien une adresse mail
             document.getElementById("divReponse").style.zIndex = '1';
             document.getElementById("divReponse").style.display = 'initial';
             alerter("Mail non valide");
@@ -162,35 +225,31 @@
 
     //=================================== animation boutons
 
-    function montrerTitre(id, type) {
+    function montrerTitre(id, type) {       //affiche le nom de la page où aller
         document.getElementById(id).innerHTML = '<i class="fa '+ id + '"></i> ' + type;
     }
 
-    function cacherTitre(id) {
+    function cacherTitre(id) {              //cache le nom lorsque la souris n'y est plus
         document.getElementById(id).innerHTML = '<i class="fa '+ id + '"></i>';
     }
-    function miseEnValeur(id) {
+    function miseEnValeur(id) {             //met en valeur les explications des pages de support
         document.getElementById(id).style.borderColor = 'white';
-        document.getElementById(id).style.borderWidth = '5px';
-        document.getElementById(id).style.borderStyle = 'solid';
         document.getElementById(id).style.backgroundColor = 'darkgrey';
         document.getElementById(id).style.color = 'black';
 
     }
-    function changerBordure(id) {
-        document.getElementById(id).style.borderWidth = '0';
+    function changerBordure(id) {          //enlève la mise en valeur les explications des pages de support
         document.getElementById(id).style.backgroundColor = '#3C3D51';
         document.getElementById(id).style.borderColor = '#3C3D51';
-        document.getElementById(id).style.borderStyle = 'none';
         document.getElementById(id).style.color = 'white';
     }
 
-        // fonction header changer contenu bouton
+        // fonction header pour changer le contenu du bandeau en fonction de la taille de la fenêtre
 
     function changerContenu(id){
         let str = document.getElementById(id).classList[1];
         let str2 = str.split('_');
-        if(window.innerWidth < 500){
+        if(window.innerWidth < 500){            //taille inférieur à 500px
             document.getElementById(id).innerHTML = "";
         } else if(window.innerWidth < 587){
             document.getElementById(id).innerHTML = str2[0].substr(0,1) + "." + str2[1];
@@ -200,9 +259,12 @@
             document.getElementById(id).innerHTML = str2[0] + " " + str2[1];
         }
     }
+
+    //changement du contenu en mettant à l'écran le contenu souhaité
     function remettreContenu(id){
         document.getElementById(id).innerHTML = id;
     }
+
 
     //=================================== gestion capteurs
 
@@ -220,6 +282,8 @@
             "</form>"+
             "</div>";
     }
+
+    //sous-fonction pour supprimer le capteur après le message de prévention
 
     function actionSupprimer(id){
         let id2 = -id;
@@ -244,7 +308,7 @@
 
     //-----------------changer la classe de l'icone + envoi requête à la base pour changer l'etat
 
-
+        //message d'alerte pour prévenir avant tout changement
     function allumerEteindre(id){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
@@ -366,6 +430,7 @@
 
     //-----------------------fonction pour monter / descendre le volet
 
+    //message avant de monter ou descendre le volet
     function monterDescendre(id){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
@@ -378,6 +443,7 @@
             "</div>";
     }
 
+    //fonction récupérant la valeur pour le monter
     function actionMonterDescendre(id){
         document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'>" +
             "<h1>Modifications</h1>" +
@@ -390,6 +456,7 @@
             "</div>";
     }
 
+    //fonction envoyant les changements au serveur
     function finalMonterDescendre(id) {
         let etat = document.forms["modifVolet"].elements["volet"].value;
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
@@ -414,6 +481,7 @@
 
     // ------------------------------------- fonction pour ajouter un capteur dans la maison
 
+    //message pour prévenir de l'ajout
     function ajouterCapteur(id, idUt){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
@@ -426,6 +494,7 @@
             "</div>";
     }
 
+    // affichage du formulaire après avoir récupéré les pieces présents dans le logement
     function actionAjouterCapteur(id, idUt){
         let request = new XMLHttpRequest();
         request.onreadystatechange = function(){
@@ -468,6 +537,7 @@
         request.send("idUtil=" + idUt);
     }
 
+    //fonction qui envoie au serveur les informations pour les ajouter dans la base de données + message de confirmation
     function finalAjouterCapteur(id, idUt) {
         let nom = document.forms["ajoutCap"].elements["nomCap"].value;
         let numSerie = document.forms["ajoutCap"].elements["numSerie"].value;
@@ -487,7 +557,7 @@
             + "&piece=" + piece + "&cemac=" + cemac + "&cat=" + cat);
     }
 
-    // ------------------------------------- fonction pour tout changer dans la maison
+    // ------------------------------------- fonction pour tout changer dans la maison (allumer / éteindre / monter / descendre
 
     function changer(id, action, numAction){
         document.getElementById("divReponse").style.zIndex = '1';
@@ -501,6 +571,7 @@
             "</div>";
     }
 
+    //envoie au serveur les informations
     function actionChanger(id, numAction){
         let participe = "";
         let action2 = "";
@@ -543,7 +614,7 @@
 
     // --------------------------------------------- fonction qui change les propriétés des capteurs (à continuer)
 
-
+    //message de prévention avant modification
     function modificationInformations(id){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
@@ -556,6 +627,7 @@
             "</div>";
     }
 
+    //fonction pour afficher le formulaire de modification
     function actionModificationInfo(id){
         document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'>" +
             "<h1>Informations</h1>" +
@@ -568,6 +640,7 @@
             "</div>";
     }
 
+    //fonction d'envoi des informations au serveur
     function finalModification(id) {
         let nom = document.forms["modifInfo"].elements["nomCapteur"].value;
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
@@ -590,7 +663,7 @@
     }
 
 
-    // --------------------------------------------- fonction qui permet d'afficher les capteurs en fonction de la piece demandée
+    // --------------------------------------------- fonction qui permet d'afficher les clients en fonction du logement demandé
 
     function changerLogement(logementVoulu, id, idGest) {
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
@@ -602,7 +675,7 @@
         request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
             if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
                 document.getElementById("zoneClients").innerHTML = "";
-                document.getElementById("zoneClients").innerHTML =
+                document.getElementById("zoneClients").innerHTML =              //affiche les clients et la consommation dans l'appartement
                     "<div class=\"container\">" +
                     "    <button class=\"bouton boutonAjout\" onclick=\"ajouterClient("+idGest + "," + id +")\">" +
                     "        <i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Ajouter un client" +
@@ -622,7 +695,7 @@
         request.send();                                                              //envoie le resultat de la requete au serveur
     }
 
-    //------------------------------fonction qui permet d'afficher les pieces en fonction de l'appartement
+    //------------------------------fonction qui permet d'afficher les pieces en fonction de l'appartement pour un client
 
     function changerLogement2(id) {
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
@@ -650,8 +723,9 @@
         request.send();                                                              //envoie le resultat de la requete au serveur
     }
 
-    //------------------------fonction de suppression du capteur non voulu
+    //------------------------fonction de suppression des clients quittant l'appartement
 
+    //message de prévention avant suppression
     function supprimerClient(id) {
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
@@ -664,6 +738,7 @@
             "</div>";
     }
 
+    //suppression du client par envoi des informations au serveur
     function actionSupprimerClient(id){
         let id2 = -id;
         let client = document.getElementById(id);   // recupere element <ul> avec id="zoneCapteurs"
@@ -685,8 +760,9 @@
         request.send("id=" + id2);   //envoie le resultat de la requete
     }
 
-    // ------------------------------------- fonction pour ajouter un capteur dans la maison
+    // ------------------------------------- fonction pour ajouter un capteur dans la maison souhaité
 
+    //message de prévention
     function ajouterClient(idGest, idLog){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
@@ -699,6 +775,7 @@
             "</div>";
     }
 
+    //affichage du choix de client
     function actionAjouterClient(idGest, idLog){
                 document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur' style='height: 300px'>" +
                     "<h1>Ajout d'un client</h1>" +
@@ -713,6 +790,7 @@
                     "</div>";
     }
 
+    //confirmation
     function finalAjouterClient(idGest, idLog) {
         let num = document.forms["ajoutClient"].elements["num"].value;
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
@@ -734,6 +812,7 @@
         request.send("idUtilisateur=" + num);
     }
 
+    //retour au menu de choix d'appartement
     function finalAjouterClientFinal(id, idGest, idLog) {
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
         request = new XMLHttpRequest();

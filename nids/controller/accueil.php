@@ -36,8 +36,6 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
 
 // récupération des données passées dans le formulaire
 
-
-
     if(isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['mail']) && isset($_POST['naissance']) && isset($_POST['mdp']) &&isset($_POST['ConfirmationMdp'])){
         $prenom = $_POST['prenom'];
         $nom = $_POST['nom'];
@@ -45,6 +43,7 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
         $naissance = $_POST['naissance'];
         $date = preg_split("/\-/", $naissance);
 
+        //vérification que chaque input est bien rempli + mail est bien un mail + date de naissance prise en compte
         if($prenom == ""){
             affichageErreur("votre prénom. Veuillez en rentrer un.");
 
@@ -57,7 +56,7 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
         } elseif(!filter_var($mail,FILTER_VALIDATE_EMAIL)){
             affichageErreur("votre email. Veuillez rentrer un email valide.");
 
-        } elseif($naissance == "" || ($date['0'] > 2050) || ($date['0'] < 1900)){
+        } elseif($naissance == "" || ($date['0'] > 2020) || ($date['0'] < 1900)){
             affichageErreur("votre date de naissance. Veuillez en rentrer une.");
 
         } elseif($_POST['mdp'] == "") {
@@ -68,11 +67,11 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
 
         } elseif($_POST['mdp'] != $_POST['ConfirmationMdp']){
             affichageErreur( "le mot de passe. Veuillez rentrer le même deux fois.");
-        } else {     //verif avec confirmation
+        } else {                                                        //verif avec confirmation
             $mdp = $_POST['mdp'];
-            $id = maximumId($bdd) + 1;  //met au nouvel inscrit l'id le plus  grand + 1
+            $id = maximumId($bdd) + 1;                          //met au nouvel inscrit l'id le plus  grand + 1
             ajouterInscription($bdd, $id, $nom, $prenom, $mail, $naissance, $mdp);
-            updateEtat($bdd, $id, 1);
+            updateEtat($bdd, $id, 1);                       //le met connecté
             $utilisateur = $prenom . "_". $nom;
             affichageReponse(true, $id, $utilisateur,"Inscription"); //message envoyé pour être affiché
         }

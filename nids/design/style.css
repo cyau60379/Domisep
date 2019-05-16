@@ -662,7 +662,7 @@ td.nom {
 .choixPage2:focus{
     outline-color: #3c3d51;
 }
-.croute{
+.redirection{
     width: 170px;
     height: 44px;
     border: solid 3px white;
@@ -675,14 +675,14 @@ td.nom {
 
 
 }
-.croute:hover{
+.redirection:hover{
     background-color: darkgrey;
     color: #05083E;
     border-color: #05083E;
     font-weight: bold;
 }
 
-.croutte2{
+.redirection2{
     width: 170px;
     height: 44px;
     border: solid 3px white;
@@ -695,7 +695,7 @@ td.nom {
     margin-top: 150px;
 
 }
-.croutte2 :hover{
+.redirection2 :hover{
     background-color: darkgrey;
     color: #05083E;
     border-color: #05083E;
@@ -735,4 +735,12 @@ td.nom {
     margin-right: 100px;
     margin-left: 100px;
     margin-bottom: auto;
+}
+
+.explications {
+    color: #ffffff;
+    font-size: 15px;
+    border-width: 5px;
+    border-color: #3C3D51;
+    border-style: solid;
 }
