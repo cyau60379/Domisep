@@ -41,31 +41,32 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
     if(isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['mail']) && isset($_POST['naissance']) && isset($_POST['mdp']) &&isset($_POST['ConfirmationMdp'])){
         $prenom = $_POST['prenom'];
         $nom = $_POST['nom'];
-        $mail = $_POST['mail'];
+        $mail = filter_var($_POST['mail'], FILTER_SANITIZE_EMAIL);
         $naissance = $_POST['naissance'];
+        $date = preg_split("/\-/", $naissance);
 
-        if($_POST['prenom'] == ""){
+        if($prenom == ""){
             affichageErreur("votre prénom. Veuillez en rentrer un.");
 
-        } elseif($_POST['nom']==""){
+        } elseif($nom == ""){
             affichageErreur("votre nom. Veuillez en rentrer un.");
 
-        } elseif($_POST['mail']=="") {
+        } elseif($mail == "") {
             affichageErreur("votre email. Veuillez en rentrer un.");
 
-        } elseif(filter_var($_POST['mail'],FILTER_VALIDATE_EMAIL)){
+        } elseif(!filter_var($mail,FILTER_VALIDATE_EMAIL)){
             affichageErreur("votre email. Veuillez rentrer un email valide.");
 
-        } elseif($_POST['naissance']==""){
+        } elseif($naissance == "" || ($date['0'] > 2050) || ($date['0'] < 1900)){
             affichageErreur("votre date de naissance. Veuillez en rentrer une.");
 
-        } elseif($_POST['mdp']=="") {
+        } elseif($_POST['mdp'] == "") {
             affichageErreur("votre mot de passe. Veuillez en rentrer un.");
 
-        } elseif($_POST['ConfirmationMdp']=="") {
+        } elseif($_POST['ConfirmationMdp'] == "") {
             affichageErreur("votre mot de passe. Veuillez le confirmer.");
 
-        } elseif($_POST['mdp']!=$_POST['ConfirmationMdp']){
+        } elseif($_POST['mdp'] != $_POST['ConfirmationMdp']){
             affichageErreur( "le mot de passe. Veuillez rentrer le même deux fois.");
         } else {     //verif avec confirmation
             $mdp = $_POST['mdp'];
@@ -75,7 +76,4 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
             $utilisateur = $prenom . "_". $nom;
             affichageReponse(true, $id, $utilisateur,"Inscription"); //message envoyé pour être affiché
         }
-
-
-
     }

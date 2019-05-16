@@ -56,7 +56,7 @@
                 Adresse mail: <input class="input" name="AdresseMail">
             </label>
             <label class="boxIdentifiant boxConnexion1">
-                Date de Naissance: <input class="input" type="date" name="DateDeNaissance">
+                Date de Naissance: <input class="input" type="date" name="DateDeNaissance" min="1900-01-01" max="2050-12-31">
             </label>
             <label class="boxIdentifiant boxConnexion1">
                 Mot de Passe: <input class="input" type="password" name="Mdp">
