@@ -47,22 +47,22 @@
         <h1> Inscription</h1>
         <form name='inscription' class="boxConnexion1" >
             <label class="boxIdentifiant boxConnexion1">
-                Prénom: <input class="input" name="Prenom">
+                Prénom: <input id="Prenom" class="input" name="Prenom" oninput="verificationNom(this.name)">
             </label>
             <label class="boxIdentifiant boxConnexion1">
-                Nom: <input class="input" name="Nom">
+                Nom: <input id="Nom" class="input" name="Nom" oninput="verificationNom(this.name)">
             </label>
             <label class="boxIdentifiant boxConnexion1">
-                Adresse mail: <input class="input" name="AdresseMail">
+                Adresse mail: <input id="AdresseMail" class="input" name="AdresseMail">
             </label>
             <label class="boxIdentifiant boxConnexion1">
-                Date de Naissance: <input class="input" type="date" name="DateDeNaissance" min="1900-01-01" max="2050-12-31">
+                Date de Naissance: <input id="DateDeNaissance" class="input" type="date" name="DateDeNaissance" min="1900-01-01" max="2050-12-31">
             </label>
             <label class="boxIdentifiant boxConnexion1">
-                Mot de Passe: <input class="input" type="password" name="Mdp">
+                Mot de Passe: <input id="Mdp" class="input" type="password" name="Mdp">
             </label>
             <label class="boxIdentifiant boxConnexion1">
-                Confirmation: <input class="input" type="password" name="ConfirmationMdp">
+                Confirmation: <input id="ConfirmationMdp" class="input" type="password" name="ConfirmationMdp">
             </label>
             <div class="boxBouton boxConnexion1">
                 <input type="button" class="button"  onclick="return inscriptionUser()" value="S'inscrire">

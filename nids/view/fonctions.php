@@ -15,6 +15,34 @@
             "</div>";
     }*/
 
+  //changement de couleur lors de l'entrée des données pour l'inscription
+
+    function verificationNom(nom){
+        let entree = document.forms['inscription'].elements[nom].value;  //récupération de ce qui est mis dans l'entrée pour le mot de passe
+        if(entree !== ""){
+            document.getElementById(nom).style.borderColor = "green";             //change le style du message
+            return true;
+        } else {
+            document.getElementById(nom).style.borderColor = "RED";               //change le style du message
+            return false;
+        }
+    }
+
+    //fonction qui récupère le mot de passe et la confirmation et vérifie s'ils sont égaux
+    function verificationPass(){
+        let pass = document.forms['inscription'].elements['pass'].value;  //récupération de ce qui est mis dans l'entrée pour le mot de passe
+        let pass2 = document.forms['inscription'].elements['pass2'].value;  //récupération de ce qui est mis dans l'entrée pour la confirmation
+        if(pass === pass2 && pass !== ""){
+            document.getElementById("verifPass").innerHTML = "OK";                  //change le message inscrit
+            document.getElementById("verifPass").style.color = "green";             //change le style du message
+            return true;
+        } else {
+            document.getElementById("verifPass").innerHTML = "NOK";                 //change le message inscrit
+            document.getElementById("verifPass").style.color = "RED";               //change le style du message
+            return false;
+        }
+    }
+
   //fonction qui permet d'afficher un messsage comme alert en JS mais en personnalisé
     function alerter(message){
         //ajout du message dans le div appelé divReponse
@@ -26,7 +54,11 @@
             "</div>";
     }
 
-
+    //test de la validité du mail
+    function checkMail(mail){
+        let regularExp = /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+        return(regularExp.test(mail));
+    }
 
     //=================================== connexion à la page
 
@@ -71,9 +103,6 @@
     }
 
 
-
-
-
     function fermetureMessage(id){
         document.getElementById(id).style.zIndex = '-100';
         document.getElementById(id).style.display = 'none';
@@ -104,20 +133,31 @@
         let question = document.forms["modification"].elements["user_question"].value;
         let reponse = document.forms["modification"].elements["user_response"].value;
 
-        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
-        request = new XMLHttpRequest();
-        request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
-            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
-                document.getElementById("divReponse").innerHTML = this.responseText;   //rempli le corps de la page avec la réponse
-                document.getElementById("divReponse").style.zIndex = '1';
-                document.getElementById("divReponse").style.display = 'initial';
-            }
-        };
-        request.open("POST", "controller/editionProfil.php", true);
-        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("user_prenom=" + prenom + "&user_nom=" + nom
-            + "&user_email=" + mail + "&user_phone=" + phone
-            + "&user_date=" + naissance + "&user_pass=" + mdp + "&user_question=" + question + "&user_response=" + reponse);                      //envoie le resultat de la requete au serveur
+        let date = naissance.split("-");
+        if((date[0] > 2050) || (date[0] < 1900)){
+            document.getElementById("divReponse").style.zIndex = '1';
+            document.getElementById("divReponse").style.display = 'initial';
+            alerter("Date de naissance invalide");
+        } else if(!checkMail(mail)) {
+            document.getElementById("divReponse").style.zIndex = '1';
+            document.getElementById("divReponse").style.display = 'initial';
+            alerter("Mail non valide");
+        } else {
+            let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+            request = new XMLHttpRequest();
+            request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
+                if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                    document.getElementById("divReponse").innerHTML = this.responseText;   //rempli le corps de la page avec la réponse
+                    document.getElementById("divReponse").style.zIndex = '1';
+                    document.getElementById("divReponse").style.display = 'initial';
+                }
+            };
+            request.open("POST", "controller/editionProfil.php", true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send("user_prenom=" + prenom + "&user_nom=" + nom
+                + "&user_email=" + mail + "&user_phone=" + phone
+                + "&user_date=" + naissance + "&user_pass=" + mdp + "&user_question=" + question + "&user_response=" + reponse);                      //envoie le resultat de la requete au serveur
+        }
     }
 
     //=================================== animation boutons
