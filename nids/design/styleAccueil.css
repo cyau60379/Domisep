@@ -1,12 +1,12 @@
 /*Boite au centre de la page d'accueil*/
 .boxCentre{
-    width: 740px;
-    height: 580px;
+    width: 100%;
+    height: 100%;
     display: flex;
-    margin: auto;
     flex-direction: row;
     justify-content: space-between;
     position: relative;
+    flex-flow: wrap;
 }
 /*Boite contenant les formulaires*/
 .box{
@@ -19,6 +19,17 @@
     padding: 5px;
     display: flex;
     flex-direction: column;
+}
+
+/*boite de la connexion*/
+.boxCo {
+    height: 400px;
+    margin: auto 5px auto auto;
+}
+
+/*boite de l'inscription*/
+.boxIns {
+    margin: auto auto auto 5px;
 }
 
 /*classe des formulaires*/
@@ -91,4 +102,31 @@ p.put {
     text-align: center;
     margin: 15px;
     padding: 15px;
+}
+
+@media screen and (max-width: 760px){
+    .boxCo {
+        margin: auto;
+    }
+
+    .boxIns {
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 750px){
+    .boxCo {
+        width: 100%;
+    }
+
+    .boxIns {
+        width: 100%;
+    }
+
+    .boxConnexion1{
+        width: 90%;
+    }
+    .boxIdentifiant{
+        margin: auto;
+    }
 }

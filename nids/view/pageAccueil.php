@@ -18,7 +18,7 @@
 </div>
 
 <div id="boxCentre" class="boxCentre">
-    <div class="box" style="height: 400px; margin: auto;">
+    <div class="box boxCo">
         <h1>Connexion</h1>
             <form name='connexion' class="boxConnexion1">
                 <label class="boxIdentifiant boxConnexion1">
@@ -45,7 +45,7 @@
 
     </div>
 
-    <div class="box">
+    <div class="box boxIns">
         <h1> Inscription</h1>
         <form name='inscription' class="boxConnexion1" >
             <label class="boxIdentifiant boxConnexion1">
