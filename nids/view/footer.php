@@ -32,6 +32,9 @@
 <br/>
 <br/>
 <br/>
+<br/>
+<br/>
+<br/>
 <footer>
     <div class="liste1">
         <img class="logoFoot" src="../Images/logoNids.png" alt="notre logo"><br/>© 2019 Copyright: NIDS

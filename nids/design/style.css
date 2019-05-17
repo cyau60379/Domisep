@@ -744,3 +744,8 @@ td.nom {
     border-color: #3C3D51;
     border-style: solid;
 }
+
+.contenu {
+    width: 90%;
+    height: 456px;
+}

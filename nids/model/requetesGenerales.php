@@ -30,3 +30,15 @@ function recupLogements (PDO $bdd, $id) {
     return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, "recup2");     //retourne un tableau contenant toutes les resultats de la requete
 }
 
+function recupTitre(PDO $bdd, $id){
+    $query = "SELECT article.Titre FROM article WHERE article.id = '$id'";
+    $table = $bdd->query($query)->fetch();
+    return $table['Titre'];  //renvoie le mail
+}
+
+function recupContenu(PDO $bdd, $id){
+    $query = "SELECT article.Contenu FROM article WHERE article.id = '$id'";
+    $table = $bdd->query($query)->fetch();
+    return $table['Contenu'];  //renvoie le mail
+}
+

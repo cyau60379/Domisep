@@ -46,7 +46,7 @@
     <form action="../index.php" method="post">
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
-        <input type='hidden' name='cible' value='catalogue'>
+        <input type='hidden' name='cible' value='forum'>
         <button id="fa-question" class="choixPage2 redirection">
             <i class="fa fa-map-marker"></i> Forum
         </button>
