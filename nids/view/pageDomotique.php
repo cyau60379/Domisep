@@ -30,7 +30,7 @@
     <form action="../index.php" method="post" class="form">
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
-        <input type='hidden' name='cible' value='gestionClient'>
+        <input type='hidden' name='cible' value='<?php if($type == 2): echo "gestionClient"; else: echo "statistique"; endif;?>'>
         <button type="submit" id="fa-file-text-o" class="choixPage2">
             Gestion de vos logements
         </button>

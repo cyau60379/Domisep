@@ -17,7 +17,7 @@ if(isset($_POST['deconnexion'])){
         $type = recupType($bdd, $id);
         switch($type){
             case 1: //client
-                $pagesPossibles["Domotique"] = array("gestionCapteur", "fa-home");
+                $pagesPossibles["Domotique"] = array("domotique", "fa-home");
                 $pagesPossibles["Profil"] = array("editionProfil", "fa-file-text-o");
                 $pagesPossibles["Support"] = array("support", "fa-question");
                 break;

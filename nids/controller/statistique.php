@@ -1,8 +1,4 @@
 <?php
-/**
- * Controleur des clients pour les gestionnaires
- */
-
 include_once("fonctions.php");
 include_once ($_SERVER["DOCUMENT_ROOT"] . "/model/gestionClient.php");
 include_once ($_SERVER["DOCUMENT_ROOT"] . "/model/capteur.php");
@@ -24,21 +20,13 @@ if (isset($_GET['logement']) && isset($_GET['id'])) {
 
     $logementActif = $_GET['logement'];
     $idLogementActif = $_GET['id'];
-    $clients = recuperationClients($bdd, $idLogementActif);
-    foreach ($clients as $key => $value){
-        $tabValeurs = preg_split("/\!/", $value);
-        $clients[$key] = $tabValeurs;       //tableau sous la forme {indice => coordonnees client ...}
-    }
     $listePieces = recuperationPieces($bdd, $idLogementActif);
 
     //liste des pieces de la maison sous forme array { [$id] => $nom ... }
     $pieces = decoupeString($listePieces);
-
-    $c = afficheClients($clients);
     $b = affichePieces3($pieces, $id);
-    $sortie = $c. "§" . $b;
     //affiche les infos dans le div qui convient via Javascript
-    echo $sortie;
+    echo $b;
 }
 
 //============================================ test des graphes a afficher
@@ -103,23 +91,4 @@ if (isset($_POST['piece']) && isset($_POST['idPieceActive'])) {
     //mise en commun des deux pour tout envoyer en meme temps
     $resultat = $lumiere . "?" . $temperature;
     echo $resultat; //envoi au JS
-}
-
-//============================================ test des clients a supprimer
-
-if (isset($_POST['id'])){
-    supprimerClient($bdd, $_POST['id']);
-}
-
-//============================================ test des clients a ajouter
-
-if (isset($_POST['idUtilisateur'])){
-    $tab = recupClient($bdd, $_POST['idUtilisateur']);
-    echo decoupeString2($tab);
-}
-
-//============================================ ajout des clients
-
-if (isset($_POST['idClientAjouter']) && isset($_POST['idGest']) && isset($_POST['idLog'])){
-    associationClient($bdd, $_POST['idClientAjouter'], $_POST['idGest'], $_POST['idLog']);
 }
