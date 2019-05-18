@@ -11,7 +11,7 @@
 <body>
 
 <div class="container fil" id="filPieces">     <!-- Contient les boutons pour afficher les différents capteurs en fonction de la salle -->
-    <?php foreach($logement as $id => $p):?>
+    <?php foreach($total as $id => $p):?>
         <input onclick="changerLogement2(this.id); return activerBouton2(this.id);" type="button" id="<?php echo $id;?>" class="boutonAppart" value="<?php echo $p;?>"> <!-- creation des boutons avec un ID identique au nom de la salle -->
     <?php endforeach;?>
 </div>

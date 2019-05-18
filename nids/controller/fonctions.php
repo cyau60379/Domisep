@@ -140,6 +140,33 @@ function affichePieces($pieces, $logement, $id, $utilisateur){
         </li>";
 }
 
+//fonction pour afficher les pièces de la maison pour un client voulant gérer sa maison
+
+function affichePiecesLocation($pieces, $logement, $id, $utilisateur){
+    $logement += 100000;
+    echo "<div id='gestionGlobale' class= 'container gestionGlobale'>
+        <div style='margin: 15px'>
+            <label for='tempChoix'>Température du logement voulue:</label>
+            <input id='tempChoix' style='width: 50px; height: 30px; text-align: center;' type='number' name='temp' value=20 min=0 max=25> °C
+            <input class='bouton' type='submit' value='Valider' onclick='changerTemperature(document.getElementById(`tempChoix`).value)'\">
+        </div>
+        <button onclick=\"changer(this.id, 'eteindre', 2)\" class=' bouton boutonGlobal' id ='$logement'>Tout éteindre</button>
+        <button onclick=\"changer(this.id, 'fermer', 4)\" class=\"bouton boutonGlobal\" id ='$logement'>Tout fermer</button>
+        <button onclick=\"changer(this.id, 'allumer', 1)\" class=' bouton boutonGlobal' id ='$logement'>Tout allumer</button>
+        <button onclick=\"changer(this.id, 'ouvrir', 3)\" class=\"bouton boutonGlobal\" id ='$logement'>Tout ouvrir</button>
+    </div>
+
+    <div class=\"container fil\" id=\"filPieces\"> ";
+    foreach($pieces as $identif => $p):
+        echo "<input onclick=\"changerPiece(this.value, this.id); return activerBouton(this.id);\" type=\"button\" id='$identif' class=\"boutonFil\" value= '$p'>";
+    endforeach;
+    echo "</div>
+
+        <li id=\"zoneCapteurs\">
+            <p class=\"info\">Veuillez choisir une pièce</p>  <!-- à améliorer -->
+        </li>";
+}
+
 //affichage des logements pour un utilisateur dans l'edition de profil
 
 function affichePieces2($pieces, $logement, $id, $utilisateur){
@@ -253,6 +280,33 @@ function afficheCapteur($cap){
                     <a href='javascript:modificationInformations($c[0])'>
                         <i class='fa fa-cogs editionCapteur' aria-hidden='true'></i>
                     </a>
+                </div>
+                <img src='Images/$c[2].png' alt='$c[2]' class='imageCapteur'>
+                <a href='javascript:allumerEteindre($c[0], $taille)'>
+                    <i class='fa fa-power-off editionCapteur $c[1] $actif' id='$c[0]'></i>
+                </a>
+                $donnees
+            </div>";
+    endforeach;
+}
+
+//fonction pour afficher les capteurs de la pièce choisie
+
+function afficheCapteurLocation($cap){
+    $taille = sizeof($cap);     //nombre de capteurs
+    foreach ($cap as $c):
+        $id = -$c[0];           //id negatif
+        $type = preg_split("/\s/", $c[1]);  //recuperation type
+        $donnees = afficheDonnees($c);              //recuperation des donnees
+        $actif = '';                                //récupération de l'activité du capteur
+        if($c[4] == 1){
+            $actif = 'on';
+        } else {
+            $actif = 'off';
+        }
+        echo "<div id= '$id' class= 'caseCapteur $c[1]'> 
+                <div class='titre'>
+                    $c[1]
                 </div>
                 <img src='Images/$c[2].png' alt='$c[2]' class='imageCapteur'>
                 <a href='javascript:allumerEteindre($c[0], $taille)'>

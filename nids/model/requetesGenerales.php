@@ -30,15 +30,35 @@ function recupLogements (PDO $bdd, $id) {
     return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, "recup2");     //retourne un tableau contenant toutes les resultats de la requete
 }
 
+//requête recuperations du logement en fonction de l'id de l'utilisateur
+function recupLgmnt (PDO $bdd, $id) {
+    $query = 'SELECT logement.Adresse FROM logement WHERE logement.id = ' . $id;
+    $result = $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);     //retourne un tableau contenant toutes les resultats de la requete
+    return $result;
+}
+
+//requête recuperations du logement en fonction de l'id de l'utilisateur et si location
+function recupLocation (PDO $bdd, $id) {
+    $query = 'SELECT logement.id, logement.Adresse FROM logement JOIN heritage ON logement.id = heritage.id_logement WHERE heritage.id_utilisateur_sec = ' . $id;
+    return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, "recup2");     //retourne un tableau contenant toutes les resultats de la requete
+}
+
+//requête recuperations du logement en fonction de l'id de l'utilisateur
+function recupLogementsParPiece (PDO $bdd, $id) {
+    $query = 'SELECT piece.id_logement FROM piece WHERE piece.id = ' . $id;
+    $result = $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);     //retourne un tableau contenant toutes les resultats de la requete
+    return $result;
+}
+
 function recupTitre(PDO $bdd, $id){
     $query = "SELECT article.Titre FROM article WHERE article.id = '$id'";
     $table = $bdd->query($query)->fetch();
-    return $table['Titre'];  //renvoie le mail
+    return $table['Titre'];  //renvoie le titre
 }
 
 function recupContenu(PDO $bdd, $id){
     $query = "SELECT article.Contenu FROM article WHERE article.id = '$id'";
     $table = $bdd->query($query)->fetch();
-    return $table['Contenu'];  //renvoie le mail
+    return $table['Contenu'];  //renvoie le contenu
 }
 

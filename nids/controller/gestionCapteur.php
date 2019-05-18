@@ -22,13 +22,19 @@ $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));
 
 //id des logements du gestionnaire
 $logement = decoupeString(recupLogements($bdd, $id));
-
+$location = decoupeString(recupLocation($bdd, $id));
+$total = $logement + $location;
 
 //============================================ logements a afficher
 
 if (isset($_GET['logement'])) {
 
     $idLogementActif = $_GET['logement'];
+    $ad = recupLgmnt($bdd, $idLogementActif);
+    $adValue = "";
+    if (!empty($ad)){
+        $adValue = $ad[0];
+    }
 
     //liste des pieces de la maison sous forme array { [0] => $id!$nom ... }
     $listePieces = recuperationPieces($bdd, $idLogementActif);
@@ -37,7 +43,11 @@ if (isset($_GET['logement'])) {
     $pieces = decoupeString($listePieces);
 
     //affiche les pièces dans le div qui convient via Javascript
-    affichePieces($pieces, $idLogementActif, $id, $utilisateur);
+    if(in_array($adValue, $location)){
+        affichePiecesLocation($pieces, $idLogementActif, $id, $utilisateur);
+    } else {
+        affichePieces($pieces, $idLogementActif, $id, $utilisateur);
+    }
 }
 
 //============================================ test des capteurs a afficher
@@ -47,6 +57,13 @@ if (isset($_POST['piece']) && isset($_POST['id'])) {
     //récupération par requête post des données voulues
     $pieceActive = $_POST['piece'];
     $idPieceActive = $_POST['id'];
+
+    //vérification appartient à une location
+    $idLoge = recupLogementsParPiece($bdd, $idPieceActive);
+    $logValue = "";
+    if (!empty($idLoge)){
+        $logValue = $idLoge[0];
+    }
 
     //récupérations des données des capteurs sous la forme array { [0] => $id!$nom!$type!$valeur!$actif ... }
     $capteurs = recuperationCapteurs($bdd, $idPieceActive);
@@ -72,7 +89,11 @@ if (isset($_POST['piece']) && isset($_POST['id'])) {
     }
 
     //affichage des capteurs dans le bon div
-    afficheCapteur($capteurs);
+    if(array_key_exists($logValue, $location)){
+        afficheCapteurLocation($capteurs);
+    } else {
+        afficheCapteur($capteurs);
+    }
 }
 
 //============================================ test des capteurs a supprimer
