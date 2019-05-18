@@ -40,6 +40,16 @@ function recuperationCapteurs (PDO $bdd, $p) {      //prend la bdd et l'id de la
     return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC,"recupValeur4");     //retourne un tableau contenant toutes les resultats de la requete
 }
 
+//requête recup capteur en fonction de la pieces en entree pour le gestionnaire
+
+function recuperationPourStat(PDO $bdd, $p, $id) {
+    $query = "SELECT donnees.Valeur, donnees.Date_heure_reception FROM donnees 
+              JOIN actionneur_capteur AS ac ON donnees.id_actionneur_capteur = ac.id
+              WHERE ac.id_piece = '$p' AND ac.id_element_catalogue = '$id' ORDER BY donnees.Date_heure_reception";
+    return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC,"recup2");     //retourne un tableau contenant toutes les resultats de la requete
+}
+
+
 //requête recup donnees des capteurs
 
 function recuperationDonnees (PDO $bdd, $id){

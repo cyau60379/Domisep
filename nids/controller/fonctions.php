@@ -109,7 +109,7 @@ function decoupeString4($str){
 
 function affichePieces($pieces, $logement, $id, $utilisateur){
     $logement += 100000;
-echo "    <div id='gestionGlobale' class= 'container gestionGlobale'>
+    echo "<div id='gestionGlobale' class= 'container gestionGlobale'>
         <div style='margin: 15px'>
             <label for='tempChoix'>Température du logement voulue:</label>
             <input id='tempChoix' style='width: 50px; height: 30px; text-align: center;' type='number' name='temp' value=20 min=0 max=25> °C
@@ -159,6 +159,20 @@ function affichePieces2($pieces, $logement, $id, $utilisateur){
                     </tr>";
     endforeach;
     echo "</table>";
+}
+
+//affichage des pièces dans la gestion de client
+
+function affichePieces3($pieces, $id){
+    $reponse = "<div class=\"container fil\" id=\"filPieces\"> ";
+        foreach($pieces as $identif => $p):
+            $reponse .= "<input onclick=\"changerPieceEd(this.value, this.id); return activerBouton(this.id);\" type=\"button\" id='$identif' class=\"boutonFil\" value= '$p'>";
+        endforeach;
+    $reponse .= "</div><div id=\"zoneGraphe\">
+            <p class=\"info\">Veuillez choisir une pièce</p>
+        </div><div id=\"zoneGraphe2\">
+        </div>";
+    return $reponse;
 }
 
 //fonction affichant les données dans les cases des capteurs
@@ -251,11 +265,12 @@ function afficheCapteur($cap){
 
 //fonction qui place sur la page les informations concernant les clients liés à un gestionnaire en fonction de l'appartement choisi
 
-function afficheClients($clients){
+function afficheClients($clients) {
     $taille = sizeof($clients);
+    $reponse = "";
     foreach ($clients as $c):
         $id = -$c[0];
-        echo "<div id= '$id' class= ' caseClient '> 
+        $reponse .= "<div id= '$id' class= ' caseClient '> 
                 <div class='titre'>
                     $c[1] $c[2]
                     <a href='javascript:supprimerClient($id)'>
@@ -265,5 +280,15 @@ function afficheClients($clients){
                 numéro client : $c[0]<br>$c[3]<br>$c[4]
             </div>";
     endforeach;
+    return $reponse;
+}
+
+//fonction pour transformer un arrat en string
+function arrayToString($tab){
+    $str = "";
+    foreach ($tab as $key => $value){
+        $str .= "$key!$value+";
+    }
+    return $str;
 }
 ?>

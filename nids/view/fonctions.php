@@ -201,7 +201,7 @@
             document.getElementById("divReponse").style.zIndex = '1';
             document.getElementById("divReponse").style.display = 'initial';
             alerter("Date de naissance invalide");
-        } else if(!checkMail(mail)) {                               //verification que l'adresse est bien une adresse mail
+        } else if(mail !== "" && !checkMail(mail)) {                               //verification que l'adresse est bien une adresse mail
             document.getElementById("divReponse").style.zIndex = '1';
             document.getElementById("divReponse").style.display = 'initial';
             alerter("Mail non valide");
@@ -409,6 +409,64 @@
         request.open("POST", "controller/gestionCapteur.php", true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send("piece=" + pieceVoulue + "&id=" + id);                                                              //envoie le resultat de la requete au serveur
+    }
+
+    //----------------------------fonction qui permet d'afficher les capteurs en fonction de la piece demandée
+
+    function changerPieceEd(pieceVoulue, id) {
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        if (pieceVoulue === "") {
+            document.getElementById("zoneGraphe").innerHTML = "";  //cas ou aucune piece n'est choisi mais un bouton existe
+            return;
+        }
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                document.getElementById('zoneGraphe').innerHTML = "";
+                document.getElementById('zoneGraphe2').innerHTML = "";
+                let reponse = this.responseText;
+                let division = reponse.split("?");
+                let tabLum = division[0].split("+");
+                let tabTemp = division[1].split("+");
+                tracerGraph(tabTemp, "Température", "°C", "zoneGraphe");
+                tracerGraph(tabLum, "Luminosité", "lux", "zoneGraphe2");
+            }
+        };
+        request.open("POST", "controller/gestionClient.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("piece=" + pieceVoulue + "&idPieceActive=" + id);                                                              //envoie le resultat de la requete au serveur
+    }
+
+    //fonction qui permet de tracer un graphique dans la zone désigné en fonction des données en entrée
+    function tracerGraph(tab, titre, unite, zone){
+        //trace en fonction des mois
+        let nomMois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+        let donnees = [];   //les données du graphe
+        let mois = [];      //les mois vraiment pris en compte
+        for (let i = 0; i < tab.length - 1; i++) {      //récupération du mois et de la valeur
+            let tab2 = tab[i].split('!');
+            donnees.push(tab2[1]);
+            mois.push(nomMois[parseInt(tab2[0]) - 1]);
+        }
+        let zoneGraph = document.getElementById(zone);  //zone de dessin
+        let data = [{       //les données
+            x: mois,
+            y: donnees,
+            type: 'scatter'
+        }];
+        let layout = {      //comment sera agencé les graphes
+            title: titre,
+            xaxis: {
+                title: 'Mois',
+                showgrid: false,
+                zeroline: false
+            },
+            yaxis: {
+                title: unite,
+                showline: false
+            }
+        };
+        Plotly.newPlot(zoneGraph, data, layout);    //tracé sur un nouveau plot pour éviter le chevauchement
     }
 
     //-----------------------------fonction pour modifier la température de la maison
@@ -687,8 +745,9 @@
                     "<div class='caseClient graphe' id='divClients'>" +
                         "<div class='titre titreSup'>Graphes</div>" +
                     "</div>";
-                document.getElementById("divClients").innerHTML += this.responseText;   //rempli la zoneCapteurs
-                document.getElementsByClassName("graphe")[0].innerHTML += "<img style='width: 550px; height: 400px' src='Images/graph.png' alt='graph'>"
+                let result = this.responseText.split("§");
+                document.getElementById("divClients").innerHTML += result[0];   //rempli la zoneClients
+                document.getElementsByClassName("graphe")[0].innerHTML += result[1];
             }
         };
         request.open("GET", "controller/gestionClient.php?logement=" + logementVoulu + "&id=" + id, true);
