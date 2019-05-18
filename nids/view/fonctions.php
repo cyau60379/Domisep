@@ -382,6 +382,20 @@
 
     //------------------------change la classe des boutons en fonction de s'il y en a un qui est activé ce en fonction de l'id du bouton
 
+    function activerBouton3(id) {
+        let len = document.getElementsByClassName("boutonFil2").length;
+        for(let i = 0; i < len; i++){
+            if(document.getElementsByClassName("boutonFil2")[i].classList.contains("activer")){
+                document.getElementsByClassName("boutonFil2")[i].classList.remove("activer");
+            }
+            if(document.getElementsByClassName("boutonFil2")[i].id == id){
+                document.getElementsByClassName("boutonFil2")[i].classList.add("activer");
+            }
+        }
+    }
+
+    //------------------------change la classe des boutons en fonction de s'il y en a un qui est activé ce en fonction de l'id du bouton
+
     function activerBouton2(id) {
         let len = document.getElementsByClassName("boutonAppart").length;
         for(let i = 0; i < len; i++){

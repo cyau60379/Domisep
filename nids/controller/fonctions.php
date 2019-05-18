@@ -166,10 +166,10 @@ function affichePieces2($pieces, $logement, $id, $utilisateur){
 function affichePieces3($pieces, $id){
     $reponse = "<div class=\"container fil\" id=\"filPieces\"> ";
         foreach($pieces as $identif => $p):
-            $reponse .= "<input onclick=\"changerPieceEd(this.value, this.id); return activerBouton(this.id);\" type=\"button\" id='$identif' class=\"boutonFil\" value= '$p'>";
+            $reponse .= "<input onclick=\"changerPieceEd(this.value, this.id); return activerBouton3(this.id);\" type=\"button\" id='$identif' class=\"boutonFil2\" value= '$p'>";
         endforeach;
     $reponse .= "</div><div id=\"zoneGraphe\">
-            <p class=\"info\">Veuillez choisir une pièce</p>
+            <p class=\"info\" style='color: black'>Veuillez choisir une pièce</p>
         </div><div id=\"zoneGraphe2\">
         </div>";
     return $reponse;

@@ -22,7 +22,7 @@ if(isset($_POST['deconnexion'])){
                 $pagesPossibles["Support"] = array("support", "fa-question");
                 break;
             case 2: //gestionnaire
-                $pagesPossibles["Domotique"] = array("gestionClient", "fa-home");
+                $pagesPossibles["Domotique"] = array("domotique", "fa-home");
                 $pagesPossibles["Profil"] = array("editionProfil", "fa-file-text-o");
                 $pagesPossibles["Support"] = array("support", "fa-question");
                 break;
