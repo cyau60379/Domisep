@@ -121,3 +121,45 @@ function updateMdp(PDO $bdd, $id, $chgnt, $colonne){
         echo $query . "<br>" . $e->getMessage();
     }
 }
+
+function recuperationComptesSecondaires(PDO $bdd, $id){
+
+    $query = "SELECT * FROM heritage INNER JOIN utilisateur ON heritage.id_utilisateur_sec = utilisateur.id WHERE heritage.id_utilisateur_prim= '$id'";
+    $table = $bdd->query($query)->fetchAll();
+    return $table;
+}
+
+
+function supprimComptesSecondaires(PDO $bdd, $id, $id_sec){
+    try {
+        $query = "DELETE FROM heritage WHERE heritage.id_utilisateur_prim='$id' && heritage.id_utilisateur_sec='$id_sec'";
+        $bdd->exec($query);
+    }
+    catch(PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
+    }
+}
+
+function ajouterComptesSecondaires(PDO $bdd, $id, $id_secadd, $id_logement)
+{
+    $query = "";
+    try {
+        $query = "INSERT INTO heritage (id_utilisateur_prim, id_utilisateur_sec, id_logement) 
+              VALUES ('$id', '$id_secadd', '$id_logement')"; //rajoute les données du nouvel utilisateur
+        $bdd->exec($query);
+    } catch (PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
+    }
+}
+
+function recupLogementFromAdressse (PDO $bdd, $logementsec){
+    $query = "SELECT id FROM logement WHERE Adresse ='$logementsec'";
+    $table = $bdd->query($query)->fetch();
+    return $table;
+}
+
+function recupIdSecFromNomPrenom(PDO $bdd, $prenomsec, $nomsec){
+    $query = "SELECT id FROM utilisateur WHERE nom = '$nomsec' AND prenom = '$prenomsec'";
+    $table = $bdd->query($query)->fetch();
+    return $table;
+}

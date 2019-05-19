@@ -52,12 +52,14 @@
             </form>
         </div>
 
-        <div class="bloc">
-            <div class="titre titreSup"> Comptes secondaires liés  <input class="imgInput" type="image" src="Images/plus-circle-solid.svg" /></div>
+        <div class="bloc"><!-- début romuald -->
+            <div class="titre titreSup"> Comptes secondaires liés  <a href='javascript:ajoutCompteSec()'>
+                    <i class='fa fa-plus-circle editionCapteur' style='color: black;' aria-hidden='true' id='$c[0]'></i>
+                </a></div>
             <div class="listPersonne">
-                <div class="list2">
+                <div class="list2"><!-- romumumumumumumu -->
                     <ul class="client">
-                        <li class="client">Thomas-Pierre Rakhastanisque</li> <input class="imgInput" type="image" src="Images/times-circle-regular.svg" />
+                        <?php afficheComptesSecondaire($ComptesSecondaires) ?>
                     </ul>
                 </div>
             </div>

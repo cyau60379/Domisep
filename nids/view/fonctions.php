@@ -952,4 +952,71 @@
 
     }
 
+    //-----------------Fonctions comptes secondaires edition de profil
+
+
+    function supprimComptes(id_sec) {
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1> Voulez-vous supprimer ce compte secondaire ?</h1>" +
+            "<form>" +
+            "<input type='button' class='bouton boutonGlobal' onclick='actionSupprimComptes("+id_sec+")'   style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+
+    function actionSupprimComptes(id_sec){
+        //supprimer de la base de données
+        let request;
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                let div = document.getElementById(id_sec);
+                let nom = div.classList[0];
+                div.remove();
+                alerter('Compte secondaire de '+nom+' supprimé');
+            }
+        };
+        request.open("POST", "controller/editionProfil.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("id_sec=" + id_sec);   //envoie le resultat de la requete
+    }
+
+
+    function ajoutCompteSec() {
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1> Quel est le nom et le prénom du compte qui vous voulez lier ?</h1>" +
+            "<form method='post' name='comptesec'>" +
+            "<input type=\"text\" placeholder='Nom' name='nomsec' style=\"border:solid 1px black; border-radius:5px; text-align:center; box-shadow:0 0 6px;\" />"+
+            "<input type=\"text\" placeholder='Prénom' name='prenomsec' style=\"border:solid 1px black; border-radius:5px; text-align:center; box-shadow:0 0 6px;\" />"+
+            "<br> <input type=\"text\" placeholder='Adresse' name='logementsec' style=\"border:solid 1px black; border-radius:5px; text-align:center; box-shadow:0 0 6px;\" />"+
+            "<br> <input type='button' class='bouton boutonGlobal' value='VALIDER' onclick='actionAjoutCompteSec()' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+    function actionAjoutCompteSec() {
+        let nomsec = document.forms["comptesec"].elements["nomsec"].value;
+        let prenomsec = document.forms["comptesec"].elements["prenomsec"].value;
+        let logementsec = document.forms["comptesec"].elements["logementsec"].value;
+        let request;
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                alerter("L'ajout du compte a bien été prise en compte");
+            }
+        }
+        request.open("POST", "controller/editionProfil.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("nomsec=" + nomsec + "&nprenomsec=" + prenomsec
+            + "&logementsec=" + logementsec);
+    }
+
+
 </script>

@@ -24,6 +24,26 @@ $logement = decoupeString(recupLogements($bdd, $id));
 //récupération des coordonnées de l'utilisateur
 $coord = recuperationCoordonnees($bdd, $id);
 
+
+$ComptesSecondaires = recuperationComptesSecondaires($bdd, $id);
+
+if(isset($_POST['id_sec'])){
+    $id_sec = $_POST['id_sec'];
+    supprimComptesSecondaires($bdd, $id, $id_sec);
+}
+
+if(isset($_POST['logementsec']) && isset($_POST['prenomsec']) && isset($_POST['nomsec'])){
+    $logementsec = $_POST['logementsec'];
+    $prenomsec = $_POST['prenomsec'];
+    $nomsec = $_POST['nomsec'];
+    $id_logementsec = recupLogementFromAdressse($bdd,$logementsec);
+    $id_secadd = recupIdSecFromNomPrenom($bdd, $prenomsec, $nomsec);
+    if (!empty($id_logementsec) && !empty($id_secadd)){     //verifier que le logement existe & personne existe
+        ajouterComptesSecondaires($bdd, $id, $id_secadd, $id_logementsec);
+    }
+}
+
+
 $modif = false;
 
 //================================================ changement du nom
