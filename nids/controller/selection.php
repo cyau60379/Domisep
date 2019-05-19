@@ -26,7 +26,12 @@ if(isset($_POST['deconnexion'])){
                 $pagesPossibles["Profil"] = array("editionProfil", "fa-file-text-o");
                 $pagesPossibles["Support"] = array("support", "fa-question");
                 break;
-            //mettre pour admin + sav
+            case 3: //SAV
+                $pagesPossibles["Comptes"] = array("infoCompte", "fa-home");
+                $pagesPossibles["Profil"] = array("editionProfil", "fa-file-text-o");
+                $pagesPossibles["Support"] = array("support", "fa-question");
+                break;
+            //mettre pour admin
             default:
                 break;
         }

@@ -11,14 +11,16 @@
 </head>
 <body>
 
-<table cellspacing = "0" cellpadding = "0" border="0">
+<table cellspacing = "0" cellpadding = "0" border="0" style="margin: auto">
     <caption>CATALOGUE CAPTEURS</caption>
     <thead>
     <tr>
         <td class='catalogue nom head'>Nom Capteur</td>
         <td class='catalogue nom head'>Image Capteur</td>
         <td class='catalogue head' >Description Capteur</td>
+        <?php if($ajout):?>
         <td class='catalogue head'>Ajouter ?</td>
+        <?php endif;?>
     </tr>
     </thead>
 
@@ -34,9 +36,11 @@
         <td class='catalogue descriCapteur'>
             <?php echo $value[1];?>
         </td>
+        <?php if($ajout):?>
         <td class='catalogue prixElement'>
             <input class="bouton boutonGlobal <?php echo $id;?> boutonAjout2" type="button" id ="<?php echo $key;?>" value="Ajouter" onclick="ajouterCapteur(this.id, this.classList[2])" />
         </td>
+        <?php endif;?>
     </tr>
     <?php endforeach;?>
     </tbody>

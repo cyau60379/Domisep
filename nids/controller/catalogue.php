@@ -2,12 +2,20 @@
 
 include_once("fonctions.php");
 include_once ($_SERVER["DOCUMENT_ROOT"] . "/model/catalogue.php");
+include_once ($_SERVER["DOCUMENT_ROOT"] . "/model/requetesUtilisateur.php");
 
 //vérifie si la session est toujours active
 if(!isset($_SESSION['idUtilisateur'])){
     session_start();
 }
 $id = $_SESSION['idUtilisateur'];
+//recuperation du type
+$idTypeUtil = recupType($bdd, $id);
+$ajout = true;
+//changement en fonction de l'utilisateur
+if(($idTypeUtil == 1 && empty(recupLogements($bdd, $id))) || $idTypeUtil == 3 || $idTypeUtil == 4){   //client uniquement locataire ou SAV ou Admin
+    $ajout = false;
+}
 
 //id des types de capteurs
 $tabId = recuperationId($bdd);
