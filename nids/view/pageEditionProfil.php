@@ -14,10 +14,10 @@
 </div>
 
 <div id="zoneClients">
-    <li class='caseClient' id='divClients'>     <!-- Contient les options de modifications de profil -->
-        <div class='titre titreSup'>Edition de profil</div>
+    <li class='caseClient compte' id='divClients'>     <!-- Contient les options de modifications de profil -->
+        <div class='titre titreSup titre2'>Edition de profil</div>
         <div class="bloc">
-            <form class="formulaire" name="modification">
+            <form name="modification">
                 <input type='hidden' name='cible' value='editionProfil'>
                 <input type='hidden' name='id' value= "<?php echo $id ?>">
                 <input type='hidden' name='utilisateur' value= "<?php echo $utilisateur?>" >
@@ -67,18 +67,18 @@
 
     </li>
 
-    <li class='caseClient' id='divClients' style="height: 250px">     <!-- Contient les options de modifications de logement -->
+    <li class='caseClient' id='divClients'>     <!-- Contient les options de modifications de logement -->
         <div class='titre titreSup'>Logement</div>
         <div class="container fil" id="filPieces">     <!-- Contient les boutons pour afficher les différents capteurs en fonction de la salle -->
             <?php foreach($logement as $id => $p):?>
-                <input onclick="changerLogement3(this.id); return activerBouton(this.id);" type="button" id="<?php echo $id;?>" class="boutonFil" value="<?php echo $p;?>"> <!-- creation des boutons avec un ID identique au nom de la salle -->
+                <input onclick="changerLogement3(this.id); return activerBouton3(this.id);" type="button" id="<?php echo $id;?>" class="boutonFil2" value="<?php echo $p;?>"> <!-- creation des boutons avec un ID identique au nom de la salle -->
             <?php endforeach;?>
         </div>
-        <div class="container gestionGlobale">
+        <div class="container">
             <div id="gestionPieces">
 
             </div>
-            <div>
+        <!--    <div class="ajoutPiece">
                 <div class="titre" style="color: black"> Ajout d'une salle dans : [Appartement 2]
                     <p>
                         <form method="post" action="../controller/editionProfil.php">
@@ -93,7 +93,7 @@
                     </form>
                     </p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </li>
 </div>

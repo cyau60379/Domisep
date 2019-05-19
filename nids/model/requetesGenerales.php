@@ -62,3 +62,23 @@ function recupContenu(PDO $bdd, $id){
     return $table['Contenu'];  //renvoie le contenu
 }
 
+function addPieces(PDO $bdd, $idLog, $nom){
+    $query = "";
+    try{
+        $query = "INSERT INTO piece(nom, id_logement) VALUES ('$nom', '$idLog')";
+        $bdd->exec($query);
+    } catch (PDOException $e){
+        echo $query . "<br>" . $e->getMessage();
+    }
+}
+
+function supprPieces(PDO $bdd, $id){
+    $query = "";
+    try{
+        $query = "DELETE FROM piece WHERE id = '$id'";
+        $bdd->exec($query);
+    } catch (PDOException $e){
+        echo $query . "<br>" . $e->getMessage();
+    }
+}
+

@@ -582,20 +582,20 @@
                   "<h1>Informations</h1>" +
                   "<form name='ajoutCap'>" +
 
-                  "<label class='ed' style='text-align: center; font-size: 15px; width: 100%'> Nom :</label>" +
+                  "<label class='ed edition'> Nom :</label>" +
                   "<input type='text' name='nomCap' style='width: 90%'>" +
 
-                  "<label class='ed' style='text-align: center; font-size: 15px; width: 100%'> Numéro de série :</label>" +
+                  "<label class='ed edition'> Numéro de série :</label>" +
                   "<input type='number' name='numSerie' style='width: 90%'>" +
 
-                  "<label class='ed' style='text-align: center; font-size: 15px; width: 100%'> Piece :</label>" +
+                  "<label class='ed edition'> Piece :</label>" +
                   "<select name='piece'>" +
                   options +
                   "</select>" +
-                  "<label class='ed' style='text-align: center; font-size: 15px; width: 100%'> Id CeMAC :</label>" +
+                  "<label class='ed edition'> Id CeMAC :</label>" +
                   "<input type='number' name='CeMAC' style='width: 90%'>" +
 
-                  "<label class='ed' style='text-align: center; font-size: 15px; width: 100%'> Id Categorie :</label>" +
+                  "<label class='ed edition'> Id Categorie :</label>" +
                   "<input type='number' name='Cat' style='width: 90%'>" +
 
                   "<input type='button' class='bouton boutonGlobal' onclick='finalAjouterCapteur(" + id + "," + idUt +")' style='float: none' value='OUI'>"+
@@ -875,7 +875,7 @@
                     "<h1>Ajout d'un client</h1>" +
                     "<form name='ajoutClient'>" +
 
-                    "<label class='ed' style='text-align: center; font-size: 15px; width: 100%'> Numéro du client :</label>" +
+                    "<label class='ed edition'> Numéro du client :</label>" +
                     "<input type='number' name='num' style='width: 90%'>" +
 
                     "<input type='button' class='bouton boutonGlobal' onclick='finalAjouterClient(" + idGest + "," + idLog +")' style='float: none' value='OUI'>"+
@@ -991,10 +991,10 @@
         document.getElementById("divReponse").style.display = 'initial';
         document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
             "<h1> Quel est le nom et le prénom du compte qui vous voulez lier ?</h1>" +
-            "<form method='post' name='comptesec'>" +
-            "<input type=\"text\" placeholder='Nom' name='nomsec' style=\"border:solid 1px black; border-radius:5px; text-align:center; box-shadow:0 0 6px;\" />"+
-            "<input type=\"text\" placeholder='Prénom' name='prenomsec' style=\"border:solid 1px black; border-radius:5px; text-align:center; box-shadow:0 0 6px;\" />"+
-            "<br> <input type=\"text\" placeholder='Adresse' name='logementsec' style=\"border:solid 1px black; border-radius:5px; text-align:center; box-shadow:0 0 6px;\" />"+
+            "<form name='comptesec'>" +
+            "<input type=\"text\" placeholder='Nom' name='nomsec' class='compteSec'/>"+
+            "<input type=\"text\" placeholder='Prénom' name='prenomsec' class='compteSec'/>"+
+            "<br> <input type=\"text\" placeholder='Adresse' name='logementsec' class='compteSec'/>"+
             "<br> <input type='button' class='bouton boutonGlobal' value='VALIDER' onclick='actionAjoutCompteSec()' style='float: none'>"+
             "<input type='button' class='bouton boutonGlobal' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
@@ -1011,12 +1011,84 @@
             if (this.readyState === 4 && this.status === 200) {
                 alerter("L'ajout du compte a bien été prise en compte");
             }
-        }
+        };
         request.open("POST", "controller/editionProfil.php", true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send("nomsec=" + nomsec + "&nprenomsec=" + prenomsec
             + "&logementsec=" + logementsec);
     }
 
+    //======================================= ajout d'une pièce dans la maison qui lui appartient
+    function ajouterPiece(id){
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1>Voulez-vous réellement ajouter une pièce dans la maison ?</h1>" +
+            "<form>" +
+            "<input type='button' class='bouton boutonGlobal' onclick='actionAjouterPiece(" + id + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
 
+    // affichage du formulaire après avoir récupéré les pieces présents dans le logement
+    function actionAjouterPiece(id){
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1> Quel est le nom de la nouvelle pièce ?</h1>" +
+            "<form name='ajoutPiece'>" +
+            "<label class='ed edition'> Nom :</label>" +
+            "<input type='text' name='nomPiece' style='width: 90%'>"+
+            "<br> <input type='button' class='bouton boutonGlobal' value='VALIDER' onclick='finalAjouterPiece(" + id + ")' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+    //fonction qui envoie au serveur les informations pour les ajouter dans la base de données + message de confirmation
+    function finalAjouterPiece(id) {
+        let nom = document.forms["ajoutPiece"].elements["nomPiece"].value;
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                alerter("L'ajout a bien été prise en compte");
+                changerLogement3(id);
+            }
+        };
+        request.open("POST", "controller/editionProfil.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("idLogement="+ id + "&nomPiece=" + nom);
+    }
+
+    //============================================== fonction pour supprimer une pièce de la maison
+    function supprimerPiece(id, idMaison) {
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
+            "<h1> Voulez-vous supprimer cette pièce de la maison ?</h1>" +
+            "<form>" +
+            "<input type='button' class='bouton boutonGlobal' onclick='actionSupprimerPiece(" + id + "," + idMaison + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+    //sous-fonction pour supprimer le capteur après le message de prévention
+
+    function actionSupprimerPiece(id, idMaison){
+        //supprimer de la base de données
+        let request;
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                alerter('Pièce supprimée !');             // /!\ mettre condition si la base n'a pas ete mise a jour
+                changerLogement3(idMaison);
+            }
+        };
+        request.open("POST", "controller/editionProfil.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("idPieceSuppr=" + id);   //envoie le resultat de la requete
+    }
 </script>

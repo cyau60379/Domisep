@@ -109,5 +109,17 @@ if (isset($_GET['logement'])) {
 
     //liste des pieces de la maison sous forme array { [$id] => $nom ... }
     $pieces = decoupeString($listePieces);
-    affichePieces2($pieces, $idLogementActif, $id, $utilisateur);
+    affichePieces2($pieces, $idLogementActif);
+}
+
+// =========================================== ajout d'une piece
+
+if(isset($_POST['idLogement']) && isset($_POST['nomPiece'])){
+    addPieces($bdd, $_POST['idLogement'], $_POST['nomPiece']);
+}
+
+// =========================================== suppression d'une piece
+
+if(isset($_POST['idPieceSuppr'])){
+    supprPieces($bdd, $_POST['idPieceSuppr']);
 }

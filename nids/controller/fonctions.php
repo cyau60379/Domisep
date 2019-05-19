@@ -169,8 +169,12 @@ function affichePiecesLocation($pieces, $logement, $id, $utilisateur){
 
 //affichage des logements pour un utilisateur dans l'edition de profil
 
-function affichePieces2($pieces, $logement, $id, $utilisateur){
-    echo "<table>
+function affichePieces2($pieces, $logement){
+    echo  "<div class=\"container\">
+            <button id='$logement' class=\"bouton boutonAjout\" onclick=\"ajouterPiece(this.id)\">
+               <i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Ajouter une pièce
+           </button>
+        </div><table>
                     <thead>                   <!-- En-tête du tableau -->
                     <tr>
                         <th>  </th>
@@ -181,7 +185,7 @@ function affichePieces2($pieces, $logement, $id, $utilisateur){
                     <tbody>                 <!-- Corps du tableau -->";
     foreach($pieces as $identif => $p):
         echo "<tr>
-                <td><input class='imgInput' type='image' src='Images/times-circle-regular.svg'/></td>
+                <td><input class='imgInput' type='image' src='Images/times-circle-regular.svg' alt='x' onclick='supprimerPiece($identif, $logement)'/></td>
                         <td>$p</td>
                     </tr>";
     endforeach;
