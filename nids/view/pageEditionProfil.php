@@ -59,7 +59,7 @@
             <div class="listPersonne">
                 <div class="list2"><!-- romumumumumumumu -->
                     <ul class="client">
-                        <?php afficheComptesSecondaire($ComptesSecondaires) ?>
+                        <?php afficheComptesSecondaire($ComptesSecondaires);?>
                     </ul>
                 </div>
             </div>
@@ -76,24 +76,8 @@
         </div>
         <div class="container">
             <div id="gestionPieces">
-
+                <p class="info" style="color: black">Veuillez choisir un logement</p>
             </div>
-        <!--    <div class="ajoutPiece">
-                <div class="titre" style="color: black"> Ajout d'une salle dans : [Appartement 2]
-                    <p>
-                        <form method="post" action="../controller/editionProfil.php">
-                            <div>
-                    <p><label for="pays">Salle :</label>
-                        <select name="nouvelleSalle" id="nouvelleSalle">
-                            <option value="Chambre">Chambre</option>
-                            <option value="Terasse">Terasse</option>
-                        </select>
-                        <input class="imgInput" type="image" src="../Images/check-circle-regular.svg" />
-                    </p>
-                    </form>
-                    </p>
-                </div>
-            </div> -->
         </div>
     </li>
 </div>

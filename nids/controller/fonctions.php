@@ -360,7 +360,7 @@ function afficheComptesSecondaire($ComptesSecondaires){
         $compte = 0;
         while (($NombredeComptes) >= 1) {
             $id_sec = $ComptesSecondaires[$compte][4];
-            echo "<div id='".$id_sec."' class='" . $ComptesSecondaires[$compte]['Nom'] . " " . $ComptesSecondaires[$compte]['Prenom'] . "'>
+            echo "<div id='".$id_sec."' class='" . $ComptesSecondaires[$compte]['Nom'] . " " . $ComptesSecondaires[$compte]['Prenom'] . " compteSecondaire'>
                     <a href='javascript:supprimComptes($id_sec)'>
                         <i class='fa fa-times-circle editionCapteur' style='color: black;' aria-hidden='true'></i>
                     </a> 

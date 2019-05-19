@@ -582,20 +582,20 @@
                   "<h1>Informations</h1>" +
                   "<form name='ajoutCap'>" +
 
-                  "<label class='ed edition'> Nom :</label>" +
+                  "<label class='edition ed'> Nom :</label>" +
                   "<input type='text' name='nomCap' style='width: 90%'>" +
 
-                  "<label class='ed edition'> Numéro de série :</label>" +
+                  "<label class='edition ed'> Numéro de série :</label>" +
                   "<input type='number' name='numSerie' style='width: 90%'>" +
 
-                  "<label class='ed edition'> Piece :</label>" +
+                  "<label class='edition ed'> Piece :</label>" +
                   "<select name='piece'>" +
                   options +
                   "</select>" +
-                  "<label class='ed edition'> Id CeMAC :</label>" +
+                  "<label class='edition ed'> Id CeMAC :</label>" +
                   "<input type='number' name='CeMAC' style='width: 90%'>" +
 
-                  "<label class='ed edition'> Id Categorie :</label>" +
+                  "<label class='edition ed'> Id Categorie :</label>" +
                   "<input type='number' name='Cat' style='width: 90%'>" +
 
                   "<input type='button' class='bouton boutonGlobal' onclick='finalAjouterCapteur(" + id + "," + idUt +")' style='float: none' value='OUI'>"+

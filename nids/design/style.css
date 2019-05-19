@@ -538,8 +538,6 @@ ul.client {
     padding: 0;
     width: 100%;
     height: 200px;
-    overflow: auto;
-    display: inline-flex;
 }
 li.client {
     width: 100%;
@@ -836,8 +834,13 @@ td.nom {
     box-shadow: 0 0 6px;
 }
 
-.edition {
+label.edition {
     text-align: center;
     font-size: 15px;
-    width: 100%;
+    width: auto;
+}
+
+div.compteSecondaire {
+    border-bottom: black solid;
+    padding: 10px;
 }
