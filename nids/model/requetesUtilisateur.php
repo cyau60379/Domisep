@@ -163,3 +163,13 @@ function recupIdSecFromNomPrenom(PDO $bdd, $prenomsec, $nomsec){
     $table = $bdd->query($query)->fetch();
     return $table;
 }
+
+function update(PDO $bdd, $mdpcript, $adresseMail) {
+    try {
+        $req = "UPDATE utilisateur SET Mot_de_passe = '$mdpcript' WHERE Adresse_mail = '$adresseMail'";
+        $bdd->exec($req);
+    }
+    catch(PDOException $e) {
+        echo $req . "<br>" . $e->getMessage();
+    }
+}
