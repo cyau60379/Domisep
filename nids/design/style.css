@@ -260,6 +260,14 @@ div.actionneur {
     font-size: 20px;
     float: left;
 }
+
+.boutonGlobal2 {
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    float: left;
+}
+
 .bouton:hover {     /*bouton de base changeant en passant dessus*/
     background-color: #000000;
     background-image: none;
@@ -557,10 +565,16 @@ li.client {
 }
 
 .case {
+    background-image: linear-gradient(0deg, rgba(207,207,207,1) 0%, rgba(60,61,81,1) 100%);
+    border-radius: 10px;
+    width: 400px;
+    height: 200px;
+    border: solid 1px #000000;
     display: inline-grid;
     position: relative;
-    top: 25%;
-    left: 35.5%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
     align-content: center;
     margin: auto;
     text-align: center;
@@ -602,6 +616,10 @@ caption{
     font-size: 55px;
     margin: auto;
     justify-content: center;
+}
+
+h1.alert {
+    font-size: 20px;
 }
 
 td.catalogue{
@@ -777,6 +795,10 @@ td.nom {
     text-align: center;
 }
 
+.inputForm {
+    width: 365px;
+}
+
 @media screen and (max-width: 900px) {
     .choixPage2 {
         width: 125px;
@@ -830,6 +852,34 @@ td.nom {
     .choixPage2 {
         width: auto;
     }
+    .case{
+        width: 350px;
+    }
+    .inputForm {
+        width: 305px;
+    }
+    caption {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .case{
+        width: 300px;
+    }
+
+    .boutonGlobal2{
+        width: 100px;
+        font-size: 15px;
+    }
+
+    h1.alert {
+        font-size: 15px;
+    }
+
+    .inputForm {
+        width: 255px;
+    }
 }
 
 .ajoutPiece {
@@ -848,7 +898,7 @@ td.nom {
 label.edition {
     text-align: center;
     font-size: 15px;
-    width: auto;
+    width: 200px;
 }
 
 div.compteSecondaire {

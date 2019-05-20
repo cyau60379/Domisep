@@ -12,20 +12,20 @@
 function affichageReponse($reponse, $id, $utilisateur, $type){
     if($reponse){                                   //vérifie si la réponse doit être positive ou négative
                     //affiche un formulaire permettant d'aller à la page suivante
-        echo "<div class= 'case caseCapteur'> 
-                <h1>$type réussie !</h1>
+        echo "<div class= 'case'> 
+                <h1 class='alert'>$type réussie !</h1>
                 <form action='../index.php' method='post'>
                     <input type='hidden' name='cible' value='editionProfil'>
                     <input type='hidden' name='id' value= $id>
                     <input type='hidden' name='utilisateur' value= $utilisateur>
-                    <input type='submit' class='bouton boutonGlobal' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OK'>
+                    <input type='submit' class='bouton boutonGlobal2' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OK'>
                 </form>
             </div>";
     } else {                                        //sinon le message ne fait que se fermer, on revient sur le formulaire d'inscription ou de connexion
-        echo "<div class= 'case caseCapteur'> 
-                <h1>$type échouée !</h1>
+        echo "<div class= 'case'> 
+                <h1 class='alert'>$type échouée !</h1>
                 <div>
-                    <input type='button' class='bouton boutonGlobal' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>
+                    <input type='button' class='bouton boutonGlobal2' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>
                 </div>
             </div>";
     }
@@ -34,14 +34,14 @@ function affichageReponse($reponse, $id, $utilisateur, $type){
 //fonction pour afficher le message de déconnexion
 
 function affichageReponse2(){
-        echo "<div class= 'case caseCapteur'> 
-                <h1>Voulez-vous vous déconnecter ?</h1>
+        echo "<div class= 'case'> 
+                <h1 class='alert'>Voulez-vous vous déconnecter ?</h1>
                 <form action='../index.php' method='post'>
                     <input type='hidden' name='cible' value='accueil'>
                     <input type='hidden' name='id' value= 0>
                     <input type='hidden' name='utilisateur' value= ''>
-                    <input type='submit' class='bouton boutonGlobal' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OUI'>
-                    <input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>
+                    <input type='submit' class='bouton boutonGlobal2' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OUI'>
+                    <input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>
                 </form>
             </div>";
 }
@@ -49,10 +49,10 @@ function affichageReponse2(){
 //fonction pour erreurs lors de l'inscription (+ connexion)
 
 function affichageErreur($type){
-    echo "<div class='case caseCapteur'>
-            <h1> Il y a un problème avec $type</h1>
+    echo "<div class='case'>
+            <h1 class='alert'> Il y a un problème avec $type</h1>
             <div>
-                <input type='button' class='bouton boutonGlobal' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>
+                <input type='button' class='bouton boutonGlobal2' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>
             </div>
           </div>";
 }

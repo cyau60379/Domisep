@@ -6,11 +6,11 @@
     //=================================== messages à afficher
 
   /*  function confirmer(message, zone){
-        document.getElementById(zone).innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1>"+ message +"</h1>" +
+        document.getElementById(zone).innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'>"+ message +"</h1>" +
         "<form action='../index.php' method='post'>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }*/
@@ -98,10 +98,10 @@
   //fonction qui permet d'afficher un messsage comme alert en JS mais en personnalisé
     function alerter(message){
         //ajout du message dans le div appelé divReponse
-        document.getElementById(`divReponse`).innerHTML = "<div class= 'case caseCapteur'>"+
-        "<h1>"+ message +"</h1>"+
+        document.getElementById(`divReponse`).innerHTML = "<div class= 'case'>"+
+        "<h1 class='alert'>"+ message +"</h1>"+
             "<div>"+
-                "<input type='button' class='bouton boutonGlobal' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+                "<input type='button' class='bouton boutonGlobal2' value='OK' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</div>"+
             "</div>";
     }
@@ -320,11 +320,11 @@
     function supprimer(id) {
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1> Voulez-vous supprimer ce capteur ?</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'> Voulez-vous supprimer ce capteur ?</h1>" +
             "<form>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='actionSupprimer("+id+")' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' onclick='actionSupprimer("+id+")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
@@ -358,11 +358,11 @@
     function allumerEteindre(id){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1>Voulez-vous réellement modifier l'état de ce capteur ?</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'>Voulez-vous réellement modifier l'état de ce capteur ?</h1>" +
             "<form>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='actionAllumerEteindre(" + id + ")' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' onclick='actionAllumerEteindre(" + id + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
@@ -552,24 +552,24 @@
     function monterDescendre(id){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1>Voulez-vous réellement modifier l'état de cet élément ?</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'>Voulez-vous réellement modifier l'état de cet élément ?</h1>" +
             "<form>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='actionMonterDescendre(" + id + ")' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' onclick='actionMonterDescendre(" + id + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
 
     //fonction récupérant la valeur pour le monter
     function actionMonterDescendre(id){
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'>" +
-            "<h1>Modifications</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'>" +
+            "<h1 class='alert'>Modifications</h1>" +
             "<form name='modifVolet'>" +
-            " <label class='ed' style='text-align: center; font-size: 15px; width: 100%'> Hauteur du volet [0 (fermer) à 10 (ouvert)] :</label>" +
-            "<input type='number' name='volet' min='0' max='10' style='width: 90%'>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='finalMonterDescendre(" + id + ")' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            " <label class='ed edition'> Hauteur du volet [0 (fermer) à 10 (ouvert)] :</label>" +
+            "<input type='number' name='volet' min='0' max='10' class='inputForm'>" +
+            "<input type='button' class='bouton boutonGlobal2' onclick='finalMonterDescendre(" + id + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
@@ -603,11 +603,11 @@
     function ajouterCapteur(id, idUt){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1>Voulez-vous réellement ajouter cet élément ?</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'>Voulez-vous réellement ajouter cet élément ?</h1>" +
             "<form>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='actionAjouterCapteur(" + id + "," + idUt +")' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' onclick='actionAjouterCapteur(" + id + "," + idUt +")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
@@ -624,28 +624,28 @@
                   let tabVal2 = tabValues[i].split("!");
                   options += "<option value= "+ tabVal2[0] + ">" + tabVal2[1] + " (" + tabVal2[2] + ")</option>"
               }
-              document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur' style='height: 300px'>" +
-                  "<h1>Informations</h1>" +
+              document.getElementById("divReponse").innerHTML = "<div class= 'case' style='height: 300px'>" +
+                  "<h1 class='alert'>Informations</h1>" +
                   "<form name='ajoutCap'>" +
 
                   "<label class='edition ed'> Nom :</label>" +
-                  "<input type='text' name='nomCap' style='width: 90%'>" +
+                  "<input type='text' name='nomCap' class='inputForm'>" +
 
                   "<label class='edition ed'> Numéro de série :</label>" +
-                  "<input type='number' name='numSerie' style='width: 90%'>" +
+                  "<input type='number' name='numSerie' class='inputForm'>" +
 
                   "<label class='edition ed'> Piece :</label>" +
-                  "<select name='piece'>" +
+                  "<select name='piece' class='inputForm'>" +
                   options +
                   "</select>" +
                   "<label class='edition ed'> Id CeMAC :</label>" +
-                  "<input type='number' name='CeMAC' style='width: 90%'>" +
+                  "<input type='number' name='CeMAC' class='inputForm'>" +
 
                   "<label class='edition ed'> Id Categorie :</label>" +
-                  "<input type='number' name='Cat' style='width: 90%'>" +
+                  "<input type='number' name='Cat' class='inputForm'>" +
 
-                  "<input type='button' class='bouton boutonGlobal' onclick='finalAjouterCapteur(" + id + "," + idUt +")' style='float: none' value='OUI'>"+
-                  "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+                  "<input type='button' class='bouton boutonGlobal2' onclick='finalAjouterCapteur(" + id + "," + idUt +")' style='float: none' value='OUI'>"+
+                  "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
                   "</form>"+
                   "</div>";
           }
@@ -680,11 +680,11 @@
     function changer(id, action, numAction){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1>Voulez-vous réellement tout "+ action +" ?</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'>Voulez-vous réellement tout "+ action +" ?</h1>" +
             "<form>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='actionChanger(" + id + "," + numAction + ")' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' onclick='actionChanger(" + id + "," + numAction + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
@@ -736,24 +736,24 @@
     function modificationInformations(id){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1>Voulez-vous réellement modifier les informations de cet élément ?</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'>Voulez-vous réellement modifier les informations de cet élément ?</h1>" +
             "<form>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='actionModificationInfo(" + id + ")' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' onclick='actionModificationInfo(" + id + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
 
     //fonction pour afficher le formulaire de modification
     function actionModificationInfo(id){
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'>" +
-            "<h1>Informations</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'>" +
+            "<h1 class='alert'>Informations</h1>" +
             "<form name='modifInfo'>" +
-                " <label class='ed' style='text-align: center; font-size: 15px; width: 50px;'> Nom :</label>" +
-                "<input type='text' name='nomCapteur' style='width: 90%'>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='finalModification(" + id + ")' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+                " <label class='ed edition'> Nom :</label>" +
+                "<input type='text' name='nomCapteur' class='inputForm'>" +
+            "<input type='button' class='bouton boutonGlobal2' onclick='finalModification(" + id + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
@@ -869,11 +869,11 @@
     function supprimerClient(id) {
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1> Voulez-vous supprimer ce client ?</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'> Voulez-vous supprimer ce client ?</h1>" +
             "<form>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='actionSupprimerClient("+id+")' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' onclick='actionSupprimerClient("+id+")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
@@ -906,26 +906,26 @@
     function ajouterClient(idGest, idLog){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1>Voulez-vous réellement ajouter un client ?</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'>Voulez-vous réellement ajouter un client ?</h1>" +
             "<form>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='actionAjouterClient(" + idGest + "," + idLog + ")' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' onclick='actionAjouterClient(" + idGest + "," + idLog + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
 
     //affichage du choix de client
     function actionAjouterClient(idGest, idLog){
-                document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur' style='height: 300px'>" +
-                    "<h1>Ajout d'un client</h1>" +
+                document.getElementById("divReponse").innerHTML = "<div class= 'case' style='height: 300px'>" +
+                    "<h1 class='alert'>Ajout d'un client</h1>" +
                     "<form name='ajoutClient'>" +
 
                     "<label class='ed edition'> Numéro du client :</label>" +
-                    "<input type='number' name='num' style='width: 90%'>" +
+                    "<input type='number' name='num' class='inputForm'>" +
 
-                    "<input type='button' class='bouton boutonGlobal' onclick='finalAjouterClient(" + idGest + "," + idLog +")' style='float: none' value='OUI'>"+
-                    "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+                    "<input type='button' class='bouton boutonGlobal2' onclick='finalAjouterClient(" + idGest + "," + idLog +")' style='float: none' value='OUI'>"+
+                    "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
                     "</form>"+
                     "</div>";
     }
@@ -938,11 +938,11 @@
         request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
             if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
                 let nomClient = this.responseText;
-                document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'>" +
-                    "<h1>Voulez-vous ajouter " + nomClient + " à ce logement ?</h1>" +
+                document.getElementById("divReponse").innerHTML = "<div class= 'case'>" +
+                    "<h1 class='alert'>Voulez-vous ajouter " + nomClient + " à ce logement ?</h1>" +
                     "<form>" +
-                        "<input type='button' class='bouton boutonGlobal' onclick='finalAjouterClientFinal(" + num + "," + idGest + "," + idLog +")' style='float: none' value='OUI'>"+
-                        "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>" +
+                        "<input type='button' class='bouton boutonGlobal2' onclick='finalAjouterClientFinal(" + num + "," + idGest + "," + idLog +")' style='float: none' value='OUI'>"+
+                        "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>" +
                     "</form>" +
                     "</div>";
             }
@@ -1005,11 +1005,11 @@
     function supprimComptes(id_sec) {
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1> Voulez-vous supprimer ce compte secondaire ?</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'> Voulez-vous supprimer ce compte secondaire ?</h1>" +
             "<form>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='actionSupprimComptes("+id_sec+")'   style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' onclick='actionSupprimComptes("+id_sec+")'   style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
@@ -1036,14 +1036,14 @@
     function ajoutCompteSec() {
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1> Quel est le nom et le prénom du compte qui vous voulez lier ?</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'> Quel est le nom et le prénom du compte qui vous voulez lier ?</h1>" +
             "<form name='comptesec'>" +
             "<input type=\"text\" placeholder='Nom' name='nomsec' class='compteSec'/>"+
             "<input type=\"text\" placeholder='Prénom' name='prenomsec' class='compteSec'/>"+
             "<br> <input type=\"text\" placeholder='Adresse' name='logementsec' class='compteSec'/>"+
-            "<br> <input type='button' class='bouton boutonGlobal' value='VALIDER' onclick='actionAjoutCompteSec()' style='float: none'>"+
-            "<input type='button' class='bouton boutonGlobal' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<br> <input type='button' class='bouton boutonGlobal2' value='VALIDER' onclick='actionAjoutCompteSec()' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
@@ -1069,11 +1069,11 @@
     function ajouterPiece(id){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1>Voulez-vous réellement ajouter une pièce dans la maison ?</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'>Voulez-vous réellement ajouter une pièce dans la maison ?</h1>" +
             "<form>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='actionAjouterPiece(" + id + ")' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' onclick='actionAjouterPiece(" + id + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
@@ -1082,13 +1082,13 @@
     function actionAjouterPiece(id){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1> Quel est le nom de la nouvelle pièce ?</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'> Quel est le nom de la nouvelle pièce ?</h1>" +
             "<form name='ajoutPiece'>" +
             "<label class='ed edition'> Nom :</label>" +
-            "<input type='text' name='nomPiece' style='width: 90%'>"+
-            "<br> <input type='button' class='bouton boutonGlobal' value='VALIDER' onclick='finalAjouterPiece(" + id + ")' style='float: none'>"+
-            "<input type='button' class='bouton boutonGlobal' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<input type='text' name='nomPiece' class='inputForm'>"+
+            "<br> <input type='button' class='bouton boutonGlobal2' value='VALIDER' onclick='finalAjouterPiece(" + id + ")' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
@@ -1113,11 +1113,11 @@
     function supprimerPiece(id, idMaison) {
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case caseCapteur'> "+
-            "<h1> Voulez-vous supprimer cette pièce de la maison ?</h1>" +
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'> Voulez-vous supprimer cette pièce de la maison ?</h1>" +
             "<form>" +
-            "<input type='button' class='bouton boutonGlobal' onclick='actionSupprimerPiece(" + id + "," + idMaison + ")' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' onclick='actionSupprimerPiece(" + id + "," + idMaison + ")' style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
