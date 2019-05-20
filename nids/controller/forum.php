@@ -21,5 +21,4 @@ if(isset($_POST['Titre']) && isset($_POST['Contenu'])) {
     ajoutArticleForum($bdd, $titre, $contenu);
     $tabForum = decoupeString(forum($bdd));
     afficheArticle($tabForum);
-
 }

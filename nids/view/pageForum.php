@@ -17,7 +17,7 @@
 <br>
 <br>
 <br>
-<form name="formulaireForum" class="formulaire">  <!-- formulaire permettant de connaître le type d'annonce voulue -->
+<form name="formulaireF" class="formulaire">  <!-- formulaire permettant de connaître le type d'annonce voulue -->
     <label> <h1>Article</h1> <br>
         TITRE :
             <input class="texte" type="text" name="Titre">
@@ -27,13 +27,9 @@
         <br>
             <textarea name="Contenu" class="contenu" cols="30" rows="5"></textarea>
     </label>
-
-
-
-
     <br>
     <div class="division">
-        <button type="button" class="bouton" onclick="ajoutForum();">    <!-- envoie au controllerAnnonces le résultat du formulaire2 -->
+        <button type="button" class="bouton" onclick="ajoutF('forum');">    <!-- envoie au controllerAnnonces le résultat du formulaire2 -->
             Envoyer
         </button>
     </div>
@@ -42,18 +38,7 @@
 <br>
 <br>
 <div id="articles">
-    <?php
-    $i = 0;
-    foreach($tabForum as $q => $r):?>
-        <section class="faq-section">
-            <input type="checkbox" id="<?php echo $i;?>">
-            <label for="<?php echo $i;?>"><?php echo $q;?></label>
-            <p> <?php echo $r;?></p>
-        </section>
-        <?php
-        $i += 1;
-
-    endforeach;?>
+    <?php afficheArticle($tabForum)?>
 </div>
 
 </html>

@@ -383,4 +383,19 @@ function afficheArticle($tabForum){
     }
 }
 
+function afficheArticle2($tabForum, $ajout, $ids){
+    $i = 0;
+    foreach($tabForum as $q => $r){
+        echo "<section class='faq-section'>
+            <input type='checkbox' id='$ids[$i]'>
+            <label for='$ids[$i]'>$q</label>
+            <p>$r</p>";
+        if($ajout) {
+            echo "<button class='bouton boutonGlobal2' onclick='supprimerArticle($ids[$i])'>SUPPRIMER</button>
+        </section> <br>";
+        }
+        $i += 1;
+    }
+}
+
 ?>

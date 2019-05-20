@@ -973,9 +973,9 @@
         request.send("idClientAjouter=" + id + "&idGest=" + idGest + "&idLog=" + idLog);
     }
 
-    function ajoutForum(){
-        let titre = document.forms["formulaireForum"].elements['Titre'].value;
-        let contenu = document.forms["formulaireForum"].elements['Contenu'].value;
+    function ajoutF(page){
+        let titre = document.forms["formulaireF"].elements['Titre'].value;
+        let contenu = document.forms["formulaireF"].elements['Contenu'].value;
         if(titre === "" || contenu === ""){
             document.getElementById("divReponse").style.zIndex = '1';
             document.getElementById("divReponse").style.display = 'initial';
@@ -992,11 +992,36 @@
                     document.getElementById("articles").innerHTML = this.responseText;
                 }
             };
-            request.open("POST", "controller/forum.php", true);
+            request.open("POST", "controller/"+ page +".php", true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send("Titre=" + titre + "&Contenu=" + contenu);
         }
+    }
 
+    function supprimerArticle(question) {
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'> Voulez-vous supprimer cet article ?</h1>" +
+            "<form>" +
+            "<input type='button' class='bouton boutonGlobal2' onclick='actionSupprimerArticle("+ question +")'   style='float: none' value='OUI'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+    function actionSupprimerArticle(question){
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                alerter("Article supprimé !");
+                document.getElementById("articles").innerHTML = this.responseText;
+            }
+        };
+        request.open("POST", "controller/FAQ.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("question=" + question);
     }
 
     //-----------------Fonctions comptes secondaires edition de profil

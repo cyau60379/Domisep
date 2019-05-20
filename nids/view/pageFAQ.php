@@ -14,21 +14,29 @@
     <h1>FAQ</h1>
 
 </div>
-<?php
-if($ajout){
-    //mettre un champ pour ajouter un article (idem forum)
-}
-$i = 0;
-foreach($tabFaq as $q => $r):?>
-<section class="faq-section">
-    <input type="checkbox" id="<?php echo $i;?>">
-    <label for="<?php echo $i;?>"><?php echo $q;?></label>
-    <p> <?php echo $r;?></p>
-</section>
-<?php
-$i += 1;
-endforeach;?>
-
+<?php if($ajout):?>
+<form name="formulaireF" class="formulaire">  <!-- formulaire permettant de connaître le type d'annonce voulue -->
+    <label> <h1>Article</h1> <br>
+        Titre :
+        <br>
+        <textarea class="texte" name="Titre" cols="30" rows="1"></textarea>
+        <br>
+        <br>
+        Contenu:
+        <br>
+        <textarea name="Contenu" class="contenu" cols="30" rows="5"></textarea>
+    </label>
+    <br>
+    <div class="division">
+        <button type="button" class="bouton boutonGlobal2" style="float: none" onclick="ajoutF('FAQ');">    <!-- envoie au controllerAnnonces le résultat du formulaire2 -->
+            Envoyer
+        </button>
+    </div>
+</form>
+<?php endif; ?>
+<div id="articles">
+    <?php afficheArticle2($tabFaq, $ajout, $ids);?>
+</div>
 </body>
 </html>
 

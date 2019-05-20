@@ -1,5 +1,6 @@
 <?php
 
+include_once ("fonctions.php");
 include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesUtilisateur.php");
 include_once($_SERVER["DOCUMENT_ROOT"] . "/model/FAQ.php");
 
@@ -24,3 +25,23 @@ $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));
 
 //récupérations des questions et des réponses de la FAQ
 $tabFaq = decoupeString(recupFAQ($bdd));
+$ids = recupIds($bdd);
+
+if(isset($_POST['Titre']) && isset($_POST['Contenu'])) {
+    $titre = $_POST['Titre'];
+    $contenu = $_POST['Contenu'];
+    ajoutArticleFaq($bdd, $titre, $contenu);
+    $tabFaq = decoupeString(recupFAQ($bdd));
+    $ids = recupIds($bdd);
+    afficheArticle2($tabFaq, $ajout, $ids);
+
+}
+
+if(isset($_POST['question'])) {
+    $question = $_POST['question'];
+    suppressionArticleFaq($bdd, $question);
+    $tabFaq = decoupeString(recupFAQ($bdd));
+    $ids = recupIds($bdd);
+    afficheArticle2($tabFaq, $ajout, $ids);
+
+}
