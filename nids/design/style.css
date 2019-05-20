@@ -640,12 +640,14 @@ td.catalogue2{
 td.nom {
     width: 20%;
 }
-.head{
+td.head{
     margin-top: 0;
     padding-left: 0;
     padding-right: 0;
     font-weight: bolder;
     width: 12px;
+    background-color: #05083E;
+    color: #FFFFFF;
 }
 
 @media screen and  (max-width: 10000px) {
@@ -663,12 +665,17 @@ td.nom {
     }
 }
 
+@media screen and (max-width: 650px) {
+    .catalogue2{
+        font-size: 12px;
+    }
+}
 @media screen and (max-width: 600px) {
     .catalogue {
         font-size: 3vw;
     }
     .catalogue2 {
-        font-size: 2.5vw;
+        font-size: 2vw;
     }
     .img{
         width: 50px;

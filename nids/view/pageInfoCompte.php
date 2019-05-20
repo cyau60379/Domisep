@@ -14,13 +14,13 @@
     <caption>Comptes clients</caption>
     <thead>
     <tr>
-        <td class='catalogue2 head'>ID</td>
-        <td class='catalogue2 nom head'>Nom</td>
-        <td class='catalogue2 nom head'>Prénom</td>
-        <td class='catalogue2 head'>Adresse mail</td>
-        <td class='catalogue2 head' >Numéro de téléphone</td>
-        <td class='catalogue2 head' >Date de naissance</td>
-        <td class='catalogue2 head' >Type</td>
+        <td class='head catalogue2'>ID</td>
+        <td class='head catalogue2 nom'>Nom</td>
+        <td class='head catalogue2 nom'>Prénom</td>
+        <td class='head catalogue2'>Adresse mail</td>
+        <td class='head catalogue2'>Numéro de téléphone</td>
+        <td class='head catalogue2'>Date de naissance</td>
+        <td class='head catalogue2'>Type</td>
     </tr>
     </thead>
 

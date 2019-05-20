@@ -9,7 +9,9 @@ function recup7($u1, $u2, $u3, $u4, $u5, $u6, $u7){
 
 //fonction de recupération des données d'un tableau
 function recupererToutDansUtilisateur(PDO $bdd) {
-    $query = 'SELECT id, Nom, Prenom, Adresse_mail, numeroTel, Date_naissance, id_type_utilsateur FROM utilisateur';
+    $query = 'SELECT utilisateur.id, utilisateur.Nom, utilisateur.Prenom, 
+              utilisateur.Adresse_mail, utilisateur.numeroTel, utilisateur.Date_naissance, 
+              type_utilisateur.Nom FROM utilisateur JOIN type_utilisateur ON utilisateur.id_type_utilsateur = type_utilisateur.id';
     return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, "recup7");     //retourne un tableau contenant toutes les resultats de la requete
 }
 
