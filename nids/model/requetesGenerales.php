@@ -2,10 +2,15 @@
 
 include_once($_SERVER["DOCUMENT_ROOT"] . "/model/connexionBDD.php");
 
+//fonction pour mettre les données sous forme de string lors d'un retour avec 2 infos
+function recup7($u1, $u2, $u3, $u4, $u5, $u6, $u7){
+    return "$u1!$u2!$u3!$u4!$u5!$u6!$u7";
+}
+
 //fonction de recupération des données d'un tableau
-function recupererToutDans(PDO $bdd, string $table): array {
-    $query = 'SELECT * FROM ' . $table;
-    return $bdd->query($query)->fetchAll();     //retourne un tableau contenant toutes les resultats de la requete
+function recupererToutDansUtilisateur(PDO $bdd) {
+    $query = 'SELECT id, Nom, Prenom, Adresse_mail, numeroTel, Date_naissance, id_type_utilsateur FROM utilisateur';
+    return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, "recup7");     //retourne un tableau contenant toutes les resultats de la requete
 }
 
 //fonction pour mettre les données sous forme de string lors d'un retour avec 2 infos

@@ -611,6 +611,14 @@ td.catalogue{
     width: 100%;
     background-color: #979ACC;
 }
+
+td.catalogue2{
+    border : 1px solid white;
+    text-align: center;
+    background-color: #979ACC;
+    height: 50px;
+}
+
 td.nom {
     width: 20%;
 }
@@ -640,6 +648,9 @@ td.nom {
 @media screen and (max-width: 600px) {
     .catalogue {
         font-size: 3vw;
+    }
+    .catalogue2 {
+        font-size: 2.5vw;
     }
     .img{
         width: 50px;
