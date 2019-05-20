@@ -197,14 +197,17 @@
         let naissance = document.forms["inscription"].elements["DateDeNaissance"].value;
         let mdp = document.forms["inscription"].elements["Mdp"].value;
         let confirma = document.forms["inscription"].elements["ConfirmationMdp"].value;
-
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        //ajout du message dans le div appelé divReponse
+        document.getElementById(`divReponse`).innerHTML = "<div class= 'case'>"+
+            "<h1 class='alert'>Patientez s'il vous plait, votre inscription est en cours...</h1>"+
+            "</div>";
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
         request = new XMLHttpRequest();
         request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
             if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
                 document.getElementById("divReponse").innerHTML = this.responseText;   //rempli le corps de la page avec la réponse
-                document.getElementById("divReponse").style.zIndex = '1';
-                document.getElementById("divReponse").style.display = 'initial';
             }
         };
         request.open("POST", "controller/accueil.php", true);

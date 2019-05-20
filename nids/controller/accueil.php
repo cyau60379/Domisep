@@ -73,6 +73,29 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
             ajouterInscription($bdd, $id, $nom, $prenom, $mail, $naissance, $mdp);
             updateEtat($bdd, $id, 1);                       //le met connecté
             $utilisateur = $prenom . "_". $nom;
+            $identifiant =  substr($prenom,0,2) . substr($nom,0,2) . $id;
             affichageReponse(true, $id, $utilisateur,"Inscription"); //message envoyé pour être affiché
+            //envoi de mail pour récupérer les identifiants
+            $sujet = "Votre inscription";
+            $header = "MIME-Version: 1.0\r\n";
+            $header .= 'From:"NIDS"<contactservice123456@gmail.com>' . "\n";
+            $header .= 'Content-Type:text/html; charset="utf-8"' . "\n";
+            $header .= 'Content-Transfer-Encoding: 8bit';
+            $messsage = "Bonjour $prenom,
+                        <br> vous venez de vous inscrire sur le site NIDS pour gérer vos capteurs en toute sécurité.
+                        <br> nous vous communiquons votre identifiant : $identifiant.
+                        <br>Cordialement,
+                        <br>L'équipe de NIDS";
+
+            if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) {
+                $passage_ligne = "\r\n";
+            } else {
+                $passage_ligne = "\n";
+            }
+            try {
+                mail($mail, $sujet, $messsage, $header);
+            } catch (Exception $e) {
+                echo $e->getMessage(), "\n";
+            }
         }
     }

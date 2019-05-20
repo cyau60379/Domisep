@@ -4,9 +4,9 @@ $login = "";
 if (isset($_POST['mail'])) {
     $login = $_POST['mail'];
 
-    $sujet = "test";
+    $sujet = "Modification de votre mot de passe";
     $header = "MIME-Version: 1.0\r\n";
-    $header .= 'From:"Genesis"<contactservice123456@gmail.com>' . "\n";
+    $header .= 'From:"NIDS"<contactservice123456@gmail.com>' . "\n";
     $header .= 'Content-Type:text/html; charset="utf-8"' . "\n";
     $header .= 'Content-Transfer-Encoding: 8bit';
     $messsage = '<html>
