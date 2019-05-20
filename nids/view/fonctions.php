@@ -989,6 +989,7 @@
                     document.getElementById("divReponse").style.zIndex = '1';
                     document.getElementById("divReponse").style.display = 'initial';
                     alerter("L'ajout a bien été pris en compte");
+                    document.getElementById("articles").innerHTML = this.responseText;
                 }
             };
             request.open("POST", "controller/forum.php", true);

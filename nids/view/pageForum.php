@@ -23,9 +23,13 @@
             <input class="texte" type="text" name="Titre">
         <br>
         <br>
-        Contenu :
-        <input class="contenu" type="text" name="Contenu">
+        Contenu:
+        <br>
+            <textarea name="Contenu" class="contenu" cols="30" rows="5"></textarea>
     </label>
+
+
+
 
     <br>
     <div class="division">
@@ -37,23 +41,19 @@
 <br>
 <br>
 <br>
-
-<?php
-$i = 0;
-foreach($tabForum as $q => $r):?>
-    <section class="faq-section">
-        <input type="checkbox" id="<?php echo $i;?>">
-        <label for="<?php echo $i;?>"><?php echo $q;?></label>
-        <p> <?php echo $r;?></p>
-    </section>
+<div id="articles">
     <?php
-    $i += 1;
-endforeach;?>
+    $i = 0;
+    foreach($tabForum as $q => $r):?>
+        <section class="faq-section">
+            <input type="checkbox" id="<?php echo $i;?>">
+            <label for="<?php echo $i;?>"><?php echo $q;?></label>
+            <p> <?php echo $r;?></p>
+        </section>
+        <?php
+        $i += 1;
 
-
-
-
-
-
+    endforeach;?>
+</div>
 
 </html>

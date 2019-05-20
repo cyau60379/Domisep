@@ -371,5 +371,16 @@ function afficheComptesSecondaire($ComptesSecondaires){
     }
 }
 
+function afficheArticle($tabForum){
+    $i = 0;
+    foreach($tabForum as $q => $r){
+        echo "<section class='faq-section'>
+            <input type='checkbox' id='$i'>
+            <label for='$i'>$q</label>
+            <p>$r</p>
+        </section>";
+        $i += 1;
+    }
+}
 
 ?>
