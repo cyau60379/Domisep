@@ -14,11 +14,13 @@ $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));
 
 //récupérations des questions et des réponses (commentaires) du Forum
 $tabForum = decoupeString(forum($bdd));
+$ids = recupIdsForum($bdd);
 
 if(isset($_POST['Titre']) && isset($_POST['Contenu'])) {
     $titre = $_POST['Titre'];
     $contenu = $_POST['Contenu'];
     ajoutArticleForum($bdd, $titre, $contenu);
     $tabForum = decoupeString(forum($bdd));
-    afficheArticle($tabForum);
+    $ids = recupIdsForum($bdd);
+    afficheArticle($tabForum, $ids);
 }

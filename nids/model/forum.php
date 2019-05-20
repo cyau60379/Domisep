@@ -17,3 +17,10 @@ function ajoutArticleForum(PDO $bdd, $titre, $contenu){
         echo $query . "<br>" . $e->getMessage();
     }
 }
+
+//recuperation des ids du forum
+function recupIdsForum(PDO $bdd){
+    $query = "SELECT article.id FROM article";
+    $result = $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
+    return $result;
+}

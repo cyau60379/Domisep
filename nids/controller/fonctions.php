@@ -371,14 +371,15 @@ function afficheComptesSecondaire($ComptesSecondaires){
     }
 }
 
-function afficheArticle($tabForum){
+function afficheArticle($tabForum, $ids){
     $i = 0;
     foreach($tabForum as $q => $r){
         echo "<section class='faq-section'>
-            <input type='checkbox' id='$i'>
-            <label for='$i'>$q</label>
+            <input type='checkbox' id='$ids[$i]'>
+            <label for='$ids[$i]'>$q</label>
             <p>$r</p>
-        </section>";
+            <button class='bouton boutonGlobal2' onclick='CommenterArticle($ids[$i])'>COMMENTER</button>
+        </section> <br>";
         $i += 1;
     }
 }

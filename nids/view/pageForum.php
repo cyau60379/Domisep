@@ -19,17 +19,18 @@
 <br>
 <form name="formulaireF" class="formulaire">  <!-- formulaire permettant de connaître le type d'annonce voulue -->
     <label> <h1>Article</h1> <br>
-        TITRE :
-            <input class="texte" type="text" name="Titre">
+        Titre :
+        <br>
+        <textarea class="texte" name="Titre" cols="30" rows="1"></textarea>
         <br>
         <br>
-        Contenu:
+        Contenu :
         <br>
             <textarea name="Contenu" class="contenu" cols="30" rows="5"></textarea>
     </label>
     <br>
     <div class="division">
-        <button type="button" class="bouton" onclick="ajoutF('forum');">    <!-- envoie au controllerAnnonces le résultat du formulaire2 -->
+        <button type="button" class="bouton boutonGlobal2" style="float: none" onclick="ajoutF('forum');">    <!-- envoie au controllerAnnonces le résultat du formulaire2 -->
             Envoyer
         </button>
     </div>
@@ -38,7 +39,7 @@
 <br>
 <br>
 <div id="articles">
-    <?php afficheArticle($tabForum)?>
+    <?php afficheArticle($tabForum, $ids)?>
 </div>
 
 </html>

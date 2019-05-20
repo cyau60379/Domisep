@@ -22,7 +22,7 @@
         <textarea class="texte" name="Titre" cols="30" rows="1"></textarea>
         <br>
         <br>
-        Contenu:
+        Contenu :
         <br>
         <textarea name="Contenu" class="contenu" cols="30" rows="5"></textarea>
     </label>
