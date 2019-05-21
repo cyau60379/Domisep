@@ -919,3 +919,39 @@ div.compteSecondaire {
     border-bottom: black solid;
     padding: 10px;
 }
+
+.mdpo{
+    margin-left: 15px;
+    color: white;
+}
+
+.rvam{
+    margin-left: 25px;
+    color : white;
+
+
+}
+
+.boutton_mdpo{
+    margin-top: 15px;
+    border: solid;
+    border-color: black;
+    width: 70px;
+    height: 35px;
+    text-align: center;
+//padding: px;
+    box-shadow:1px 1px 3px;
+
+}
+
+.boutton_mdpo:hover{
+    background-color : black;
+    color: white;
+
+}
+
+.mdpot{
+    width: 250px;
+    box-shadow:1px 1px 3px
+
+}

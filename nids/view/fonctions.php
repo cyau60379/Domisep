@@ -62,6 +62,19 @@
             document.getElementById("labDateDeNaissance").innerHTML = "Ok";               //ajout message
         }
     }
+
+    function validationnn(mail) {
+        let expression = new RegExp('^[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*@[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*[\.]{1}[a-z]{2,6}$', 'i');
+        document.getElementById(resultat).innerHTML= ;
+        if (expression.test(document.getElementById(mail).value)){
+            document.getElementById("resultat").innerHTML = "adresse mail valide"; //. La méthode test() permet de tester une chaîne de caractères. Elle retourne true si la chaîne est valide, false sinon.
+            document.getElementById("resultat").style.color = "green";
+        } else{
+            document.getElementById("resultat").innerHTML = "adresse mail invalide";
+            document.getElementById("resultat").style.color = "red";
+        }
+        return false;
+    }
     /*
     function verificationMail(){
         let mail = document.forms['inscription'].elements['AdresseMail'].value;  //récupération de ce qui est mis dans l'entrée pour le mot de passe
