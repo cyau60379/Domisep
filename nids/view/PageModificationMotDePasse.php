@@ -10,29 +10,15 @@
 </head>
 <body marginheight="40" bgcolor="#ffffff" leftmargin="30">
 <div id="retour">
-<form name="chgmntMdp">
-             <tr>
-                    <td>
-                     <span class="style4">	Votre adresse mail : <input type="email" name="mail"> </span>
-                </td>
-
-                 <td>
-            <tr>
-                <td>
-                    <span class="style4">	Nouveau mot de passe : <input type="password" name="new_pass"> </span>
-
-
-                </td>
-
-                <td>
-            <tr>
-                <td>
-                    <span class="style4">Confirmation : <input type="password" name="new_pass_conf"></span>
-
-                </td>
-            </tr>
-    <input type = "button" value = "Envoyer" onclick="modifMdp()">
-</form>
+    <form id="changementMdp" name="inscription">
+        <label class="boxIdentifiant boxConnexion1" style="color: #FFFFFF">
+            Login : <br><input id="identifiant" class="inputForm" name="identifiant">
+            <p id="labIdentif" class ="put" style="color: #3c3d51">.</p>
+        </label>
+        <div id="boutonEnvoi" class="boxBouton boxConnexion1" style="margin: auto">
+            <input type = "button" class="boutton_mdpo" value = "Envoyer" onclick="verifLogin()">
+        </div>
+    </form>
 </div>
 </body>
 </html>

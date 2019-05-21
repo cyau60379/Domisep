@@ -164,9 +164,9 @@ function recupIdSecFromNomPrenom(PDO $bdd, $prenomsec, $nomsec){
     return $table;
 }
 
-function update(PDO $bdd, $mdpcript, $adresseMail) {
+function update(PDO $bdd, $mdpcript, $id) {
     try {
-        $req = "UPDATE utilisateur SET Mot_de_passe = '$mdpcript' WHERE Adresse_mail = '$adresseMail'";
+        $req = "UPDATE utilisateur SET Mot_de_passe = '$mdpcript' WHERE id = '$id'";
         $bdd->exec($req);
     }
     catch(PDOException $e) {
@@ -177,4 +177,14 @@ function update(PDO $bdd, $mdpcript, $adresseMail) {
 function verifAdresse(PDO $bdd, $ad){
     $query = "SELECT Adresse_mail FROM utilisateur WHERE Adresse_mail= '$ad'";
     return $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);//fetch column qui vérifie si le tableau est vide ou non
+}
+
+function recupQuestion(PDO $bdd, $id){
+    $query = "SELECT utilisateur.Question_verif FROM utilisateur WHERE utilisateur.id = '$id'";
+    return $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
+}
+
+function recupReponse(PDO $bdd, $id){
+    $query = "SELECT utilisateur.Reponse_verif FROM utilisateur WHERE utilisateur.id = '$id'";
+    return $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
 }

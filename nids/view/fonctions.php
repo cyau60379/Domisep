@@ -156,30 +156,70 @@
         }
     }
 
-    function modifMdp() {
-        let mail = document.forms['chgmntMdp'].elements['mail'].value;
-        let mdp = document.forms['chgmntMdp'].elements['new_pass'].value;
-        let newMdp = document.forms['chgmntMdp'].elements['new_pass_conf'].value;
-        if(!checkMail(mail)){
-            document.getElementById("divReponse").style.zIndex = '1';
-            document.getElementById("divReponse").style.display = 'initial';
-            alerter("Adresse mail invalide !");
-        } else if(mdp !== newMdp){
-            document.getElementById("divReponse").style.zIndex = '1';
-            document.getElementById("divReponse").style.display = 'initial';
-            alerter("Mots de passe différents !");
+    function verifLogin() {
+        let id = document.forms['inscription'].elements['identifiant'].value;
+        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
+            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                document.getElementById('boutonEnvoi').remove();
+                document.getElementById('changementMdp').innerHTML += this.responseText;
+            }
+        };
+        request.open("POST", "controller/modificationMotDePasse.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("identifiant=" + id);                      //envoie le resultat de la requete au serveur
+    }
+
+    function verifReponse() {
+        let id = document.forms['inscription'].elements['identifiant'].value;
+        let reponse = document.forms['inscription'].elements['reponse'].value;
+        if(id === ""){
+            document.getElementById("identifiant").style.borderColor = "red";             //change le style du message
+            document.getElementById("labIdentif").style.color = "red";             //change le style du message
+            document.getElementById("labIdentif").innerHTML = "Login manquant !";
         } else {
             let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
             request = new XMLHttpRequest();
             request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
                 if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
-                    document.getElementById('retour').innerHTML = "<p>La modification de mot de passe a été prise en compte ! Déconnectez-vous et reconnectez-vous afin de valider ce changement.</p><br/>" +
-                        "<a href='../index.php'>Retour à la page d'inscription</a>";
+                    let vraiReponse = this.responseText;
+                    if(vraiReponse === reponse){
+                        modifMdp();
+                    } else {
+                        document.getElementById("reponse").style.borderColor = "red";             //change le style du message
+                        document.getElementById("labRep").style.color = "red";             //change le style du message
+                        document.getElementById("labRep").innerHTML = "Mauvaise réponse !";
+                    }
                 }
             };
             request.open("POST", "controller/modificationMotDePasse.php", true);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            request.send("new_pass=" + mdp + "&new_pass_conf=" + newMdp + "&mail=" + mail);                      //envoie le resultat de la requete au serveur
+            request.send("monId=" + id);                      //envoie le resultat de la requete au serveur
+        }
+    }
+
+    function modifMdp() {
+        let id = document.forms['inscription'].elements['identifiant'].value;
+        let mdp = document.forms['inscription'].elements['Mdp'].value;
+        let newMdp = document.forms['inscription'].elements['ConfirmationMdp'].value;
+        if(id === ""){
+            document.getElementById("identifiant").style.borderColor = "red";             //change le style du message
+            document.getElementById("labIdentif").style.color = "red";             //change le style du message
+            document.getElementById("labIdentif").innerHTML = "Login manquant !";
+        } else if(mdp !== newMdp){
+        } else {
+            let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+            request = new XMLHttpRequest();
+            request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
+                if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                    document.getElementById('retour').innerHTML = "<p class=\"mdpo\" style='font-size: 25px'>La modification de mot de passe a été prise en compte !</p><br/>" +
+                        "<a href='../index.php' style='font-size: 25px'>Retour à la page d'inscription</a>";
+                }
+            };
+            request.open("POST", "controller/modificationMotDePasse.php", true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send("new_pass=" + mdp + "&new_pass_conf=" + newMdp + "&identif=" + id);                      //envoie le resultat de la requete au serveur
         }
     }
     //=================================== connexion à la page

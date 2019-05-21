@@ -25,10 +25,6 @@ if (isset($_POST['mail'])) {
 
     try {
         mail($login, $sujet, $messsage, $header);
-        echo "Votre mail a été envoyé
-            <br>
-            <br>
-            Mais la prochaine fois, achète toi de la matière grise pour retenir ton mot de passe</body></html>";
     } catch (Exception $e) {
         echo $e->getMessage(), "\n";
     }

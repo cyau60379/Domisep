@@ -422,4 +422,28 @@ function afficheLogements($logement){
         </div>";
 }
 
+function afficheChangementMdp($question){
+    echo "<label class=\"boxIdentifiant boxConnexion1\" style=\"color: #FFFFFF\">
+            $question : <br><input id=\"reponse\" class=\"inputForm\" type=\"text\" name=\"reponse\">
+            <p id=\"labRep\" class =\"put\" style=\"color: #3c3d51\">.</p>
+        </label>
+        <label class=\"boxIdentifiant boxConnexion1\" style=\"color: #FFFFFF\">
+            Mot de Passe: <br><input id=\"Mdp\" class=\"inputForm\" type=\"password\" name=\"Mdp\" oninput=\"verificationPass()\">
+            <p id=\"labMdp\" class =\"put\" style=\"color: #3c3d51\">.</p>
+        </label>
+        <label class=\"boxIdentifiant boxConnexion1\" style=\"color: #FFFFFF\">
+            Confirmation: <br><input id=\"ConfirmationMdp\" class=\"inputForm\" type=\"password\" name=\"ConfirmationMdp\" oninput=\"verificationConfPass()\">
+            <p id=\"labConfirmationMdp\" class =\"put\" style=\"color: #3c3d51\">.</p>
+        </label>
+        <div class=\"boxBouton boxConnexion1\" style=\"margin: auto\">
+            <input type = \"button\" class=\"boutton_mdpo\" value = \"Envoyer\" onclick=\"verifReponse()\">
+        </div>";
+}
+
+function afficheRelance(){
+    echo "<div class=\"boxBouton boxConnexion1\" style=\"margin: auto\">
+            <input id=\"boutonEnvoi\" type = \"button\" class=\"boutton_mdpo\" value = \"Envoyer\" onclick=\"verifLogin()\">
+        </div>";
+}
+
 ?>
