@@ -173,3 +173,8 @@ function update(PDO $bdd, $mdpcript, $adresseMail) {
         echo $req . "<br>" . $e->getMessage();
     }
 }
+
+function verifAdresse(PDO $bdd, $ad){
+    $query = "SELECT Adresse_mail FROM utilisateur WHERE Adresse_mail= '$ad'";
+    return $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);//fetch column qui vérifie si le tableau est vide ou non
+}

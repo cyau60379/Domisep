@@ -18,7 +18,9 @@ if(!isset($_SESSION['idUtilisateur'])){
 $id = $_SESSION['idUtilisateur'];
 
 //récupération du nom de l'utilisateur
-$utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));
+$utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));//recupération de la forme prenom!nom, puis découpe en prenom nom puis prenom_nom
+//pour mettre dans une classe et pas deux avec nom et prénoms
+
 
 //id des logements du gestionnaire
 $logement = decoupeString(recupLogements($bdd, $id));

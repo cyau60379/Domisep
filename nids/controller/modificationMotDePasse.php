@@ -15,14 +15,19 @@ if (isset ($_POST['new_pass'])&& isset($_POST['new_pass_conf']) && isset($_POST[
     $mdp = $_POST['new_pass']; //depuis la page changerDeMotDepasse.php
     $mdpbislol = $_POST['new_pass_conf'];
     $adresseMail = $_POST['mail'];
+    $tabAd = verifAdresse($bdd, $adresseMail);
+    if(!empty($tabAd)){
+        if ($mdp == $mdpbislol) {
+            $mdpcript = password_hash($mdp, PASSWORD_DEFAULT);
+            update($bdd, $mdpcript, $adresseMail);
+        } else {
+            echo 'Vous n\'avez pas tapé deux fois le même mot de passe';
 
-    if ($mdp == $mdpbislol) {
-        $mdpcript = password_hash($mdp, PASSWORD_DEFAULT);
-        update($bdd, $mdpcript, $adresseMail);
+        }
     } else {
-        echo 'Vous n\'avez pas tapé deux fois le même mot de passe';
-
+        echo 'Adresse inexistante';
     }
+
 }
 
 ?>

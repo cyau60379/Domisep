@@ -14,9 +14,10 @@
 <h1> MOT DE PASSE OUBLIE ?</h1>
 
 <h3>Rentrez votre adresse mail</h3>
+<div id="retour">
 <form name="mdp">
     Votre adresse mail : <input type = "text" name = "mail"><br/>
     <input type = "button" value = "Envoyer" onclick="formulaireMdp()">
 </form>
-
+</div>
 </body>

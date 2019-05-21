@@ -57,7 +57,7 @@
             document.getElementById("labDateDeNaissance").innerHTML = "Invalide (année de 1900 à 2020)";       //ajout message
             return false;
         } else {
-            document.getElementById("DateDeNaissance").style.borderColor = "green";             //change le style du message
+            document.getElementById("DateDeNaissance").style.borderColor = "green";            //change le style du message
             document.getElementById("labDateDeNaissance").style.color = "green";             //change le style du message
             document.getElementById("labDateDeNaissance").innerHTML = "Ok";               //ajout message
         }
@@ -131,7 +131,10 @@
             request = new XMLHttpRequest();
             request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
                 if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
-
+                    document.getElementById('retour').innerHTML= "<p> \Votre mail a été envoyé\n" +
+                        "            <br>\n" +
+                        "            <br>\n" +
+                        "            Mais la prochaine fois, achète toi de la matière grise pour retenir ton mot de passe</p>";
                 }
             };
             request.open("POST", "controller/messagerie.php", true);
