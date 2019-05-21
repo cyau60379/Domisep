@@ -11,13 +11,14 @@
 </head>
 <body>
 
-<h1> MOT DE PASSE OUBLIE ?</h1>
+<h1 class = "mdpo"> MOT DE PASSE OUBLIÉ ?</h1>
 
-<h3>Rentrez votre adresse mail</h3>
+<h3 class = "rvam >Rentrez votre adresse mail</h3>
 <div id="retour">
 <form name="mdp">
-    Votre adresse mail : <input type = "text" name = "mail"><br/>
-    <input type = "button" value = "Envoyer" onclick="formulaireMdp()">
+    Votre adresse mail : <input class="mdpot" type = "text" name = "mail" oninput="validationnn('mail')"><p id="resultat"> </p><br/>
+
+    <input class="boutton_mdpo" type = "button" value = "Envoyer" onclick="formulaireMdp()">
 </form>
 </div>
 </body>
