@@ -171,24 +171,27 @@ function affichePiecesLocation($pieces, $logement, $id, $utilisateur){
 
 function affichePieces2($pieces, $logement){
     echo  "<div class=\"container\">
-            <button id='$logement' class=\"bouton boutonAjout\" onclick=\"ajouterPiece(this.id)\">
-               <i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Ajouter une pièce
-           </button>
-        </div><table>
-                    <thead>                   <!-- En-tête du tableau -->
-                    <tr>
-                        <th>  </th>
-                        <th>Salle</th>
-                    </tr>
-                    </thead>
+                <button id='$logement' class=\"bouton boutonAjout\" onclick=\"ajouterPiece(this.id)\">
+                   <i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Ajouter une pièce
+                </button>
+           </div>";
+    if(!empty($pieces)):
+        echo "<table>
+                 <thead>                   <!-- En-tête du tableau -->
+                   <tr>
+                      <th>  </th>
+                      <th>Salle</th>
+                   </tr>
+                 </thead>
 
-                    <tbody>                 <!-- Corps du tableau -->";
+                  <tbody>                 <!-- Corps du tableau -->";
     foreach($pieces as $identif => $p):
         echo "<tr>
                 <td><input class='imgInput' type='image' src='Images/times-circle-regular.svg' alt='x' onclick='supprimerPiece($identif, $logement)'/></td>
                         <td>$p</td>
                     </tr>";
     endforeach;
+    endif;
     echo "</table>";
 }
 

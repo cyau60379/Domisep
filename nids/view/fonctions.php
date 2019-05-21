@@ -64,8 +64,9 @@
     }
 
     function validationnn(mail) {
-        let expression = new RegExp('^[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*@[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*[\.]{1}[a-z]{2,6}$', 'i');
-        document.getElementById(resultat).innerHTML= ;
+        //création d'une expression régulière pour tester le mail
+        let expression = /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+        document.getElementById("resultat").innerHTML= "";
         if (expression.test(document.getElementById(mail).value)){
             document.getElementById("resultat").innerHTML = "adresse mail valide"; //. La méthode test() permet de tester une chaîne de caractères. Elle retourne true si la chaîne est valide, false sinon.
             document.getElementById("resultat").style.color = "green";
