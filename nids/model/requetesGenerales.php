@@ -98,3 +98,13 @@ function addLogement(PDO $bdd, $log, $id){
         echo $query . "<br>" . $e->getMessage();
     }
 }
+
+function supprLogement(PDO $bdd, $id){
+    $query = "";
+    try{
+        $query = "DELETE FROM logement WHERE id = '$id'";
+        $bdd->exec($query);
+    } catch (PDOException $e){
+        echo $query . "<br>" . $e->getMessage();
+    }
+}

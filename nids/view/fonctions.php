@@ -1124,6 +1124,51 @@
         request.send("logement=" + logementsec);
     }
 
+    function suppressionLogement() {
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let logements = this.responseText;
+                let tabValues = logements.split('_');
+                let options = "";
+                for(let i = 0; i < tabValues.length - 1; i++){
+                    let tabVal2 = tabValues[i].split("!");
+                    options += "<option value= "+ tabVal2[0] + ">" + tabVal2[1] + "</option>"
+                }
+                document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+                    "<h1 class='alert'> Quel logement voulez-vous supprimer ?</h1>" +
+                    "<form name='logementSppr'>" +
+                    "<select name='log' class='inputForm'>" +
+                        options +
+                    "</select>" +
+                    "<br> <input type='button' class='bouton boutonGlobal2' value='VALIDER' onclick='actionSuppressionLogement()' style='float: none'>"+
+                    "<input type='button' class='bouton boutonGlobal2' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+                    "</form>"+
+                    "</div>";
+            }
+        };
+        request.open("POST", "controller/editionProfil.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("suppLogement=1");
+    }
+
+    function actionSuppressionLogement() {
+        let logementsec = document.forms["logementSppr"].elements["log"].value;
+        let request;
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                alerter("L'ajout du logement a bien été prise en compte");
+                document.getElementById('divClients2').innerHTML = this.responseText;
+            }
+        };
+        request.open("POST", "controller/editionProfil.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("logementASuppr=" + logementsec);
+    }
+
     //======================================= ajout d'une pièce dans la maison qui lui appartient
     function ajouterPiece(id){
         document.getElementById("divReponse").style.zIndex = '1';

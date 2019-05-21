@@ -68,9 +68,14 @@
     </li>
         <?php if($ajout):?>
             <li class='caseClient' id='divClients2'>     <!-- Contient les options de modifications de logement -->
-                <div class='titre titreSup'>Logement <a href='javascript:ajoutLogement()'>
-                        <i class='fa fa-plus-circle editionCapteur' style='color: black;' aria-hidden='true' id='$c[0]'></i>
-                    </a></div>
+                <div class='titre titreSup'>Logement
+                    <a href='javascript:ajoutLogement()'>
+                        <i class='fa fa-plus-circle editionCapteur' style='color: black;' aria-hidden='true'></i>
+                    </a>
+                    <a href='javascript:suppressionLogement()'>
+                        <i class='fa fa-minus-circle editionCapteur' style='color: black;' aria-hidden='true'></i>
+                    </a>
+                </div>
                 <div class="container fil" id="filPieces">     <!-- Contient les boutons pour afficher les différents capteurs en fonction de la salle -->
                     <?php foreach($logement as $id => $p):?>
                         <input onclick="changerLogement3(this.id); return activerBouton3(this.id);" type="button" id="<?php echo $id;?>" class="boutonFil2" value="<?php echo $p;?>"> <!-- creation des boutons avec un ID identique au nom de la salle -->

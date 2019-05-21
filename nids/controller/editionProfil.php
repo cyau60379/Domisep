@@ -131,10 +131,29 @@ if(isset($_POST['idPieceSuppr'])){
     supprPieces($bdd, $_POST['idPieceSuppr']);
 }
 
-// =========================================== ajout d'une piece
+// =========================================== ajout d'un logement
 
 if(isset($_POST['logement'])){
     addLogement($bdd, $_POST['logement'], $id);
+    $logement = decoupeString(recupLogements($bdd, $id));
+    afficheLogements($logement);
+}
+
+// =========================================== recup logements
+
+if(isset($_POST['suppLogement'])){
+    $logement = recupLogements($bdd, $id);
+    $stringLogement = "";
+    foreach ($logement as $value){
+        $stringLogement .= $value . "_";
+    }
+    echo $stringLogement;
+}
+
+// =========================================== ajout d'un logement
+
+if(isset($_POST['logementASuppr'])){
+    supprLogement($bdd, $_POST['logementASuppr']);
     $logement = decoupeString(recupLogements($bdd, $id));
     afficheLogements($logement);
 }
