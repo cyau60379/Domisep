@@ -11,12 +11,16 @@
 </head>
 <body>
 
-<h1 class = "mdpo"> MOT DE PASSE OUBLIÉ ?</h1>
+<h1 class="mdpo"> MOT DE PASSE OUBLIÉ ?</h1>
 
-<h3 class = "rvam >Rentrez votre adresse mail</h3>
+<h3 class="mdpo">Rentrez votre adresse mail</h3>
 <div id="retour">
 <form name="mdp">
-    Votre adresse mail : <input class="mdpot" type = "text" name = "mail" oninput="validationnn('mail')"><p id="resultat"> </p><br/>
+    <label>
+        <input class="mdpot" type="text" name="mail" oninput="validationnn(this.name)">
+        <p id="resultat">.</p>
+    </label>
+    <br>
 
     <input class="boutton_mdpo" type = "button" value = "Envoyer" onclick="formulaireMdp()">
 </form>

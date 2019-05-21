@@ -57,7 +57,7 @@
                 <p id="labNom" class ="put">.</p>
             </label>
             <label class="boxIdentifiant boxConnexion1">
-                Adresse mail: <input id="AdresseMail" class="input" name="AdresseMail">
+                Adresse mail: <input id="AdresseMail" class="input" name="AdresseMail" oninput="verificationMail(this.name)">
                 <p id="labAdresseMail" class ="put">.</p>
             </label>
             <label class="boxIdentifiant boxConnexion1">

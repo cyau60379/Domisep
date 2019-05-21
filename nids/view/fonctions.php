@@ -64,19 +64,21 @@
     }
 
     function validationnn(mail) {
+        let valeur = document.forms["mdp"].elements[mail].value;
         //création d'une expression régulière pour tester le mail
-        let expression = /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
-        document.getElementById("resultat").innerHTML= "";
-        if (expression.test(document.getElementById(mail).value)){
+        let expression = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (expression.test(valeur)){
             document.getElementById("resultat").innerHTML = "adresse mail valide"; //. La méthode test() permet de tester une chaîne de caractères. Elle retourne true si la chaîne est valide, false sinon.
             document.getElementById("resultat").style.color = "green";
+            document.getElementById("resultat").style.fontWeight = "bold";
         } else{
             document.getElementById("resultat").innerHTML = "adresse mail invalide";
             document.getElementById("resultat").style.color = "red";
+            document.getElementById("resultat").style.fontWeight = "bold";
         }
         return false;
     }
-    /*
+
     function verificationMail(){
         let mail = document.forms['inscription'].elements['AdresseMail'].value;  //récupération de ce qui est mis dans l'entrée pour le mot de passe
         if(checkMail(mail)){
@@ -91,7 +93,7 @@
             return false;
         }
     }
-*/
+
     //fonction qui récupère le mot de passe et la confirmation et vérifie s'ils sont égaux
     function verificationConfPass(){
         let pass = document.forms['inscription'].elements['Mdp'].value;  //récupération de ce qui est mis dans l'entrée pour le mot de passe
@@ -130,25 +132,22 @@
     //test de la validité du mail
     function checkMail(mail){
         //création d'une expression régulière pour tester le mail
-        let regularExp = /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+        let regularExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return(regularExp.test(mail));
     }
 
     function formulaireMdp(){
         let mail = document.forms['mdp'].elements['mail'].value;
         if(!checkMail(mail)){
-            document.getElementById("divReponse").style.zIndex = '1';
-            document.getElementById("divReponse").style.display = 'initial';
-            alerter("Mot de passe invalide !");
         } else {
+            document.getElementById('retour').innerHTML= "<p class='mdpo'> Votre mail a été envoyé" +
+                "            <br>" +
+                "            <br>" +
+                "            Mais la prochaine fois, achète toi de la matière grise pour retenir ton mot de passe</p>";
             let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
             request = new XMLHttpRequest();
             request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
                 if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
-                    document.getElementById('retour').innerHTML= "<p> \Votre mail a été envoyé\n" +
-                        "            <br>\n" +
-                        "            <br>\n" +
-                        "            Mais la prochaine fois, achète toi de la matière grise pour retenir ton mot de passe</p>";
                 }
             };
             request.open("POST", "controller/messagerie.php", true);
