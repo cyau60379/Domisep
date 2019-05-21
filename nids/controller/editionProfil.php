@@ -15,6 +15,13 @@ if(!isset($_SESSION['idUtilisateur'])){
 //récupération de l'id
 $id = $_SESSION['idUtilisateur'];
 
+//recuperation du type
+$idTypeUtil = recupType($bdd, $id);
+$ajout = false;
+//changement en fonction de l'utilisateur
+if($idTypeUtil == 1 || $idTypeUtil == 2){   //SAV peut ajouter des articles
+    $ajout = true;
+}
 //récupération du nom de l'utilisateur
 $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd, $id)));
 
@@ -122,4 +129,12 @@ if(isset($_POST['idLogement']) && isset($_POST['nomPiece'])){
 
 if(isset($_POST['idPieceSuppr'])){
     supprPieces($bdd, $_POST['idPieceSuppr']);
+}
+
+// =========================================== ajout d'une piece
+
+if(isset($_POST['logement'])){
+    addLogement($bdd, $_POST['logement'], $id);
+    $logement = decoupeString(recupLogements($bdd, $id));
+    afficheLogements($logement);
 }

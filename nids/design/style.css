@@ -201,6 +201,14 @@ div.caseCapteur {
     border: solid 1px #000000;
 }
 
+#divClients2 {
+    background-image: none;
+    background-color: rgba(207,207,207,1);
+    width: 100%;
+    height: auto;
+    border: solid 1px #000000;
+}
+
 .compte {
     display: grid;
     grid-template-columns: repeat(2,50%);

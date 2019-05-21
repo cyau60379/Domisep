@@ -89,3 +89,12 @@ function supprPieces(PDO $bdd, $id){
     }
 }
 
+function addLogement(PDO $bdd, $log, $id){
+    $query = "";
+    try{
+        $query = "INSERT INTO logement(adresse, temperature_consigne, id_utilisateur) VALUES ('$log', '20', '$id')";
+        $bdd->exec($query);
+    } catch (PDOException $e){
+        echo $query . "<br>" . $e->getMessage();
+    }
+}

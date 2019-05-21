@@ -1096,6 +1096,34 @@
             + "&logementsec=" + logementsec);
     }
 
+    function ajoutLogement() {
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+            "<h1 class='alert'> Quelle est l'adresse de votre logement ?</h1>" +
+            "<form name='logement'>" +
+            "<br> <input type=\"text\" placeholder='Adresse' name='logementsec' class='compteSec'/>"+
+            "<br> <input type='button' class='bouton boutonGlobal2' value='VALIDER' onclick='actionAjoutLogement()' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "</form>"+
+            "</div>";
+    }
+
+    function actionAjoutLogement() {
+        let logementsec = document.forms["logement"].elements["logementsec"].value;
+        let request;
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                alerter("L'ajout du logement a bien été prise en compte");
+                document.getElementById('divClients2').innerHTML = this.responseText;
+            }
+        };
+        request.open("POST", "controller/editionProfil.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("logement=" + logementsec);
+    }
+
     //======================================= ajout d'une pièce dans la maison qui lui appartient
     function ajouterPiece(id){
         document.getElementById("divReponse").style.zIndex = '1';
