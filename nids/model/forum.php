@@ -24,3 +24,25 @@ function recupIdsForum(PDO $bdd){
     $result = $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
     return $result;
 }
+
+function recupCommentaires(PDO $bdd){
+    $query = "SELECT article.id, commentaire.Contenu FROM article JOIN commentaire WHERE commentaire.id_article = article.id ORDER BY commentaire.Date_publication DESC";
+    $result = $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN|PDO::FETCH_GROUP);
+    return $result;
+}
+
+function recupDate(PDO $bdd){
+    $query = "SELECT article.id, commentaire.Date_publication FROM article JOIN commentaire WHERE commentaire.id_article = article.id ORDER BY commentaire.Date_publication DESC";
+    $result = $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN|PDO::FETCH_GROUP);
+    return $result;
+}
+
+function ajoutCommentaires(PDO $bdd, $contenu, $id){
+    $query = "";
+    try{
+        $query = "INSERT INTO `commentaire`(`Contenu`, `Note`, `id_article`) VALUES ('$contenu', '0', '$id')";
+        $bdd->exec($query);
+    } catch (PDOException $e){
+        echo $query . "<br>" . $e->getMessage();
+    }
+}

@@ -374,18 +374,7 @@ function afficheComptesSecondaire($ComptesSecondaires){
     }
 }
 
-function afficheArticle($tabForum, $ids){
-    $i = 0;
-    foreach($tabForum as $q => $r){
-        echo "<section class='faq-section'>
-            <input type='checkbox' id='$ids[$i]'>
-            <label for='$ids[$i]'>$q</label>
-            <p>$r</p>
-            <button class='bouton boutonGlobal2' onclick='CommenterArticle($ids[$i])'>COMMENTER</button>
-        </section> <br>";
-        $i += 1;
-    }
-}
+
 
 function afficheArticle2($tabForum, $ajout, $ids){
     $i = 0;
@@ -398,6 +387,30 @@ function afficheArticle2($tabForum, $ajout, $ids){
             echo "<button class='bouton boutonGlobal2' onclick='supprimerArticle($ids[$i])'>SUPPRIMER</button>
         </section> <br>";
         }
+        $i += 1;
+    }
+}
+function afficheArticle($tabForum, $tabComment, $tabDate, $ids){
+    $i = 0;
+    foreach($tabForum as $q => $r){
+        echo "<section class='faq-section'>
+            <input type='checkbox' id='$ids[$i]'>
+            <label for='$ids[$i]'>$q</label>
+            <p>$r</p>
+            <p style=\"color: white\"> Commentaire : </p>";
+        if(isset($tabComment[$ids[$i]])){       //vérification pour savoir si il y a un commentaire pour l'article
+            $tab = $tabComment[$ids[$i]];
+            $tab2 = $tabDate[$ids[$i]];
+            for ($j = 0; $j < sizeof($tab); $j++){
+                echo "<p>($tab2[$j]) <br> $tab[$j]</p>";
+            }
+        }
+            echo "<br>
+               <form name='formulaireComm'>
+                 <textarea name=\"Contenu\" class=\"contenu\" cols=\"30\" rows=\"5\"></textarea>
+                  <button type='button' class='bouton boutonGlobal2' onclick='commenterArticle($ids[$i])' style='float: none'>COMMENTER</button>
+                </form>
+        </section> <br>";
         $i += 1;
     }
 }
@@ -432,7 +445,7 @@ function afficheChangementMdp($question){
             <p id=\"labMdp\" class =\"put\" style=\"color: #3c3d51\">.</p>
         </label>
         <label class=\"boxIdentifiant boxConnexion1\" style=\"color: #FFFFFF\">
-            Confirmation: <br><input id=\"ConfirmationMdp\" class=\"inputForm\" type=\"password\" name=\"ConfirmationMdp\" oninput=\"verificationConfPass()\">
+            Confirmation : <br><input id=\"ConfirmationMdp\" class=\"inputForm\" type=\"password\" name=\"ConfirmationMdp\" oninput=\"verificationConfPass()\">
             <p id=\"labConfirmationMdp\" class =\"put\" style=\"color: #3c3d51\">.</p>
         </label>
         <div class=\"boxBouton boxConnexion1\" style=\"margin: auto\">

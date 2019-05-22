@@ -1057,6 +1057,30 @@
         }
     }
 
+    function commenterArticle(id){
+        let contenu = document.forms["formulaireComm"].elements['Contenu'].value;
+        if(contenu === ""){
+            document.getElementById("divReponse").style.zIndex = '1';
+            document.getElementById("divReponse").style.display = 'initial';
+            alerter("L'ajout n'a pas été pris en compte");
+        }
+        else {
+            let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+            request = new XMLHttpRequest();
+            request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
+                if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                    document.getElementById("divReponse").style.zIndex = '1';
+                    document.getElementById("divReponse").style.display = 'initial';
+                    alerter("L'ajout a bien été pris en compte");
+                    document.getElementById("articles").innerHTML = this.responseText;
+                }
+            };
+            request.open("POST", "controller/forum.php", true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send("identifiantArticle=" + id + "&ContenuCommentaire=" + contenu);
+        }
+    }
+
     function supprimerArticle(question) {
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
