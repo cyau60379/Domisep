@@ -214,7 +214,7 @@
             request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
                 if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
                     document.getElementById('retour').innerHTML = "<p class=\"mdpo\" style='font-size: 25px'>La modification de mot de passe a été prise en compte !</p><br/>" +
-                        "<a href='../index.php' style='font-size: 25px'>Retour à la page d'inscription</a>";
+                        "<a href='../index.php' style='font-size: 25px'>Retour à la page d'accueil</a>";
                 }
             };
             request.open("POST", "controller/modificationMotDePasse.php", true);
@@ -1145,32 +1145,57 @@
     function ajoutCompteSec() {
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
-        document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
-            "<h1 class='alert'> Quel est le nom et le prénom du compte qui vous voulez lier ?</h1>" +
-            "<form name='comptesec'>" +
-            "<input type=\"text\" placeholder='Nom' name='nomsec' class='compteSec'/>"+
-            "<input type=\"text\" placeholder='Prénom' name='prenomsec' class='compteSec'/>"+
-            "<br> <input type=\"text\" placeholder='Adresse' name='logementsec' class='compteSec'/>"+
-            "<br> <input type='button' class='bouton boutonGlobal2' value='VALIDER' onclick='actionAjoutCompteSec()' style='float: none'>"+
-            "<input type='button' class='bouton boutonGlobal2' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
-            "</form>"+
-            "</div>";
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let logements = this.responseText;
+                let tabValues = logements.split('_');
+                let options = "";
+                for(let i = 0; i < tabValues.length - 1; i++){
+                    let tabVal2 = tabValues[i].split("!");
+                    options += "<option value= "+ tabVal2[0] + ">" + tabVal2[1] + "</option>"
+                }
+                document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+                    "<h1 class='alert'> Quel est le compte que vous voulez lier ?</h1>" +
+                    "<form name='comptesec'>" +
+                    "<input type=\"text\" placeholder='Nom' name='nomsec' class='compteSec'/>"+
+                    "<input type=\"text\" placeholder='Prénom' name='prenomsec' class='compteSec'/>"+
+                    "<select name='logementsec' class='compteSec'>" +
+                    options +
+                    "</select>" +
+                    "<br> <input type='button' class='bouton boutonGlobal2' value='VALIDER' onclick='actionAjoutCompteSec()' style='float: none'>"+
+                    "<input type='button' class='bouton boutonGlobal2' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+                    "</form>"+
+                    "</div>";
+            }
+        };
+        request.open("POST", "controller/editionProfil.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("suppLogement=1");
     }
 
     function actionAjoutCompteSec() {
         let nomsec = document.forms["comptesec"].elements["nomsec"].value;
         let prenomsec = document.forms["comptesec"].elements["prenomsec"].value;
         let logementsec = document.forms["comptesec"].elements["logementsec"].value;
+        document.getElementById(`divReponse`).innerHTML = "<div class= 'case'>"+
+            "<h1 class='alert'>Patientez s'il vous plait...</h1>"+
+            "</div>";
         let request;
         request = new XMLHttpRequest();
         request.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
-                alerter("L'ajout du compte a bien été prise en compte");
+                let reponse = this.responseText;
+                if(reponse === '1'){
+                    alerter("Votre souhait d'ajout a bien été prise en compte, un mail a été envoyé à " + prenomsec + " " + nomsec);
+                } else {
+                    alerter("Informations invalides");
+                }
             }
         };
         request.open("POST", "controller/editionProfil.php", true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("nomsec=" + nomsec + "&nprenomsec=" + prenomsec
+        request.send("nomsec=" + nomsec + "&prenomsec=" + prenomsec
             + "&logementsec=" + logementsec);
     }
 

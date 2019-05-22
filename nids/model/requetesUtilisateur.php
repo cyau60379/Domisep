@@ -188,3 +188,8 @@ function recupReponse(PDO $bdd, $id){
     $query = "SELECT utilisateur.Reponse_verif FROM utilisateur WHERE utilisateur.id = '$id'";
     return $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
 }
+
+function recupRelation(PDO $bdd, $id1, $id2){
+    $query = "SELECT id FROM heritage WHERE id_utilisateur_prim= '$id1' AND id_utilisateur_sec= '$id2'";
+    return $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
+}

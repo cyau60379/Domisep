@@ -24,6 +24,7 @@ if($idTypeUtil == 1 || $idTypeUtil == 2){   //SAV peut ajouter des articles
 }
 //récupération du nom de l'utilisateur
 $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd, $id)));
+$ut = decoupeString2(recupererUtilisateur($bdd, $id));
 
 //id des logements
 $logement = decoupeString(recupLogements($bdd, $id));
@@ -43,11 +44,41 @@ if(isset($_POST['logementsec']) && isset($_POST['prenomsec']) && isset($_POST['n
     $logementsec = $_POST['logementsec'];
     $prenomsec = $_POST['prenomsec'];
     $nomsec = $_POST['nomsec'];
-    $id_logementsec = recupLogementFromAdressse($bdd,$logementsec);
+    $reponse = false;
     $id_secadd = recupIdSecFromNomPrenom($bdd, $prenomsec, $nomsec);
-    if (!empty($id_logementsec) && !empty($id_secadd)){     //verifier que le logement existe & personne existe
-        ajouterComptesSecondaires($bdd, $id, $id_secadd, $id_logementsec);
+    if (!empty($id_secadd)){     //verifier que la personne existe
+        $relation = recupRelation($bdd, $id, $id_secadd[0]);
+        if (empty($relation)){      //verifier que la personne n'est pas déjà liée
+            $mail = recupMail($bdd, $id_secadd[0]);
+            $renvoi = (3 * $id + 666) ** 2;
+            $ajoute = (6 * $id_secadd[0] + 333) ** 2;
+            //envoi de mail pour récupérer les identifiants
+            $sujet = "Un client veut vous ajouter comme compte secondaire";
+            $header = "MIME-Version: 1.0\r\n";
+            $header .= 'From:"NIDS"<contactservice123456@gmail.com>' . "\n";
+            $header .= 'Content-Type:text/html; charset="utf-8"' . "\n";
+            $header .= 'Content-Transfer-Encoding: 8bit';
+            $messsage = "Bonjour $prenomsec,
+                        <br> S'il s'agit d'une erreur, ignorez ce mail.
+                        <br> $ut a fait une demande pour vous ajouter en tant que compte secondaire.
+                        <br> Voici le lien pour accepter la requête : <a href=\"nids/controller/validationSecondaire.php?grp=$renvoi&ajt=$ajoute&m=$logementsec\">Changez de mot de passe</a>
+                        <br>Cordialement,
+                        <br>L'équipe de NIDS";
+
+            if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) {
+                $passage_ligne = "\r\n";
+            } else {
+                $passage_ligne = "\n";
+            }
+            try {
+                mail($mail, $sujet, $messsage, $header);
+            } catch (Exception $e) {
+                echo $e->getMessage(), "\n";
+            }
+            $reponse = true;
+        }
     }
+    echo $reponse;
 }
 
 

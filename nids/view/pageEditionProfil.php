@@ -58,7 +58,7 @@
                 </a></div>
             <div class="listPersonne">
                 <div class="list2"><!-- romumumumumumumu -->
-                    <ul class="client">
+                    <ul>
                         <?php afficheComptesSecondaire($ComptesSecondaires);?>
                     </ul>
                 </div>

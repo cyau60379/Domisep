@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <?php include_once("fonctions.php");      //inclut les fonctions Javascript?>
 </head>
-<body marginheight="40" bgcolor="#ffffff" leftmargin="30">
+<body>
 <div id="retour">
     <form id="changementMdp" name="inscription">
         <label class="boxIdentifiant boxConnexion1" style="color: #FFFFFF">
