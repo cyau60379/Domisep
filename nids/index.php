@@ -19,8 +19,8 @@ session_start();
 $url = "";
 
 // Identification du contrôleur à appeler
-if (isset($_POST['cible']) && !empty($_POST['cible'])) {
-    $url = $_POST['cible'];
+if (isset($_GET['cible']) && !empty($_GET['cible'])) {
+    $url = $_GET['cible'];
 } else {
     $url = 'accueil';
 }

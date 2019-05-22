@@ -15,10 +15,9 @@
     <div class = 'bandeau'>
         <div style="display: inherit">
             <?php foreach($pagesPossibles as $key => $value):?>
-            <form action="../index.php" method="post">
+            <form action="../index.php?cible=<?php echo $value[0];?>" method="post">
                 <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
                 <input type='hidden' name='id' value='<?php echo $id;?>'>
-                <input type='hidden' name='cible' value='<?php echo $value[0];?>'>
                 <button type="submit" id='<?php echo $value[1];?>' class='choixPage <?php echo $key;?>' onmouseover='montrerTitre(this.id, this.classList[1]);' onmouseout='cacherTitre(this.id);'>
                     <i class='fa <?php echo $value[1];?>'></i>
                 </button>

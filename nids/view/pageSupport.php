@@ -13,10 +13,9 @@
 </div>
 
 <div id="boite">
-    <form class="form" action="../index.php" method="post" >
+    <form class="form" action="../index.php?cible=catalogue" method="post" >
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
-        <input type='hidden' name='cible' value='catalogue'>
         <button type="submit" id="fa-home" class="choixPage">
             <i class="fa fa-file-text"></i> Produits
         </button>
@@ -27,10 +26,9 @@
         </p>
     </form>
 
-    <form class="form" action="../index.php" method="post" >
+    <form class="form" action="../index.php?cible=FAQ" method="post" >
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
-        <input type='hidden' name='cible' value='FAQ'>
         <button type="submit" id="fa-file-text-o" class="choixPage">
             <i class="fa fa-question-circle"></i> FAQ
         </button>
@@ -42,10 +40,9 @@
         </p>
     </form>
 
-    <form class="form" action="../index.php" method="post">
+    <form class="form" action="../index.php?cible=forum" method="post">
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
-        <input type='hidden' name='cible' value='forum'>
         <button id="fa-question" class="choixPage">
             <i class="fa fa-map-marker"></i> Forum
         </button>

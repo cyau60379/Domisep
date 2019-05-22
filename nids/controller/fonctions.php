@@ -14,8 +14,7 @@ function affichageReponse($reponse, $id, $utilisateur, $type){
                     //affiche un formulaire permettant d'aller à la page suivante
         echo "<div class= 'case'> 
                 <h1 class='alert'>$type réussie !</h1>
-                <form action='../index.php' method='post'>
-                    <input type='hidden' name='cible' value='editionProfil'>
+                <form action='../index.php?cible=editionProfil' method='post'>
                     <input type='hidden' name='id' value= $id>
                     <input type='hidden' name='utilisateur' value= $utilisateur>
                     <input type='submit' class='bouton boutonGlobal2' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OK'>
@@ -36,8 +35,7 @@ function affichageReponse($reponse, $id, $utilisateur, $type){
 function affichageReponse2(){
         echo "<div class= 'case'> 
                 <h1 class='alert'>Voulez-vous vous déconnecter ?</h1>
-                <form action='../index.php' method='post'>
-                    <input type='hidden' name='cible' value='accueil'>
+                <form action='../index.php?cible=accueil' method='post'>
                     <input type='hidden' name='id' value= 0>
                     <input type='hidden' name='utilisateur' value= ''>
                     <input type='submit' class='bouton boutonGlobal2' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OUI'>

@@ -13,10 +13,9 @@
 </div>
 
 <div id="boite">
-    <form action="../index.php" method="post" class="form">
+    <form action="../index.php?cible=gestionCapteur" method="post" class="form">
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
-        <input type='hidden' name='cible' value='gestionCapteur'>
         <button type="submit" id="fa-home" class="choixPage2">
             Gestion de vos capteurs
         </button>
@@ -27,10 +26,9 @@
         </p>
     </form>
 
-    <form action="../index.php" method="post" class="form">
+    <form action="../index.php?cible=<?php if($type == 2): echo "gestionClient"; else: echo "statistique"; endif;?>" method="post" class="form">
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
-        <input type='hidden' name='cible' value='<?php if($type == 2): echo "gestionClient"; else: echo "statistique"; endif;?>'>
         <button type="submit" id="fa-file-text-o" class="choixPage2">
             Gestion de vos logements
         </button>
