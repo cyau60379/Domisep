@@ -393,6 +393,7 @@ function afficheArticle2($tabForum, $ajout, $ids){
 function afficheArticle($tabForum, $tabComment, $tabDate, $ids){
     $i = 0;
     foreach($tabForum as $q => $r){
+        $contenu = "formulaireComm" . $ids[$i];
         echo "<section class='faq-section'>
             <input type='checkbox' id='$ids[$i]'>
             <label for='$ids[$i]'>$q</label>
@@ -406,7 +407,7 @@ function afficheArticle($tabForum, $tabComment, $tabDate, $ids){
             }
         }
             echo "<br>
-               <form name='formulaireComm'>
+               <form name='$contenu'>
                  <textarea name=\"Contenu\" class=\"contenu\" cols=\"30\" rows=\"5\"></textarea>
                   <button type='button' class='bouton boutonGlobal2' onclick='commenterArticle($ids[$i])' style='float: none'>COMMENTER</button>
                 </form>

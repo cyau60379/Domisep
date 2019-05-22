@@ -1058,7 +1058,8 @@
     }
 
     function commenterArticle(id){
-        let contenu = document.forms["formulaireComm"].elements['Contenu'].value;
+        let form = 'formulaireComm' + id;
+        let contenu = document.forms[form].elements['Contenu'].value;
         if(contenu === ""){
             document.getElementById("divReponse").style.zIndex = '1';
             document.getElementById("divReponse").style.display = 'initial';
