@@ -125,8 +125,7 @@ function affichePieces($pieces, $logement, $id, $utilisateur){
     endforeach;
     echo "</div>
         <div class=\"container\">
-            <form action='../index.php' method='post'>
-            <input type='hidden' name='cible' value='catalogue'>
+            <form action='../index.php?ciblecatalogue' method='post'>
              <input type='hidden' name='id' value= $id>
              <input type='hidden' name='utilisateur' value= $utilisateur>
                 <button type='submit' class=\"bouton boutonAjout\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Ajouter un élément</button>
