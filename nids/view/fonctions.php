@@ -1238,7 +1238,7 @@
         request = new XMLHttpRequest();
         request.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
-                alerter("L'ajout du logement a bien été prise en compte");
+                alerter("La suppression du logement a bien été prise en compte");
                 document.getElementById('divClients2').innerHTML = this.responseText;
             }
         };
