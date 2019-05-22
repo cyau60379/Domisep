@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" charset="UTF-8">
     <title>Edition de profil</title>
     <link rel="shortcut icon" href="../Images/logoNids.ico"/>
+
     <?php include_once ("fonctions.php");      //inclut les fonctions concernant les capteurs
     ?>
 </head>
@@ -14,13 +15,19 @@
 </div>
 
 <div id="zoneClients">
-    <li class='caseClient compte' id='divClients'>     <!-- Contient les options de modifications de profil -->
+    <li class='caseClient <?php if($ajout):?>compte<?php else:?>compte2<?php endif;?>' id='divClients'>     <!-- Contient les options de modifications de profil -->
         <div class='titre titreSup titre2'>Edition de profil</div>
         <div class="bloc">
             <form name="modification">
-                <input type='hidden' name='cible' value='editionProfil'>
-                <input type='hidden' name='id' value= "<?php echo $id ?>">
-                <input type='hidden' name='utilisateur' value= "<?php echo $utilisateur?>" >
+                <div id="typeUtilisateur">
+                     Type : <?php echo $coord["type"]?>
+                    <?php if($ajout):?>
+                    <button type="button" class="bouton bouton3" onclick="modifStatut(<?php echo $id?>)">
+                        Modifier
+                    </button>
+                    <?php endif;?>
+                </div>
+
                 <p> <label class="ed" for="nom">Nom:</label>
                     <input class="edi" type="text" id="nom" name="user_nom" placeholder="<?php echo $coord["Nom"]?>"></p>
 
@@ -45,13 +52,10 @@
                 <p> <label class="ed" for="reponse"> Réponse vérification:</label>
                     <input class="edi" type="text" id="reponse" name="user_response" placeholder="<?php echo $coord["Reponse_verif"]?>"></p>
 
-                <p> <label class="ed" for="type"> Type:</label>
-                    <input class="edi" type="number" id="type" name="user_type" disabled placeholder="<?php echo $coord["id_type_utilsateur"]?>" min="1" max="2"></p>
-
                 <input type="button" onclick="modificationUser()" class="bouton edi" style="float: right" value="Modifier les informations" />
             </form>
         </div>
-
+        <?php if($ajout):?>
         <div class="bloc"><!-- début romuald -->
             <div class="titre titreSup"> Comptes secondaires liés  <a href='javascript:ajoutCompteSec()'>
                     <i class='fa fa-plus-circle editionCapteur' style='color: black;' aria-hidden='true' id='$c[0]'></i>
@@ -64,9 +68,7 @@
                 </div>
             </div>
         </div>
-
     </li>
-        <?php if($ajout):?>
             <li class='caseClient' id='divClients2'>     <!-- Contient les options de modifications de logement -->
                 <div class='titre titreSup'>Logement
                     <a href='javascript:ajoutLogement()'>

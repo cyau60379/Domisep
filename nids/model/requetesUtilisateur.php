@@ -94,9 +94,13 @@ function recupMail(PDO $bdd, $id){
 
 //Récupère le mot de passe en fonction de l'id
 function recuperationCoordonnees(PDO $bdd, $id){
-    $query = "SELECT * FROM utilisateur WHERE utilisateur.id = '$id'";
+    $query = "SELECT utilisateur.id, utilisateur.Nom, utilisateur.Prenom, utilisateur.Adresse_mail, 
+              utilisateur.numeroTel, utilisateur.Date_naissance, utilisateur.Mot_de_passe, utilisateur.Etat, 
+              utilisateur.Question_verif, utilisateur.Reponse_verif, type_utilisateur.Nom AS type 
+              FROM utilisateur JOIN type_utilisateur ON utilisateur.id_type_utilsateur = type_utilisateur.id
+              WHERE utilisateur.id = '$id'";
     $table = $bdd->query($query)->fetchAll();
-    return $table[0];  //renvoie le mail
+    return $table;  //renvoie le mail
 }
 
 //Mise à jour dans la base de données en fonctions des changements faits
@@ -191,5 +195,15 @@ function recupReponse(PDO $bdd, $id){
 
 function recupRelation(PDO $bdd, $id1, $id2){
     $query = "SELECT id FROM heritage WHERE id_utilisateur_prim= '$id1' AND id_utilisateur_sec= '$id2'";
+    return $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
+}
+
+function recupTypesPossibles(PDO $bdd){
+    $query = "SELECT id, Nom FROM type_utilisateur WHERE id IN ('1', '2')";
+    return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, "recup2");
+}
+
+function recupUnType(PDO $bdd, $id){
+    $query = "SELECT Nom FROM type_utilisateur WHERE id= '$id'";
     return $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
 }

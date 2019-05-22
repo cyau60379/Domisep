@@ -30,8 +30,11 @@ $ut = decoupeString2(recupererUtilisateur($bdd, $id));
 $logement = decoupeString(recupLogements($bdd, $id));
 
 //récupération des coordonnées de l'utilisateur
-$coord = recuperationCoordonnees($bdd, $id);
-
+$tabCoord = recuperationCoordonnees($bdd, $id);
+$coord = array();
+if (!empty($tabCoord)){
+    $coord = $tabCoord[0];
+}
 
 $ComptesSecondaires = recuperationComptesSecondaires($bdd, $id);
 
@@ -61,7 +64,7 @@ if(isset($_POST['logementsec']) && isset($_POST['prenomsec']) && isset($_POST['n
             $messsage = "Bonjour $prenomsec,
                         <br> S'il s'agit d'une erreur, ignorez ce mail.
                         <br> $ut a fait une demande pour vous ajouter en tant que compte secondaire.
-                        <br> Voici le lien pour accepter la requête : <a href=\"nids/controller/validationSecondaire.php?grp=$renvoi&ajt=$ajoute&m=$logementsec\">Changez de mot de passe</a>
+                        <br> Voici le lien pour accepter la requête : <a href=\"nids/controller/validationSecondaire.php?grp=$renvoi&ajt=$ajoute&m=$logementsec\">Cliquez ici</a>
                         <br>Cordialement,
                         <br>L'équipe de NIDS";
 
@@ -187,4 +190,39 @@ if(isset($_POST['logementASuppr'])){
     supprLogement($bdd, $_POST['logementASuppr']);
     $logement = decoupeString(recupLogements($bdd, $id));
     afficheLogements($logement);
+}
+
+// =========================================== modification du type
+
+if(isset($_POST['modifType'])){
+    $types = recupTypesPossibles($bdd);
+    $stringTypes = "";
+    foreach ($types as $value){
+        $stringTypes .= $value . "_";
+    }
+    echo $stringTypes;
+}
+
+// ============================================ demande de modification de type
+
+if(isset($_POST['nvxType'])){
+    $nom = $coord['Nom'];
+    $prenom = $coord['Prenom'];
+    $nvxType = recupUnType($bdd, $_POST['nvxType'])[0];
+//envoi de mail pour récupérer les identifiants
+    $sujet = "Un client veut changer de type";
+    $header = "MIME-Version: 1.0\r\n";
+    $header .= 'From:"NIDS"<contactservice123456@gmail.com>' . "\n";
+    $header .= 'Content-Type:text/html; charset="utf-8"' . "\n";
+    $header .= 'Content-Transfer-Encoding: 8bit';
+    $messsage = "Bonjour,
+                 <br>$prenom $nom veut changer de type et devenir $nvxType.
+                 <br>Pouvez-vous changer cela ?
+                 <br>Cordialement,
+                 <br>L'équipe de NIDS";
+    try {
+        mail("contactservice123456@gmail.com", $sujet, $messsage, $header);
+    } catch (Exception $e) {
+        echo $e->getMessage(), "\n";
+    }
 }

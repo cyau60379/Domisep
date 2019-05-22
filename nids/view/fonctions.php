@@ -1345,4 +1345,51 @@
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send("idPieceSuppr=" + id);   //envoie le resultat de la requete
     }
+
+    function modifStatut(){
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let types = this.responseText;
+                let tabValues = types.split('_');
+                let options = "";
+                for(let i = 0; i < tabValues.length - 1; i++){
+                    let tabVal2 = tabValues[i].split("!");
+                    options += "<option value= "+ tabVal2[0] + ">" + tabVal2[1] + "</option>"
+                }
+                document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+                    "<h1 class='alert'> Quel type d'utilisateur voulez-vous devenir ?</h1>" +
+                    "<form name='type'>" +
+                    "<select name='typeChoisi' class='inputForm'>" +
+                    options +
+                    "</select>" +
+                    "<br> <input type='button' class='bouton boutonGlobal2' value='VALIDER' onclick='actionModifStatut()' style='float: none'>"+
+                    "<input type='button' class='bouton boutonGlobal2' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+                    "</form>"+
+                    "</div>";
+            }
+        };
+        request.open("POST", "controller/editionProfil.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("modifType=1");
+    }
+
+    function actionModifStatut() {
+        let type = document.forms["type"].elements["typeChoisi"].value;
+        document.getElementById(`divReponse`).innerHTML = "<div class= 'case'>"+
+            "<h1 class='alert'>Patientez s'il vous plait...</h1>"+
+            "</div>";
+        let request;
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                alerter("Votre souhait de changement de statut a bien été prise en compte, un mail a été envoyé à l'administrateur");
+            }
+        };
+        request.open("POST", "controller/editionProfil.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("nvxType=" + type);
+    }
 </script>

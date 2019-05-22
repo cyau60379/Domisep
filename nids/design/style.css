@@ -959,3 +959,23 @@ div.compteSecondaire {
     margin: 0;
     color: #3c3d51;
 }
+
+#typeUtilisateur {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.bouton3 {
+    width: 100px;
+    height: 25px;
+    font-size: 15px;
+}
+
+.compte2 {
+    display: grid;
+    grid-template-columns: repeat(1, 100%);
+}

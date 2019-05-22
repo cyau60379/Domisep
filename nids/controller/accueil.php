@@ -71,7 +71,6 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
             $mdp = $_POST['mdp'];
             $id = maximumId($bdd) + 1;                          //met au nouvel inscrit l'id le plus  grand + 1
             ajouterInscription($bdd, $id, $nom, $prenom, $mail, $naissance, $mdp);
-            updateEtat($bdd, $id, 1);                       //le met connecté
             $utilisateur = $prenom . "_". $nom;
             $identifiant =  substr($prenom,0,2) . substr($nom,0,2) . $id;
             affichageReponse(true, $id, $utilisateur,"Inscription"); //message envoyé pour être affiché
