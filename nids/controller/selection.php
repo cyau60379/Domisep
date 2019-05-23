@@ -8,9 +8,13 @@ include_once($_SERVER["DOCUMENT_ROOT"]. "/model/requetesUtilisateur.php");
 
 //tableau qui contient les pages possibles en fonction de l'utilisateur connecté
 $pagesPossibles = array();
-
+if(!isset($_SESSION['idUtilisateur'])){
+    session_start();
+}
+$id = $_SESSION['idUtilisateur'];
 
 if(isset($_POST['deconnexion'])){
+    updateEtat($bdd, $id, 0);
     affichageReponse2();  //affichage de la déconnexion + retour à l'accueil si accepté
 } else {
     if($utilisateur != ""){     //pour un utilisateur existant

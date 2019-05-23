@@ -433,7 +433,7 @@ function afficheLogements($logement){
         </div>";
 }
 
-function afficheChangementMdp($question){
+function afficheChangementMdp($question, $page){
     echo "<label class=\"boxIdentifiant boxConnexion1\" style=\"color: #FFFFFF\">
             $question : <br><input id=\"reponse\" class=\"inputForm\" type=\"text\" name=\"reponse\">
             <p id=\"labRep\" class =\"put\" style=\"color: #3c3d51\">.</p>
@@ -447,7 +447,7 @@ function afficheChangementMdp($question){
             <p id=\"labConfirmationMdp\" class =\"put\" style=\"color: #3c3d51\">.</p>
         </label>
         <div class=\"boxBouton boxConnexion1\" style=\"margin: auto\">
-            <input type = \"button\" class=\"boutton_mdpo\" value = \"Envoyer\" onclick=\"verifReponse()\">
+            <input id='$page' type = \"button\" class=\"boutton_mdpo\" value = \"Envoyer\" onclick=\"verifReponse(this.id)\">
         </div>";
 }
 

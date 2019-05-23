@@ -40,11 +40,14 @@
                 <p> <label class="ed" for="phone"> N° de téléphone:</label>
                     <input class="edi" type="tel" id="phone" name="user_phone" placeholder="<?php echo $coord["numeroTel"]?>"></p>
 
-                <p> <label class="ed" for="birth"> Date de naissance:</label>
+                <p> <label class="ed" for="date"> Date de naissance:</label>
                     <input class="edi" type="date" id="date" name="user_date" value="<?php echo $coord["Date_naissance"]?>"></p>
 
-                <p> <label class="ed" for="pass"> Mot de passe:</label>
-                    <input class="edi" type="password" id="pass" name="user_pass" placeholder="<?php echo $coord["Mot_de_passe"]?>"></p>
+                <div id="typeUtilisateur">
+                        <a href="../index.php?cible=modificationMotDePasse"><button type="button" class="bouton edi">
+                            Modifier votre mot de passe
+                        </button></a>
+                </div>
 
                 <p> <label class="ed" for="question"> Question vérification:</label>
                     <input class="edi" type="text" id="question" name="user_question" placeholder="<?php echo $coord["Question_verif"]?>"></p>

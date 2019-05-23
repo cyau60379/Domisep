@@ -12,7 +12,7 @@ function maximumId(PDO $bdd){
 //Changer l'état de connexion
 function updateEtat(PDO $bdd, $id, $etat){
     try {
-        $query = "UPDATE utilisateur SET id_type_utilsateur = '$etat' WHERE utilisateur.id = '$id'";
+        $query = "UPDATE utilisateur SET utilisateur.Etat = '$etat' WHERE utilisateur.id = '$id'";
         $bdd->exec($query);
     }
     catch(PDOException $e) {
@@ -90,6 +90,13 @@ function recupMail(PDO $bdd, $id){
     $query = "SELECT utilisateur.Adresse_mail FROM utilisateur WHERE utilisateur.id = '$id'";
     $table = $bdd->query($query)->fetch();
     return $table['Adresse_mail'];  //renvoie le mail
+}
+
+//Récupère l'etat en fonction de l'id
+function recupActivite(PDO $bdd, $id){
+    $query = "SELECT utilisateur.Etat FROM utilisateur WHERE utilisateur.id = '$id'";
+    $table = $bdd->query($query)->fetch();
+    return $table['Etat'];  //renvoie l'etat
 }
 
 //Récupère le mot de passe en fonction de l'id

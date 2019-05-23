@@ -25,7 +25,12 @@ if(isset($_POST['identifiant'])){
     if(!empty($tabIdPrenom) && !empty($tabIdNom)){
         if(in_array($id, $tabIdPrenom) && in_array($id, $tabIdNom)){        //si l'id appartient à une personne
             $question = recupQuestion($bdd, $id)[0];
-            afficheChangementMdp($question);
+            $etat = recupActivite($bdd, $id);
+            if($etat == 1){
+                afficheChangementMdp($question, "editionProfil");
+            } else {
+                afficheChangementMdp($question, "accueil");
+            }
         } else {
             afficheRelance();
         }

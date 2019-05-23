@@ -33,24 +33,32 @@ if(isset($_GET['changement'])){
     $url = 'modificationMotDePasse';
 }
 
-$url2 = ucfirst($url);
-$utilisateur = "";
-$utilisateur2 = "";
-$cible = "";
+$pages = array("accueil", "catalogue", "domotique", "editionProfil", "FAQ",
+                "forum", "gestionCapteur", "gestionClient", "infoCompte", "messagerie",
+                'modificationMotDePasse', "statistique", 'support', "validationSecondaire");
+if(!in_array($url, $pages)){
+    include_once ('view/pageErreur.php');
+} else {
+    $url2 = ucfirst($url);
+    $utilisateur = "";
+    $utilisateur2 = "";
+    $cible = "";
 
-if (isset($_POST['id']) && isset($_POST['utilisateur'])) {
-    $_SESSION['idUtilisateur'] = $_POST['id'];
-    $utilisateur = $_POST['utilisateur'];
-    $utilisateur2 = decoupeString4($utilisateur);
-}
+    if (isset($_POST['id']) && isset($_POST['utilisateur'])) {
+        $_SESSION['idUtilisateur'] = $_POST['id'];
+        $utilisateur = $_POST['utilisateur'];
+        $utilisateur2 = decoupeString4($utilisateur);
+    }
 
 // Appel du contrôleur
 
-include('view/header.php');
-include('controller/' . $url . '.php');
-if ($utilisateur != "") {
-    include('controller/selection.php');
-    include('view/selectionPage.php');
+    include('view/header.php');
+    include('controller/' . $url . '.php');
+    if ($utilisateur != "") {
+        include('controller/selection.php');
+        include('view/selectionPage.php');
+    }
+    include('view/page' . $url2 . '.php');
+    include('view/footer.php');
+
 }
-include('view/page' . $url2 . '.php');
-include('view/footer.php');

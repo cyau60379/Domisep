@@ -29,9 +29,9 @@ $total = $logement + $location;
 
 //============================================ logements a afficher
 
-if (isset($_GET['logement'])) {
+if (isset($_POST['logement'])) {
 
-    $idLogementActif = $_GET['logement'];
+    $idLogementActif = $_POST['logement'];
     $ad = recupLgmnt($bdd, $idLogementActif);
     $adValue = "";
     if (!empty($ad)){

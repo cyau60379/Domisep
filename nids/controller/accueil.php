@@ -26,6 +26,7 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
                 $reponse = true;
             }
            session_start();             //commencement de la session si la connexion fonctionne
+            updateEtat($bdd, $id, 1);
         }
     }
     $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));  //

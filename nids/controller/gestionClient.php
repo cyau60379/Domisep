@@ -5,6 +5,7 @@
 
 include_once("fonctions.php");
 include_once ($_SERVER["DOCUMENT_ROOT"] . "/model/gestionClient.php");
+include_once ($_SERVER["DOCUMENT_ROOT"] . "/model/requetesUtilisateur.php");
 include_once ($_SERVER["DOCUMENT_ROOT"] . "/model/capteur.php");
 
 
@@ -16,14 +17,15 @@ if(!isset($_SESSION['idUtilisateur'])){
 $id = $_SESSION['idUtilisateur'];
 //id des logements du gestionnaire
 $logement = decoupeString(recupLogements($bdd, $id));
+$ut = decoupeString2(recupererUtilisateur($bdd, $id));
 
 
 //============================================ test des clients a afficher
 
-if (isset($_GET['logement']) && isset($_GET['id'])) {
+if (isset($_POST['logement']) && isset($_POST['idLogement'])) {
 
-    $logementActif = $_GET['logement'];
-    $idLogementActif = $_GET['id'];
+    $logementActif = $_POST['logement'];
+    $idLogementActif = $_POST['idLogement'];
     $clients = recuperationClients($bdd, $idLogementActif);
     foreach ($clients as $key => $value){
         $tabValeurs = preg_split("/\!/", $value);
@@ -113,13 +115,43 @@ if (isset($_POST['id'])){
 
 //============================================ test des clients a ajouter
 
-if (isset($_POST['idUtilisateur'])){
-    $tab = recupClient($bdd, $_POST['idUtilisateur']);
-    echo decoupeString2($tab);
-}
+if(isset($_POST['logementsec']) && isset($_POST['prenomsec']) && isset($_POST['nomsec'])){
+    $logementsec = $_POST['logementsec'];
+    $prenomsec = $_POST['prenomsec'];
+    $nomsec = $_POST['nomsec'];
+    $reponse = false;
+    $id_secadd = recupIdSecFromNomPrenom($bdd, $prenomsec, $nomsec);
+    if (!empty($id_secadd)){     //verifier que la personne existe
+        $relation = recupRelation($bdd, $id, $id_secadd[0]);
+        if (empty($relation)){      //verifier que la personne n'est pas déjà liée
+            $mail = recupMail($bdd, $id_secadd[0]);
+            $renvoi = (3 * $id + 666) ** 2;
+            $ajoute = (6 * $id_secadd[0] + 333) ** 2;
+            //envoi de mail pour récupérer les identifiants
+            $sujet = "Un client veut vous ajouter comme compte secondaire";
+            $header = "MIME-Version: 1.0\r\n";
+            $header .= 'From:"NIDS"<contactservice123456@gmail.com>' . "\n";
+            $header .= 'Content-Type:text/html; charset="utf-8"' . "\n";
+            $header .= 'Content-Transfer-Encoding: 8bit';
+            $messsage = "Bonjour $prenomsec,
+                        <br> S'il s'agit d'une erreur, ignorez ce mail.
+                        <br> $ut a fait une demande pour vous ajouter en tant que compte secondaire.
+                        <br> Voici le lien pour accepter la requête : <a href=\"nids/controller/validationSecondaire.php?grp=$renvoi&ajt=$ajoute&m=$logementsec\">Cliquez ici</a>
+                        <br>Cordialement,
+                        <br>L'équipe de NIDS";
 
-//============================================ ajout des clients
-
-if (isset($_POST['idClientAjouter']) && isset($_POST['idGest']) && isset($_POST['idLog'])){
-    associationClient($bdd, $_POST['idClientAjouter'], $_POST['idGest'], $_POST['idLog']);
+            if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) {
+                $passage_ligne = "\r\n";
+            } else {
+                $passage_ligne = "\n";
+            }
+            try {
+                mail($mail, $sujet, $messsage, $header);
+            } catch (Exception $e) {
+                echo $e->getMessage(), "\n";
+            }
+            $reponse = true;
+        }
+    }
+    echo $reponse;
 }

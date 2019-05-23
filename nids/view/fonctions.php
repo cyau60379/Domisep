@@ -171,7 +171,7 @@
         request.send("identifiant=" + id);                      //envoie le resultat de la requete au serveur
     }
 
-    function verifReponse() {
+    function verifReponse(page) {
         let id = document.forms['inscription'].elements['identifiant'].value;
         let reponse = document.forms['inscription'].elements['reponse'].value;
         if(id === ""){
@@ -185,7 +185,7 @@
                 if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
                     let vraiReponse = this.responseText;
                     if(vraiReponse === reponse){
-                        modifMdp();
+                        modifMdp(page);
                     } else {
                         document.getElementById("reponse").style.borderColor = "red";             //change le style du message
                         document.getElementById("labRep").style.color = "red";             //change le style du message
@@ -199,7 +199,7 @@
         }
     }
 
-    function modifMdp() {
+    function modifMdp(page) {
         let id = document.forms['inscription'].elements['identifiant'].value;
         let mdp = document.forms['inscription'].elements['Mdp'].value;
         let newMdp = document.forms['inscription'].elements['ConfirmationMdp'].value;
@@ -213,8 +213,14 @@
             request = new XMLHttpRequest();
             request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
                 if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                    let page2 = "";
+                    if(page === "editionProfil") {
+                        page2 = "édition de profil";
+                    } else {
+                        page2 = "accueil";
+                    }
                     document.getElementById('retour').innerHTML = "<p class=\"mdpo\" style='font-size: 25px'>La modification de mot de passe a été prise en compte !</p><br/>" +
-                        "<a href='../index.php' style='font-size: 25px'>Retour à la page d'accueil</a>";
+                        "<a href='../index.php?cible=" + page + "' style='font-size: 25px'>Retour à la page d'" + page2 + "</a>";
                 }
             };
             request.open("POST", "controller/modificationMotDePasse.php", true);
@@ -842,7 +848,7 @@
 
     // --------------------------------------------- fonction qui permet d'afficher les clients en fonction du logement demandé
 
-    function changerLogement(logementVoulu, id, idGest) {
+    function changerLogement(logementVoulu, id) {
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
         if (logementVoulu === "") {
             document.getElementById("zoneClients").innerHTML = "";  //cas ou aucune piece n'est choisi mais un bouton existe
@@ -854,7 +860,7 @@
                 document.getElementById("zoneClients").innerHTML = "";
                 document.getElementById("zoneClients").innerHTML =              //affiche les clients et la consommation dans l'appartement
                     "<div class=\"container\">" +
-                    "    <button class=\"bouton boutonAjout\" onclick=\"ajouterClient("+idGest + "," + id +")\">" +
+                    "    <button class=\"bouton boutonAjout\" onclick=\"ajouterClient(" + id +")\">" +
                     "        <i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Ajouter un client" +
                     "    </button>" +
                     "</div>" +
@@ -869,8 +875,9 @@
                 document.getElementsByClassName("graphe")[0].innerHTML += result[1];
             }
         };
-        request.open("GET", "controller/gestionClient.php?logement=" + logementVoulu + "&id=" + id, true);
-        request.send();                                                              //envoie le resultat de la requete au serveur
+        request.open("POST", "controller/gestionClient.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("logement=" + logementVoulu + "&idLogement=" + id);                                                              //envoie le resultat de la requete au serveur
     }
 
     //------------------------------fonction qui permet d'afficher les pieces en fonction de l'appartement pour un client
@@ -883,8 +890,9 @@
                 document.getElementById("zoneGestion").innerHTML = this.responseText;   //rempli filPieces
             }
         };
-        request.open("GET", "controller/gestionCapteur.php?logement=" + id, true);
-        request.send();                                                              //envoie le resultat de la requete au serveur
+        request.open("POST", "controller/gestionCapteur.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("logement=" + id);                                                              //envoie le resultat de la requete au serveur
     }
 
     //------------------------------------fonction qui permet d'afficher les pieces en fonction de l'appartement dans l'editeur de profil
@@ -897,8 +905,9 @@
                 document.getElementById("gestionPieces").innerHTML = this.responseText;   //rempli filPieces
             }
         };
-        request.open("GET", "controller/editionProfil.php?logement=" + id, true);
-        request.send();                                                              //envoie le resultat de la requete au serveur
+        request.open("POST", "controller/editionProfil.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("logementActif=" + id);                                                               //envoie le resultat de la requete au serveur
     }
 
     function changerLogement4(logementVoulu, id) {
@@ -918,8 +927,9 @@
                     "</div>";
             }
         };
-        request.open("GET", "controller/statistique.php?logement=" + logementVoulu + "&id=" + id, true);
-        request.send();                                                              //envoie le resultat de la requete au serveur
+        request.open("POST", "controller/statistique.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("logement=" + logementVoulu + "&id=" + id);                                                              //envoie le resultat de la requete au serveur
     }
 
     //------------------------fonction de suppression des clients quittant l'appartement
@@ -962,74 +972,43 @@
     // ------------------------------------- fonction pour ajouter un capteur dans la maison souhaité
 
     //message de prévention
-    function ajouterClient(idGest, idLog){
+    function ajouterClient(idLog){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
         document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
-            "<h1 class='alert'>Voulez-vous réellement ajouter un client ?</h1>" +
-            "<form>" +
-            "<input type='button' class='bouton boutonGlobal2' onclick='actionAjouterClient(" + idGest + "," + idLog + ")' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+            "<h1 class='alert'> Quel est le compte que vous voulez lier à ce logement ?</h1>" +
+            "<form name='comptesec'>" +
+            "<input type=\"text\" placeholder='Nom' name='nomsec' class='compteSec'/>"+
+            "<input type=\"text\" placeholder='Prénom' name='prenomsec' class='compteSec'/>"+
+            "<br> <input type='button' class='bouton boutonGlobal2' value='VALIDER' onclick='actionAjouterClient("+ idLog +")' style='float: none'>"+
+            "<input type='button' class='bouton boutonGlobal2' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
             "</form>"+
             "</div>";
     }
 
     //affichage du choix de client
-    function actionAjouterClient(idGest, idLog){
-                document.getElementById("divReponse").innerHTML = "<div class= 'case' style='height: 300px'>" +
-                    "<h1 class='alert'>Ajout d'un client</h1>" +
-                    "<form name='ajoutClient'>" +
-
-                    "<label class='ed edition'> Numéro du client :</label>" +
-                    "<input type='number' name='num' class='inputForm'>" +
-
-                    "<input type='button' class='bouton boutonGlobal2' onclick='finalAjouterClient(" + idGest + "," + idLog +")' style='float: none' value='OUI'>"+
-                    "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
-                    "</form>"+
-                    "</div>";
-    }
-
-    //confirmation
-    function finalAjouterClient(idGest, idLog) {
-        let num = document.forms["ajoutClient"].elements["num"].value;
-        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
+    function actionAjouterClient(idLog){
+        let nomsec = document.forms["comptesec"].elements["nomsec"].value;
+        let prenomsec = document.forms["comptesec"].elements["prenomsec"].value;
+        document.getElementById(`divReponse`).innerHTML = "<div class= 'case'>"+
+            "<h1 class='alert'>Patientez s'il vous plait...</h1>"+
+            "</div>";
+        let request;
         request = new XMLHttpRequest();
-        request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
-            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
-                let nomClient = this.responseText;
-                document.getElementById("divReponse").innerHTML = "<div class= 'case'>" +
-                    "<h1 class='alert'>Voulez-vous ajouter " + nomClient + " à ce logement ?</h1>" +
-                    "<form>" +
-                        "<input type='button' class='bouton boutonGlobal2' onclick='finalAjouterClientFinal(" + num + "," + idGest + "," + idLog +")' style='float: none' value='OUI'>"+
-                        "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>" +
-                    "</form>" +
-                    "</div>";
-            }
-        };
-        request.open("POST", "controller/gestionClient.php", true);
-        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("idUtilisateur=" + num);
-    }
-
-    //retour au menu de choix d'appartement
-    function finalAjouterClientFinal(id, idGest, idLog) {
-        let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
-        request = new XMLHttpRequest();
-        request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
-            if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
-                alerter("L'ajout a bien été pris en compte");
-                document.getElementById("zoneClients").innerHTML = '<p class="info">Veuillez choisir un logement</p>';
-                let len = document.getElementsByClassName("boutonFil").length;
-                for(let i = 0; i < len; i++){
-                    if(document.getElementsByClassName("boutonFil")[i].classList.contains("activer")){
-                        document.getElementsByClassName("boutonFil")[i].classList.remove("activer");
-                    }
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let reponse = this.responseText;
+                if(reponse === '1'){
+                    alerter("Votre souhait d'ajout a bien été prise en compte, un mail a été envoyé à " + prenomsec + " " + nomsec);
+                } else {
+                    alerter("Informations invalides");
                 }
             }
         };
         request.open("POST", "controller/gestionClient.php", true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("idClientAjouter=" + id + "&idGest=" + idGest + "&idLog=" + idLog);
+        request.send("nomsec=" + nomsec + "&prenomsec=" + prenomsec
+            + "&logementsec=" + idLog);
     }
 
     function ajoutF(page){

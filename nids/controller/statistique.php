@@ -16,10 +16,10 @@ $logement = decoupeString(recupLogements($bdd, $id));
 
 //============================================ test des clients a afficher
 
-if (isset($_GET['logement']) && isset($_GET['id'])) {
+if (isset($_POST['logement']) && isset($_POST['id'])) {
 
-    $logementActif = $_GET['logement'];
-    $idLogementActif = $_GET['id'];
+    $logementActif = $_POST['logement'];
+    $idLogementActif = $_POST['id'];
     $listePieces = recuperationPieces($bdd, $idLogementActif);
 
     //liste des pieces de la maison sous forme array { [$id] => $nom ... }

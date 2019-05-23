@@ -141,9 +141,9 @@ if ($modif === true){
 
 //============================================ logements a afficher
 
-if (isset($_GET['logement'])) {
+if (isset($_POST['logementActif'])) {
 
-    $idLogementActif = $_GET['logement'];
+    $idLogementActif = $_POST['logementActif'];
 
     //liste des pieces de la maison sous forme array { [0] => $id!$nom ... }
     $listePieces = recuperationPieces($bdd, $idLogementActif);
