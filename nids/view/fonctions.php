@@ -171,13 +171,17 @@
         request.send("identifiant=" + id);                      //envoie le resultat de la requete au serveur
     }
 
-    function verifReponse(page) {
+    function verifReponse(page, identif) {
         let id = document.forms['inscription'].elements['identifiant'].value;
         let reponse = document.forms['inscription'].elements['reponse'].value;
         if(id === ""){
             document.getElementById("identifiant").style.borderColor = "red";             //change le style du message
             document.getElementById("labIdentif").style.color = "red";             //change le style du message
             document.getElementById("labIdentif").innerHTML = "Login manquant !";
+        } else if(id !== identif) {
+            document.getElementById("identifiant").style.borderColor = "red";             //change le style du message
+            document.getElementById("labIdentif").style.color = "red";             //change le style du message
+            document.getElementById("labIdentif").innerHTML = "Mauvais login !";
         } else {
             let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
             request = new XMLHttpRequest();
@@ -185,7 +189,7 @@
                 if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
                     let vraiReponse = this.responseText;
                     if(vraiReponse === reponse){
-                        modifMdp(page);
+                        modifMdp(page, identif);
                     } else {
                         document.getElementById("reponse").style.borderColor = "red";             //change le style du message
                         document.getElementById("labRep").style.color = "red";             //change le style du message
@@ -199,7 +203,7 @@
         }
     }
 
-    function modifMdp(page) {
+    function modifMdp(page, identif) {
         let id = document.forms['inscription'].elements['identifiant'].value;
         let mdp = document.forms['inscription'].elements['Mdp'].value;
         let newMdp = document.forms['inscription'].elements['ConfirmationMdp'].value;
@@ -207,6 +211,10 @@
             document.getElementById("identifiant").style.borderColor = "red";             //change le style du message
             document.getElementById("labIdentif").style.color = "red";             //change le style du message
             document.getElementById("labIdentif").innerHTML = "Login manquant !";
+        } else if(id !== identif) {
+            document.getElementById("identifiant").style.borderColor = "red";             //change le style du message
+            document.getElementById("labIdentif").style.color = "red";             //change le style du message
+            document.getElementById("labIdentif").innerHTML = "Mauvais login !";
         } else if(mdp !== newMdp){
         } else {
             let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
@@ -1370,5 +1378,55 @@
         request.open("POST", "controller/editionProfil.php", true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send("nvxType=" + type);
+    }
+
+    function modifStatut2(id){
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let types = this.responseText;
+                let tabValues = types.split('_');
+                let options = "";
+                for(let i = 0; i < tabValues.length - 1; i++){
+                    let tabVal2 = tabValues[i].split("!");
+                    options += "<option value= "+ tabVal2[0] + ">" + tabVal2[1] + "</option>"
+                }
+                document.getElementById("divReponse").innerHTML = "<div class= 'case'> "+
+                    "<h1 class='alert'> Quel type pour cet utilisateur ?</h1>" +
+                    "<form name='type'>" +
+                    "<select name='typeChoisi' class='inputForm'>" +
+                    options +
+                    "</select>" +
+                    "<br> <input type='button' class='bouton boutonGlobal2' value='VALIDER' onclick='actionModifStatut2("+ id +")' style='float: none'>"+
+                    "<input type='button' class='bouton boutonGlobal2' value='ANNULER' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
+                    "</form>"+
+                    "</div>";
+            }
+        };
+        request.open("POST", "controller/infoCompte.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("modifType=1");
+    }
+
+    function actionModifStatut2(id) {
+        let type = document.forms["type"].elements["typeChoisi"].value;
+        document.getElementById(`divReponse`).innerHTML = "<div class= 'case'>"+
+            "<h1 class='alert'>Patientez s'il vous plait...</h1>"+
+            "</div>";
+        let request;
+        request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let rep = this.responseText;
+                let reponse = rep.split("!");
+                alerter("Changement de statut effectué, un mail a été envoyé à " + reponse[1]);
+                document.getElementById('zoneDonnees').innerHTML = reponse[0];
+            }
+        };
+        request.open("POST", "controller/infoCompte.php", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send("nvxType=" + type + "&idDemandeur=" + id);
     }
 </script>

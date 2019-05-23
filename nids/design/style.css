@@ -658,6 +658,12 @@ td.head{
     color: #FFFFFF;
 }
 
+.bouton3 {
+    width: 80px;
+    height: 25px;
+    font-size: 15px;
+}
+
 @media screen and  (max-width: 10000px) {
     td.catalogue{
         padding: 0;
@@ -673,9 +679,13 @@ td.head{
     }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 700px) {
     .catalogue2{
         font-size: 12px;
+    }
+    .bouton3{
+        font-size: 12px;
+        width: 60px;
     }
 }
 @media screen and (max-width: 600px) {
@@ -684,6 +694,10 @@ td.head{
     }
     .catalogue2 {
         font-size: 2vw;
+    }
+    .bouton3{
+        font-size: 2vw;
+        width: 50px;
     }
     .img{
         width: 50px;
@@ -699,6 +713,13 @@ td.head{
         padding: 0;
     }
 
+}
+
+@media screen and (max-width: 370px) {
+    .bouton3 {
+        font-size: 2vw;
+        width: 40px;
+    }
 }
 
 @media screen and (max-width: 200px) {
@@ -967,12 +988,6 @@ div.compteSecondaire {
     font-style: italic;
     font-weight: bold;
     margin-top: 10px;
-}
-
-.bouton3 {
-    width: 100px;
-    height: 25px;
-    font-size: 15px;
 }
 
 .compte2 {

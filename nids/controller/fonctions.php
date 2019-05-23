@@ -433,8 +433,21 @@ function afficheLogements($logement){
         </div>";
 }
 
-function afficheChangementMdp($question, $page){
-    echo "<label class=\"boxIdentifiant boxConnexion1\" style=\"color: #FFFFFF\">
+function afficheChangementMdp($question, $identif, $page){
+    if($question == ""){
+        echo "<label class=\"boxIdentifiant boxConnexion1\" style=\"color: #FFFFFF\">
+            Mot de Passe: <br><input id=\"Mdp\" class=\"inputForm\" type=\"password\" name=\"Mdp\" oninput=\"verificationPass()\">
+            <p id=\"labMdp\" class =\"put\" style=\"color: #3c3d51\">.</p>
+        </label>
+        <label class=\"boxIdentifiant boxConnexion1\" style=\"color: #FFFFFF\">
+            Confirmation : <br><input id=\"ConfirmationMdp\" class=\"inputForm\" type=\"password\" name=\"ConfirmationMdp\" oninput=\"verificationConfPass()\">
+            <p id=\"labConfirmationMdp\" class =\"put\" style=\"color: #3c3d51\">.</p>
+        </label>
+        <div class=\"boxBouton boxConnexion1\" style=\"margin: auto\">
+            <input id='$page' type = \"button\" class=\"boutton_mdpo $identif\" value = \"Envoyer\" onclick=\"modifMdp(this.id, this.classList[1])\">
+        </div>";
+    } else {
+        echo "<label class=\"boxIdentifiant boxConnexion1\" style=\"color: #FFFFFF\">
             $question : <br><input id=\"reponse\" class=\"inputForm\" type=\"text\" name=\"reponse\">
             <p id=\"labRep\" class =\"put\" style=\"color: #3c3d51\">.</p>
         </label>
@@ -447,14 +460,49 @@ function afficheChangementMdp($question, $page){
             <p id=\"labConfirmationMdp\" class =\"put\" style=\"color: #3c3d51\">.</p>
         </label>
         <div class=\"boxBouton boxConnexion1\" style=\"margin: auto\">
-            <input id='$page' type = \"button\" class=\"boutton_mdpo\" value = \"Envoyer\" onclick=\"verifReponse(this.id)\">
+            <input id='$page' type = \"button\" class=\"boutton_mdpo $identif\" value = \"Envoyer\" onclick=\"verifReponse(this.id, this.classList[1])\">
         </div>";
+    }
 }
 
 function afficheRelance(){
     echo "<div class=\"boxBouton boxConnexion1\" style=\"margin: auto\">
             <input id=\"boutonEnvoi\" type = \"button\" class=\"boutton_mdpo\" value = \"Envoyer\" onclick=\"verifLogin()\">
         </div>";
+}
+
+function affichePageDonnees($tabCompte, $ajout){
+    foreach($tabCompte as $key => $value):
+        echo "<tr>
+            <td class='catalogue2'>
+                $value[0]
+            </td>
+            <td class='catalogue2 nom'>
+                $value[1]
+            </td>
+            <td class='catalogue2 nom'>
+                $value[2]
+            </td>
+            <td class='catalogue2'>
+                $value[3]
+            </td>
+            <td class='catalogue2'>
+                $value[4]
+            </td>
+            <td class='catalogue2'>
+                $value[5]
+            </td>
+            <td class='catalogue2'>
+                <p id=\"resultat\">$value[6]</p>";
+                if($ajout):
+                    echo "<button type='button' class='bouton bouton3' onclick='modifStatut2($value[0])'>
+                        Modifier
+                    </button>";
+                endif;
+            echo "</td>
+        </tr>";
+    endforeach;
+    echo "</tbody>";
 }
 
 ?>

@@ -11,7 +11,6 @@ include_once ("fonctions.php");
 $mdpbislol="";
 $mdp="";
 $adresseMail="";
-
 //test du login
 
 if(isset($_POST['identifiant'])){
@@ -27,9 +26,9 @@ if(isset($_POST['identifiant'])){
             $question = recupQuestion($bdd, $id)[0];
             $etat = recupActivite($bdd, $id);
             if($etat == 1){
-                afficheChangementMdp($question, "editionProfil");
+                afficheChangementMdp($question, $identif, "editionProfil");
             } else {
-                afficheChangementMdp($question, "accueil");
+                afficheChangementMdp($question, $identif, "accueil");
             }
         } else {
             afficheRelance();

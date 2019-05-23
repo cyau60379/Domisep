@@ -24,7 +24,7 @@
     </tr>
     </thead>
 
-    <tbody>
+    <tbody id="zoneDonnees">
     <?php foreach($tabCompte as $key => $value):?>
         <tr>
             <td class='catalogue2'>
@@ -46,7 +46,12 @@
                 <?php echo $value[5];?>
             </td>
             <td class='catalogue2'>
-                <?php echo $value[6];?>
+                <p id="resultat"><?php echo $value[6];?></p>
+                <?php if($ajout):?>
+                    <button type="button" class="bouton bouton3 bout" onclick="modifStatut2(<?php echo $value[0]?>)">
+                        Modifier
+                    </button>
+                <?php endif;?>
             </td>
         </tr>
     <?php endforeach;?>

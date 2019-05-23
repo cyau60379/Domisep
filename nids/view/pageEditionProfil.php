@@ -22,7 +22,7 @@
                 <div id="typeUtilisateur">
                      Type : <?php echo $coord["type"]?>
                     <?php if($ajout):?>
-                    <button type="button" class="bouton bouton3" onclick="modifStatut(<?php echo $id?>)">
+                    <button type="button" class="bouton bouton3" onclick="modifStatut()">
                         Modifier
                     </button>
                     <?php endif;?>
