@@ -121,18 +121,6 @@ function updateUtilisateur(PDO $bdd, $id, $chgnt, $colonne){
     }
 }
 
-//Met à jour le mot de passe en fonction de l'id
-function updateMdp(PDO $bdd, $id, $chgnt, $colonne){
-    try {
-        $valMdp = password_hash($chgnt, PASSWORD_DEFAULT);
-        $query = "UPDATE utilisateur SET ". $colonne ."= '$valMdp' WHERE utilisateur.id = '$id'";
-        $bdd->exec($query);
-    }
-    catch(PDOException $e) {
-        echo $query . "<br>" . $e->getMessage();
-    }
-}
-
 function recuperationComptesSecondaires(PDO $bdd, $id){
 
     $query = "SELECT * FROM heritage INNER JOIN utilisateur ON heritage.id_utilisateur_sec = utilisateur.id WHERE heritage.id_utilisateur_prim= '$id'";
@@ -213,4 +201,19 @@ function recupTypesPossibles(PDO $bdd){
 function recupUnType(PDO $bdd, $id){
     $query = "SELECT Nom FROM type_utilisateur WHERE id= '$id'";
     return $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
+}
+
+function recupEssai(PDO $bdd, $id){
+    $query = "SELECT utilisateur.essais FROM utilisateur WHERE utilisateur.id = '$id'";
+    return $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
+}
+
+function updateEssai(PDO $bdd, $id, $count) {
+    try {
+        $req = "UPDATE utilisateur SET essais = '$count' WHERE id = '$id'";
+        $bdd->exec($req);
+    }
+    catch(PDOException $e) {
+        echo $req . "<br>" . $e->getMessage();
+    }
 }

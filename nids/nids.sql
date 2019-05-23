@@ -439,6 +439,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `Etat` tinyint(1) NOT NULL,
   `Question_verif` varchar(255) DEFAULT NULL,
   `Reponse_verif` varchar(255) DEFAULT NULL,
+  `essais` int(11) DEFAULT NULL,
   `id_type_utilsateur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `utilisateur_ibfk_1` (`id_type_utilsateur`)

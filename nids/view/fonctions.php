@@ -243,13 +243,17 @@
         //recuperation des données du formulaire
         let id = document.forms["connexion"].elements["identifiant"].value;
         let mdp = document.forms["connexion"].elements["password"].value;
+        //ajout du message dans le div appelé divReponse
+        document.getElementById("divReponse").style.zIndex = '1';
+        document.getElementById("divReponse").style.display = 'initial';
+        document.getElementById(`divReponse`).innerHTML = "<div class= 'case'>"+
+            "<h1 class='alert'>Patientez s'il vous plait, votre connexion est en cours...</h1>"+
+            "</div>";
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
         request = new XMLHttpRequest();
         request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
             if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
                 document.getElementById("divReponse").innerHTML = this.responseText;   //rempli le corps de la page avec la réponse
-                document.getElementById("divReponse").style.zIndex = '1';
-                document.getElementById("divReponse").style.display = 'initial';
             }
         };
         request.open("POST", "controller/accueil.php", true);
@@ -311,7 +315,6 @@
         let mail = document.forms["modification"].elements["user_email"].value;
         let phone = document.forms["modification"].elements["user_phone"].value;
         let naissance = document.forms["modification"].elements["user_date"].value;
-        let mdp = document.forms["modification"].elements["user_pass"].value;
         let question = document.forms["modification"].elements["user_question"].value;
         let reponse = document.forms["modification"].elements["user_response"].value;
 
@@ -338,7 +341,7 @@
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send("user_prenom=" + prenom + "&user_nom=" + nom
                 + "&user_email=" + mail + "&user_phone=" + phone
-                + "&user_date=" + naissance + "&user_pass=" + mdp + "&user_question=" + question + "&user_response=" + reponse);                      //envoie le resultat de la requete au serveur
+                + "&user_date=" + naissance + "&user_question=" + question + "&user_response=" + reponse);                      //envoie le resultat de la requete au serveur
         }
     }
 

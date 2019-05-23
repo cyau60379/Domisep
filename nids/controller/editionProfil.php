@@ -117,12 +117,6 @@ if(isset($_POST['user_date']) && !empty($_POST['user_date'])){
     $modif = true;
 }
 
-//================================================ changement du mot de passe
-if(isset($_POST['user_pass']) && !empty($_POST['user_pass'])){
-    updateMdp($bdd, $id, $_POST['user_pass'], "Mot_de_passe");
-    $modif = true;
-}
-
 //================================================ changement de la question de vérification
 if(isset($_POST['user_question']) && !empty($_POST['user_question'])){
     updateUtilisateur($bdd, $id, $_POST['user_question'], "Question_verif");

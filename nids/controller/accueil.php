@@ -6,8 +6,6 @@
 include_once("fonctions.php");
 include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesUtilisateur.php");
 
-$countdownToExtinction = 0;
-
 //============================================================== connexion
 
 if(isset($_POST['identifiant']) && isset($_POST['password'])){
@@ -19,20 +17,33 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
     $tabIdPrenom = prenomVersId($bdd,$prenom);          //id des personnes ayant un debut de prenom correspondant
     $tabIdNom = nomVersId($bdd,$nom);                //id des personnes ayant un debut de nom correspondant
     $reponse = false;                                   //reponse qui determinera l'action suivante
-
     if(!empty($tabIdPrenom) && !empty($tabIdNom)){
         if(in_array($id, $tabIdPrenom) && in_array($id, $tabIdNom)){        //si l'id appartient à une personne
+            $countdownToExtinction = recupEssai($bdd, $id)[0];
             $mdpRegistered = recupMdp($bdd, $id);                           //on recupere le mot de passe de la personne
            if(password_verify($mdp, $mdpRegistered)) {                     //on compare les deux
-                $reponse = true;
+               $reponse = true;
+               $countdownToExtinction = 0;
+               updateEssai($bdd, $id, $countdownToExtinction);
             } else {
                $countdownToExtinction += 1;
+               updateEssai($bdd, $id, $countdownToExtinction);
            }
            session_start();             //commencement de la session si la connexion fonctionne
             updateEtat($bdd, $id, 1);
         }
     }
-    if($countdownToExtinction == 3){
+    $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));  //
+    affichageReponse($reponse, $id, $utilisateur, "Connexion");
+
+    if($countdownToExtinction >= 3){
+        $chaine="aqwzsxedAZSQXCDERFV1472583690BGTYHNJUIKLOPMcrfvtgbyhnujikolpm1478502369";
+        $newMdp = "";
+        for($i = 0; $i < 15; $i++){
+            $newMdp .= $chaine[mt_rand(0,strlen($chaine)-1)];
+        }
+        $valMdp = password_hash($newMdp, PASSWORD_DEFAULT);
+        update($bdd, $valMdp, $id);
         $mail = recuperationCoordonnees($bdd, $id)[0]['Adresse_mail'];
         $pre = recuperationCoordonnees($bdd, $id)[0]['Prenom'];
         $sujet = " /!\ Intrusion sur votre compte /!\ ";
@@ -42,6 +53,7 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
         $header .= 'Content-Transfer-Encoding: 8bit';
         $messsage = "Bonjour $pre,
                  <br> Quelqu'un tente de s'introduire sur votre session !
+                 <br>Votre nouveau mot de passe temporaire : $newMdp
                  <br>Cordialement,
                  <br>L'équipe de NIDS";
         try {
@@ -50,8 +62,6 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
             echo $e->getMessage(), "\n";
         }
     }
-    $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));  //
-    affichageReponse($reponse, $id, $utilisateur, "Connexion");
 }
 
 // ============================================================= inscription
