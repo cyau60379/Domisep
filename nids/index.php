@@ -14,8 +14,8 @@ ini_set('display_errors', 1);
 
 // Appel des fonctions du contrôleur
 include_once("controller/fonctions.php");
+session_cache_limiter('private_no_expire, must-revalidate');        //empeche le document expiré
 session_start();
-
 $url = "";
 
 // Identification du contrôleur à appeler

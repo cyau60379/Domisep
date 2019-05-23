@@ -871,8 +871,8 @@
                     "        <i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Ajouter un client" +
                     "    </button>" +
                     "</div>" +
-                    "<div class='caseClient compte2' id='divClients'>" +
-                        "<div id='titreClient' class='titre titreSup titre2'>Clients</div>" +
+                    "<div class='caseClient' id='divClients'>" +
+                        "<div id='titreClient' class='titre titreSup'>Clients</div>" +
                         "<div id='zoneCapteurs'></div>" +
                     "</div>" +
                     "<div class='caseClient graphe' id='divClients'>" +

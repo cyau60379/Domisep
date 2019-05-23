@@ -6,6 +6,7 @@
 include_once("fonctions.php");
 include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesUtilisateur.php");
 
+$countdownToExtinction = 0;
 
 //============================================================== connexion
 
@@ -24,9 +25,29 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
             $mdpRegistered = recupMdp($bdd, $id);                           //on recupere le mot de passe de la personne
            if(password_verify($mdp, $mdpRegistered)) {                     //on compare les deux
                 $reponse = true;
-            }
+            } else {
+               $countdownToExtinction += 1;
+           }
            session_start();             //commencement de la session si la connexion fonctionne
             updateEtat($bdd, $id, 1);
+        }
+    }
+    if($countdownToExtinction == 3){
+        $mail = recuperationCoordonnees($bdd, $id)[0]['Adresse_mail'];
+        $pre = recuperationCoordonnees($bdd, $id)[0]['Prenom'];
+        $sujet = " /!\ Intrusion sur votre compte /!\ ";
+        $header = "MIME-Version: 1.0\r\n";
+        $header .= 'From:"NIDS"<contactservice123456@gmail.com>' . "\n";
+        $header .= 'Content-Type:text/html; charset="utf-8"' . "\n";
+        $header .= 'Content-Transfer-Encoding: 8bit';
+        $messsage = "Bonjour $pre,
+                 <br> Quelqu'un tente de s'introduire sur votre session !
+                 <br>Cordialement,
+                 <br>L'équipe de NIDS";
+        try {
+            mail($mail, $sujet, $messsage, $header);
+        } catch (Exception $e) {
+            echo $e->getMessage(), "\n";
         }
     }
     $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));  //
