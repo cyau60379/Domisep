@@ -853,7 +853,6 @@
         request.send("modifNom=" + nom + "&idDuCapteur=" + id);
     }
 
-
     // --------------------------------------------- fonction qui permet d'afficher les clients en fonction du logement demandé
 
     function changerLogement(logementVoulu, id) {
@@ -874,14 +873,13 @@
                     "</div>" +
                     "<div class='caseClient compte2' id='divClients'>" +
                         "<div id='titreClient' class='titre titreSup titre2'>Clients</div>" +
+                        "<div id='zoneCapteurs'></div>" +
                     "</div>" +
                     "<div class='caseClient graphe' id='divClients'>" +
                         "<div class='titre titreSup'>Graphes</div>" +
                     "</div>";
                 let result = this.responseText.split("§");
-                document.getElementById("divClients").innerHTML += result[0];   //rempli la zoneClients
-                document.getElementById("divClients").style.gridTemplateColumns = "repeat(" + result[2] + "," + (100 / result[2]) +"%)";
-                document.getElementById("titreClient").style.gridColumn = "1 / " + (1 + result[2]);
+                document.getElementById("zoneCapteurs").innerHTML += result[0];   //rempli la zoneClients
                 document.getElementsByClassName("graphe")[0].innerHTML += result[1];
             }
         };

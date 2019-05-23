@@ -44,7 +44,7 @@ if(isset($_POST['nvxType']) && isset($_POST['idDemandeur'])){
     $nvxType = recupUnType($bdd, $_POST['nvxType'])[0];
     updateUtilisateur($bdd, $idDemandeur, $_POST['nvxType'], 'id_type_utilsateur');
 //envoi de mail pour récupérer les identifiants
-    $sujet = "Votre changement de status effectué";
+    $sujet = "Votre changement de statut effectué";
     $header = "MIME-Version: 1.0\r\n";
     $header .= 'From:"NIDS"<contactservice123456@gmail.com>' . "\n";
     $header .= 'Content-Type:text/html; charset="utf-8"' . "\n";
