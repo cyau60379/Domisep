@@ -38,7 +38,7 @@ if (isset($_POST['logement']) && isset($_POST['idLogement'])) {
 
     $c = afficheClients($clients);
     $b = affichePieces3($pieces, $id);
-    $sortie = $c. "§" . $b;
+    $sortie = $c . "§" . $b . "§" . sizeof($clients);
     //affiche les infos dans le div qui convient via Javascript
     echo $sortie;
 }

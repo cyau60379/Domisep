@@ -328,7 +328,7 @@ function afficheClients($clients) {
     $reponse = "";
     foreach ($clients as $c):
         $id = -$c[0];
-        $reponse .= "<div id= '$id' class= ' caseClient '> 
+        $reponse .= "<div id= '$id' class= ' caseClient ' style='margin: 20px auto;'> 
                 <div class='titre'>
                     $c[1] $c[2]
                     <a href='javascript:supprimerClient($id)'>

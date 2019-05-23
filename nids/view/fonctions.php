@@ -872,14 +872,16 @@
                     "        <i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Ajouter un client" +
                     "    </button>" +
                     "</div>" +
-                    "<div class='caseClient' id='divClients'>" +
-                        "<div class='titre titreSup'>Clients</div>" +
+                    "<div class='caseClient compte2' id='divClients'>" +
+                        "<div id='titreClient' class='titre titreSup titre2'>Clients</div>" +
                     "</div>" +
                     "<div class='caseClient graphe' id='divClients'>" +
                         "<div class='titre titreSup'>Graphes</div>" +
                     "</div>";
                 let result = this.responseText.split("§");
                 document.getElementById("divClients").innerHTML += result[0];   //rempli la zoneClients
+                document.getElementById("divClients").style.gridTemplateColumns = "repeat(" + result[2] + "," + (100 / result[2]) +"%)";
+                document.getElementById("titreClient").style.gridColumn = "1 / " + (1 + result[2]);
                 document.getElementsByClassName("graphe")[0].innerHTML += result[1];
             }
         };
@@ -969,7 +971,7 @@
                 for(let i = 1; i < client.classList.length; i++){
                     nom += " " + client.classList[i];
                 }
-                alerter(nom +' supprimé !');             // /!\ mettre condition si la base n'a pas ete mise a jour
+                alerter('Client supprimé !');             // /!\ mettre condition si la base n'a pas ete mise a jour
             }
         };
         request.open("POST", "controller/gestionClient.php", true);
