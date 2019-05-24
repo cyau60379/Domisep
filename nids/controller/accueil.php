@@ -29,7 +29,7 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
                $countdownToExtinction += 1;
                updateEssai($bdd, $id, $countdownToExtinction);
            }
-           session_start();             //commencement de la session si la connexion fonctionne
+           //session_start();             //commencement de la session si la connexion fonctionne
             updateEtat($bdd, $id, 1);
         }
     }

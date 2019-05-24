@@ -37,7 +37,8 @@
 <br>
 <br>
 <div id="articles">
-    <?php afficheArticle($tabForum, $tabComment, $tabDate, $ids)?>
+    <?php print_r($tabComment);
+    afficheArticle($tabForum, $tabComment, $tabDate, $ids)?>
 </div>
 
 </html>

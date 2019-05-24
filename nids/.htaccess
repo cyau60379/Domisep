@@ -1,14 +1,7 @@
 ErrorDocument 404 /view/pageErreur.php
 
-# Redirection vers HTTPS
-#RewriteCond %{SERVER_PORT} ^80$ [OR]
-#RewriteCond %{HTTPS} =off
-#RewriteRule ^(.*)$ https://nids/$1 [R=301,L]
-
-# Redirection du www vers non-www en HTTPS
-#RewriteCond %{HTTP_HOST} ^www\.nids\.com [NC]
-#RewriteRule ^(.*)$ https://nids/$1 [R=301,L]
-
-
-RewriteEngine on
+#RewriteEngine on
 #RewriteRule ^index/([0-9]+)$ index.php?mdpOublie=$1 [L]
+
+#RewriteEngine On
+#RewriteRule ^/?nids/index/([0-9]+)/(.*)$ /nids/index.php?cible=$1 [L,QSA]

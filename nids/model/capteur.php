@@ -27,11 +27,6 @@ function recuperationPieces (PDO $bdd, $id) {
     return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC,"recupValeurPiece");     //retourne un tableau contenant toutes les resultats de la requete
 }
 
-//requête recup capteur en fonction de la pieces en entree
-
-function recupValeur4($a1, $a2, $a3, $a4) {
-    return "$a1!$a2!$a3!$a4";
-}
 
 //requête recup capteur en fonction de la pieces en entree
 

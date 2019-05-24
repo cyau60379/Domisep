@@ -393,8 +393,8 @@ function afficheArticle($tabForum, $tabComment, $tabDate, $ids){
         $contenu = "formulaireComm" . $ids[$i];
         echo "<section class='faq-section'>
             <input type='checkbox' id='$ids[$i]'>
-            <label for='$ids[$i]'>$q</label>
-            <p>$r</p>
+            <label for='$ids[$i]'>$r[2] - $q ($r[1])</label>
+            <p>$r[0]</p>
             <p style=\"color: white\"> Commentaire : </p>";
         if(isset($tabComment[$ids[$i]])){       //vérification pour savoir si il y a un commentaire pour l'article
             $tab = $tabComment[$ids[$i]];

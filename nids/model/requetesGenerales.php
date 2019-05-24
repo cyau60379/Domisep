@@ -25,6 +25,12 @@ function recup3($a1, $a2, $a3){
     return "$a1!$a2!$a3";
 }
 
+//requête recup capteur en fonction de la pieces en entree
+
+function recupValeur4($a1, $a2, $a3, $a4) {
+    return "$a1!$a2!$a3!$a4";
+}
+
 //recupération du nom et prenom de l'utilisateur en fonction de l'id
 function recupererUtilisateur(PDO $bdd, $id): array {
     $query = ' SELECT utilisateur.prenom, utilisateur.nom  FROM utilisateur WHERE utilisateur.id='. $id;
