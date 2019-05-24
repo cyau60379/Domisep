@@ -9,6 +9,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesUtilisateur.php");
 //============================================================== connexion
 
 if(isset($_POST['identifiant']) && isset($_POST['password'])){
+    $countdownToExtinction = 0;
     $identif = $_POST['identifiant'];                       //identifiant de la forme 2 lettres du prenom, 2 lettres du nom, id
     $prenom = substr($identif,0,2);
     $nom = substr($identif,2,2);
