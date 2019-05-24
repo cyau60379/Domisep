@@ -69,65 +69,69 @@ if(isset($_POST['identifiant']) && isset($_POST['password'])){
 
 // récupération des données passées dans le formulaire
 
-    if(isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['mail']) && isset($_POST['naissance']) && isset($_POST['mdp']) &&isset($_POST['ConfirmationMdp'])){
-        $prenom = $_POST['prenom'];
-        $nom = $_POST['nom'];
-        $mail = filter_var($_POST['mail'], FILTER_SANITIZE_EMAIL);
-        $naissance = $_POST['naissance'];
-        $date = preg_split("/\-/", $naissance);
+if(isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['mail']) && isset($_POST['naissance']) && isset($_POST['mdp']) &&isset($_POST['ConfirmationMdp'])){
+    $prenom = $_POST['prenom'];
+    $nom = $_POST['nom'];
+    $mail = filter_var($_POST['mail'], FILTER_SANITIZE_EMAIL);
+    $naissance = $_POST['naissance'];
+    $date = preg_split("/\-/", $naissance);
+    $donnees = checkMailExistence($bdd, $mail);
 
-        //vérification que chaque input est bien rempli + mail est bien un mail + date de naissance prise en compte
-        if($prenom == ""){
-            affichageErreur("votre prénom. Veuillez en rentrer un.");
+    //vérification que chaque input est bien rempli + mail est bien un mail + date de naissance prise en compte
+    if($prenom == ""){
+        affichageErreur("votre prénom. Veuillez en rentrer un.");
 
-        } elseif($nom == ""){
-            affichageErreur("votre nom. Veuillez en rentrer un.");
+    } elseif($nom == ""){
+        affichageErreur("votre nom. Veuillez en rentrer un.");
 
-        } elseif($mail == "") {
-            affichageErreur("votre email. Veuillez en rentrer un.");
+    } elseif($mail == "") {
+        affichageErreur("votre email. Veuillez en rentrer un.");
 
-        } elseif(!filter_var($mail,FILTER_VALIDATE_EMAIL)){
-            affichageErreur("votre email. Veuillez rentrer un email valide.");
+    } elseif(!filter_var($mail,FILTER_VALIDATE_EMAIL)){
+        affichageErreur("votre email. Veuillez rentrer un email valide.");
 
-        } elseif($naissance == "" || ($date['0'] > 2020) || ($date['0'] < 1900)){
-            affichageErreur("votre date de naissance. Veuillez en rentrer une.");
+    } elseif(!empty($donnees)){
+        affichageErreur("votre email. Il existe déjà. Veuillez rentrer un email valide.");
 
-        } elseif($_POST['mdp'] == "") {
-            affichageErreur("votre mot de passe. Veuillez en rentrer un.");
+    } elseif($naissance == "" || ($date['0'] > 2020) || ($date['0'] < 1900)){
+        affichageErreur("votre date de naissance. Veuillez en rentrer une.");
 
-        } elseif($_POST['ConfirmationMdp'] == "") {
-            affichageErreur("votre mot de passe. Veuillez le confirmer.");
+    } elseif($_POST['mdp'] == "") {
+        affichageErreur("votre mot de passe. Veuillez en rentrer un.");
 
-        } elseif($_POST['mdp'] != $_POST['ConfirmationMdp']){
-            affichageErreur( "le mot de passe. Veuillez rentrer le même deux fois.");
-        } else {                                                        //verif avec confirmation
-            $mdp = $_POST['mdp'];
-            $id = maximumId($bdd) + 1;                          //met au nouvel inscrit l'id le plus  grand + 1
-            ajouterInscription($bdd, $id, $nom, $prenom, $mail, $naissance, $mdp);
-            $utilisateur = $prenom . "_". $nom;
-            $identifiant =  substr($prenom,0,2) . substr($nom,0,2) . $id;
-            affichageReponse(true, $id, $utilisateur,"Inscription"); //message envoyé pour être affiché
-            //envoi de mail pour récupérer les identifiants
-            $sujet = "Votre inscription";
-            $header = "MIME-Version: 1.0\r\n";
-            $header .= 'From:"NIDS"<contactservice123456@gmail.com>' . "\n";
-            $header .= 'Content-Type:text/html; charset="utf-8"' . "\n";
-            $header .= 'Content-Transfer-Encoding: 8bit';
-            $messsage = "Bonjour $prenom,
+    } elseif($_POST['ConfirmationMdp'] == "") {
+        affichageErreur("votre mot de passe. Veuillez le confirmer.");
+
+    } elseif($_POST['mdp'] != $_POST['ConfirmationMdp']){
+        affichageErreur( "le mot de passe. Veuillez rentrer le même deux fois.");
+    } else {                                                        //verif avec confirmation
+        $mdp = $_POST['mdp'];
+        $id = maximumId($bdd) + 1;                          //met au nouvel inscrit l'id le plus  grand + 1
+        ajouterInscription($bdd, $id, $nom, $prenom, $mail, $naissance, $mdp);
+        $utilisateur = $prenom . "_". $nom;
+        $identifiant =  substr($prenom,0,2) . substr($nom,0,2) . $id;
+        affichageReponse(true, $id, $utilisateur,"Inscription"); //message envoyé pour être affiché
+        //envoi de mail pour récupérer les identifiants
+        $sujet = "Votre inscription";
+        $header = "MIME-Version: 1.0\r\n";
+        $header .= 'From:"NIDS"<contactservice123456@gmail.com>' . "\n";
+        $header .= 'Content-Type:text/html; charset="utf-8"' . "\n";
+        $header .= 'Content-Transfer-Encoding: 8bit';
+        $messsage = "Bonjour $prenom,
                         <br> vous venez de vous inscrire sur le site NIDS pour gérer vos capteurs en toute sécurité.
                         <br> nous vous communiquons votre identifiant : $identifiant.
                         <br>Cordialement,
                         <br>L'équipe de NIDS";
 
-            if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) {
-                $passage_ligne = "\r\n";
-            } else {
-                $passage_ligne = "\n";
-            }
-            try {
-                mail($mail, $sujet, $messsage, $header);
-            } catch (Exception $e) {
-                echo $e->getMessage(), "\n";
-            }
+        if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail)) {
+            $passage_ligne = "\r\n";
+        } else {
+            $passage_ligne = "\n";
+        }
+        try {
+            mail($mail, $sujet, $messsage, $header);
+        } catch (Exception $e) {
+            echo $e->getMessage(), "\n";
         }
     }
+}

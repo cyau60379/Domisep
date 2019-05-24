@@ -114,3 +114,9 @@ function supprLogement(PDO $bdd, $id){
         echo $query . "<br>" . $e->getMessage();
     }
 }
+
+function checkMailExistence(PDO $bdd, $mail) {
+    $query = "SELECT Adresse_mail FROM utilisateur WHERE Adresse_mail= '$mail'";
+    $req = $bdd->query($query)->fetch();
+    return $req;
+}
