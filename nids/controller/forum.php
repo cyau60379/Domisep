@@ -14,13 +14,13 @@ $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));
 
 //récupérations des questions et des réponses (commentaires) du Forum
 $tabForum = array();
-$tabForum0 = decoupeString(forum($bdd));
+$tabForum0 = decoupeString10(forum($bdd));
 foreach ($tabForum0 as $key => $value){
     $tabForum[$key] = preg_split("/\*/", $value);
 }
 $ids = recupIdsForum($bdd);
 $tabComment = array();
-$tabComment0 = decoupeString(recupCommentaires($bdd));
+$tabComment0 = decoupeString10(recupCommentaires($bdd));
 foreach ($tabComment0 as $key => $value){
     $tabComment[$key] = preg_split("/\*/", $value);
 }
@@ -32,7 +32,7 @@ if(isset($_POST['Titre']) && isset($_POST['Contenu'])) {
     $titre = $_POST['Titre'];
     $contenu = $_POST['Contenu'];
     ajoutArticleForum($bdd, $titre, $contenu, $id);
-    $tabForum0 = decoupeString(forum($bdd));
+    $tabForum0 = decoupeString10(forum($bdd));
     foreach ($tabForum0 as $key => $value){
         $tabForum[$key] = preg_split("/\*/", $value);
     }
@@ -44,7 +44,7 @@ if(isset($_POST['identifiantArticle']) && isset($_POST['ContenuCommentaire'])) {
     $idArticle= $_POST['identifiantArticle'];
     $contenu = $_POST['ContenuCommentaire'];
     ajoutCommentaires($bdd, $contenu, $idArticle, $id);
-    $tabComment0 = decoupeString(recupCommentaires($bdd));
+    $tabComment0 = decoupeString10(recupCommentaires($bdd));
     foreach ($tabComment0 as $key => $value){
         $tabComment[$key] = preg_split("/\*/", $value);
     }

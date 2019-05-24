@@ -70,6 +70,18 @@ function decoupeString($list){
     return $tab;
 }
 
+
+//fonction pour découper un tableau de string en un tableau de tableau de string avec l'id en indice
+
+function decoupeString10($list){
+    $tab = array();
+    foreach ($list as $str){
+        $result = preg_split("/\@/", $str); //découpe un string et crée un tableau avec
+        $tab[$result[0]] = $result[1];
+    }
+    return $tab;
+}
+
 //fonction pour découper un string en fonction du séparateur choisi ("!")
 
 function decoupeString2($list){
@@ -379,7 +391,7 @@ function afficheArticle2($tabForum, $ajout, $ids){
         echo "<section class='faq-section'>
             <input type='checkbox' id='$ids[$i]'>
             <label for='$ids[$i]'>$q</label>
-            <p>$r</p>";
+            <p class='forum'>$r</p>";
         if($ajout) {
             echo "<button class='bouton boutonGlobal2' onclick='supprimerArticle($ids[$i])'>SUPPRIMER</button>
         </section> <br>";
@@ -394,14 +406,11 @@ function afficheArticle($tabForum, $tabComment, $tabDate, $ids){
         echo "<section class='faq-section'>
             <input type='checkbox' id='$ids[$i]'>
             <label for='$ids[$i]'>$r[2] - $q ($r[1])</label>
-            <p>$r[0]</p>
-            <p style=\"color: white\"> Commentaire : </p>";
+            <p class='forum'>$r[0]</p>
+            <p class='faq-section' style='font-weight: bold;'> Commentaire : </p>";
         if(isset($tabComment[$ids[$i]])){       //vérification pour savoir si il y a un commentaire pour l'article
             $tab = $tabComment[$ids[$i]];
-            $tab2 = $tabDate[$ids[$i]];
-            for ($j = 0; $j < sizeof($tab); $j++){
-                echo "<p>($tab2[$j]) <br> $tab[$j]</p>";
-            }
+            echo "<p class='forum'>$tab[1] ($tab[2])<br><br> $tab[0]</p>";
         }
             echo "<br>
                <form name='$contenu'>

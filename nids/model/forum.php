@@ -4,11 +4,11 @@ include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesGenerales.php");
 
 
 function recup4($a1, $a2, $a3, $a4) {
-    return "$a1!$a2*$a3*$a4";
+    return "$a1@$a2*$a3*$a4";
 }
 
 function forum(PDO $bdd){
-    $query = "SELECT article.Titre, article.Contenu, article.Date, utilisateur.Nom FROM article
+    $query = "SELECT article.Titre, article.Contenu, article.Date, utilisateur.Prenom FROM article
               JOIN utilisateur ON article.id_utilisateur = utilisateur.id ORDER BY article.Date ASC";
     $result = $bdd->query($query)->fetchAll(PDO::FETCH_FUNC, "recup4");
     return $result;
@@ -32,7 +32,7 @@ function recupIdsForum(PDO $bdd){
 }
 
 function recupCommentaires(PDO $bdd){
-    $query = "SELECT article.id, commentaire.Contenu, utilisateur.Nom, commentaire.Date_publication FROM article 
+    $query = "SELECT article.id, commentaire.Contenu, utilisateur.Prenom, commentaire.Date_publication FROM article 
               JOIN commentaire ON commentaire.id_article = article.id
               JOIN utilisateur ON utilisateur.id = commentaire.id_utilisateur
               ORDER BY commentaire.Date_publication DESC";

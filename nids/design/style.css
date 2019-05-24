@@ -6,6 +6,11 @@ body {
     margin: 0;
 }
 
+p.forum {
+    font-size: 18px;
+    text-align: left;
+}
+
 /*division de base*/
 
 .container {
