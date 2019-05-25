@@ -10,7 +10,9 @@
     <?php include_once("fonctions.php");      //inclut les fonctions JS?>
 </head>
 <body>
-
+<div id="divReponse">
+    Hello
+</div>
 <h1 class="mdpo"> MOT DE PASSE OUBLIÉ ?</h1>
 
 <h3 class="mdpo">Rentrez votre adresse mail</h3>

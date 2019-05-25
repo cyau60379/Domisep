@@ -135,14 +135,33 @@
         let mail = document.forms['mdp'].elements['mail'].value;
         if(!checkMail(mail)){
         } else {
-            document.getElementById('retour').innerHTML= "<p class='mdpo'> Votre mail a été envoyé" +
-                "            <br>" +
-                "            <br>" +
-                "            Mais la prochaine fois, achète toi de la matière grise pour retenir ton mot de passe</p>";
+            //ajout du message dans le div appelé divReponse
+            document.getElementById("divReponse").style.zIndex = '1';
+            document.getElementById("divReponse").style.display = 'initial';
+            document.getElementById(`divReponse`).innerHTML = "<div class= 'case'>"+
+                "<h1 class='alert'>Patientez s'il vous plait, votre connexion est en cours...</h1>"+
+                "</div>";
             let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
             request = new XMLHttpRequest();
             request.onreadystatechange = function() {                    //applique la fonction défini après lorsque le changement s'opère
                 if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
+                    fermetureMessage(`divReponse`);
+                    if(this.responseText === '1'){
+                        document.getElementById('retour').innerHTML = "<p class='mdpo'> Votre mail a été envoyé" +
+                            "            <br>" +
+                            "            <br>" +
+                            "            Mais la prochaine fois, achète toi de la matière grise pour retenir ton mot de passe</p>";
+                    } else {
+                        document.getElementById('retour').innerHTML = "<form name=\"mdp\">       <!-- formulaire pour recuperer l'adresse mail et envoyer un lien -->" +
+                            "    <label>" +
+                            "        <input class=\"mdpot\" type=\"text\" name=\"mail\" oninput=\"validationnn('mail')\">" +
+                            "        <p id=\"resultat\">.</p>" +
+                            "    </label>" +
+                            "    <br>" +
+                            "    <input class=\"boutton_mdpo\" type = \"button\" value = \"Envoyer\" onclick=\"formulaireMdp()\">" +
+                            "</form>" +
+                            "<p class='mdpo' style='color: red;'>Ce mail ne correspond pas à celui d'un de nos clients !</p>"
+                    }
                 }
             };
             request.open("POST", "controller/messagerie.php", true);

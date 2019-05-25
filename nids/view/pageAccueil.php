@@ -38,7 +38,7 @@
 
             </form>
         <div class="boxBouton boxConnexion1">
-            <a href="http://nids/mdpOublie/1" class="boxOubli boxConnexion1">Mot de passe oublié ?</a>
+            <a href="http://nids/messagerie" class="boxOubli boxConnexion1">Mot de passe oublié ?</a>
         </div>
 
 

@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1" charset="UTF-8">
-    <link rel="stylesheet" type="text/css" media="screen" title="default" href="../design/style.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" title="default" href="http://nids/design/style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel = "stylesheet" type="text/css" href="../design/styleFooter.css">
+    <link rel = "stylesheet" type="text/css" href="http://nids/design/styleFooter.css">
 </head>
 
 <br/>
@@ -37,17 +37,17 @@
 <br/>
 <footer>
     <div class="liste1">
-        <a href="http://nids/accueil"><img class="logoFoot" src="../Images/logoNids.png" alt="notre logo"></a><br/>© 2019 Copyright: NIDS
+        <a href="http://nids/accueil"><img class="logoFoot" src="http://nids/Images/logoNids.png" alt="notre logo"></a><br/>© 2019 Copyright: NIDS
     </div>
     <ul class="liste">
         <li>
-            <a href="lienADefinir">Support</a>
+            <a href="http://nids/support">Support</a>
         </li>
         <li>
-            <a href="lienADefinir">FAQ</a>
+            <a href="http://nids/FAQ">FAQ</a>
         </li>
         <li>
-            <a href="lienADefinir">Catalogue</a>
+            <a href="http://nids/catalogue">Catalogue</a>
         </li>
     </ul>
     <br/>

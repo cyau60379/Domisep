@@ -136,7 +136,7 @@ if(isset($_POST['logementsec']) && isset($_POST['prenomsec']) && isset($_POST['n
             $messsage = "Bonjour $prenomsec,
                         <br> S'il s'agit d'une erreur, ignorez ce mail.
                         <br> $ut a fait une demande pour vous ajouter en tant que compte secondaire.
-                        <br> Voici le lien pour accepter la requête : <a href=\"nids/controller/validationSecondaire.php?grp=$renvoi&ajt=$ajoute&m=$logementsec\">Cliquez ici</a>
+                        <br> Voici le lien pour accepter la requête : <a href=\"http://nids/validationSecondaire/$renvoi/$ajoute/$logementsec\">Cliquez ici</a>
                         <br>Cordialement,
                         <br>L'équipe de NIDS";
 

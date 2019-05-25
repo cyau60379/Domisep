@@ -25,14 +25,6 @@ if (isset($_GET['cible']) && !empty($_GET['cible'])) {
     $url = 'accueil';
 }
 
-if(isset($_GET['mdpOublie'])){
-    $url = 'messagerie';
-}
-
-if(isset($_GET['changement'])){
-    $url = 'modificationMotDePasse';
-}
-
 $pages = array("accueil", "catalogue", "domotique", "editionProfil", "FAQ",
                 "forum", "gestionCapteur", "gestionClient", "infoCompte", "messagerie",
                 'modificationMotDePasse', "statistique", 'support', "validationSecondaire");

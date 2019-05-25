@@ -3,6 +3,4 @@ ErrorDocument 404 /view/pageErreur.php
 RewriteEngine on
 
 RewriteRule ^([a-zA-Z]+)$   index.php?cible=$1 [L]
-RewriteRule ^mdpOublie/1$   index.php?mdpOublie=$1 [L]
-RewriteRule ^chgnt/1$   index.php?changement=$1 [L]
-
+RewriteRule ^validationSecondaire/([0-9]+)/([0-9]+)/([0-9]+)$   controller/validationSecondaire.php?grp=$1&ajt=$2&m=$3 [L]
