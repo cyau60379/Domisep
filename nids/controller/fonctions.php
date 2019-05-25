@@ -516,7 +516,7 @@ function affichePageDonnees($tabCompte, $ajout){
             </td>
             <td class='catalogue2'>
                 <p id=\"resultat\">$value[6]</p>";
-                if($ajout && ($value[6] = 'client' || $value[6] == 'gestionnaire')):
+                if($ajout && ($value[6] == 'client' || $value[6] == 'gestionnaire')):
                     echo "<button type='button' class='bouton bouton3' onclick='modifStatut2($value[0])'>
                         Modifier
                     </button>";

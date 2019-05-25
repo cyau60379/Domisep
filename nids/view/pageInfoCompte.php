@@ -47,7 +47,7 @@
             </td>
             <td class='catalogue2'>
                 <p id="resultat"><?php echo $value[6];?></p>
-                <?php if($ajout):?>
+                <?php if($ajout && ($value[6] == 'client' || $value[6] == 'gestionnaire')):?>
                     <button type="button" class="bouton bouton3 bout" onclick="modifStatut2(<?php echo $value[0]?>)">
                         Modifier
                     </button>
