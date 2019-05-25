@@ -13,7 +13,7 @@
 </div>
 
 <div id="boite">
-    <form action="../index.php?cible=gestionCapteur" method="post" class="form">
+    <form action="http://nids/gestionCapteur" method="post" class="form">
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
         <button type="submit" id="fa-home" class="choixPage2">
@@ -26,7 +26,7 @@
         </p>
     </form>
 
-    <form action="../index.php?cible=<?php if($type == 2): echo "gestionClient"; else: echo "statistique"; endif;?>" method="post" class="form">
+    <form action="http://nids/<?php if($type == 2): echo "gestionClient"; else: echo "statistique"; endif;?>" method="post" class="form">
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
         <button type="submit" id="fa-file-text-o" class="choixPage2">

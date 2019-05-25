@@ -11,7 +11,7 @@
 <body>
 <div id="retour">
     <p class="mdpo" style='font-size: 25px'>Vous êtes maintenant lié au compte de <?php echo $nomGest;?> !</p><br/>
-    <a href='../index.php' style='font-size: 25px'>Retour à la page d'accueil</a>
+    <a href='http://nids/accueil' style='font-size: 25px'>Retour à la page d'accueil</a>
 </div>
 </body>
 </html>

@@ -1,7 +1,8 @@
 ErrorDocument 404 /view/pageErreur.php
 
-#RewriteEngine on
-#RewriteRule ^index/([0-9]+)$ index.php?mdpOublie=$1 [L]
+RewriteEngine on
 
-#RewriteEngine On
-#RewriteRule ^/?nids/index/([0-9]+)/(.*)$ /nids/index.php?cible=$1 [L,QSA]
+RewriteRule ^([a-zA-Z]+)$   index.php?cible=$1 [L]
+RewriteRule ^mdpOublie/1$   index.php?mdpOublie=$1 [L]
+RewriteRule ^chgnt/1$   index.php?changement=$1 [L]
+

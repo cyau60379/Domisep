@@ -44,7 +44,7 @@
                     <input class="edi" type="date" id="date" name="user_date" value="<?php echo $coord["Date_naissance"]?>"></p>
 
                 <div id="typeUtilisateur">
-                        <a href="../index.php?cible=modificationMotDePasse"><button type="button" class="bouton edi">
+                        <a href="http://nids/modificationMotDePasse"><button type="button" class="bouton edi">
                             Modifier votre mot de passe
                         </button></a>
                 </div>

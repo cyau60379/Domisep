@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="../Images/logoNids.ico"/>
     <link rel="stylesheet" type="text/css" media="screen" title="default" href="../design/style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <?php include_once("fonctions.php");      //inclut les fonctions concernant les capteurs?>
+    <?php include_once("fonctions.php");      //inclut les fonctions JS?>
 </head>
 <body>
 
@@ -15,7 +15,7 @@
 
 <h3 class="mdpo">Rentrez votre adresse mail</h3>
 <div id="retour">
-<form name="mdp">
+<form name="mdp">       <!-- formulaire pour recuperer l'adresse mail et envoyer un lien -->
     <label>
         <input class="mdpot" type="text" name="mail" oninput="validationnn(this.name)">
         <p id="resultat">.</p>

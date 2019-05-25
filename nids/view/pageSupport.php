@@ -13,7 +13,7 @@
 </div>
 
 <div id="boite">
-    <form class="form" action="../index.php?cible=catalogue" method="post" >
+    <form class="form" action="http://nids/catalogue" method="post" >
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
         <button type="submit" id="fa-home" class="choixPage">
@@ -26,7 +26,7 @@
         </p>
     </form>
 
-    <form class="form" action="../index.php?cible=FAQ" method="post" >
+    <form class="form" action="http://nids/FAQ" method="post" >
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
         <button type="submit" id="fa-file-text-o" class="choixPage">
@@ -40,7 +40,7 @@
         </p>
     </form>
 
-    <form class="form" action="../index.php?cible=forum" method="post">
+    <form class="form" action="http://nids/forum" method="post">
         <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
         <input type='hidden' name='id' value='<?php echo $id;?>'>
         <button id="fa-question" class="choixPage">

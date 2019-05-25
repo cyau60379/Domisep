@@ -14,7 +14,7 @@ function affichageReponse($reponse, $id, $utilisateur, $type){
                     //affiche un formulaire permettant d'aller à la page suivante
         echo "<div class= 'case'> 
                 <h1 class='alert'>$type réussie !</h1>
-                <form action='../index.php?cible=editionProfil' method='post'>
+                <form action='http://nids/editionProfil' method='post'>
                     <input type='hidden' name='id' value= $id>
                     <input type='hidden' name='utilisateur' value= $utilisateur>
                     <input type='submit' class='bouton boutonGlobal2' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OK'>
@@ -35,7 +35,7 @@ function affichageReponse($reponse, $id, $utilisateur, $type){
 function affichageReponse2(){
         echo "<div class= 'case'> 
                 <h1 class='alert'>Voulez-vous vous déconnecter ?</h1>
-                <form action='../index.php?cible=accueil' method='post'>
+                <form action='http://nids/accueil' method='post'>
                     <input type='hidden' name='id' value= 0>
                     <input type='hidden' name='utilisateur' value= ''>
                     <input type='submit' class='bouton boutonGlobal2' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OUI'>
@@ -137,7 +137,7 @@ function affichePieces($pieces, $logement, $id, $utilisateur){
     endforeach;
     echo "</div>
         <div class=\"container\">
-            <form action='../index.php?cible=catalogue' method='post'>
+            <form action='http://nids/catalogue' method='post'>
              <input type='hidden' name='id' value= $id>
              <input type='hidden' name='utilisateur' value= $utilisateur>
                 <button type='submit' class=\"bouton boutonAjout\"><i class=\"fa fa-plus-circle\" aria-hidden=\"true\"></i> Ajouter un élément</button>
@@ -366,6 +366,8 @@ function arrayToString($tab){
  * @param $ComptesSecondaires
  */
 
+//affichage des comptes secondaires dans l'édition de profil
+
 function afficheComptesSecondaire($ComptesSecondaires){
     if (sizeof($ComptesSecondaires) != 0) {
         $NombredeComptes = (sizeof($ComptesSecondaires)) % 15;
@@ -383,7 +385,7 @@ function afficheComptesSecondaire($ComptesSecondaires){
     }
 }
 
-
+//affiche les articles de la FAQ
 
 function afficheArticle2($tabForum, $ajout, $ids){
     $i = 0;
@@ -392,14 +394,17 @@ function afficheArticle2($tabForum, $ajout, $ids){
             <input type='checkbox' id='$ids[$i]'>
             <label for='$ids[$i]'>$q</label>
             <p class='forum'>$r</p>";
-        if($ajout) {
+        if($ajout) {    //si SAV
             echo "<button class='bouton boutonGlobal2' onclick='supprimerArticle($ids[$i])'>SUPPRIMER</button>
         </section> <br>";
         }
         $i += 1;
     }
 }
-function afficheArticle($tabForum, $tabComment, $tabDate, $ids){
+
+//affiche les articles du forum
+
+function afficheArticle($tabForum, $tabComment, $ids){
     $i = 0;
     foreach($tabForum as $q => $r){
         $contenu = "formulaireComm" . $ids[$i];
@@ -422,6 +427,8 @@ function afficheArticle($tabForum, $tabComment, $tabDate, $ids){
     }
 }
 
+//affiche les logements pour l'édition de profil
+
 function afficheLogements($logement){
         echo "<div class='titre titreSup'>Logement <a href='javascript:ajoutLogement()'>
                 <i class='fa fa-plus-circle editionCapteur' style='color: black;' aria-hidden='true'></i>
@@ -441,6 +448,8 @@ function afficheLogements($logement){
             </div>
         </div>";
 }
+
+//affiche le formulaire de changement de mot de passe
 
 function afficheChangementMdp($question, $identif, $page){
     if($question == ""){
@@ -474,11 +483,15 @@ function afficheChangementMdp($question, $identif, $page){
     }
 }
 
+//fonction qui remet le bouton d'envoi si le login est mauvais pour la modification de mot de passe
+
 function afficheRelance(){
     echo "<div class=\"boxBouton boxConnexion1\" style=\"margin: auto\">
             <input id=\"boutonEnvoi\" type = \"button\" class=\"boutton_mdpo\" value = \"Envoyer\" onclick=\"verifLogin()\">
         </div>";
 }
+
+//affichage de la page d'information des comptes
 
 function affichePageDonnees($tabCompte, $ajout){
     foreach($tabCompte as $key => $value):
@@ -503,7 +516,7 @@ function affichePageDonnees($tabCompte, $ajout){
             </td>
             <td class='catalogue2'>
                 <p id=\"resultat\">$value[6]</p>";
-                if($ajout):
+                if($ajout && ($value[6] = 'client' || $value[6] == 'gestionnaire')):
                     echo "<button type='button' class='bouton bouton3' onclick='modifStatut2($value[0])'>
                         Modifier
                     </button>";

@@ -37,7 +37,7 @@
 <br/>
 <footer>
     <div class="liste1">
-        <a href="../index.php?cible=accueil"><img class="logoFoot" src="../Images/logoNids.png" alt="notre logo"></a><br/>© 2019 Copyright: NIDS
+        <a href="http://nids/accueil"><img class="logoFoot" src="../Images/logoNids.png" alt="notre logo"></a><br/>© 2019 Copyright: NIDS
     </div>
     <ul class="liste">
         <li>

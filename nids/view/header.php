@@ -10,7 +10,7 @@
 <body>
 <header>
     <div class="header">
-        <a href="../index.php?cible=accueil"><img src="../Images/logoNids.png" alt="notre logo" class="logo"></a>
+        <a href="http://nids/accueil"><img src="../Images/logoNids.png" alt="notre logo" class="logo"></a>
         <h1 class="nomSite">
             Numérique et Intelligence pour Demeure Sécurisée
         </h1>

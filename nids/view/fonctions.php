@@ -5,16 +5,6 @@
 
     //=================================== messages à afficher
 
-  /*  function confirmer(message, zone){
-        document.getElementById(zone).innerHTML = "<div class= 'case'> "+
-            "<h1 class='alert'>"+ message +"</h1>" +
-        "<form action='../index.php' method='post'>" +
-            "<input type='button' class='bouton boutonGlobal2' onclick='fermetureMessage(`divReponse`)' style='float: none' value='OUI'>"+
-            "<input type='button' class='bouton boutonGlobal2' value='NON' onclick='fermetureMessage(`divReponse`)' style='float: none'>"+
-            "</form>"+
-            "</div>";
-    }*/
-
   //changements de couleur lors de l'entrée des données pour l'inscription + ajout de message
 
     function verificationNom(nom){
@@ -63,6 +53,8 @@
         }
     }
 
+    //vérifie que l'adresse mail est bien dans la forme conventionnelle pour l'envoi du lien pour le changement de mot de passe
+
     function validationnn(mail) {
         let valeur = document.forms["mdp"].elements[mail].value;
         //création d'une expression régulière pour tester le mail
@@ -78,6 +70,8 @@
         }
         return false;
     }
+
+    //vérifie que l'adresse mail est bien dans la forme conventionnelle pour l'inscription
 
     function verificationMail(){
         let mail = document.forms['inscription'].elements['AdresseMail'].value;  //récupération de ce qui est mis dans l'entrée pour le mot de passe
@@ -136,6 +130,7 @@
         return(regularExp.test(mail));
     }
 
+    //envoi au serveur les données du mot de passe avant l'envoi du mail pour changer de mot de passe
     function formulaireMdp(){
         let mail = document.forms['mdp'].elements['mail'].value;
         if(!checkMail(mail)){
@@ -156,6 +151,7 @@
         }
     }
 
+    //vérifie si l'identifiant est bon avant de continuer la procédure
     function verifLogin() {
         let id = document.forms['inscription'].elements['identifiant'].value;
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
@@ -171,6 +167,7 @@
         request.send("identifiant=" + id);                      //envoie le resultat de la requete au serveur
     }
 
+    //vérification de la réponse donnée, si elle correspond à celle répertoriée, le mot de passe sera changé
     function verifReponse(page, identif) {
         let id = document.forms['inscription'].elements['identifiant'].value;
         let reponse = document.forms['inscription'].elements['reponse'].value;
@@ -203,6 +200,7 @@
         }
     }
 
+    //modifie le mot de passe sur la page modificationMotDePasse
     function modifMdp(page, identif) {
         let id = document.forms['inscription'].elements['identifiant'].value;
         let mdp = document.forms['inscription'].elements['Mdp'].value;
@@ -228,7 +226,7 @@
                         page2 = "accueil";
                     }
                     document.getElementById('retour').innerHTML = "<p class=\"mdpo\" style='font-size: 25px'>La modification de mot de passe a été prise en compte !</p><br/>" +
-                        "<a href='../index.php?cible=" + page + "' style='font-size: 25px'>Retour à la page d'" + page2 + "</a>";
+                        "<a href='http://nids/" + page + "' style='font-size: 25px'>Retour à la page d'" + page2 + "</a>";
                 }
             };
             request.open("POST", "controller/modificationMotDePasse.php", true);
@@ -1336,6 +1334,8 @@
         request.send("idPieceSuppr=" + id);   //envoie le resultat de la requete
     }
 
+    //fonction qui permet de changer le statut d'un client / gestionnaire
+
     function modifStatut(){
         document.getElementById("divReponse").style.zIndex = '1';
         document.getElementById("divReponse").style.display = 'initial';
@@ -1382,6 +1382,8 @@
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send("nvxType=" + type);
     }
+
+    //fonction qui permet de changer le statut d'un client / gestionnaire par un admin
 
     function modifStatut2(id){
         document.getElementById("divReponse").style.zIndex = '1';

@@ -24,7 +24,6 @@ $tabComment0 = decoupeString10(recupCommentaires($bdd));
 foreach ($tabComment0 as $key => $value){
     $tabComment[$key] = preg_split("/\*/", $value);
 }
-$tabDate = recupDate($bdd);
 
 
 //ajout
@@ -37,7 +36,7 @@ if(isset($_POST['Titre']) && isset($_POST['Contenu'])) {
         $tabForum[$key] = preg_split("/\*/", $value);
     }
     $ids = recupIdsForum($bdd);
-    afficheArticle($tabForum, $tabComment, $tabDate, $ids);
+    afficheArticle($tabForum, $tabComment, $ids);
 }
 
 if(isset($_POST['identifiantArticle']) && isset($_POST['ContenuCommentaire'])) {
@@ -49,5 +48,5 @@ if(isset($_POST['identifiantArticle']) && isset($_POST['ContenuCommentaire'])) {
         $tabComment[$key] = preg_split("/\*/", $value);
     }
     $tabDate = recupDate($bdd);
-    afficheArticle($tabForum, $tabComment, $tabDate, $ids);
+    afficheArticle($tabForum, $tabComment, $ids);
 }

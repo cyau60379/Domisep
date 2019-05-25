@@ -1,5 +1,8 @@
 <?php
 
+include_once("fonctions.php");
+include_once($_SERVER["DOCUMENT_ROOT"] . "/model/requetesUtilisateur.php");
+
 $login = "";
 if (isset($_POST['mail'])) {
     $login = $_POST['mail'];
@@ -9,13 +12,11 @@ if (isset($_POST['mail'])) {
     $header .= 'From:"NIDS"<contactservice123456@gmail.com>' . "\n";
     $header .= 'Content-Type:text/html; charset="utf-8"' . "\n";
     $header .= 'Content-Transfer-Encoding: 8bit';
-    $messsage = '<html>
-                    <body>
-                        <div align="center">
+    $messsage = "<div align='center'>
                             <h1>Pour changer de mot de passe, cliquez ici : 
-                                    <a href="http://nids/index.php?changement=1">Changez de mot de passe</a>
+                                    <a href='http://nids/chgnt/1'>Changez de mot de passe</a>
                             </h1>
-                        </div>';
+                        </div>";
 
     if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $login)) {
         $passage_ligne = "\r\n";

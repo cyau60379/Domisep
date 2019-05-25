@@ -15,7 +15,7 @@ include('header.php');
 <body>
     <p class = "info">Page non trouvée</p>
     <p class = "info">Nous ne sommes pas parvenus à trouver la page.</p>
-    <a href = "../index.php?cible=accueil"><p class = "info" style = "text-align: center">Retour à l'accueil</p></a>
+    <a href = "http://nids/accueil"><p class = "info" style = "text-align: center">Retour à l'accueil</p></a>
 </body>
 
 </html>
