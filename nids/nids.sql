@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 24 mai 2019 à 11:34
+-- Généré le :  sam. 25 mai 2019 à 20:11
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `actionneur_capteur` (
   KEY `id_CeMac` (`id_CeMac`),
   KEY `id_element_catalogue` (`id_element_catalogue`),
   KEY `id_piece` (`id_piece`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `actionneur_capteur`
@@ -57,19 +57,19 @@ INSERT INTO `actionneur_capteur` (`id`, `nom`, `Etat`, `Actif`, `NumeroSerie`, `
 (14, 'Mouvement', 1, 1, 723163653, 3, 1, 4, 1, 1),
 (16, 'Mouvement 2', 1, 1, 723163655, 3, 1, 2, 1, 1),
 (17, 'Mouvement 3', 1, 1, 723163656, 3, 1, 2, 1, 1),
-(18, 'Mouvement 4', 1, 1, 723163657, 3, 1, 2, 1, 1),
 (19, 'Mouvement 5', 1, 1, 723163658, 3, 1, 2, 1, 1),
-(20, 'Mon volet', 1, 1, 976786, 4, 1, 1, 1, 1),
 (21, 'Volet Nord', 1, 1, 976787, 4, 1, 4, 1, 1),
 (22, 'Volet Sud', 1, 1, 976788, 4, 1, 4, 1, 1),
 (23, 'Nieme capteur', 1, 1, 5646544, 3, 1, 2, 1, 1),
-(24, 'Luminosité', 1, 0, 4913184, 2, 1, 6, 1, 1),
+(24, 'Luminosité', 1, 1, 4913184, 2, 1, 6, 1, 1),
 (25, 'Temp', 1, 1, 4564564, 1, 1, 1, 1, 1),
 (26, 'Température', 1, 0, 15613218, 1, 10, 6, 4, 12),
 (27, 'Mouvement', 1, 0, 56184123, 3, 21, 6, 4, 21),
 (28, 'Volet', 1, 0, 21512151, 4, 12, 6, 4, 12),
 (29, 'Temp', 1, 0, 16546138, 1, 12, 7, 4, 12),
-(30, 'Lumi', 1, 0, 5184514, 2, 1515184, 7, 4, 25);
+(30, 'Lumi', 1, 0, 5184514, 2, 1515184, 7, 4, 25),
+(31, 'Volet', 1, 0, 151811, 4, 15111, 1, 1, 35151),
+(32, 'Lumi', 1, 1, 18919, 2, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
 --
 
 INSERT INTO `categorie` (`id`, `Nom`) VALUES
-(1, 'Homme en colère');
+(1, 'Cat1');
 
 -- --------------------------------------------------------
 
@@ -196,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
   PRIMARY KEY (`id`),
   KEY `id_article` (`id_article`),
   KEY `id_utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `commentaire`
@@ -204,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
 
 INSERT INTO `commentaire` (`id`, `Date_publication`, `Contenu`, `Note`, `id_article`, `id_utilisateur`) VALUES
 (1, '2019-05-22 11:56:15', 'first!', 0, 2, 15),
-(2, '2019-05-22 12:06:48', 'cfdsfefsdfds', 0, 1, 15);
+(2, '2019-05-22 12:06:48', 'Il faut appuyer sur le bouton modifier à côté du type dans l\'édition de profil', 0, 1, 15);
 
 -- --------------------------------------------------------
 
@@ -220,7 +220,7 @@ CREATE TABLE IF NOT EXISTS `donnees` (
   `id_actionneur_capteur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `donnees_ibfk_1` (`id_actionneur_capteur`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `donnees`
@@ -255,12 +255,24 @@ INSERT INTO `donnees` (`id`, `Date_heure_reception`, `Valeur`, `id_actionneur_ca
 (26, '2019-04-25 17:01:54', 150, 24),
 (27, '2019-03-25 17:01:54', 125, 24),
 (28, '2019-02-25 17:01:54', 130, 24),
-(29, '2019-05-18 23:03:23', 0, 25),
 (30, '2019-05-19 21:57:15', 0, 26),
 (31, '2019-05-19 22:00:16', 0, 27),
 (32, '2019-05-19 22:00:28', 0, 28),
 (33, '2019-05-19 22:00:49', 0, 29),
-(34, '2019-05-19 22:01:12', 0, 30);
+(34, '2019-05-19 22:01:12', 0, 30),
+(35, '2019-05-25 16:16:04', 0, 30),
+(36, '2019-05-25 16:16:42', 0, 31),
+(37, '2019-05-25 16:17:01', 4, 31),
+(38, '2019-05-25 18:47:41', 200, 32),
+(39, '2019-05-18 23:03:23', 20, 25),
+(40, '2019-04-18 23:03:23', 20, 25),
+(41, '2019-03-18 23:03:23', 23, 25),
+(42, '2019-06-18 23:03:23', 23, 25),
+(43, '2019-07-18 23:03:23', 25, 25),
+(44, '2019-06-25 18:47:41', 210, 32),
+(45, '2019-07-25 18:47:41', 220, 32),
+(46, '2019-04-25 18:47:41', 190, 32),
+(47, '2019-03-25 18:47:41', 150, 32);
 
 -- --------------------------------------------------------
 
@@ -272,8 +284,8 @@ DROP TABLE IF EXISTS `element_catalogue`;
 CREATE TABLE IF NOT EXISTS `element_catalogue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `Description` text COLLATE utf8_unicode_ci NOT NULL,
-  `Photo` text COLLATE utf8_unicode_ci NOT NULL,
+  `Description` text COLLATE utf8_unicode_ci,
+  `Photo` text COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -303,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `heritage` (
   KEY `id_utilisateur_prim` (`id_utilisateur_prim`),
   KEY `id_utilisateur_sec` (`id_utilisateur_sec`),
   KEY `id_logement` (`id_logement`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `heritage`
@@ -311,9 +323,9 @@ CREATE TABLE IF NOT EXISTS `heritage` (
 
 INSERT INTO `heritage` (`id`, `id_utilisateur_prim`, `id_utilisateur_sec`, `id_logement`) VALUES
 (2, 4, 3, 3),
-(5, 1, 8, 1),
+(5, 4, 2, 2),
 (23, 1, 7, 1),
-(24, 1, 9, 1);
+(25, 1, 17, 1);
 
 -- --------------------------------------------------------
 
@@ -440,7 +452,7 @@ CREATE TABLE IF NOT EXISTS `type_utilisateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `type_utilisateur`
@@ -450,7 +462,8 @@ INSERT INTO `type_utilisateur` (`id`, `Nom`) VALUES
 (1, 'client'),
 (2, 'gestionnaire'),
 (3, 'SAV'),
-(4, 'administrateur');
+(4, 'administrateur'),
+(5, 'WebMaster');
 
 -- --------------------------------------------------------
 
@@ -474,24 +487,23 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_type_utilsateur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `utilisateur_ibfk_1` (`id_type_utilsateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id`, `Nom`, `Prenom`, `Adresse_mail`, `numeroTel`, `Date_naissance`, `Mot_de_passe`, `Etat`, `Question_verif`, `Reponse_verif`, `essais`, `id_type_utilsateur`) VALUES
-(1, 'MENVUSSA', 'Gérard', 'aubourg.cyril@gmail.com', '05 54 54 54 54', '1990-12-22', '$2y$10$Eawe7JBwgcVunzGFtECTNuaXlUR8OtebJtd10OXpIMXK7ak8LAlqi', 1, 'Que voulez-vous ?', 'rien', 0, 2),
+(1, 'MENVUSSA', 'Gérard', 'gerard.menvuss4@gmail.com', '05 54 54 54 54', '1990-12-22', '$2y$10$Eawe7JBwgcVunzGFtECTNuaXlUR8OtebJtd10OXpIMXK7ak8LAlqi', 0, 'Que voulez-vous ?', 'rien', 0, 5),
 (2, 'HIFFY', 'Eugène', 'eugene.hiffy@gmail.com', '07 87 26 12 12', '1998-01-31', '$2y$10$wjol0zsWtb8OoAyt8PjY4eolyZuKYxZK5BQe1J/lWtQj9WWShgavS', 0, 'Que voulez-vous manger ?', 'Des patates', 0, 1),
 (3, 'HIC', 'Bazil', 'bazil.hic@gmail.com', '07 54 64 12 14', '1987-07-05', 'Bi1Fr4is', 0, 'Que voulez-vous prendre ?', 'Un pari sur l\'avenir', 0, 1),
-(4, 'TIME', 'Vincent', 'vic.time@gmail.com', '06 78 45 40 17', '2000-07-09', '$2y$10$yLbuWRFui/VcVSptcccySOVetSziwGNtf1UTIIeWk0.VbY.hnWr1e', 1, 'Quel est votre premier animal de compagnie ?', 'Un chien', 0, 2),
+(4, 'TIME', 'Vincent', 'vic.time@gmail.com', '06 78 45 40 17', '2000-07-09', '$2y$10$yLbuWRFui/VcVSptcccySOVetSziwGNtf1UTIIeWk0.VbY.hnWr1e', 0, 'Quel est votre premier animal de compagnie ?', 'Un chien', 0, 2),
 (7, 'PARIZOT', 'Julien', 'julien.parizot@isep.fr', NULL, '1998-02-12', '$2y$10$YXOcjoUfBdHBCkT2MekdM.xofbVd.PVXiG5/puwLc2JELoydNT06W', 0, NULL, NULL, 0, 1),
 (8, 'Corcaud', 'Bastien', 'bastien.corcaud@isep.fr', NULL, '1996-05-21', '$2y$10$JvdKq9M.vNDUEdYhKY7H6uU.4NxeyxtY/S9H5niEH/bE5ro/jXaai', 0, NULL, NULL, 0, 1),
-(9, 'AUBOURG', 'Cyril', 'cyril.aubourg@isep.fr', NULL, '1998-01-08', '$2y$10$hmpy3J9OjpYSEpzijm.cC.vZ.fdX.aSNyVdZdMA.lxJoLPWAgsSTS', 0, NULL, NULL, 0, 1),
-(11, 'Roshing', 'Bob', 'bob.bob@bob.bob', NULL, '1009-05-04', '$2y$10$0hqLEZyLPWM.ejUUrkth9O/y9DaboR7jZzN5dYctrw5miaGi1VGq.', 0, NULL, NULL, 0, 1),
-(14, 'V0', 'SA', 'contact123456@gmail.com', NULL, '2019-05-19', '$2y$10$WcYbSBsG53WD.8uUoxQQO.9ZVWfR3qseX33Ky4K/J6MvUupxZYog.', 0, NULL, NULL, 0, 3),
+(14, 'V0', 'SA', 'contactservice123456@gmail.com', NULL, '2019-05-19', '$2y$10$WcYbSBsG53WD.8uUoxQQO.9ZVWfR3qseX33Ky4K/J6MvUupxZYog.', 0, NULL, NULL, 0, 3),
 (15, 'OLIVIER', 'Raphaël', 'training2015won@gmail.com', NULL, '1998-09-12', '$2y$10$WcYbSBsG53WD.8uUoxQQO.9ZVWfR3qseX33Ky4K/J6MvUupxZYog.', 0, NULL, NULL, 0, 1),
-(16, 'Nids', 'Admin', 'contactservice123456@gmail.com', NULL, '2002-02-02', '$2y$10$BmX0B9R4VFW0FqGLoMtiOOgZAblE8dDyikLxtR36vOKxQCZH7OiuK', 1, NULL, NULL, 0, 4);
+(16, 'Nids', 'Admin', 'contactservice123456@gmail.com', NULL, '2002-02-02', '$2y$10$Eawe7JBwgcVunzGFtECTNuaXlUR8OtebJtd10OXpIMXK7ak8LAlqi', 1, NULL, NULL, 0, 4),
+(17, 'AUBOURG', 'Cyril', 'cyril.aubourg@isep.fr', NULL, '1998-01-08', '$2y$10$XjnzvSmwJwmvWAZaUEg.yucbYAOsjn1TvMozJSyuBpbi7Yc5krcOy', 0, NULL, NULL, NULL, 1);
 
 --
 -- Contraintes pour les tables déchargées
@@ -509,6 +521,20 @@ ALTER TABLE `article`
 ALTER TABLE `commentaire`
   ADD CONSTRAINT `commentaire_ibfk_1` FOREIGN KEY (`id_article`) REFERENCES `article` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `commentaire_ibfk_2` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `heritage`
+--
+ALTER TABLE `heritage`
+  ADD CONSTRAINT `heritage_ibfk_1` FOREIGN KEY (`id_logement`) REFERENCES `logement` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `heritage_ibfk_2` FOREIGN KEY (`id_utilisateur_prim`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `heritage_ibfk_3` FOREIGN KEY (`id_utilisateur_sec`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `logement`
+--
+ALTER TABLE `logement`
+  ADD CONSTRAINT `logement_ibfk_1` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `utilisateur`
