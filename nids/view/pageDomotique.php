@@ -40,5 +40,20 @@
             <?php endif;?>
         </p>
     </form>
+
+    <?php if($type == 5):?>
+    <form action="http://nids/gestionClient" method="post" class="form">
+        <input type='hidden' name='utilisateur' value='<?php echo $utilisateur;?>'>
+        <input type='hidden' name='id' value='<?php echo $id;?>'>
+        <button type="submit" id="fa-file-text-o" class="choixPage2">
+            Gestion de vos clients
+        </button>
+        <br>
+        <br>
+        <p id="foireaq" class="explications" onmouseover='miseEnValeur(this.id);' onmouseout='changerBordure(this.id);'>Accéder aux statistiques <br>de vos logements<br>
+                et gérer les clients de chacun
+        </p>
+    </form>
+    <?php endif;?>
 </div>
 </html>

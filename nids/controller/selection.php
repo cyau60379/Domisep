@@ -40,6 +40,11 @@ if(isset($_POST['deconnexion'])){
                 $pagesPossibles["Profil"] = array("editionProfil", "fa-file-text-o");
                 $pagesPossibles["Support"] = array("support", "fa-question");
                 break;
+            case 5: //webMaster
+                $pagesPossibles["Comptes"] = array("domotique", "fa-home");
+                $pagesPossibles["Profil"] = array("editionProfil", "fa-file-text-o");
+                $pagesPossibles["Support"] = array("support", "fa-question");
+                break;
             default:
                 break;
         }

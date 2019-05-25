@@ -16,7 +16,7 @@ $id = $_SESSION['idUtilisateur'];
 $idTypeUtil = recupType($bdd, $id);
 $ajout = false;
 //changement en fonction de l'utilisateur
-if($idTypeUtil == 3){   //SAV peut ajouter des articles
+if($idTypeUtil == 3 || $idTypeUtil == 5){   //SAV + webMaster peut ajouter des articles
     $ajout = true;
 }
 
