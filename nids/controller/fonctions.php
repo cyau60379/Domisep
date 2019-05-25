@@ -88,7 +88,9 @@ function decoupeString2($list){
     $string = "";
     foreach ($list as $str){
         $result = preg_split("/\!/", $str);
-        $string = $result[0] ." ". $result[1];
+        foreach ($result as $val){
+            $string .= $val . " ";
+        }
     }
     return $string;
 }
@@ -99,7 +101,9 @@ function decoupeString3($str){
     $string = "";
     if($str != "") {
         $result = preg_split("/\s/", $str);
-        $string = $result[0] . "_" . $result[1];
+        foreach ($result as $val){
+            $string .= $val . "_";
+        }
     }
     return $string;
 }
@@ -110,7 +114,9 @@ function decoupeString4($str){
     $string = "";
     if($str != ""){
         $result = preg_split("/\_/", $str);
-        $string = $result[0] . " " . $result[1];
+        foreach ($result as $val){
+            $string .= $val . " ";
+        }
     }
     return $string;
 }

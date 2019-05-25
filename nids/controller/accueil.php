@@ -108,7 +108,11 @@ if(isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['mail']) && i
         $mdp = $_POST['mdp'];
         $id = maximumId($bdd) + 1;                          //met au nouvel inscrit l'id le plus  grand + 1
         ajouterInscription($bdd, $id, $nom, $prenom, $mail, $naissance, $mdp);
-        $utilisateur = $prenom . "_". $nom;
+        $ut = preg_split("/\s/",$prenom . " ". $nom);
+        $utilisateur = "";
+        foreach ($ut as $val){
+            $utilisateur .= $val . "_";
+        }
         $identifiant =  substr($prenom,0,2) . substr($nom,0,2) . $id;
         affichageReponse(true, $id, $utilisateur,"Inscription"); //message envoyé pour être affiché
         //envoi de mail pour récupérer les identifiants
