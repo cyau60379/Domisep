@@ -17,7 +17,7 @@ function forum(PDO $bdd){
 function ajoutArticleForum(PDO $bdd, $titre, $contenu, $idUt){
     $query = "";
     try{
-        $query = "INSERT INTO article(titre, contenu) VALUES ('$titre', '$contenu', '$idUt')";
+        $query = "INSERT INTO article(titre, contenu, id_utilisateur) VALUES ('$titre', '$contenu', '$idUt')";
         $bdd->exec($query);
     } catch (PDOException $e){
         echo $query . "<br>" . $e->getMessage();
@@ -26,7 +26,7 @@ function ajoutArticleForum(PDO $bdd, $titre, $contenu, $idUt){
 
 //recuperation des ids du forum
 function recupIdsForum(PDO $bdd){
-    $query = "SELECT article.id FROM article";
+    $query = "SELECT article.id FROM article ORDER BY article.id";
     $result = $bdd->query($query)->fetchAll(PDO::FETCH_COLUMN, 0);
     return $result;
 }

@@ -70,7 +70,6 @@ function decoupeString($list){
     return $tab;
 }
 
-
 //fonction pour découper un tableau de string en un tableau de tableau de string avec l'id en indice
 
 function decoupeString10($list){
@@ -78,6 +77,25 @@ function decoupeString10($list){
     foreach ($list as $str){
         $result = preg_split("/\@/", $str); //découpe un string et crée un tableau avec
         $tab[$result[0]] = $result[1];
+    }
+    return $tab;
+}
+
+//fonction pour découper un tableau de string en un tableau de tableau de string avec l'id en indice
+
+function decoupeString11($list){
+    $tab = array();
+    $i = 0;
+    foreach ($list as $str){
+        $result = preg_split("/\@/", $str); //découpe un string et crée un tableau avec
+        $indice = intval($result[0]);
+        if(isset($tab[$indice])){
+            $val = $tab[$indice];
+            $tab[$indice] = $val + array($i => $result[1]);
+        } else {
+            $tab[$indice] = array($i => $result[1]);
+        }
+        $i++;
     }
     return $tab;
 }
@@ -420,8 +438,9 @@ function afficheArticle($tabForum, $tabComment, $ids){
             <p class='forum'>$r[0]</p>
             <p class='faq-section' style='font-weight: bold;'> Commentaire : </p>";
         if(isset($tabComment[$ids[$i]])){       //vérification pour savoir si il y a un commentaire pour l'article
-            $tab = $tabComment[$ids[$i]];
-            echo "<p class='forum'>$tab[1] ($tab[2])<br><br> $tab[0]</p>";
+            foreach ($tabComment[$ids[$i]] as $tab) {
+                echo "<p class='forum'>$tab[1] ($tab[2])<br><br> $tab[0]</p>";
+            }
         }
             echo "<br>
                <form name='$contenu'>
