@@ -6,7 +6,6 @@
 include_once ("fonctions.php");
 include_once($_SERVER["DOCUMENT_ROOT"] . "/model/capteur.php");
 
-
 //creation du tableau des capteurs de la piece
 $capteurs = array();
 
@@ -16,6 +15,26 @@ if(!isset($_SESSION['idUtilisateur'])){
 }
 //id de l'utilisateur
 $id = $_SESSION['idUtilisateur'];
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL,"http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=007A");
+curl_setopt($ch, CURLOPT_HEADER, FALSE);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+//curl_setopt($ch,CURLOPT_TIMEOUT,10);
+$data = curl_exec($ch);
+curl_close($ch);
+$data_tab = str_split($data,33);
+echo "Tabular Data:<br>";
+$size=sizeof($data_tab);
+for($i = 0; $i < $size - 1; $i++){
+    list($type,$equipe,$req,$c,$n,$valCap,$a,$x,$year,$month,$day,$hour,$min,$sec) = sscanf($data_tab[$i],"%1s%4s%1s%1s%2s%4s%4s%2s%4s%2s%2s%2s%2s%2s");
+    $date = "$year-$month-$day $hour:$min:$sec";
+    $sum = intval(hexdec($type)) + intval(hexdec($equipe)) + intval(hexdec($req)) + intval(hexdec($c)) + intval(hexdec($n))
+            + intval(hexdec($valCap)) + intval(hexdec($year)) + intval(hexdec($month)) + intval(hexdec($day))
+            + intval(hexdec($hour))+ intval(hexdec($min)) + intval(hexdec($sec));
+    $check = hexdec($x);
+    echo("<br/>$type,$equipe,$req,$c,$n,$valCap,$a,$x,$date,$check,$sum<br/>");
+}
 
 //récupération du nom de l'utilisateur
 $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));//recupération de la forme prenom!nom, puis découpe en prenom nom puis prenom_nom
