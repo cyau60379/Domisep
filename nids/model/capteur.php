@@ -44,6 +44,15 @@ function recuperationPourStat(PDO $bdd, $p, $id) {
     return $bdd->query($query)->fetchAll(PDO::FETCH_FUNC,"recup2");     //retourne un tableau contenant toutes les resultats de la requete
 }
 
+function updateDonnees(PDO $bdd, $idCap, $date, $val){
+    try {
+        $query = "INSERT INTO donnees(valeur, Date_heure_reception, id_actionneur_capteur)  VALUES ('$val','$date', '$idCap')";
+        $bdd->exec($query);
+    }
+    catch(PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
+    }
+}
 
 //requête recup donnees des capteurs
 
