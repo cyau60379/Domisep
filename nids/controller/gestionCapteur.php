@@ -43,9 +43,10 @@ for($i = 0; $i < $size - 1; $i++){
     $x2 = intval(hexdec($x));
     if($sum == $x2){
         echo("<br/>$type,$equipe,$req,$c,$n,$valCap,$a,$x,$date,$check<br/>");
-        //updateDonnees($bdd, intval(hexdec($n)), $date, intval(hexdec($valCap)));
+        updateDonnees($bdd, intval(hexdec($n)), $date, intval(hexdec($valCap)));
     }
 }
+//prendre dans le tableau a partir du i eme element
 
 //récupération du nom de l'utilisateur
 $utilisateur = decoupeString3(decoupeString2(recupererUtilisateur($bdd,$id)));//recupération de la forme prenom!nom, puis découpe en prenom nom puis prenom_nom
