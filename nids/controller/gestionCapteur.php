@@ -20,11 +20,9 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL,"http://projets-tomcat.isep.fr:8080/appService/?ACTION=GETLOG&TEAM=007A");
 curl_setopt($ch, CURLOPT_HEADER, FALSE);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-//curl_setopt($ch,CURLOPT_TIMEOUT,10);
 $data = curl_exec($ch);
 curl_close($ch);
 $data_tab = str_split($data,33);
-echo "Tabular Data:<br>";
 $size = sizeof($data_tab);
 for($i = 0; $i < $size - 1; $i++){
     list($type,$equipe,$req,$c,$n,$valCap,$a,$x,$year,$month,$day,$hour,$min,$sec) = sscanf($data_tab[$i],"%1s%4s%1s%1s%2s%4s%4s%2s%4s%2s%2s%2s%2s%2s");
@@ -42,8 +40,7 @@ for($i = 0; $i < $size - 1; $i++){
     $check = dechex($sum);
     $x2 = intval(hexdec($x));
     if($sum == $x2){
-        echo("<br/>$type,$equipe,$req,$c,$n,$valCap,$a,$x,$date,$check<br/>");
-        updateDonnees($bdd, intval(hexdec($n)), $date, intval(hexdec($valCap)));
+        //updateDonnees($bdd, intval(hexdec($n)), $date, intval(hexdec($valCap)));
     }
 }
 //prendre dans le tableau a partir du i eme element
@@ -154,6 +151,30 @@ if (isset($_POST['positionVolet']) && isset($_POST['idCap2'])) {
 
     $volet = $_POST['positionVolet'];
     $idCapt2 = $_POST['idCap2'];
+    $position = recupAncienPosition($bdd, $idCapt2);
+    $action = 0;
+    if ($position == $volet){
+        $action = 0;
+    } elseif ($position < $volet) {
+        $action = 1;
+    } else {
+        $action = 2;
+    }
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,"http://projets-tomcat.isep.fr:8080/appService/?ACTION=COMMAND&TEAM=007A&TRAME=1007A2a02000".$action."10");
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $data = curl_exec($ch);
+    curl_close($ch);
+    $time = abs($volet - $position);
+    sleep($time);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL,"http://projets-tomcat.isep.fr:8080/appService/?ACTION=COMMAND&TEAM=007A&TRAME=1007A2a02000010");
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $data = curl_exec($ch);
+    curl_close($ch);
+
     miseAJourVolet($bdd, $volet, $idCapt2);
     afficheCapteur($capteurs);
 }

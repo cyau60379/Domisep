@@ -672,6 +672,9 @@
         let etat = document.forms["modifVolet"].elements["volet"].value;
         let request;                         //requete http permettant d'envoyer au fichier serveur de modifier la page
         request = new XMLHttpRequest();
+        document.getElementById(`divReponse`).innerHTML = "<div class= 'case'>"+
+            "<h1 class='alert'>Patientez s'il vous plait...</h1>"+
+            "</div>";
         request.onreadystatechange = function () {                    //applique la fonction défini après lorsque le changement s'opère
             if (this.readyState === 4 && this.status === 200) {      // 4 = reponse prete / 200 = OK
                 alerter('La modification a bien été prise en compte');

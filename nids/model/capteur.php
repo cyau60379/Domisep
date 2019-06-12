@@ -227,3 +227,20 @@ function updateNom(PDO $bdd, $identity, $name) {
         echo $query . "<br>" . $e->getMessage();
     }
 }
+
+/**
+ *  met a jour de toutes les données dans la table actionneur_capteur
+ * @param PDO $bdd
+ * @param int $identity
+ * @return array
+ */
+
+function recupAncienPosition(PDO $bdd, $identity) {
+    try {
+        $query = "SELECT donnees.Valeur FROM donnees WHERE donnees.id_actionneur_capteur = '$identity'";
+        $table = $bdd->query($query)->fetch();
+        return $table['Valeur'];
+    } catch (PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
+    }
+}
