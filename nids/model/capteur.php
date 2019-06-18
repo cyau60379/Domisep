@@ -14,6 +14,21 @@ function supprimerCapteur(PDO $bdd, $id){
     }
 }
 
+function recupIndice(PDO $bdd, $id){
+    $query = "SELECT utilisateur.indiceBDD FROM utilisateur WHERE utilisateur.id = '$id'";
+    return $bdd->query($query)->fetch()['indiceBDD'];
+}
+
+function miseAJourIndice(PDO $bdd, $indice, $id) {
+    try {
+        $query = "UPDATE utilisateur SET indiceBDD = '$indice' WHERE utilisateur.id = '$id'";
+        $bdd->exec($query);
+    }
+    catch(PDOException $e) {
+        echo $query . "<br>" . $e->getMessage();
+    }
+}
+
 // fonction pour recuperer les valeurs de la base de donnees sous forme de string
 
 function recupValeurPiece($id, $nom) {

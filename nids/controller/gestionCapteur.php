@@ -24,7 +24,8 @@ $data = curl_exec($ch);
 curl_close($ch);
 $data_tab = str_split($data,33);
 $size = sizeof($data_tab);
-for($i = 0; $i < $size - 1; $i++){
+$indice = recupIndice($bdd, $id);
+for($i = $indice; $i < $size - 1; $i++){
     list($type,$equipe,$req,$c,$n,$valCap,$a,$x,$year,$month,$day,$hour,$min,$sec) = sscanf($data_tab[$i],"%1s%4s%1s%1s%2s%4s%4s%2s%4s%2s%2s%2s%2s%2s");
     $date = "$year-$month-$day $hour:$min:$sec";
     //verif de l'autheticité de la trame
@@ -40,9 +41,11 @@ for($i = 0; $i < $size - 1; $i++){
     $check = dechex($sum);
     $x2 = intval(hexdec($x));
     if($sum == $x2){
-        //updateDonnees($bdd, intval(hexdec($n)), $date, intval(hexdec($valCap)));
+        updateDonnees($bdd, intval(hexdec($n)), $date, intval(hexdec($valCap)));
     }
 }
+
+miseAJourIndice($bdd, $size - 1, $id);
 //prendre dans le tableau a partir du i eme element
 
 //récupération du nom de l'utilisateur
