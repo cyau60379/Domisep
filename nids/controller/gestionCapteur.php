@@ -153,12 +153,15 @@ if (isset($_POST['positionVolet']) && isset($_POST['idCap2'])) {
     $idCapt2 = $_POST['idCap2'];
     $position = recupAncienPosition($bdd, $idCapt2);
     $action = 0;
-    if ($position == $volet){
-        $action = 0;
-    } elseif ($position < $volet) {
-        $action = 1;
-    } else {
+    $time = 0;
+    if ($position > $volet){
         $action = 2;
+        $time = $position - $volet;
+    } elseif ($position < $volet) { //ouverture
+        $action = 1;
+        $time = $volet - $position;
+    } else {        //fermeture
+        $action = 0;
     }
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL,"http://projets-tomcat.isep.fr:8080/appService/?ACTION=COMMAND&TEAM=007A&TRAME=1007A2a02000".$action."10");
@@ -166,7 +169,6 @@ if (isset($_POST['positionVolet']) && isset($_POST['idCap2'])) {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     $data = curl_exec($ch);
     curl_close($ch);
-    $time = abs($volet - $position);
     sleep($time);
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL,"http://projets-tomcat.isep.fr:8080/appService/?ACTION=COMMAND&TEAM=007A&TRAME=1007A2a02000010");

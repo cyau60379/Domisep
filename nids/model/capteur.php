@@ -237,7 +237,10 @@ function updateNom(PDO $bdd, $identity, $name) {
 
 function recupAncienPosition(PDO $bdd, $identity) {
     try {
-        $query = "SELECT donnees.Valeur FROM donnees WHERE donnees.id_actionneur_capteur = '$identity'";
+        $query = "SELECT donnees.Valeur FROM donnees 
+                    WHERE donnees.id_actionneur_capteur = '$identity' 
+                      AND donnees.Date_heure_reception = (SELECT MAX(donnees.Date_heure_reception) 
+                                                              FROM donnees WHERE donnees.id_actionneur_capteur = '$identity')";
         $table = $bdd->query($query)->fetch();
         return $table['Valeur'];
     } catch (PDOException $e) {

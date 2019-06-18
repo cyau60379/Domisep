@@ -267,7 +267,7 @@ function afficheDonnees($tab){
                             </div>");
                 } else {
                     return ("<div class='actionneur imageCapteur'>
-                            <p>Mouvement à <br> $tab[3] m</p>
+                            <p>Mouvement à <br> $tab[3] cm</p>
                             </div>");
                 }
                 break;
