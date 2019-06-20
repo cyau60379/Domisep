@@ -581,7 +581,7 @@
                 let division = reponse.split("?");
                 let tabLum = division[0].split("+");
                 let tabTemp = division[1].split("+");
-                tracerGraph(tabTemp, "Température", "°C", "zoneGraphe");
+                tracerGraph(tabTemp, "Mouvement", "cm", "zoneGraphe");
                 tracerGraph(tabLum, "Luminosité", "lux", "zoneGraphe2");
             }
         };
@@ -593,13 +593,13 @@
     //fonction qui permet de tracer un graphique dans la zone désigné en fonction des données en entrée
     function tracerGraph(tab, titre, unite, zone){
         //trace en fonction des mois
-        let nomMois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+        let nomMois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
         let donnees = [];   //les données du graphe
         let mois = [];      //les mois vraiment pris en compte
         for (let i = 0; i < tab.length - 1; i++) {      //récupération du mois et de la valeur
             let tab2 = tab[i].split('!');
             donnees.push(tab2[1]);
-            mois.push(nomMois[parseInt(tab2[0]) - 1]);
+            mois.push(tab2[0].split('-')[2] + " " + nomMois[parseInt(tab2[0].split('-')[1]) - 1] + " " + tab2[0].split('-')[0]);
         }
         let zoneGraph = document.getElementById(zone);  //zone de dessin
         let data = [{       //les données
@@ -610,7 +610,7 @@
         let layout = {      //comment sera agencé les graphes
             title: titre,
             xaxis: {
-                title: 'Mois',
+                title: 'Jour',
                 showgrid: false,
                 zeroline: false
             },

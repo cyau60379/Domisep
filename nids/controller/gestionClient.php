@@ -52,43 +52,43 @@ if (isset($_POST['piece']) && isset($_POST['idPieceActive'])) {
     $idPieceActive = $_POST['idPieceActive'];
 
     //récupérations des données des capteurs sous la forme array { [0] => $valeur!$date ... }
-    $temp = recuperationPourStat($bdd, $idPieceActive, 1);  //recuperation que si l'id du catalogue est celui de la luminosité
+    $temp = recuperationPourStat($bdd, $idPieceActive, 3);  //recuperation que si l'id du catalogue est celui du mouvement
     $lum = recuperationPourStat($bdd, $idPieceActive, 2);   //idem mais pour la luminosité
-    $donneesTemp = array();     //tableau des donnees de température
+    $donneesMouv = array();     //tableau des donnees de mouv
     $donneesLum = array();      //tableau des donnees de lumière
-    $donneesTempFinal = array();    //tableau de moyenne des températures
+    $donneesMouvFinal = array();    //tableau de moyenne des mouv
     $donneesLumFinal = array();     //tableau de moyenne de la luminosité
 
-    // boucle pour séparer les données de $capteurs et les mettre en fonction du mois
+    // boucle pour séparer les données de $capteurs et les mettre en fonction du jour
     foreach ($temp as $key => $value) {
         //tableau des valeurs
         $tabValeurs = preg_split("/\!/", $value);
-        $mois = preg_split("/\-/", $tabValeurs[1])[1];
-        if (isset($donneesTemp[$mois])){        //pour eviter d'ecraser les donnees des différents capteurs
-            array_push($donneesTemp[$mois], $tabValeurs[0]);
+        $jour = preg_split("/\s/", $tabValeurs[1])[0];
+        if (isset($donneesMouv[$jour])){        //pour eviter d'ecraser les donnees des différents capteurs
+            array_push($donneesMouv[$jour], $tabValeurs[0]);
         } else {
-            $donneesTemp[$mois] = array($tabValeurs[0]);
+            $donneesMouv[$jour] = array($tabValeurs[0]);
         }
     }
-    //meme chose mais pour la température
+    //meme chose mais pour le mouv
     foreach ($lum as $key => $value) {
         //tableau des valeurs
         $tabValeurs = preg_split("/\!/", $value);
-        $mois = preg_split("/\-/", $tabValeurs[1])[1];
-        if (isset($donneesLum[$mois])){
-            array_push($donneesLum[$mois], $tabValeurs[0]);
+        $jour = preg_split("/\s/", $tabValeurs[1])[0];
+        if (isset($donneesLum[$jour])){
+            array_push($donneesLum[$jour], $tabValeurs[0]);
         } else {
-            $donneesLum[$mois] = array($tabValeurs[0]);
+            $donneesLum[$jour] = array($tabValeurs[0]);
         }
     }
-    //moyenne effectuée pour le graphe en fonction du mois
-    foreach ($donneesTemp as $clef => $valeur){
+    //moyenne effectuée pour le graphe en fonction du jour
+    foreach ($donneesMouv as $clef => $valeur){
         $len = sizeof($valeur);
         $total = 0.0;
         foreach ($valeur as $v){
             $total += $v;
         }
-        $donneesTempFinal[$clef] = $total / $len;
+        $donneesMouvFinal[$clef] = $total / $len;
     }
     //idem pour la luminosité
     foreach ($donneesLum as $clef => $valeur){
@@ -101,9 +101,9 @@ if (isset($_POST['piece']) && isset($_POST['idPieceActive'])) {
     }
     //conversion en string pour eviter les conflits avec Javascript
     $lumiere = arrayToString($donneesLumFinal);
-    $temperature = arrayToString($donneesTempFinal);
+    $mouv = arrayToString($donneesMouvFinal);
     //mise en commun des deux pour tout envoyer en meme temps
-    $resultat = $lumiere . "?" . $temperature;
+    $resultat = $lumiere . "?" . $mouv;
     echo $resultat; //envoi au JS
 }
 

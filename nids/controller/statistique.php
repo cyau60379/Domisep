@@ -40,9 +40,9 @@ if (isset($_POST['piece']) && isset($_POST['idPieceActive'])) {
     //récupérations des données des capteurs sous la forme array { [0] => $valeur!$date ... }
     $temp = recuperationPourStat($bdd, $idPieceActive, 1);  //recuperation que si l'id du catalogue est celui de la luminosité
     $lum = recuperationPourStat($bdd, $idPieceActive, 2);   //idem mais pour la luminosité
-    $donneesTemp = array();     //tableau des donnees de température
+    $donneesMouv = array();     //tableau des donnees de température
     $donneesLum = array();      //tableau des donnees de lumière
-    $donneesTempFinal = array();    //tableau de moyenne des températures
+    $donneesMouvFinal = array();    //tableau de moyenne des températures
     $donneesLumFinal = array();     //tableau de moyenne de la luminosité
 
     // boucle pour séparer les données de $capteurs et les mettre en fonction du mois
@@ -50,10 +50,10 @@ if (isset($_POST['piece']) && isset($_POST['idPieceActive'])) {
         //tableau des valeurs
         $tabValeurs = preg_split("/\!/", $value);
         $mois = preg_split("/\-/", $tabValeurs[1])[1];
-        if (isset($donneesTemp[$mois])){        //pour eviter d'ecraser les donnees des différents capteurs
-            array_push($donneesTemp[$mois], $tabValeurs[0]);
+        if (isset($donneesMouv[$mois])){        //pour eviter d'ecraser les donnees des différents capteurs
+            array_push($donneesMouv[$mois], $tabValeurs[0]);
         } else {
-            $donneesTemp[$mois] = array($tabValeurs[0]);
+            $donneesMouv[$mois] = array($tabValeurs[0]);
         }
     }
     //meme chose mais pour la température
@@ -68,13 +68,13 @@ if (isset($_POST['piece']) && isset($_POST['idPieceActive'])) {
         }
     }
     //moyenne effectuée pour le graphe en fonction du mois
-    foreach ($donneesTemp as $clef => $valeur){
+    foreach ($donneesMouv as $clef => $valeur){
         $len = sizeof($valeur);
         $total = 0.0;
         foreach ($valeur as $v){
             $total += $v;
         }
-        $donneesTempFinal[$clef] = $total / $len;
+        $donneesMouvFinal[$clef] = $total / $len;
     }
     //idem pour la luminosité
     foreach ($donneesLum as $clef => $valeur){
@@ -87,7 +87,7 @@ if (isset($_POST['piece']) && isset($_POST['idPieceActive'])) {
     }
     //conversion en string pour eviter les conflits avec Javascript
     $lumiere = arrayToString($donneesLumFinal);
-    $temperature = arrayToString($donneesTempFinal);
+    $temperature = arrayToString($donneesMouvFinal);
     //mise en commun des deux pour tout envoyer en meme temps
     $resultat = $lumiere . "?" . $temperature;
     echo $resultat; //envoi au JS
